@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rfc;
+
 final readonly class HomeController
 {
     public function __invoke()
     {
-        return view('home');
+        $rfcs = Rfc::all();
+
+        return view('home', [
+            'rfcs' => $rfcs,
+        ]);
     }
 }

@@ -10,15 +10,9 @@ class Argument extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
-
-    protected $casts = [
-        'type' => VoteType::class,
-    ];
-
-    public function vote(): BelongsTo
+    public function rfc(): BelongsTo
     {
-        return $this->belongsTo(Vote::class);
+        return $this->belongsTo(Rfc::class);
     }
 
     public function user(): BelongsTo

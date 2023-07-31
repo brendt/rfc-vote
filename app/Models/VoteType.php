@@ -10,24 +10,16 @@ enum VoteType: string
     public function getColor(): string
     {
         return match($this) {
-            self::YES => 'green',
-            self::NO => 'red',
+            self::YES => 'bg-green-200',
+            self::NO => 'bg-red-200',
         };
     }
 
     public function getJustify(): string
     {
         return match($this) {
-            self::YES => 'start',
-            self::NO => 'end',
-        };
-    }
-
-    public function getDirection(): string
-    {
-        return match($this) {
-            self::YES => 'row-reverse',
-            self::NO => 'row',
+            self::YES => 'justify-start',
+            self::NO => 'justify-end',
         };
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -42,66 +43,66 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function votes(): HasMany
+    {
+        return $this->hasMany(Vote::class);
+    }
+
     public function arguments(): HasMany
     {
         return $this->hasMany(Argument::class);
     }
 
-    public function argumentVotes(): HasMany
+    public function createVote(Rfc $rfc, VoteType $type): Vote
     {
-        return $this->hasMany(UserArgumentVote::class);
+        return DB::transaction(function () use ($type, $rfc) {
+            $vote = $this->getVoteForRfc($rfc);
+
+            if (! $vote) {
+                $vote = new Vote([
+                    'user_id' => $this->id,
+                    'rfc_id' => $rfc->id,
+                ]);
+            }
+
+            $vote->type = $type;
+
+            $vote->save();
+
+            $rfc->update([
+                'count_yes' => $rfc->yesVotes()->count(),
+                'count_no' => $rfc->noVotes()->count(),
+            ]);
+
+            return $vote;
+        });
     }
 
-    public function getArgumentFor(Vote $vote): ?Argument
+    public function saveArgument(Rfc $rfc, string $body): Argument
     {
-        return $this->arguments->first(
-            fn (Argument $argument) => $argument->vote_id === $vote->id,
-        );
-    }
+        $argument = $this->getArgumentForRfc($rfc);
 
-    public function hasArgumentFor(Vote $vote): bool
-    {
-        return $this->getArgumentFor($vote) !== null;
-    }
-
-    public function hasVotedForArgument(Argument $argument): bool
-    {
-        return $this->getArgumentVoteFor($argument) !== null;
-    }
-
-    public function getArgumentVoteFor(Argument $argument): ?UserArgumentVote
-    {
-        return $this->argumentVotes->first(
-            fn (UserArgumentVote $userArgumentVote) => $userArgumentVote->argument_id === $argument->id,
-        );
-    }
-
-    public function addArgumentVote(Argument $argument): UserArgumentVote
-    {
-        $userArgumentVote = UserArgumentVote::create([
-            'user_id' => $this->id,
-            'argument_id' => $argument->id,
-        ]);
-
-        $argument->update([
-            'vote_count' => $argument->vote_count + 1,
-        ]);
-
-        return $userArgumentVote;
-    }
-
-    public function removeArgumentVote(Argument $argument): void
-    {
-        $userArgumentVote = $this->getArgumentVoteFor($argument);
-
-        if (! $userArgumentVote) {
-            return;
+        if (! $argument) {
+            $argument = new Argument([
+                'user_id' => $this->id,
+                'rfc_id' => $rfc->id,
+            ]);
         }
 
-        $userArgumentVote->delete();
+        $argument->body = $body;
 
-        $argument->update([
-            'vote_count' => $argument->vote_count - 1,
-        ]);
+        $argument->save();
+
+        return $argument;
+    }
+
+    public function getVoteForRfc(Rfc $rfc): ?Vote
+    {
+        return $this->votes->first(fn (Vote $vote) => $vote->rfc_id === $rfc->id);
+    }
+
+    public function getArgumentForRfc(Rfc $rfc): ?Argument
+    {
+        return $this->arguments->first(fn (Argument $argument) => $argument->rfc_id === $rfc->id);
     }
 }
