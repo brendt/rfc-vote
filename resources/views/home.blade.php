@@ -5,6 +5,7 @@
         <a href="{{ action(\App\Http\Controllers\RfcDetailController::class, $rfc) }}">
             {{ $rfc->title }}
         </a>
+        <p>{{ $rfc->description }}</p>
     @endforeach
 </div>
 
