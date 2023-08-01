@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         foreach ($rfcs as $rfc) {
             foreach ($users as $user) {
                 $user->createVote($rfc, fake()->boolean(70) ? VoteType::YES : VoteType::NO);
+                $user->saveArgument($rfc, fake()->paragraphs(fake()->numberBetween(1, 4), true));
             }
         }
     }

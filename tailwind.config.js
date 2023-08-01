@@ -13,8 +13,12 @@ export default {
     safelist: [
         'bg-red-100',
         'bg-green-100',
+        'border-red-200',
+        'border-green-200',
         'border-red-400',
         'border-green-400',
+        'text-green-800',
+        'text-red-800',
         'flex-row',
         'flex-row-reverse',
     ],

@@ -13,9 +13,7 @@
         </div>
 
         <div class="col-span-3">
-            @foreach($rfc->arguments as $argument)
-                <livewire:argument-detail :argument="$argument"/>
-            @endforeach
+            <livewire:argument-list :rfc="$rfc" :user="$user"/>
         </div>
     </div>
 @endcomponent

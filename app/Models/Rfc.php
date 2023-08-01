@@ -13,7 +13,7 @@ class Rfc extends Model
 
     public function arguments(): HasMany
     {
-        return $this->hasMany(Argument::class);
+        return $this->hasMany(Argument::class)->orderByDesc('vote_count')->orderByDesc('created_at');
     }
 
     public function votes(): HasMany

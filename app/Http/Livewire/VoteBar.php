@@ -30,6 +30,9 @@ class VoteBar extends Component
 
         $this->user->createVote($this->rfc, VoteType::from($voteType));
 
+        $this->user->refresh();
+        $this->rfc->refresh();
+
         $this->emit('userVoted');
     }
 }

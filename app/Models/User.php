@@ -43,6 +43,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function argumentVotes(): HasMany
+    {
+        return $this->hasMany(ArgumentVote::class);
+    }
+
     public function votes(): HasMany
     {
         return $this->hasMany(Vote::class);
@@ -104,5 +109,35 @@ class User extends Authenticatable
     public function getArgumentForRfc(Rfc $rfc): ?Argument
     {
         return $this->arguments->first(fn (Argument $argument) => $argument->rfc_id === $rfc->id);
+    }
+
+    public function hasVotedForArgument(Argument $argument): bool
+    {
+        return $this->getArgumentVoteForArgument($argument) !== null;
+    }
+
+    public function getArgumentVoteForArgument(Argument $argument): ?ArgumentVote
+    {
+        return $this->argumentVotes->first(fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id);
+    }
+
+    public function toggleArgumentVote(Argument $argument): void
+    {
+        DB::transaction(function () use ($argument) {
+            $argumentVote = $this->getArgumentVoteForArgument($argument);
+
+            if ($argumentVote) {
+                $argumentVote->delete();
+            } else {
+                ArgumentVote::create([
+                    'argument_id' => $argument->id,
+                    'user_id' => $this->id,
+                ]);
+            }
+
+            $argument->update([
+                'vote_count' => $argument->votes()->count(),
+            ]);
+        });
     }
 }
