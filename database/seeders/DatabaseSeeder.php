@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Rfc;
 use App\Models\User;
-use App\Models\Vote;
 use App\Models\VoteType;
 use Illuminate\Database\Seeder;
 

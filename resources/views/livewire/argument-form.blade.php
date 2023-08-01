@@ -1,31 +1,41 @@
 <div>
-    @php
-        $vote = $user?->getVoteForRfc($rfc);
-    @endphp
-
-    @if($vote)
-        <form
-            action="{{ action(\App\Http\Controllers\StoreArgumentController::class, $rfc) }}"
-            method="post"
-        >
-            @csrf
-
-            <div class="">
-                <div class="grid grid-cols-1 gap-2">
-                    <p>
-                        Add your argument
-                    </p>
+    @if($vote && !$existingArgument)
+        <div class="flex {{ $vote->type->getJustify() }}">
+            <div class="
+                    flex-1
+                    border-2
+                    border-{{ $vote->type->getColor() }}-400
+                    p-4 max-w-4xl flex gap-4
+                    items-end
+                    {{ $vote->type->getJustify() }}
+            ">
+                <div class="w-full">
+                    <small>
+                        {{ $user->name }}
+                    </small>
 
                     <div class="grid gap-2">
-                        <textarea name="body"></textarea>
+                        <textarea name="body" wire:model="body"
+                                  class="w-full border border-gray-300"></textarea>
+
                         @error('body')
                         {{ $message }}
                         @enderror
                     </div>
-
-                    <button type="submit">Submit</button>
                 </div>
+
+                <button
+                    type="submit"
+                    class="
+                        py-2 px-4 cursor-pointer
+                        bg-{{ $vote->type->getColor() }}-200
+                        text-{{ $vote->type->getColor() }}-800
+                        text-center
+                    "
+                    wire:click="storeArgument"
+                >Submit
+                </button>
             </div>
-        </form>
+        </div>
     @endif()
 </div>

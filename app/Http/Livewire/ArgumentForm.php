@@ -10,18 +10,42 @@ class ArgumentForm extends Component
 {
     public Rfc $rfc;
 
-    public ?User $user = null;
+    public User $user;
 
-    protected $listeners = ['userVoted' => 'handleUserVoted'];
+    public ?string $body = null;
+
+    protected $listeners = [
+        Events::USER_VOTED->value => 'handleUserVoted'
+    ];
 
     public function render()
     {
-        return view('livewire.argument-form');
+        $existingArgument = $this->user->getArgumentForRfc($this->rfc);
+        $vote = $this->user->getVoteForRfc($this->rfc);
+
+        return view('livewire.argument-form', [
+            'vote' => $vote,
+            'existingArgument' => $existingArgument,
+        ]);
     }
 
     public function handleUserVoted(): void
     {
-        $this->user?->refresh();
+        $this->user->refresh();
         $this->rfc->refresh();
+    }
+
+    public function storeArgument(): void
+    {
+        if (! $this->body) {
+            return;
+        }
+
+        $this->user->saveArgument($this->rfc, $this->body);
+
+        $this->user->refresh();
+        $this->rfc->refresh();
+
+        $this->emit(Events::ARGUMENT_CREATED);
     }
 }

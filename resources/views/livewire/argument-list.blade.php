@@ -7,7 +7,8 @@
         <div class="flex {{ $voteForUser?->type->getJustify() }}">
             <div
                 class="
-                    {{ $voteForUser?->type->getBorderColor() }} p-4 border-2 max-w-4xl flex gap-4 items-center
+                    {{ $voteForUser?->type->getBorderColor() }}
+                    p-4 border-2 max-w-4xl flex gap-4 items-center
                     {{ $voteForUser?->type->getDirection() }}
                 "
             >
