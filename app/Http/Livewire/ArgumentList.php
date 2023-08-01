@@ -14,7 +14,8 @@ class ArgumentList extends Component
     public ?User $user = null;
 
     protected $listeners = [
-        'userVoted' => 'handleUserVoted',
+        Events::USER_VOTED->value => 'handleUserVoted',
+        Events::ARGUMENT_CREATED->value => 'handleUserVoted',
     ];
 
     public function render()
@@ -23,6 +24,11 @@ class ArgumentList extends Component
     }
 
     public function handleUserVoted(): void
+    {
+        $this->rfc->refresh();
+    }
+
+    public function handleArgumentCreated(): void
     {
         $this->rfc->refresh();
     }
@@ -37,5 +43,6 @@ class ArgumentList extends Component
 
         $this->user->refresh();
         $this->rfc->refresh();
+        $this->emit(Events::REPUTATION_UPDATED);
     }
 }

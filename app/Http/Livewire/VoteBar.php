@@ -33,6 +33,7 @@ class VoteBar extends Component
         $this->user->refresh();
         $this->rfc->refresh();
 
-        $this->emit('userVoted');
+        $this->emit(Events::USER_VOTED);
+        $this->emit(Events::REPUTATION_UPDATED);
     }
 }

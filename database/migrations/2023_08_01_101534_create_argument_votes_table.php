@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->foreign('argument_id')->references('id')->on('arguments')->onDelete('cascade');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
