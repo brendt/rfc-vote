@@ -22,7 +22,6 @@ class ArgumentForm extends Component
     public function handleUserVoted(): void
     {
         $this->user?->refresh();
-//        $this->rfc->refresh();
         $this->rfc->refresh();
     }
 }
