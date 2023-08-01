@@ -4,6 +4,7 @@
         <div
             class="
                 p-4 flex-grow text-left border-r-2 border-gray-700 hover:bg-green-600 hover:text-white cursor-pointer
+                min-w-[10%]
                 @if($user?->getVoteForRfc($rfc)?->type === \App\Models\VoteType::YES)
                 bg-green-600 text-white
                 @else
@@ -18,6 +19,7 @@
         <div
             class="
                 p-4 flex-grow text-right border-l-2 border-gray-700  hover:bg-red-600 hover:text-white cursor-pointer
+                min-w-[10%]
 
                 @if($user?->getVoteForRfc($rfc)?->type === \App\Models\VoteType::NO)
                 bg-red-600 text-white

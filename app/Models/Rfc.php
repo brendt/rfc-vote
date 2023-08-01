@@ -40,15 +40,28 @@ class Rfc extends Model
 
     public function percentageYes(): Attribute
     {
+
         return Attribute::make(
-            get: fn () => round(($this->count_yes / $this->count_total) * 100),
+            get: function () {
+                if ($this->count_total === 0) {
+                    return 0;
+                }
+
+                return round(($this->count_yes / $this->count_total) * 100);
+            },
         );
     }
 
     public function percentageNo(): Attribute
     {
         return Attribute::make(
-            get: fn () => round(($this->count_no / $this->count_total) * 100),
+            get: function () {
+                if ($this->count_total === 0) {
+                    return 0;
+                }
+
+                return round(($this->count_no / $this->count_total) * 100);
+            },
         );
     }
 
