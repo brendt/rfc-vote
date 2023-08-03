@@ -11,11 +11,13 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->string('url');
-            $table->text('description');
+            $table->string('url')->nullable();
+            $table->text('description')->nullable();
             $table->bigInteger('count_yes')->default(0);
             $table->bigInteger('count_no')->default(0);
             $table->timestamps();
+            $table->dateTime('published_at')->nullable();
+            $table->dateTime('ends_at')->nullable();
         });
     }
 

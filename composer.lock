@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48aca2a70e3865def0b720c093351879",
+    "content-hash": "521e6ec0910ed288319f2381ae6c6323",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -239,6 +239,52 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.2"
             },
             "time": "2022-10-27T11:44:00+00:00"
+        },
+        {
+            "name": "dg/rss-php",
+            "version": "v1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dg/rss-php.git",
+                "reference": "18f00ab1828948a8cfe107729ca1f11c20129b47"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dg/rss-php/zipball/18f00ab1828948a8cfe107729ca1f11c20129b47",
+                "reference": "18f00ab1828948a8cfe107729ca1f11c20129b47",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                }
+            ],
+            "description": "RSS & Atom Feeds for PHP is a very small and easy-to-use library for consuming an RSS and Atom feed",
+            "homepage": "https://github.com/dg/rss-php",
+            "keywords": [
+                "atom",
+                "feed",
+                "rss"
+            ],
+            "support": {
+                "source": "https://github.com/dg/rss-php/tree/v1.5"
+            },
+            "time": "2020-11-25T22:57:16+00:00"
         },
         {
             "name": "doctrine/inflector",

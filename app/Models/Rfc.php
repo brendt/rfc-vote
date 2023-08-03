@@ -12,6 +12,11 @@ class Rfc extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'published_at' => 'datetime',
+        'ends_at' => 'datetime',
+    ];
+
     protected static function boot(): void
     {
         parent::boot();
@@ -56,7 +61,6 @@ class Rfc extends Model
 
     public function percentageYes(): Attribute
     {
-
         return Attribute::make(
             get: function () {
                 if ($this->count_total === 0) {

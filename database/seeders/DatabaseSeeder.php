@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
+        return;
+
         $users = User::factory()->count(50)->create();
 
         $rfcs = Rfc::factory()->count(10)->create([
