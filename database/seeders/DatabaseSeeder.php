@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
 
         $rfcs = Rfc::factory()->count(10)->create([
             'title' => 'Interface Default Methods',
+            'published_at' => now(),
         ]);
 
         foreach ($rfcs as $rfc) {
