@@ -31,6 +31,16 @@
 </div>
 
 {{ $slot }}
+
+<div class="flex justify-center p-8 bg-purple-900 text-white mt-8">
+    <div class="flex font-bold flex-wrap md:flex-nowrap gap-4 flex-1 justify-center">
+        <span class="w-full md:w-auto">This project is open source, you can help out.</span>
+        <div class="w-full md:w-auto">
+            <a href="https://github.com/brendt/rfc-vote" class="bg-white px-4 p-2 text-purple-600 font-bold rounded hover:bg-purple-300 hover:text-purple-800">Check out the repository</a>
+        </div>
+    </div>
+</div>
+
 @livewireScripts
 </body>
 </html>

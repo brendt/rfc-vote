@@ -9,17 +9,19 @@
                 bg-white
                 rounded
                 shadow-md
-               grid items-center
+               flex flex-col
+               justify-between
                overflow-hidden
                hover:shadow-2xl
                hover:outline
 
             "
             >
-                <div class="p-4 font-bold font-mono">
+                <div class="px-4 mt-4 font-bold font-mono">
                     {{ $rfc->title }}
                 </div>
-                <p>{{ $rfc->description }}</p>
+
+                <p class="px-4 mb-2">{{ $rfc->description }}</p>
 
                 <div class="border-gray-700 border-t flex font-bold">
                     <div
