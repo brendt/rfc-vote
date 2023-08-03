@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('rfcs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug');
             $table->string('url');
             $table->bigInteger('count_yes')->default(0);
             $table->bigInteger('count_no')->default(0);
