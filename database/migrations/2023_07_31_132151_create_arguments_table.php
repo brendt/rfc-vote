@@ -18,6 +18,7 @@ return new class extends Migration {
 
             $table->longText('body');
             $table->unsignedBigInteger('vote_count')->default(0);
+            $table->dateTime('body_updated_at')->nullable();
             $table->timestamps();
         });
     }

@@ -19,14 +19,19 @@ class DatabaseSeeder extends Seeder
 
         $users = User::factory()->count(50)->create();
 
-        $rfcs = Rfc::factory()->count(1)->create([
+        $rfcs = Rfc::factory()->count(10)->create([
             'title' => 'Interface Default Methods',
         ]);
 
         foreach ($rfcs as $rfc) {
             foreach ($users as $user) {
-                $user->createVote($rfc, fake()->boolean(70) ? VoteType::YES : VoteType::NO);
-                $user->saveArgument($rfc, fake()->paragraphs(fake()->numberBetween(1, 4), true));
+                if (fake()->boolean(80)) {
+                    $user->createVote($rfc, fake()->boolean(70) ? VoteType::YES : VoteType::NO);
+
+                    if (fake()->boolean(20)) {
+                        $user->saveArgument($rfc, fake()->paragraphs(fake()->numberBetween(1, 4), true));
+                    }
+                }
             }
         }
     }

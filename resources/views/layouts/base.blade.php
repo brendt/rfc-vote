@@ -7,13 +7,14 @@
     @vite('resources/css/app.css')
     @livewireStyles
 </head>
-<body>
+<body class="bg-gray-100">
 
 @php
     $user = auth()->user();
 @endphp
 
 <div class="bg-gray-800 flex justify-end text-white p-4 gap-4">
+    <a href="/">Home</a>
     @if($user)
         <div>
             <span class="front-bold">{{ $user->name }}</span>
