@@ -11,6 +11,9 @@
                 class="text-xs bg-[#7a86b8] border border-[#4f5b93] hover:bg-[#4f5b93] text-white p-2 py-1 font-bold rounded"
             >Read RFC</a>
         </h1>
+        <p class="font-mono col-span-1">
+            {{ $rfc->description }}
+        </p>
 
         <div class="col-span-3">
             <livewire:vote-bar :rfc="$rfc->withoutRelations()" :user="$user?->withoutRelations()"/>

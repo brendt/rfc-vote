@@ -15,6 +15,7 @@ class RfcFactory extends Factory
         return [
             'title' => $this->faker->word(),
             'url' => $this->faker->url(),
+            'description' => $this->faker->sentences(3, true),
             'count_yes' => 0,
             'count_no' => 0,
             'created_at' => Carbon::now(),

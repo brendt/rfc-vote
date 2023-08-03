@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->string('title');
             $table->string('slug');
             $table->string('url');
+            $table->text('description');
             $table->bigInteger('count_yes')->default(0);
             $table->bigInteger('count_no')->default(0);
             $table->timestamps();

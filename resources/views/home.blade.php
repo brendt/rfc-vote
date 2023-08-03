@@ -19,6 +19,7 @@
                 <div class="p-4 font-bold font-mono">
                     {{ $rfc->title }}
                 </div>
+                <p>{{ $rfc->description }}</p>
 
                 <div class="border-gray-700 border-t flex font-bold">
                     <div
