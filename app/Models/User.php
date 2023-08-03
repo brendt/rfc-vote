@@ -85,7 +85,7 @@ class User extends Authenticatable
         });
     }
 
-    public function removeVote(Rfc $rfc, VoteType $type): void
+    public function undoVote(Rfc $rfc, VoteType $type): void
     {
         DB::transaction(function () use ($type, $rfc) {
             $vote = $this->getVoteForRfc($rfc);
