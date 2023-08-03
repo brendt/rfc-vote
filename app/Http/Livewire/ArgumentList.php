@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\RfcDetailController;
 use App\Models\Argument;
 use App\Models\Rfc;
 use App\Models\User;
 use Livewire\Component;
+use Session;
 
 class ArgumentList extends Component
 {
@@ -35,7 +37,9 @@ class ArgumentList extends Component
 
     public function voteForArgument(Argument $argument): void
     {
-        if (!$this->user) {
+        if (! $this->user) {
+            Session::put('url.intended', action(RfcDetailController::class, $this->rfc));
+            $this->redirect(route('login'));
             return;
         }
 

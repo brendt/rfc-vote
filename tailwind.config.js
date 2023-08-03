@@ -13,6 +13,10 @@ export default {
     safelist: [
         'bg-red-100',
         'bg-green-100',
+        'hover:bg-red-400',
+        'hover:bg-green-400',
+        'active:bg-red-400',
+        'active:bg-green-400',
         'border-red-200',
         'border-green-200',
         'border-red-400',

@@ -96,6 +96,8 @@ class User extends Authenticatable
             ]);
 
             $this->addReputation(ReputationType::MAKE_ARGUMENT);
+        } else {
+            $argument->body_updated_at = now();
         }
 
         $argument->body = $body;

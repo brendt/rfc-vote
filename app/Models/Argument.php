@@ -11,6 +11,10 @@ class Argument extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'body_updated_at' => 'datetime',
+    ];
+
     public function rfc(): BelongsTo
     {
         return $this->belongsTo(Rfc::class);

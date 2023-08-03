@@ -18,6 +18,13 @@ class ArgumentForm extends Component
         Events::USER_VOTED->value => 'handleUserVoted'
     ];
 
+    public function mount()
+    {
+        $existingArgument = $this->user->getArgumentForRfc($this->rfc);
+
+        $this->body = $existingArgument?->body;
+    }
+
     public function render()
     {
         $existingArgument = $this->user->getArgumentForRfc($this->rfc);
