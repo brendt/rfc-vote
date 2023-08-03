@@ -18,6 +18,7 @@ class ArgumentList extends Component
     protected $listeners = [
         Events::USER_VOTED->value => 'handleUserVoted',
         Events::ARGUMENT_CREATED->value => 'handleUserVoted',
+        Events::USER_UNDO_VOTE->value => 'handleUserVoted',
     ];
 
     public function render()
