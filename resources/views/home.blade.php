@@ -12,6 +12,8 @@
                grid items-center
                overflow-hidden
                hover:shadow-2xl
+               hover:outline
+
             "
             >
                 <div class="p-4 font-bold font-mono">
