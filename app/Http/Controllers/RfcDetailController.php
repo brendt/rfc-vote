@@ -9,7 +9,7 @@ final readonly class RfcDetailController
     public function __invoke(Rfc $rfc)
     {
         $rfc->load([
-            'votes',
+            'votes.user',
             'arguments.user',
         ]);
 

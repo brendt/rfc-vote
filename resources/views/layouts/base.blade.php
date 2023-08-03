@@ -13,15 +13,15 @@
     $user = auth()->user();
 @endphp
 
-<div class="bg-gray-800 flex justify-end text-white p-4 gap-4">
-    <a href="/">Home</a>
+<div class="bg-purple-800 flex justify-end text-white p-4 gap-4 items-center border-b-amber-300 border-b-2 fixed top-0 left-0 w-full">
+        <a href="/">Home</a>
     @if($user)
         <div>
+            <a href="{{ route('logout') }}">Logout</a>
+        </div>
+        <div class="flex gap-2 items-center">
             <span class="front-bold">{{ $user->name }}</span>
             <livewire:user-reputation-counter :user="$user"/>
-        </div>
-        <div>
-            <a href="{{ route('logout') }}">Logout</a>
         </div>
     @else
         <div>
@@ -30,7 +30,9 @@
     @endif
 </div>
 
-{{ $slot }}
+<div class="mt-[150px]">
+    {{ $slot }}
+</div>
 
 <div class="flex justify-center p-8 bg-purple-900 text-white mt-8">
     <div class="flex font-bold flex-wrap md:flex-nowrap gap-4 flex-1 justify-center">

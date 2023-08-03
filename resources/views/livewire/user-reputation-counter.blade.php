@@ -1,1 +1,1 @@
-<span class="text-sm">({{ $user->reputation }})</span>
+<x-user-reputation :user="$user"/>
