@@ -22,7 +22,7 @@ class VoteBar extends Component
 
     public function vote(string $voteType): void
     {
-        if (! $this->user) {
+        if (!$this->user) {
             Session::put('url.intended', action(RfcDetailController::class, $this->rfc));
             $this->redirect(route('login'));
             return;
@@ -34,6 +34,16 @@ class VoteBar extends Component
         $this->rfc->refresh();
 
         $this->emit(Events::USER_VOTED);
+        $this->emit(Events::REPUTATION_UPDATED);
+    }
+
+    public function undo(string $voteType): void
+    {
+        $this->user->removeVote($this->rfc, VoteType::from($voteType));
+        $this->user->refresh();
+        $this->rfc->refresh();
+
+        $this->emit(Events::USER_UNDO_VOTE);
         $this->emit(Events::REPUTATION_UPDATED);
     }
 }

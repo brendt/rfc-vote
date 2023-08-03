@@ -7,7 +7,7 @@
         <div
             class="
                 bg-white
-                @if ($vote->type === \App\Models\VoteType::YES)
+                @if ($vote?->type === \App\Models\VoteType::YES)
                     border-l-green-400 border-l-8 md:mr-8
                 @else
                     border-r-red-400 border-r-8 md:ml-8
