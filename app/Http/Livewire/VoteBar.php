@@ -30,14 +30,15 @@ class VoteBar extends Component
 
         if ($this->user->getVoteForRfc($this->rfc)) {
             $this->user->undoVote($this->rfc, VoteType::from($voteType));
+            $this->emit(Events::USER_UNDO_VOTE);
         } else {
             $this->user->createVote($this->rfc, VoteType::from($voteType));
+            $this->emit(Events::USER_VOTED);
         }
 
         $this->user->refresh();
         $this->rfc->refresh();
 
-        $this->emit(Events::USER_VOTED);
         $this->emit(Events::REPUTATION_UPDATED);
     }
 }
