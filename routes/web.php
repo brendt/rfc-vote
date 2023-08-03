@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RfcDetailController;
+use App\Http\Controllers\SocialiteCallbackController;
+use App\Http\Controllers\SocialiteRedirectController;
 use App\Http\Controllers\StoreArgumentController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +34,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/auth/redirect/{driver}', SocialiteRedirectController::class);
+Route::get('/auth/callback/{driver}', SocialiteCallbackController::class);

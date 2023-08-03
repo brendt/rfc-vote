@@ -44,5 +44,13 @@
                 </x-button>
             </div>
         </form>
+
+        <div class="mt-2 text-right">
+            <form action="{{ action(\App\Http\Controllers\SocialiteRedirectController::class, 'github') }}">
+                <x-button>
+                    {{ __('Log in with GitHub') }}
+                </x-button>
+            </form>
+        </div>
     </x-authentication-card>
 </x-guest-layout>

@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+
+final readonly class SocialiteCallbackController
+{
+    public function __invoke(string $driver)
+    {
+        $socialiteUser = Socialite::driver('github')->user();
+
+        $user = User::updateOrCreate([
+            'email' => $socialiteUser->getEmail(),
+        ], [
+            'name' => $socialiteUser->getName(),
+            'socialite' => serialize($socialiteUser),
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->to('/');
+    }
+}
