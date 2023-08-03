@@ -28,17 +28,23 @@ class VoteBar extends Component
             return;
         }
 
-        if ($this->user->getVoteForRfc($this->rfc)) {
-            $this->user->undoVote($this->rfc, VoteType::from($voteType));
-            $this->emit(Events::USER_UNDO_VOTE);
-        } else {
-            $this->user->createVote($this->rfc, VoteType::from($voteType));
-            $this->emit(Events::USER_VOTED);
-        }
+        $this->user->createVote($this->rfc, VoteType::from($voteType));
 
         $this->user->refresh();
         $this->rfc->refresh();
 
+        $this->emit(Events::USER_VOTED);
+        $this->emit(Events::REPUTATION_UPDATED);
+    }
+
+    public function undo(string $voteType): void
+    {
+        $this->user->undoVote($this->rfc, VoteType::from($voteType));
+
+        $this->user->refresh();
+        $this->rfc->refresh();
+
+        $this->emit(Events::USER_UNDO_VOTE);
         $this->emit(Events::REPUTATION_UPDATED);
     }
 }

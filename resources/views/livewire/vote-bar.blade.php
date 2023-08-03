@@ -12,7 +12,12 @@
                 @endif
             "
             style="width: {{ $rfc->percentage_yes }}%;"
-            wire:click="vote('{{ \App\Models\VoteType::YES }}')">
+            @if($user?->getVoteForRfc($rfc)?->type === \App\Models\VoteType::YES)
+                wire:click="undo('{{ \App\Models\VoteType::YES }}')"
+            @else
+                wire:click="vote('{{ \App\Models\VoteType::YES }}')"
+            @endif
+        >
             {{ $rfc->percentage_yes }}%
         </div>
         <div
@@ -27,7 +32,11 @@
                 @endif
             "
             style="width: {{ $rfc->percentage_no }}%;"
-            wire:click="vote('{{ \App\Models\VoteType::NO }}')">
+            @if($user?->getVoteForRfc($rfc)?->type === \App\Models\VoteType::NO)
+                wire:click="unDoVote('{{ \App\Models\VoteType::NO }}')"
+            @else
+                wire:click="vote('{{ \App\Models\VoteType::NO }}')"
+            @endif >
             {{ $rfc->percentage_no }}%
         </div>
     </div>
