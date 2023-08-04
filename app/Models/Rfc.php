@@ -13,8 +13,8 @@ class Rfc extends Model
     use HasFactory;
 
     protected $casts = [
-        'published_at' => 'datetime',
-        'ends_at' => 'datetime',
+        'published_at' => 'datetime:Y-m-d',
+        'ends_at' => 'datetime:Y-m-d',
     ];
 
     protected static function boot(): void
@@ -88,5 +88,14 @@ class Rfc extends Model
     public function getVoteForUser(User $user): ?Vote
     {
         return $this->votes->first(fn (Vote $vote) => $vote->user_id === $user->id);
+    }
+
+    public function isActive(): bool
+    {
+        if ($this->ends_at && $this->ends_at->lt(now())) {
+            return false;
+        }
+
+        return $this->published_at && $this->published_at->lte(now());
     }
 }

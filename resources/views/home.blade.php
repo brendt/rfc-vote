@@ -31,7 +31,6 @@
                             bg-green-300 text-green-900
                         "
                         style="width: {{ $rfc->percentage_yes }}%;"
-                        wire:click="vote('{{ \App\Models\VoteType::YES }}')"
                     >
                         {{ $rfc->percentage_yes }}%
                     </div>
@@ -41,10 +40,9 @@
                             min-w-[15%]
                             bg-red-300 text-red-900
                         "
-                        style="width: {{ $rfc->percentage_yes }}%;"
-                        wire:click="vote('{{ \App\Models\VoteType::YES }}')"
+                        style="width: {{ $rfc->percentage_no }}%;"
                     >
-                        {{ $rfc->percentage_yes }}%
+                        {{ $rfc->percentage_no }}%
                     </div>
                 </div>
             </a>

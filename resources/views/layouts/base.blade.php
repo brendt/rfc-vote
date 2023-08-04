@@ -16,9 +16,12 @@
 <div class="bg-purple-800 flex justify-end text-white p-4 gap-4 items-center fixed top-0 left-0 w-full">
         <a href="/">Home</a>
     @if($user)
-        <div>
-            <a href="{{ route('logout') }}">Logout</a>
-        </div>
+{{--        <div>--}}
+{{--            <a href="{{ route('logout') }}">Logout</a>--}}
+{{--        </div>--}}
+        @if($user->is_admin)
+            <a href="{{ action(\App\Http\Controllers\RfcAdminController::class) }}">Admin</a>
+        @endif
         <div class="flex gap-2 items-center">
             <span class="front-bold">{{ $user->name }}</span>
             <livewire:user-reputation-counter :user="$user"/>

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->bigInteger('count_yes')->default(0);
             $table->bigInteger('count_no')->default(0);
             $table->timestamps();
-            $table->dateTime('published_at')->nullable();
-            $table->dateTime('ends_at')->nullable();
+            $table->datetime('published_at')->nullable();
+            $table->datetime('ends_at')->nullable();
         });
     }
 

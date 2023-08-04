@@ -16,9 +16,6 @@
                 @else
                     border-r-red-400 border-r-8 md:ml-8
                 @endif
-                rounded
-                border
-                border-gray-200
                 shadow-md
                 p-4 flex gap-4 items-center
             "

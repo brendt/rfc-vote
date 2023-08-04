@@ -17,8 +17,6 @@
                     border-r-8
                     md:ml-8
                 @endif
-                rounded
-                border
                 shadow-md
                 p-4 gap-4 items-center
             ">
