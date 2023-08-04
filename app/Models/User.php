@@ -63,7 +63,7 @@ class User extends Authenticatable
         return DB::transaction(function () use ($type, $rfc) {
             $vote = $this->getVoteForRfc($rfc);
 
-            if (! $vote) {
+            if (!$vote) {
                 $vote = new Vote([
                     'user_id' => $this->id,
                     'rfc_id' => $rfc->id,
@@ -85,11 +85,25 @@ class User extends Authenticatable
         });
     }
 
+    public function undoVote(Rfc $rfc, VoteType $type): void
+    {
+        DB::transaction(function () use ($type, $rfc) {
+            $vote = $this->getVoteForRfc($rfc);
+            $vote->delete();
+            $this->removeReputation(ReputationType::VOTE_FOR_RFC);
+
+            $rfc->update([
+                'count_yes' => $rfc->yesVotes()->count(),
+                'count_no' => $rfc->noVotes()->count(),
+            ]);
+        });
+    }
+
     public function saveArgument(Rfc $rfc, string $body): Argument
     {
         $argument = $this->getArgumentForRfc($rfc);
 
-        if (! $argument) {
+        if (!$argument) {
             $argument = new Argument([
                 'user_id' => $this->id,
                 'rfc_id' => $rfc->id,
@@ -109,12 +123,12 @@ class User extends Authenticatable
 
     public function getVoteForRfc(Rfc $rfc): ?Vote
     {
-        return $this->votes->first(fn (Vote $vote) => $vote->rfc_id === $rfc->id);
+        return $this->votes->first(fn(Vote $vote) => $vote->rfc_id === $rfc->id);
     }
 
     public function getArgumentForRfc(Rfc $rfc): ?Argument
     {
-        return $this->arguments->first(fn (Argument $argument) => $argument->rfc_id === $rfc->id);
+        return $this->arguments->first(fn(Argument $argument) => $argument->rfc_id === $rfc->id);
     }
 
     public function hasVotedForArgument(Argument $argument): bool
@@ -124,7 +138,7 @@ class User extends Authenticatable
 
     public function getArgumentVoteForArgument(Argument $argument): ?ArgumentVote
     {
-        return $this->argumentVotes->first(fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id);
+        return $this->argumentVotes->first(fn(ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id);
     }
 
     public function hasAlreadyVotedForArgument(Argument $argument): bool
@@ -144,7 +158,7 @@ class User extends Authenticatable
             if ($argumentVote) {
                 $argumentVote->delete();
             } else {
-                if (! $this->hasAlreadyVotedForArgument($argument)) {
+                if (!$this->hasAlreadyVotedForArgument($argument)) {
                     $this->addReputation(ReputationType::VOTE_FOR_ARGUMENT);
                 }
 
@@ -163,6 +177,13 @@ class User extends Authenticatable
     public function addReputation(ReputationType $type): self
     {
         $this->increment('reputation', $type->getPoints());
+
+        return $this;
+    }
+
+    public function removeReputation(ReputationType $type): self
+    {
+        $this->decrement('reputation', $type->getPoints());
 
         return $this;
     }

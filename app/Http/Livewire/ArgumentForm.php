@@ -15,7 +15,8 @@ class ArgumentForm extends Component
     public ?string $body = null;
 
     protected $listeners = [
-        Events::USER_VOTED->value => 'handleUserVoted'
+        Events::USER_VOTED->value => 'handleUserVoteChanged',
+        Events::USER_UNDO_VOTE->value => 'handleUserVoteChanged'
     ];
 
     public function mount()
@@ -36,7 +37,7 @@ class ArgumentForm extends Component
         ]);
     }
 
-    public function handleUserVoted(): void
+    public function handleUserVoteChanged(): void
     {
         $this->user->refresh();
         $this->rfc->refresh();
@@ -44,7 +45,7 @@ class ArgumentForm extends Component
 
     public function storeArgument(): void
     {
-        if (! $this->body) {
+        if (!$this->body) {
             return;
         }
 
