@@ -9,6 +9,13 @@
                     rel="noopener noreferrer"
                     class="text-xs bg-[#7a86b8] border border-[#4f5b93] hover:bg-[#4f5b93] text-white p-2 py-1 font-bold rounded min-w-[80px] text-center"
                 >Read RFC</a>
+
+                @if($user?->is_admin)
+                    <a
+                        href="{{ action([\App\Http\Controllers\RfcEditController::class, 'edit'], ['rfc' => $rfc, 'back' => action(\App\Http\Controllers\RfcDetailController::class, $rfc)]) }}"
+                        class="text-xs bg-blue-100 border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white p-2 py-1 font-bold rounded text-center"
+                    >Edit</a>
+                @endif
             </h1>
 
             <p class="mt-2 md:mt-4 md:max-w-[50%] md:text-center md:mx-auto">

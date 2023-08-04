@@ -13,7 +13,8 @@
         "laravel/sanctum": "^3.2",
         "laravel/socialite": "^5.8",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^2.11"
+        "livewire/livewire": "^2.11",
+        "protonemedia/laravel-form-components": "^3.8"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
