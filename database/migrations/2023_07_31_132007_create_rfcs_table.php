@@ -11,14 +11,14 @@ return new class extends Migration
         Schema::create('rfcs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('url')->nullable();
             $table->text('description')->nullable();
             $table->bigInteger('count_yes')->default(0);
             $table->bigInteger('count_no')->default(0);
             $table->timestamps();
-            $table->dateTime('published_at')->nullable();
-            $table->dateTime('ends_at')->nullable();
+            $table->datetime('published_at')->nullable();
+            $table->datetime('ends_at')->nullable();
         });
     }
 
