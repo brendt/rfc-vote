@@ -2,6 +2,10 @@
     @foreach($rfc->arguments as $argument)
         @php
             $vote = $rfc->getVoteForUser($argument->user);
+
+            if (!$vote) {
+                continue;
+            }
         @endphp
 
         <div
@@ -22,7 +26,7 @@
             <div
                 class="
                     py-2 px-4 cursor-pointer
-                    border-{{ $vote?->type->getColor() }}-400
+                    border-{{ $vote->type->getColor() }}-400
                     border
                     @if($user?->hasVotedForArgument($argument))
                         bg-{{ $vote?->type->getColor() }}-400
