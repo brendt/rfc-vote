@@ -33,7 +33,7 @@
             "
             style="width: {{ $rfc->percentage_no }}%;"
             @if($user?->getVoteForRfc($rfc)?->type === \App\Models\VoteType::NO)
-                wire:click="unDoVote('{{ \App\Models\VoteType::NO }}')"
+                wire:click="undoVote('{{ \App\Models\VoteType::NO }}')"
             @else
                 wire:click="vote('{{ \App\Models\VoteType::NO }}')"
             @endif >
