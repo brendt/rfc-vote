@@ -22,9 +22,10 @@ class VoteBar extends Component
 
     public function vote(string $voteType): void
     {
-        if (!$this->user) {
+        if (! $this->user) {
             Session::put('url.intended', action(RfcDetailController::class, $this->rfc));
             $this->redirect(route('login'));
+
             return;
         }
 

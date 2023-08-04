@@ -10,7 +10,7 @@ final readonly class StoreArgumentController
     public function __invoke(Rfc $rfc, Request $request)
     {
         $validated = $request->validate([
-            'body' => ['required', 'string']
+            'body' => ['required', 'string'],
         ]);
 
         $request->user()->saveArgument($rfc, $validated['body']);

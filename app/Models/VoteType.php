@@ -9,7 +9,7 @@ enum VoteType: string
 
     public function getColor(): string
     {
-        return match($this) {
+        return match ($this) {
             self::YES => 'green',
             self::NO => 'red',
         };
@@ -17,7 +17,7 @@ enum VoteType: string
 
     public function getBackgroundColor(): string
     {
-        return match($this) {
+        return match ($this) {
             self::YES => 'bg-green-200',
             self::NO => 'bg-red-200',
         };
@@ -25,7 +25,7 @@ enum VoteType: string
 
     public function getBorderColor(): string
     {
-        return match($this) {
+        return match ($this) {
             self::YES => 'border-green-400',
             self::NO => 'border-red-400',
         };
@@ -33,7 +33,7 @@ enum VoteType: string
 
     public function getJustify(): string
     {
-        return match($this) {
+        return match ($this) {
             self::YES => 'justify-start',
             self::NO => 'justify-end',
         };
@@ -41,7 +41,7 @@ enum VoteType: string
 
     public function getDirection(): string
     {
-        return match($this) {
+        return match ($this) {
             self::YES => 'flex-row',
             self::NO => 'flex-row-reverse',
         };

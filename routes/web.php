@@ -7,7 +7,6 @@ use App\Http\Controllers\SocialiteRedirectController;
 use App\Http\Controllers\StoreArgumentController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
-use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +27,7 @@ Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');

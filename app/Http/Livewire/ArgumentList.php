@@ -41,6 +41,7 @@ class ArgumentList extends Component
         if (! $this->user) {
             Session::put('url.intended', action(RfcDetailController::class, $this->rfc));
             $this->redirect(route('login'));
+
             return;
         }
 
