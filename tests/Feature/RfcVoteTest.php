@@ -73,7 +73,6 @@ class RfcVoteTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-
         Livewire::test(VoteBar::class, ['rfc' => $rfc, 'user' => $user])
             ->call('vote', VoteType::YES->value)
             ->assertSuccessful();
