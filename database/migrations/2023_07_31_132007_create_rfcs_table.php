@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('rfcs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('url')->nullable();
             $table->text('description')->nullable();
             $table->bigInteger('count_yes')->default(0);

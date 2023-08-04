@@ -13,17 +13,26 @@ class Rfc extends Model
     use HasFactory;
 
     protected $casts = [
-        'published_at' => 'datetime:Y-m-d',
-        'ends_at' => 'datetime:Y-m-d',
+        'published_at' => 'datetime',
+        'ends_at' => 'datetime',
     ];
 
     protected static function boot(): void
     {
         parent::boot();
 
-        // When a RFC model is saved, we set its slug from the title
         static::saving(function (Rfc $rfc) {
-            $rfc->slug = Str::slug($rfc->title);
+            if ($rfc->slug !== null) {
+                return;
+            }
+
+            $slug = Str::slug($rfc->title);
+
+            $slugCount = self::query()->where('slug', 'like', "{$slug}%")->count();
+
+            $rfc->slug = $slugCount === 0 ? $slug : "{$slug}-{$slugCount}";
+
+            $rfc->save();
         });
     }
 

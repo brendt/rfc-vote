@@ -22,13 +22,14 @@
         @if($user->is_admin)
             <a href="{{ action(\App\Http\Controllers\RfcAdminController::class) }}">Admin</a>
         @endif
+        <a href="{{ action(\App\Http\Controllers\LogoutController::class) }}">Logout</a>
         <div class="flex gap-2 items-center">
             <span class="front-bold">{{ $user->name }}</span>
             <livewire:user-reputation-counter :user="$user"/>
         </div>
     @else
         <div>
-            <a href="{{ route('login') }}">Login</a>
+            <a href="{{ action(\App\Http\Controllers\LoginController::class) }}">Login</a>
         </div>
     @endif
 </div>

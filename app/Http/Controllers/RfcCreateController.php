@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Rfc;
 use Illuminate\Http\Request;
 
-final readonly class RfcEditController
+final readonly class RfcCreateController
 {
-    public function edit(Rfc $rfc)
+    public function create()
     {
         return view('rfc-form', [
-            'rfc' => $rfc,
-            'method' => action([self::class, 'update'], ['rfc' => $rfc, 'back' => request()->get('back')]),
+            'rfc' => new Rfc(),
+            'method' => action([self::class, 'store'])
         ]);
     }
 
-    public function update(Rfc $rfc, Request $request)
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'title' => ['required', 'string'],
@@ -25,12 +25,9 @@ final readonly class RfcEditController
             'url' => ['required', 'url'],
         ]);
 
-        $rfc->update($validated);
+        $rfc = new Rfc($validated);
+        $rfc->save();
 
-        if ($back = $request->get('back')) {
-            return redirect()->to($back);
-        }
-
-        return redirect()->action([self::class, 'edit'], $rfc);
+        return redirect()->action([RfcEditController::class, 'edit'], $rfc);
     }
 }
