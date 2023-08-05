@@ -102,12 +102,14 @@ composer install --prefer-dist --no-scripts --no-dev -o;
 @task('runNpm', ['on' => 'remote'])
 {{ logMessage("📦  Running NPM...") }}
 cd {{ $newReleaseDir }};
+npm install
 npm run build
 @endtask
 
 @task('runNpmInCurrentDir', ['on' => 'remote'])
 {{ logMessage("📦  Running NPM...") }}
 cd {{ $currentDir }};
+npm install
 npm run build
 @endtask
 
