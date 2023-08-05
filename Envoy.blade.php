@@ -59,8 +59,8 @@ finishCodeDeploy
 
 @task('startDeployment', ['on' => 'local'])
 {{ logMessage("🏃  Starting deployment...") }}
-git checkout master
-git pull origin master
+git checkout main
+git pull origin main
 @endtask
 
 @task('cloneRepository', ['on' => 'remote'])
@@ -173,7 +173,7 @@ eval `ssh-agent -s`
 ssh-add -D
 ssh-add ~/.ssh/id_rsa_rfc
 
-git pull origin master
+git pull origin main
 
 ssh-add -D
 @endtask
