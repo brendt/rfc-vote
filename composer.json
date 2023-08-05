@@ -40,6 +40,8 @@
         }
     },
     "scripts": {
+        "deploy": "vendor/bin/envoy run deploy",
+        "deploy-code": "vendor/bin/envoy run deploy-code",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
