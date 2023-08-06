@@ -44,9 +44,9 @@
             </div>
 
             <div class="grid gap-2 md:gap-4">
-                <div>
+                <x-markdown class="prose prose-md">
                     {{ $argument->body }}
-                </div>
+                </x-markdown>
                 <small class="flex gap-1 items-center">
                     — <x-user-name :user="$argument->user" />@if($argument->body_updated_at !== null) (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})@endif
                 </small>
