@@ -5,3 +5,8 @@
 [x-cloak] {
     display: none;
 }
+
+pre.shiki {
+    background-color: #f5f5f5 !important;
+    width: 100%;
+}

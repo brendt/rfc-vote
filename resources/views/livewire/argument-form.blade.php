@@ -3,7 +3,7 @@
         <div class="flex {{ $vote->type->getJustify() }}">
             <div class="
                     flex-1
-                    p-4 max-w-4xl flex gap-4
+                    p-4 flex gap-4
                     items-end
                     {{ $vote->type->getJustify() }}
                     bg-white
@@ -27,6 +27,7 @@
 
                     <div class="grid gap-2">
                         <textarea name="body" wire:model="body"
+                                  rows="{{ $rowCount }}"
                                   class="
                                     w-full border border-{{ $vote->type->getColor() }}-200
                                     active:border-{{ $vote->type->getColor() }}-400

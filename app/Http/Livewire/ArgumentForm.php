@@ -30,10 +30,12 @@ class ArgumentForm extends Component
     {
         $existingArgument = $this->user->getArgumentForRfc($this->rfc);
         $vote = $this->user->getVoteForRfc($this->rfc);
+        $rowCount = count(explode(PHP_EOL, $this->body ?? '')) + 1;
 
         return view('livewire.argument-form', [
             'vote' => $vote,
             'existingArgument' => $existingArgument,
+            'rowCount' => $rowCount,
         ]);
     }
 

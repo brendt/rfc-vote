@@ -13,8 +13,8 @@ class Rfc extends Model
     use HasFactory;
 
     protected $casts = [
-        'published_at' => 'datetime',
-        'ends_at' => 'datetime',
+        'published_at' => 'datetime:Y-m-d',
+        'ends_at' => 'datetime:Y-m-d',
     ];
 
     protected static function boot(): void
