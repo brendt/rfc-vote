@@ -38,9 +38,9 @@ class VoteBar extends Component
         $this->emit(Events::REPUTATION_UPDATED);
     }
 
-    public function undo(string $voteType): void
+    public function undo(): void
     {
-        $this->user->undoVote($this->rfc, VoteType::from($voteType));
+        $this->user->undoVote($this->rfc);
 
         $this->user->refresh();
         $this->rfc->refresh();
