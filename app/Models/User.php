@@ -63,7 +63,7 @@ class User extends Authenticatable
         return DB::transaction(function () use ($type, $rfc) {
             $vote = $this->getVoteForRfc($rfc);
 
-            if (! $vote) {
+            if (!$vote) {
                 $vote = new Vote([
                     'user_id' => $this->id,
                     'rfc_id' => $rfc->id,
@@ -103,7 +103,7 @@ class User extends Authenticatable
     {
         $argument = $this->getArgumentForRfc($rfc);
 
-        if (! $argument) {
+        if (!$argument) {
             $argument = new Argument([
                 'user_id' => $this->id,
                 'rfc_id' => $rfc->id,
@@ -203,7 +203,7 @@ class User extends Authenticatable
     protected function profilePhotoPath(): Attribute
     {
         return Attribute::make(
-            get: fn(?string $value) => isset($value) ? asset($value) : "https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+            get: fn (?string $value) => isset($value) ? asset($value) : 'https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg'
         );
     }
 }
