@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -196,5 +197,13 @@ class User extends Authenticatable
         }
 
         return url($this->avatar);
+    }
+
+
+    protected function profilePhotoPath(): Attribute
+    {
+        return Attribute::make(
+            get: fn(?string $value) => isset($value) ? asset($value) : "https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+        );
     }
 }
