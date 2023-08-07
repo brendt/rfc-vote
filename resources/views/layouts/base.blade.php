@@ -24,8 +24,11 @@
         @endif
         <a href="{{ action(\App\Http\Controllers\LogoutController::class) }}">Logout</a>
         <a class="flex gap-2 items-center" href="{{ action([\App\Http\Controllers\ProfileController::class, 'edit']) }}">
+{{--            <livewire:user-reputation-counter :user="$user"/>--}}
             <span class="front-bold">{{ $user->name }}</span>
-            <livewire:user-reputation-counter :user="$user"/>
+            @if($user->getAvatarUrl())
+                <img src="{{ $user->getAvatarUrl() }}" class="border-purple-200 rounded-full w-[30px] h-[30px]"/>
+            @endif
         </a>
     @else
         <div>
