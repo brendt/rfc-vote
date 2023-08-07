@@ -109,13 +109,14 @@ class User extends Authenticatable
             ]);
 
             $this->addReputation(ReputationType::MAKE_ARGUMENT);
+            $argument->body = $body;
+            $argument->save();
+            $this->toggleArgumentVote($argument);
         } else {
             $argument->body_updated_at = now();
+            $argument->body = $body;
+            $argument->save();
         }
-
-        $argument->body = $body;
-
-        $argument->save();
 
         return $argument;
     }

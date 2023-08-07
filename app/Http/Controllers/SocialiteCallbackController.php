@@ -12,12 +12,15 @@ final readonly class SocialiteCallbackController
     {
         $socialiteUser = Socialite::driver('github')->user();
 
-        $user = User::updateOrCreate([
-            'email' => $socialiteUser->getEmail(),
-        ], [
-            'name' => $socialiteUser->getName(),
-            'socialite' => serialize($socialiteUser),
-        ]);
+        $user = User::query()->where('email', $socialiteUser->getEmail())->first();
+
+        if (! $user) {
+            $user = User::create([
+                'email' => $socialiteUser->getEmail(),
+                'name' => $socialiteUser->getName(),
+                'socialite' => serialize($socialiteUser),
+            ]);
+        }
 
         Auth::login($user);
 

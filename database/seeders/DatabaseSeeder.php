@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->create([
             'name' => 'Brent',
-            'email' => 'brent.roose@jetbrains.com',
+            'email' => 'brendt@stitcher.io',
             'is_admin' => true,
         ]);
 
@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
         $rfcs = Rfc::factory()->count(10)->create([
             'title' => 'Interface Default Methods',
-            'published_at' => now(),
+            'published_at' => now()->subDay(),
         ]);
 
         foreach ($rfcs as $rfc) {
