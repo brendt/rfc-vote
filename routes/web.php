@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PublishRfcController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RfcAdminController;
 use App\Http\Controllers\RfcCreateController;
 use App\Http\Controllers\RfcDetailController;
@@ -30,6 +31,8 @@ Route::get('/', HomeController::class);
 Route::get('/rfc/{rfc}', RfcDetailController::class);
 Route::Post('/rfc/{rfc}/argument', StoreArgumentController::class);
 Route::get('/login', LoginController::class)->name('login');
+Route::get('/register', RegisterController::class)->name('register');
+Route::get('/register-pending', fn () => view('register-pending'))->name('register-pending');
 Route::get('/logout', LogoutController::class);
 
 Route::middleware(AdminMiddleware::class)->prefix('/admin')->group(function () {
