@@ -19,6 +19,8 @@ export default {
         'active:bg-green-400',
         'border-red-200',
         'border-green-200',
+        'border-red-200',
+        'border-green-200',
         'border-red-400',
         'border-green-400',
         'text-green-800',
