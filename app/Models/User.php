@@ -192,18 +192,10 @@ class User extends Authenticatable
 
     public function getAvatarUrl(): ?string
     {
-        if (! $this->avatar) {
-            return null;
+        if (!$this->avatar) {
+            return "https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg";
         }
 
         return url($this->avatar);
-    }
-
-
-    protected function profilePhotoPath(): Attribute
-    {
-        return Attribute::make(
-            get: fn (?string $value) => isset($value) ? asset($value) : 'https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg'
-        );
     }
 }
