@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -186,5 +187,14 @@ class User extends Authenticatable
         $this->decrement('reputation', $type->getPoints());
 
         return $this;
+    }
+
+    public function getAvatarUrl(): ?string
+    {
+        if (! $this->avatar) {
+            return null;
+        }
+
+        return url($this->avatar);
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\EndRfcController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublishRfcController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RfcAdminController;
@@ -50,6 +51,10 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit']);
+    Route::post('/profile', [ProfileController::class, 'update']);
+    Route::post('/profile/password', [ProfileController::class, 'updatePassword']);
+
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');

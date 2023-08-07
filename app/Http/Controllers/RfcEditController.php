@@ -11,7 +11,7 @@ final readonly class RfcEditController
     {
         return view('rfc-form', [
             'rfc' => $rfc,
-            'method' => action([self::class, 'update'], ['rfc' => $rfc, 'back' => request()->get('back')]),
+            'action' => action([self::class, 'update'], ['rfc' => $rfc, 'back' => request()->get('back')]),
         ]);
     }
 

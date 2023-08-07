@@ -23,10 +23,10 @@
             <a href="{{ action(\App\Http\Controllers\RfcAdminController::class) }}">Admin</a>
         @endif
         <a href="{{ action(\App\Http\Controllers\LogoutController::class) }}">Logout</a>
-        <div class="flex gap-2 items-center">
+        <a class="flex gap-2 items-center" href="{{ action([\App\Http\Controllers\ProfileController::class, 'edit']) }}">
             <span class="front-bold">{{ $user->name }}</span>
             <livewire:user-reputation-counter :user="$user"/>
-        </div>
+        </a>
     @else
         <div>
             <a href="{{ action(\App\Http\Controllers\LoginController::class) }}">Login</a>
