@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -63,7 +62,7 @@ class User extends Authenticatable
         return DB::transaction(function () use ($type, $rfc) {
             $vote = $this->getVoteForRfc($rfc);
 
-            if (!$vote) {
+            if (! $vote) {
                 $vote = new Vote([
                     'user_id' => $this->id,
                     'rfc_id' => $rfc->id,
@@ -103,7 +102,7 @@ class User extends Authenticatable
     {
         $argument = $this->getArgumentForRfc($rfc);
 
-        if (!$argument) {
+        if (! $argument) {
             $argument = new Argument([
                 'user_id' => $this->id,
                 'rfc_id' => $rfc->id,
@@ -192,8 +191,8 @@ class User extends Authenticatable
 
     public function getAvatarUrl(): ?string
     {
-        if (!$this->avatar) {
-            return "https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg";
+        if (! $this->avatar) {
+            return 'https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg';
         }
 
         return url($this->avatar);
