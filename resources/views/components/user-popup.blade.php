@@ -3,7 +3,7 @@
 @endphp
 {{--right-20 bottom-3--}}
 <span
-    class="text-xs bg-gray-600 p-2 z-10 rounded-xl font-bold origin-left space-x-4 min-w-max shadow-2xl scale-0 duration-300 flex items-center group-hover:scale-100 absolute transition-all">
+    class="text-xs bg-gray-600 p-2 z-10 rounded-xl right-20 bottom-3 font-bold origin-left space-x-4 min-w-max shadow-2xl scale-0 duration-300 flex items-center group-hover:scale-100 absolute transition-all">
     <img class="w-36 h-32 object-cover rounded-md" src="{{$user->profile_photo_path}}" alt="">
     <div class="flex flex-col items-center text-center  space-y-4">
         <p class="text-white text-ellipsis w-36 overflow-hidden">{{$user->name}}</p>
