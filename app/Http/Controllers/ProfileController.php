@@ -27,7 +27,7 @@ final readonly class ProfileController
             'avatar' => [
                 'nullable',
                 File::types(['png', 'jpg'])->max(1024),
-            ]
+            ],
         ]));
 
         $user = $request->user();
