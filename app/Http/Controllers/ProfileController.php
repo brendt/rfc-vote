@@ -24,6 +24,9 @@ final readonly class ProfileController
     {
         $validated = collect($request->validate([
             'name' => ['required', 'string'],
+            'website_url' => ['nullable', 'url'],
+            'github_url' => ['nullable', 'url'],
+            'twitter_url' => ['nullable', 'url'],
             'avatar' => [
                 'nullable',
                 File::types(['png', 'jpg'])->max(1024),

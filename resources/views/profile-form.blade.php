@@ -22,6 +22,13 @@
                 <x-form-input type="file" name="avatar" label="Choose a new avatar" />
             </div>
 
+            <div class="col-span-2 mt-4">
+                <h2 class="text-xl font-bold">Social links</h2>
+                <x-form-input type="text" name="website_url" label="Website" />
+                <x-form-input type="text" name="github_url" label="GitHub" />
+                <x-form-input type="text" name="twitter_url" label="Twitter" />
+            </div>
+
             <div class="flex justify-end items-baseline gap-2 col-span-2">
                 <x-form-submit>
                     Save
