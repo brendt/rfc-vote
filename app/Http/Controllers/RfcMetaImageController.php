@@ -19,7 +19,7 @@ final readonly class RfcMetaImageController
             $disk->makeDirectory('meta');
         }
 
-        $path = public_path("meta/{$rfc->id}.jpg");
+        $path = public_path("/storage/meta/{$rfc->id}.jpg");
 
         Browsershot::html($html)
             ->windowSize(1200, 627)
