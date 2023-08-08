@@ -24,7 +24,7 @@ final readonly class RfcMetaImageController
 
         Log::debug("Length:" . strlen($image));
 
-        return response(base64_decode($image))->header('Content-Type', 'image/png');
+        return response(base64_decode($image))->header('Content-Type', 'image/jpeg');
     }
 
     private function generateImage(Rfc $rfc): string
@@ -42,7 +42,7 @@ final readonly class RfcMetaImageController
         return $browsershot
             ->windowSize(1200, 627)
             ->deviceScaleFactor(2)
-            ->setScreenshotType('png')
+            ->setScreenshotType('jpeg')
             ->base64Screenshot();
     }
 }
