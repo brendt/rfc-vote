@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\EndRfcController;
+use App\Http\Controllers\ForgotPassword;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublishRfcController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ForgotPassword;
 use App\Http\Controllers\RfcAdminController;
 use App\Http\Controllers\RfcCreateController;
 use App\Http\Controllers\RfcDetailController;
