@@ -48,7 +48,7 @@
                     {{ $argument->body }}
                 </x-markdown>
                 <small class="flex gap-1 items-center">
-                    <x-user-name :user="$argument->user" />@if($argument->body_updated_at !== null) (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})@endif
+                     <x-user-name :user="$argument->user" />@if($argument->body_updated_at !== null) (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})@endif
                 </small>
             </div>
         </div>
