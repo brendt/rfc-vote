@@ -13,7 +13,7 @@
     $user = auth()->user();
 @endphp
 
-<div class="bg-purple-800 flex justify-end text-white p-4 gap-4 items-center fixed top-0 left-0 w-full">
+<div class="bg-purple-800 flex justify-end text-white p-4 gap-4 items-center fixed top-0 left-0 w-full z-10">
         <a href="/">Home</a>
     @if($user)
 {{--        <div>--}}
