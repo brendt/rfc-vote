@@ -36,4 +36,8 @@ return [
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => '/auth/callback/github',
     ],
+
+    'chrome' => [
+        'path' => env('CHROME_BINARY_PATH', '/opt/homebrew/bin/chromium')
+    ]
 ];
