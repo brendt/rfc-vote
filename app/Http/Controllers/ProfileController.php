@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\Fortify\PasswordValidationRules;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
 final readonly class ProfileController
@@ -24,6 +25,7 @@ final readonly class ProfileController
     {
         $validated = collect($request->validate([
             'name' => ['required', 'string'],
+            'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore($request->user()->id)],
             'website_url' => ['nullable', 'url'],
             'github_url' => ['nullable', 'url'],
             'twitter_url' => ['nullable', 'url'],
