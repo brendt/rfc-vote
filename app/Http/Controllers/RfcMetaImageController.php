@@ -22,7 +22,7 @@ final readonly class RfcMetaImageController
             );
         }
 
-        Log::debug("Length:" . strlen($image));
+        Log::debug('Length:'.strlen($image));
 
         return response(base64_decode($image))->header('Content-Type', 'image/jpeg');
     }
