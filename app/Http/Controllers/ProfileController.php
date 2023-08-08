@@ -54,14 +54,24 @@ final readonly class ProfileController
     {
         $user = $request->user();
 
-        $validated = $request->validate([
-            'current_password' => ['required', 'string', 'current_password:web'],
-            'new_password' => $this->passwordRules(),
-        ]);
+        if ($user->password) {
+            $validated = $request->validate([
+                'current_password' => ['required', 'string', 'current_password:web'],
+                'new_password' => $this->passwordRules(),
+            ]);
 
-        $user->forceFill([
-            'password' => Hash::make($validated['new_password']),
-        ])->save();
+            $user->forceFill([
+                'password' => Hash::make($validated['new_password']),
+            ])->save();
+        } else {
+            $validated = $request->validate([
+                'password' => $this->passwordRules(),
+            ]);
+
+            $user->forceFill([
+                'password' => Hash::make($validated['password']),
+            ])->save();
+        }
 
         return redirect()->action([self::class, 'edit']);
     }

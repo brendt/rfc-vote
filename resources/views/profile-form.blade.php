@@ -6,7 +6,7 @@
                 enctype="multipart/form-data"
         >
 
-            <h2 class="text-xl font-bold col-span-2">Profile</h2>
+            <h1 class="text-2xl font-bold col-span-2">Profile</h1>
 
             @bind($user)
 
@@ -22,7 +22,7 @@
                 <x-form-input type="file" name="avatar" label="Choose a new avatar" />
             </div>
 
-            <div class="col-span-2 mt-4">
+            <div class="col-span-2 mt-6">
                 <h2 class="text-xl font-bold">Social links</h2>
                 <x-form-input type="text" name="website_url" label="Website" />
                 <x-form-input type="text" name="github_url" label="GitHub" />
@@ -41,13 +41,20 @@
                 action="{{ action([\App\Http\Controllers\ProfileController::class, 'updatePassword']) }}"
                 method="post">
 
-            <h2 class="text-xl font-bold">Password</h2>
+            <h2 class="text-xl font-bold mt-2">Password</h2>
 
             @bind($user)
 
-            <x-form-input type="password" name="current_password" label="Current password" />
-            <x-form-input type="password" name="new_password" label="New password" />
-            <x-form-input type="password" name="new_password_confirmation" label="Confirm your new password" />
+            @if($user->password)
+                <p class="mt-2">You can change your password here if you need to.</p>
+                <x-form-input type="password" name="current_password" label="Current password" />
+                <x-form-input type="password" name="new_password" label="New password" />
+                <x-form-input type="password" name="new_password_confirmation" label="Confirm your new password" />
+            @else
+                <p class="mt-2">You're logged in with Github, so you haven't set a password yet. You can choose a password if you'd like to be able to use the password login as well.</p>
+                <x-form-input type="password" name="password" label="Choose a password" />
+                <x-form-input type="password" name="password_confirmation" label="Confirm your password" />
+            @endif
 
             <div class="flex justify-end items-baseline gap-2 col-span-2">
                 <x-form-submit>
