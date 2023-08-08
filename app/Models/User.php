@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use App\Mail\EmailVerificationMail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -198,5 +202,21 @@ class User extends Authenticatable
         }
 
         return url($this->avatar);
+    }
+
+    public function emailChangeRequest(): HasMany
+    {
+        return $this->hasMany(EmailChangeRequest::class);
+    }
+
+    public function requestEmailChange($newEmail): void
+    {
+        $token = Str::random(64);
+        auth()->user()->emailChangeRequest()->create([
+            'new_email' => $newEmail,
+            'token' => $token,
+        ]);
+        $verificationLink = URL::signedRoute('email.verify', ['token' => $token]);
+        Mail::to($newEmail)->send(new EmailVerificationMail($verificationLink));
     }
 }
