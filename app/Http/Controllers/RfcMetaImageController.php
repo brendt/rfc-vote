@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Rfc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
 use Spatie\Browsershot\Browsershot;
 
 final readonly class RfcMetaImageController
@@ -39,6 +38,8 @@ final readonly class RfcMetaImageController
 
         return $browsershot
             ->windowSize(1200, 627)
+            ->deviceScaleFactor(2)
+            ->setScreenshotType('png')
             ->base64Screenshot();
     }
 }
