@@ -192,7 +192,9 @@ class User extends Authenticatable
     public function getAvatarUrl(): ?string
     {
         if (! $this->avatar) {
-            return 'https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg';
+            $hash = md5(strtolower(trim($this->email)));
+
+            return "https://www.gravatar.com/avatar/{$hash}";
         }
 
         return url($this->avatar);
