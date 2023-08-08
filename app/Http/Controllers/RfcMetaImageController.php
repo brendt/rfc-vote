@@ -15,7 +15,7 @@ final readonly class RfcMetaImageController
         ])->render();
 
         $disk = Storage::disk('public');
-        if (!$disk->exists('meta')) {
+        if (! $disk->exists('meta')) {
             $disk->makeDirectory('meta');
         }
 
