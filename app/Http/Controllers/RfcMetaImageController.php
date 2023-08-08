@@ -13,16 +13,16 @@ final readonly class RfcMetaImageController
     public function __invoke(Rfc $rfc, Request $request)
     {
         if ($request->has('nocache')) {
-            $path = $this->generateImage($rfc);
+            $image = $this->generateImage($rfc);
         } else {
-            $path = Cache::remember(
+            $image = Cache::remember(
                 key: "meta-{$rfc->id}",
                 ttl: now()->addMinutes(15),
                 callback: fn () => $this->generateImage($rfc),
             );
         }
 
-        return response()->file($path);
+        return response(base64_decode($image))->header('Content-Type', 'image/png');
     }
 
     private function generateImage(Rfc $rfc): string
@@ -31,24 +31,14 @@ final readonly class RfcMetaImageController
             'rfc' => $rfc,
         ])->render();
 
-        $disk = Storage::disk('public');
-
-        if (! $disk->exists('meta')) {
-            $disk->makeDirectory('meta');
-        }
-
-        $path = public_path("/storage/meta/{$rfc->id}.jpg");
-
         $browsershot = Browsershot::html($html);
 
         if ($chromePath = config('services.chrome.path')) {
             $browsershot->setChromePath($chromePath);
         }
 
-        $browsershot
+        return $browsershot
             ->windowSize(1200, 627)
-            ->save($path);
-
-        return $path;
+            ->base64Screenshot();
     }
 }
