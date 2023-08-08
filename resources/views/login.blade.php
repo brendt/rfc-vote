@@ -16,7 +16,7 @@
             </div>
 
             <div class=" justify-between flex  items-baseline col-span-2">
-                <a href="{{ action(\App\Http\Controllers\ResetPassword::class) }}" class="text-black underline hover:no-underline">Forget Password?</a>
+                <a href="{{ action(\App\Http\Controllers\ForgotPassword::class) }}" class="text-black underline hover:no-underline">Forget Password?</a>
                 <div class="flex space-x-4">
                     <label for="remember_me" class="flex items-center">
                         <x-checkbox id="remember_me" name="remember"/>
