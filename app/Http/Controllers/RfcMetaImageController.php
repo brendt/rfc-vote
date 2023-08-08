@@ -39,8 +39,13 @@ final readonly class RfcMetaImageController
 
         $path = public_path("/storage/meta/{$rfc->id}.jpg");
 
-        Browsershot::html($html)
-            ->setChromePath(config('services.chrome.path'))
+        $browsershot = Browsershot::html($html);
+
+        if ($chromePath = config('services.chrome.path')) {
+            $browsershot->setChromePath($chromePath);
+        }
+
+        $browsershot
             ->windowSize(1200, 627)
             ->save($path);
 
