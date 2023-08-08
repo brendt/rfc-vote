@@ -27,6 +27,8 @@ final readonly class RfcEditController
 
         $rfc->update($validated);
 
+        flash('Success');
+
         if ($back = $request->get('back')) {
             return redirect()->to($back);
         }

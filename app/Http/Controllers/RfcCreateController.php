@@ -28,6 +28,8 @@ final readonly class RfcCreateController
         $rfc = new Rfc($validated);
         $rfc->save();
 
+        flash('Success');
+        
         return redirect()->action([RfcEditController::class, 'edit'], $rfc);
     }
 }

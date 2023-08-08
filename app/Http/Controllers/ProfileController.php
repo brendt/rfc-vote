@@ -47,6 +47,8 @@ final readonly class ProfileController
             ]);
         }
 
+        flash("Profile updated successfully");
+
         return redirect()->action([self::class, 'edit']);
     }
 
@@ -63,6 +65,8 @@ final readonly class ProfileController
             $user->forceFill([
                 'password' => Hash::make($validated['new_password']),
             ])->save();
+
+            flash("Password updated successfully");
         } else {
             $validated = $request->validate([
                 'password' => $this->passwordRules(),
@@ -71,6 +75,8 @@ final readonly class ProfileController
             $user->forceFill([
                 'password' => Hash::make($validated['password']),
             ])->save();
+
+            flash("Password set successfully");
         }
 
         return redirect()->action([self::class, 'edit']);
