@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
-use App\Mail\EmailVerificationMail;
 use App\Models\EmailChangeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
@@ -45,6 +41,7 @@ final readonly class ProfileController
         if ($validated['email'] && $validated['email'] !== $user->email) {
             $user->requestEmailChange($validated['email']);
             flash('An email with a verification link has been sent to your new email address. Please click the link to verify your email.');
+
             return redirect()->action([self::class, 'edit']);
         }
 
@@ -98,7 +95,7 @@ final readonly class ProfileController
     public function verifyEmail($token)
     {
         $emailChangeRequest = EmailChangeRequest::where('token', $token)->first();
-        if (!$emailChangeRequest) {
+        if (! $emailChangeRequest) {
             abort('403', 'Email Expired');
         }
         if (now()->greaterThan($emailChangeRequest->created_at->addMinutes(30))) {
@@ -109,7 +106,7 @@ final readonly class ProfileController
         $user->update(['email' => $emailChangeRequest->new_email]);
         $emailChangeRequest->delete();
         flash('Your email has been successfully changed.');
+
         return redirect()->action([self::class, 'edit']);
     }
-
 }

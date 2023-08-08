@@ -39,7 +39,6 @@ Route::get('/register-pending', fn () => view('register-pending'))->name('regist
 Route::get('/logout', LogoutController::class);
 Route::get('email/verify/{token}', [ProfileController::class, 'verifyEmail'])->name('email.verify');
 
-
 Route::middleware(AdminMiddleware::class)->prefix('/admin')->group(function () {
     Route::get('/rfc', RfcAdminController::class);
     Route::get('/rfc/new', [RfcCreateController::class, 'create']);
