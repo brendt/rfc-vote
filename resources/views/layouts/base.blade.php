@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
     @livewireStyles
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
 @php
     $user = auth()->user();
@@ -37,7 +37,7 @@
     @endif
 </div>
 
-<div class="mt-[150px]">
+<div class="mt-[150px] flex-1">
 
     @if(flash()->message)
         <div class="z-50 bg-blue-400 max-w-[766px] mx-auto p-4 border border-blue-800 text-white font-bold">
