@@ -183,6 +183,7 @@ ssh-add -D
 @task('finishCodeDeploy',['on' => 'remote'])
 cd {{ $currentDir }}
 
+php artisan storage:link
 php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
