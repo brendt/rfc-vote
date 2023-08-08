@@ -29,7 +29,7 @@ final readonly class RfcCreateController
         $rfc->save();
 
         flash('Success');
-        
+
         return redirect()->action([RfcEditController::class, 'edit'], $rfc);
     }
 }
