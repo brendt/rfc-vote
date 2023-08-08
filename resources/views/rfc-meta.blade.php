@@ -5,7 +5,7 @@
 </head>
 <body class="bg-gray-900">
 <div class="flex items-center justify-center h-screen">
-    <div class="w-[949px] h-[495px] bg-white p-4 flex flex-col gap-4 items-center justify-center flex-wrap">
+    <div class="w-[1200px] h-[627px] bg-white p-4 flex flex-col gap-4 items-center justify-center flex-wrap">
         <div class="text-center text-3xl font-mono">
             <h1>{{ $rfc->title }}</h1>
         </div>
