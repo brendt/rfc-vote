@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Rfc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Log;
 use Spatie\Browsershot\Browsershot;
 
 final readonly class RfcMetaImageController
