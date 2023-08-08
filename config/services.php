@@ -38,6 +38,6 @@ return [
     ],
 
     'chrome' => [
-        'path' => env('CHROME_BINARY_PATH', '/opt/homebrew/bin/chromium')
-    ]
+        'path' => env('CHROME_BINARY_PATH', '/opt/homebrew/bin/chromium'),
+    ],
 ];
