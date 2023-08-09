@@ -35,6 +35,7 @@
             <div class="flex justify-start text-xs items-center flex-wrap gap-1">
                 <x-tag-link
                     :href="$rfc->url"
+                    target="_blank"
                     class="bg-[#7a86b8] border border-[#4f5b93] hover:bg-[#4f5b93] text-white"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
