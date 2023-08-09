@@ -24,7 +24,6 @@ final readonly class RenderMetaImage
 
         return $browsershot
             ->windowSize(1200, 627)
-            ->deviceScaleFactor(2)
             ->setScreenshotType('png')
             ->setCustomTempPath(storage_path())
             ->base64Screenshot();
