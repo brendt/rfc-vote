@@ -44,15 +44,13 @@
                 <button
                     type="submit"
                     class="
+                        font-bold
                         py-2 px-4 cursor-pointer
-                        bg-{{ $vote->type->getColor() }}-200
-                        hover:bg-{{ $vote->type->getColor() }}-400
-                        hover:text-white
-                        text-{{ $vote->type->getColor() }}-800
+                        bg-{{ $vote->type->getColor() }}-400
+                        hover:bg-{{ $vote->type->getColor() }}-600
+                        text-white
                         text-center
-                        rounded
-                        border-{{ $vote->type->getColor() }}-400
-                        border
+                        rounded-full
                     "
                     wire:click="storeArgument"
                 >{{ $existingArgument ? 'Save' : 'Submit' }}

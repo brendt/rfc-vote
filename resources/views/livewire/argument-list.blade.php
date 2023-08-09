@@ -22,9 +22,10 @@
         >
             <div
                 class="
+                    font-bold
                     py-2 px-4 cursor-pointer
                     border-{{ $vote->type->getColor() }}-400
-                    border
+                    border-2
                     @if($user?->hasVotedForArgument($argument))
                         bg-{{ $vote?->type->getColor() }}-400
                         text-white

@@ -17,7 +17,11 @@ class VoteBar extends Component
 
     public function render()
     {
-        return view('livewire.vote-bar');
+        $userVote = $this->user?->getVoteForRfc($this->rfc);
+
+        return view('livewire.vote-bar', [
+            'userVote' => $userVote,
+        ]);
     }
 
     public function vote(string $voteType): void
