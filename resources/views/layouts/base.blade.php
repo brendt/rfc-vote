@@ -28,6 +28,8 @@
     </div>
 
     <div class="flex justify-end items-baseline gap-4 font-bold">
+        <a href="{{ action(\App\Http\Controllers\AboutController::class) }}">About</a>
+
         @if($user)
             @if($user->is_admin)
                 <a href="{{ action(\App\Http\Controllers\RfcAdminController::class) }}">Admin</a>
