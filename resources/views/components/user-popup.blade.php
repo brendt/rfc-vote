@@ -4,7 +4,7 @@
 {{--right-20 bottom-3--}}
 <x-card
     class="
-        flex-row text-xs bg-white p-2 rounded-xl left-[-50px] bottom-4 font-bold origin-bottom space-x-4 min-w-max shadow-2xl scale-0 duration-300 flex items-center group-hover:scale-100 absolute
+         flex-row text-xs bg-white p-2 rounded-xl left-[-50px] bottom-4 font-bold origin-bottom space-x-4 min-w-max shadow-2xl scale-0 duration-300 flex items-center group-hover:scale-100 absolute
     ">
     <img class="w-[35px] h-[35px] object-cover rounded-full border-2 border-purple-400" src="{{$user->getAvatarUrl()}}" alt="">
     <div class="flex flex-col items-center text-center  space-y-4">

@@ -6,7 +6,7 @@
                 @if($user?->getVoteForRfc($rfc)?->type === \App\Models\VoteType::YES)
                 bg-green-600 text-white
                 @else
-                bg-green-200 text-green-900
+                bg-green-300 text-green-900
                 @endif
             "
         style="width: {{ $rfc->percentage_yes }}%;"
@@ -26,7 +26,7 @@
                 @if($user?->getVoteForRfc($rfc)?->type === \App\Models\VoteType::NO)
                 bg-red-600 text-white
                 @else
-                bg-red-200 text-red-900
+                bg-red-300 text-red-900
                 @endif
             "
         style="width: {{ $rfc->percentage_no }}%;"

@@ -13,8 +13,8 @@ if (!str_contains($attributes->get('class'), 'flex-row')) {
             bg-white
             rounded
             shadow-md
-            flex {$flexDirection} items-center justify-between gap-2
-            p-4 md:pt-8 md:px-6
+            flex {$flexDirection} justify-between gap-2
+            p-4 md:px-6
             "
     ]) }}>
 
