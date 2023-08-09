@@ -6,6 +6,10 @@
     <title>RFC Vote</title>
     @vite('resources/css/app.css')
     @livewireStyles
+
+    <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
+    <meta charset="UTF-8">
+    {!!  $meta ?? null  !!}
 </head>
 <body class="bg-gray-100">
 
