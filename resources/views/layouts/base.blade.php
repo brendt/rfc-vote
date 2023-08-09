@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFC Vote</title>
+    <title>RFC Vote {{ app()->isProduction() ?: ' (local)' }}</title>
     @vite('resources/css/app.css')
     @livewireStyles
 
@@ -24,7 +24,7 @@
     p-4 md:p-8
 ">
     <div class="text-xl font-bold">
-        <a href="/">RFC Vote</a>
+        <a href="/">RFC Vote {{ app()->isProduction() ?: ' (local)' }}</a>
     </div>
 
     <div class="flex justify-end items-baseline gap-4 font-bold">
