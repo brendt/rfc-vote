@@ -7,7 +7,7 @@
                     {{ $rfc->title }}
                 </div>
 
-                <p class="px-2">{{ $rfc->description }}</p>
+                <x-markdown class="px-2">{!! $rfc->teaser !!}</x-markdown>
 
                 <div>
                     <div class="flex font-bold rounded-full overflow-hidden mt-2">

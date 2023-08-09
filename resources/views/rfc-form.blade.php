@@ -8,6 +8,9 @@
             <x-form-input type="date" name="published_at" label="Published at"/>
             <x-form-input type="date" name="ends_at" label="Ends at"/>
             <div class="col-span-2">
+                <x-form-textarea rows="2" name="teaser" label="Teaser"/>
+            </div>
+            <div class="col-span-2">
                 <x-form-textarea rows="4" name="description" label="Description"/>
             </div>
             <div class="col-span-2">

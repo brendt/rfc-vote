@@ -48,7 +48,7 @@
 
 <div class="flex-1">
     @if(flash()->message)
-        <div class="z-50 bg-blue-400 max-w-[766px] mx-auto p-4 border border-blue-800 text-white font-bold">
+        <div class="mt-4 z-50 bg-blue-400 max-w-[766px] mx-auto p-4 border border-blue-800 text-white font-bold">
             {{ flash()->message }}
         </div>
     @endif

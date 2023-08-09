@@ -100,9 +100,9 @@
                 @endif
             </div>
 
-            <p class="prose">
-                {{ $rfc->description }}
-            </p>
+            <x-markdown class="prose">
+                {!! $rfc->description !!}
+            </x-markdown>
         </div>
 
         <div class="col-span-3">

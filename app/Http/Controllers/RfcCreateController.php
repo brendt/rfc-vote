@@ -19,6 +19,7 @@ final readonly class RfcCreateController
     {
         $validated = $request->validate([
             'title' => ['required', 'string'],
+            'teaser' => ['required', 'string'],
             'description' => ['required', 'string'],
             'published_at' => ['nullable', 'date'],
             'ends_at' => ['nullable', 'date'],
