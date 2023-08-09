@@ -27,9 +27,6 @@ final readonly class RenderMetaImage
             ->deviceScaleFactor(2)
             ->setScreenshotType('png')
             ->setCustomTempPath(storage_path())
-            ->noSandbox()
-            ->ignoreHttpsErrors()
-            ->dismissDialogs()
             ->base64Screenshot();
     }
 }
