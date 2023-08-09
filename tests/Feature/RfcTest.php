@@ -2,9 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\PublishRfcController;
+use App\Http\Controllers\RfcAdminController;
+use App\Http\Controllers\RfcCreateController;
+use App\Http\Controllers\RfcEditController;
 use App\Models\Rfc;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class RfcTest extends TestCase
@@ -25,7 +30,7 @@ class RfcTest extends TestCase
     {
         $this->login(null, true);
 
-        $this->get('/admin/rfc')
+        $this->get(action(RfcAdminController::class))
             ->assertViewIs('rfc-admin')
             ->assertOk();
     }
@@ -35,7 +40,7 @@ class RfcTest extends TestCase
     {
         $this->login(null, true);
 
-        $this->get('/admin/rfc/new')
+        $this->get(action([RfcCreateController::class, 'create']))
             ->assertViewIs('rfc-form')
             ->assertOk();
     }
@@ -45,7 +50,7 @@ class RfcTest extends TestCase
     {
         $this->login(null, true);
 
-        $this->post('/admin/rfc/new')
+        $this->post(action([RfcCreateController::class, 'store']))
             ->assertSessionHasErrors(['title', 'description', 'url']);
     }
 
@@ -54,7 +59,7 @@ class RfcTest extends TestCase
     {
         $this->login(null, true);
 
-        $this->post('/admin/rfc/new', [
+        $this->post(action([RfcCreateController::class, 'store']), [
             'title' => $this->faker->text(10),
             'description' => $this->faker->text(50),
             'url' => $this->faker->url
@@ -67,12 +72,47 @@ class RfcTest extends TestCase
     /** @test */
     public function edit_rfc_screen_can_be_rendered()
     {
-        $this->withoutExceptionHandling();
         $rfc = Rfc::factory()->create();
-
         $this->login(null, true);
 
-        $this->get("admin/rfc/{$rfc->id}")
-            ->dd();
+        $this->get(action([RfcEditController::class, 'edit'], $rfc))
+            ->assertViewIs('rfc-form')
+            ->assertSee($rfc->title)
+            ->assertSee($rfc->url)
+            ->assertSee($rfc->id)
+            ->assertSee($rfc->description)
+            ->assertOk();
+    }
+
+    /** @test */
+    public function rfc_can_be_updated()
+    {
+        $rfc = Rfc::factory()->create();
+        $this->login(null, true);
+
+        $this->post(action([RfcEditController::class, 'update'], $rfc),
+            [
+                'title' => 'updated_title',
+                'description' => 'updated_description',
+                'url' => $this->faker->url
+            ])
+            ->assertRedirect(action([RfcEditController::class, 'update'], $rfc));
+
+        $this->assertDatabaseCount('rfcs', 1);
+        $this->assertDatabaseHas('rfcs', ['title' => 'updated_title', 'description' => 'updated_description']);
+    }
+
+
+    /** @test */
+    public function rfc_can_be_published()
+    {
+        $rfc = Rfc::factory()->create();
+        $this->login(null, true);
+        $now = now();
+        $this->post(action(PublishRfcController::class, $rfc))
+            ->assertRedirect(action(RfcAdminController::class));
+
+        $this->markTestIncomplete();
+        $this->assertDatabaseHas('rfc', ['published_at' => DB::raw('IS NOT NULL')]);
     }
 }
