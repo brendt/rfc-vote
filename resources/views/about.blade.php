@@ -3,13 +3,20 @@
 <x-markdown>
 ## Shaping PHP, together
 
-Thank you for checking out RFC Vote! This project's goal is to visualize how the PHP community feels about the direction that PHP is going. Right now, only internal PHP developers and a select group of people can vote on RFCs — and thus determine the direction of PHP. This website allows everyone from the PHP community to have a voice.
+Thank you for checking out RFC Vote!
 
-To be clear: community votes won't influence the outcome of PHP RFC votes directly. However, they might give internals a better understanding of what the community wants, and might be a valuable data point in the future.
+This project is dedicated to providing a platform for the PHP community to express their thoughts and feelings about the proposals for the PHP language in an easier way.
 
-Besides a vote, people can also share their arguments on every RFC, explaining _why_ they voted yes or no. This way we can learn from each other, and get better insights into why an RFC is popular or not.
+Our main goal is to visualize the diverse opinions and arguments surrounding PHP's proposed features, making it easier to understand the benefits and downsides of each proposal. By doing so, we hope to foster a greater understanding of how PHP developers feel about these changes.
 
-## Who's involved?
+While official voting on RFCs is limited to internal qualified developers and a specific group of contributors, RFC Vote offers a space for everyone in the PHP community to share their voice. Your votes and comments won't directly influence the official PHP RFC outcomes, but they can serve as valuable insights for those involved in the decision-making process.
+
+In addition to casting a vote, you are encouraged to share your reasoning behind your choices on each RFC. By explaining why you voted yes or no, we can collectively gain better insights into the popularity or concerns associated with an RFC. This collaborative approach allows us to learn from one another and contributes to a more informed and connected PHP community.
+
+For official messages, please consider using the PHP Internals mailing list. Despite common belief, it is in fact, open to anyone.
+
+
+    ## Who's involved?
 
 Many people throughout the PHP community have already [contributed to this project](https://github.com/brendt/rfc-vote/graphs/contributors) — and [you can too](https://github.com/brendt/rfc-vote)!
 We also want to give a special shout-out to [Tighten](https://tighten.com/) for helping to create a design.
