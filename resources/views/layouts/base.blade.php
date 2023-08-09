@@ -28,13 +28,13 @@
     </div>
 
     <div class="flex justify-end items-baseline gap-4 font-bold">
-        <a href="{{ action(\App\Http\Controllers\AboutController::class) }}">About</a>
+        <a href="{{ action(\App\Http\Controllers\AboutController::class) }}" class="hover:underline">About</a>
 
         @if($user)
             @if($user->is_admin)
-                <a href="{{ action(\App\Http\Controllers\RfcAdminController::class) }}">Admin</a>
+                <a href="{{ action(\App\Http\Controllers\RfcAdminController::class) }}" class="hover:underline">Admin</a>
             @endif
-            <a class="flex gap-2 items-center" href="{{ action([\App\Http\Controllers\ProfileController::class, 'edit']) }}">
+            <a class="flex gap-2 items-center hover:underline" href="{{ action([\App\Http\Controllers\ProfileController::class, 'edit']) }}">
                 <span class="front-bold">{{ $user->name }}</span>
                 @if($user->getAvatarUrl())
                     <img src="{{ $user->getAvatarUrl() }}" class="border-purple-200 rounded-full w-[30px] h-[30px]"/>
@@ -42,7 +42,7 @@
             </a>
         @else
             <div>
-                <a href="{{ action(\App\Http\Controllers\LoginController::class) }}">Login</a>
+                <a href="{{ action(\App\Http\Controllers\LoginController::class) }}" class="hover:underline">Login</a>
             </div>
         @endif
     </div>
