@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-final readonly class ForgotPassword
+final readonly class ForgotPasswordController
 {
     public function __invoke()
     {
