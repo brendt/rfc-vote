@@ -10,7 +10,6 @@ use App\Http\Controllers\RfcEditController;
 use App\Models\Rfc;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class RfcTest extends TestCase
@@ -63,7 +62,7 @@ class RfcTest extends TestCase
         $this->post(action([RfcCreateController::class, 'store']), [
             'title' => $this->faker->text(10),
             'description' => $this->faker->text(50),
-            'url' => $this->faker->url
+            'url' => $this->faker->url,
         ])
             ->assertRedirect();
 
@@ -95,14 +94,13 @@ class RfcTest extends TestCase
             [
                 'title' => 'updated_title',
                 'description' => 'updated_description',
-                'url' => $this->faker->url
+                'url' => $this->faker->url,
             ])
             ->assertRedirect(action([RfcEditController::class, 'update'], $rfc));
 
         $this->assertDatabaseCount('rfcs', 1);
         $this->assertDatabaseHas('rfcs', ['title' => 'updated_title', 'description' => 'updated_description']);
     }
-
 
     /** @test */
     public function rfc_can_be_published()
