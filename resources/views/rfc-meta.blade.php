@@ -5,7 +5,12 @@
 </head>
 <body class="bg-gray-900">
 <div class="flex items-center justify-center h-screen">
-    <div class="w-[1200px] h-[627px] bg-purple-500 p-4 flex flex-col gap-8 items-center justify-center flex-wrap">
+    <div class="w-[1200px] h-[627px]
+
+    bg-purple-500
+    bg-gradient-to-br from-purple-600 to-purple-900
+
+    p-4 flex flex-col gap-8 items-center justify-center flex-wrap">
         <div class="text-center text-3xl prose">
             <h1 class="mt-0 text-white p-6 py-4">{{ $rfc->title }}</h1>
         </div>
