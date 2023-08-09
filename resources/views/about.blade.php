@@ -15,8 +15,7 @@ In addition to casting a vote, you are encouraged to share your reasoning behind
 
 For official messages, please consider using the PHP Internals mailing list. Despite common belief, it is in fact, open to anyone.
 
-
-    ## Who's involved?
+## Who's involved?
 
 Many people throughout the PHP community have already [contributed to this project](https://github.com/brendt/rfc-vote/graphs/contributors) — and [you can too](https://github.com/brendt/rfc-vote)!
 We also want to give a special shout-out to [Tighten](https://tighten.com/) for helping to create a design.
