@@ -6,7 +6,6 @@ use App\Actions\RenderMetaImage;
 use App\Models\Rfc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Log;
 
 final readonly class RfcMetaImageController
 {
