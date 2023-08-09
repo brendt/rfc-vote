@@ -6,6 +6,7 @@ use App\Actions\RenderMetaImage;
 use App\Models\Rfc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Log;
 
 final readonly class RfcMetaImageController
 {
@@ -20,6 +21,8 @@ final readonly class RfcMetaImageController
                 callback: fn () => $this->generateImage($rfc),
             );
         }
+
+        Log::debug(strlen($image));
 
         return response(base64_decode($image))->header('Content-Type', 'image/png');
     }
