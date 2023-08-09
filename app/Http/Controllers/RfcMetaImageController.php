@@ -20,9 +20,13 @@ final readonly class RfcMetaImageController
         } elseif ($request->has('nocache')) {
             $image = (new RenderMetaImage())($html);
         } else {
+            $cacheMinutes = $rfc->published_at->diffInDays(now()) >= 1
+                ? 15
+                : 2;
+
             $image = Cache::remember(
                 key: "meta-{$rfc->id}",
-                ttl: now()->addMinutes(15),
+                ttl: now()->addMinutes($cacheMinutes),
                 callback: fn () => (new RenderMetaImage())($html),
             );
         }
