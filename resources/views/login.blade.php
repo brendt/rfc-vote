@@ -15,13 +15,19 @@
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
             </div>
 
-            <div class="flex justify-end items-baseline gap-2 col-span-2">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
+            <div class=" justify-between flex  items-baseline col-span-2">
+                <a href="{{ action(\App\Http\Controllers\ForgotPassword::class) }}" class="text-black underline hover:no-underline">Forget Password?</a>
+                <div class="flex space-x-4">
+                    <label for="remember_me" class="flex items-center">
+                        <x-checkbox id="remember_me" name="remember"/>
+                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    </label>
 
-                <button type="submit" class="p-2 px-4 bg-blue-400 rounded text-white font-bold hover:bg-blue-600 hover:text-white">Login</button>
+                    <button type="submit"
+                            class="p-2 px-4 bg-blue-400 rounded text-white font-bold hover:bg-blue-600 hover:text-white">
+                        Login
+                    </button>
+                </div>
             </div>
         </x-form>
 

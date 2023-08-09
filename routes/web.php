@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EndRfcController;
+use App\Http\Controllers\ForgotPassword;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -66,3 +67,5 @@ Route::middleware([
 
 Route::get('/auth/redirect/{driver}', SocialiteRedirectController::class);
 Route::get('/auth/callback/{driver}', SocialiteCallbackController::class);
+
+Route::get('/forgot-password', ForgotPassword::class);
