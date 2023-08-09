@@ -21,6 +21,7 @@ class BrowsershotCommand extends Command
             ->windowSize(1200, 627)
             ->deviceScaleFactor(2)
             ->setScreenshotType('png')
+            ->setCustomTempPath(storage_path())
             ->base64Screenshot();
 
         $this->info(strlen($image));
