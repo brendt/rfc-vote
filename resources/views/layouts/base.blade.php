@@ -24,7 +24,7 @@
     p-4 md:p-8
 ">
     <div class="text-xl font-bold">
-        <a href="/">RFC Vote {{ app()->isProduction() ?: ' (local)' }}</a>
+        <a href="/">RFC Vote {{ app()->isProduction() ? '' : ' (local)' }}</a>
     </div>
 
     <div class="flex justify-end items-baseline gap-4 font-bold">
