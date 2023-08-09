@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\RenderMetaImage;
 use App\Models\Rfc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Spatie\Browsershot\Browsershot;
 
 final readonly class RfcMetaImageController
 {
@@ -30,16 +30,6 @@ final readonly class RfcMetaImageController
             'rfc' => $rfc,
         ])->render();
 
-        $browsershot = Browsershot::html($html);
-
-        if ($chromePath = config('services.chrome.path')) {
-            $browsershot->setChromePath($chromePath);
-        }
-
-        return $browsershot
-            ->windowSize(1200, 627)
-            ->deviceScaleFactor(2)
-            ->setScreenshotType('png')
-            ->base64Screenshot();
+        return (new RenderMetaImage())($html);
     }
 }
