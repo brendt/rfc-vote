@@ -14,10 +14,6 @@
                 <x-form-input type="text" name="name" label="Name" />
             </div>
 
-            <div class="col-span-2">
-                <x-form-input type="email" name="email" label="Email" />
-            </div>
-
             <div class="flex col-span-2 gap-4 items-center mt-4">
                 @if($user->getAvatarUrl())
                     <img src="{{ $user->getAvatarUrl() }}" class="border-4 border-purple-800 shadow-xl rounded-full max-w-[100px]"/>
@@ -36,6 +32,30 @@
             <div class="flex justify-end items-baseline gap-2 col-span-2">
                 <x-form-submit>
                     Save
+                </x-form-submit>
+            </div>
+            @endbind()
+        </x-form>
+
+        <x-form class="bg-white p-4 shadow-lg border-gray-300 border"
+                action="{{ action([\App\Http\Controllers\ProfileController::class, 'updateEmail']) }}"
+                method="post">
+
+            <h2 class="text-xl font-bold mt-2">Email</h2>
+
+            @bind($user)
+
+            <div class="col-span-2">
+                <x-form-input type="email" name="email" label="Email" />
+            </div>
+
+            <p class="text-red-600 font-bold mt-2">
+                Note: you will need to confirm your new email address. Also: if you logged in with GitHub and change your email address, your GitHub login won't work anymore.
+            </p>
+
+            <div class="flex justify-end items-baseline gap-2 col-span-2">
+                <x-form-submit>
+                    Change your email
                 </x-form-submit>
             </div>
             @endbind()
@@ -62,7 +82,7 @@
 
             <div class="flex justify-end items-baseline gap-2 col-span-2">
                 <x-form-submit>
-                    Save
+                    {{ @$user->password ? "Change your password" : "Set your password" }}
                 </x-form-submit>
             </div>
             @endbind()

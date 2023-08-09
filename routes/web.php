@@ -57,6 +57,7 @@ Route::middleware([
     Route::get('/profile', [ProfileController::class, 'edit']);
     Route::post('/profile', [ProfileController::class, 'update']);
     Route::post('/profile/password', [ProfileController::class, 'updatePassword']);
+    Route::post('/profile/email', [ProfileController::class, 'updateEmail']);
 
     Route::get('/dashboard', function () {
         return view('dashboard');

@@ -26,7 +26,6 @@ final readonly class ProfileController
     {
         $validated = collect($request->validate([
             'name' => ['required', 'string'],
-            'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore($request->user()->id)],
             'website_url' => ['nullable', 'url'],
             'github_url' => ['nullable', 'url'],
             'twitter_url' => ['nullable', 'url'],
@@ -37,13 +36,6 @@ final readonly class ProfileController
         ]));
 
         $user = $request->user();
-
-        if ($validated['email'] && $validated['email'] !== $user->email) {
-            $user->requestEmailChange($validated['email']);
-            flash('An email with a verification link has been sent to your new email address. Please click the link to verify your email.');
-
-            return redirect()->action([self::class, 'edit']);
-        }
 
         $user->update($validated->except('avatar')->all());
 
@@ -58,6 +50,27 @@ final readonly class ProfileController
         }
 
         flash('Profile updated successfully');
+
+        return redirect()->action([self::class, 'edit']);
+    }
+
+    public function updateEmail(Request $request)
+    {
+        $user = $request->user();
+
+        $validated = $request->validate([
+            'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore($request->user()->id)],
+        ]);
+
+        if ($validated['email'] === $user->email) {
+            flash('No changes were made');
+
+            return redirect()->action([self::class, 'edit']);
+        }
+
+        $user->requestEmailChange($validated['email']);
+
+        flash('An email with a verification link has been sent to your new email address. Please click the link to verify your email.');
 
         return redirect()->action([self::class, 'edit']);
     }
@@ -92,19 +105,26 @@ final readonly class ProfileController
         return redirect()->action([self::class, 'edit']);
     }
 
-    public function verifyEmail($token)
+    public function verifyEmail(string $token)
     {
-        $emailChangeRequest = EmailChangeRequest::where('token', $token)->first();
+        $emailChangeRequest = EmailChangeRequest::query()->where('token', $token)->first();
+
         if (! $emailChangeRequest) {
             abort('403', 'Email Expired');
         }
+
         if (now()->greaterThan($emailChangeRequest->created_at->addMinutes(30))) {
             abort('404', 'Link expired');
         }
 
         $user = $emailChangeRequest->user;
-        $user->update(['email' => $emailChangeRequest->new_email]);
+
+        $user->update([
+            'email' => $emailChangeRequest->new_email,
+        ]);
+
         $emailChangeRequest->delete();
+
         flash('Your email has been successfully changed.');
 
         return redirect()->action([self::class, 'edit']);

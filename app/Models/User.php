@@ -209,14 +209,17 @@ class User extends Authenticatable
         return $this->hasMany(EmailChangeRequest::class);
     }
 
-    public function requestEmailChange($newEmail): void
+    public function requestEmailChange(string $newEmail): void
     {
         $token = Str::random(64);
-        auth()->user()->emailChangeRequest()->create([
+
+        $this->emailChangeRequest()->create([
             'new_email' => $newEmail,
             'token' => $token,
         ]);
+
         $verificationLink = URL::signedRoute('email.verify', ['token' => $token]);
+
         Mail::to($newEmail)->send(new EmailVerificationMail($verificationLink));
     }
 }
