@@ -1,51 +1,77 @@
 @component('layouts.base')
 
-    <div class="container mx-auto px-4 grid lg:grid-cols-3 gap-6 md:gap-12 mt-4 md:mt-8">
+    <div class="container max-w-[1200px] mx-auto px-4 grid lg:grid-cols-3 gap-4 mt-4 md:mt-8">
         @foreach ($rfcs as $rfc)
-            <a
-                href="{{ action(\App\Http\Controllers\RfcDetailController::class, $rfc) }}"
-                class="
-                border-gray-700 border
-                bg-white
-                rounded
-                shadow-md
-               flex flex-col
-               justify-between
-               overflow-hidden
-               hover:shadow-2xl
-               hover:outline
-
-            "
-            >
-                <div class="px-4 mt-4 font-bold font-mono">
+            <x-card-link :href="action(\App\Http\Controllers\RfcDetailController::class, $rfc)">
+                <div class="font-bold px-2">
                     {{ $rfc->title }}
                 </div>
 
-                <p class="px-4 mb-2">{{ $rfc->description }}</p>
+                <p class="px-2">{{ $rfc->description }}</p>
 
-                <div class="border-gray-700 border-t flex font-bold">
-                    <div
-                        class="
-                            p-2 px-4 flex-grow text-left border-r border-gray-700
-                            min-w-[15%]
-                            bg-green-300 text-green-900
-                        "
-                        style="width: {{ $rfc->percentage_yes }}%;"
-                    >
-                        {{ $rfc->percentage_yes }}%
+                <div>
+                    <div class="flex font-bold rounded-full overflow-hidden mt-2">
+                        <div
+                            @class([
+                                'p-2 flex-grow',
+                                'bg-green-400' => $rfc->majorityYes(),
+                                'bg-gray-400' => ! $rfc->majorityYes(),
+                            ])
+                            style="width: {{ $rfc->percentage_yes }}%;"
+                        ></div>
+                        <div
+                            @class([
+                                'p-2 flex-grow',
+                                'bg-red-400' => $rfc->majorityNo(),
+                                'bg-gray-400' => ! $rfc->majorityNo(),
+                            ])
+                            style="width: {{ $rfc->percentage_no }}%;"
+                        ></div>
                     </div>
-                    <div
-                        class="
-                            p-2 px-4 flex-grow text-right border-gray-700
-                            min-w-[15%]
-                            bg-red-300 text-red-900
-                        "
-                        style="width: {{ $rfc->percentage_no }}%;"
-                    >
-                        {{ $rfc->percentage_no }}%
+
+                    <div class="flex justify-between p-1 px-2 text-sm">
+                        <span
+                            @class([
+                                'text-green-600 font-bold' => $rfc->majorityYes(),
+                                'text-gray-600' => ! $rfc->majorityYes(),
+                            ])
+                        >{{ $rfc->percentage_yes }}%</span>
+                        <span
+                            @class([
+                                'text-red-600 font-bold' => $rfc->majorityNo(),
+                                'text-gray-600' => ! $rfc->majorityNo(),
+                            ])
+                        >{{ $rfc->percentage_no }}%</span>
                     </div>
                 </div>
-            </a>
+
+                <div class="flex justify-start text-xs mt-4 gap-1">
+                    <x-tag>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-gray-700">
+                            <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" />
+                        </svg>
+
+                        {{ $rfc->arguments->count() }}
+                    </x-tag>
+
+                    <x-tag>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-gray-700">
+                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z" clip-rule="evenodd" />
+                        </svg>
+
+
+                        {{ $rfc->yesVotes->count() }}
+                    </x-tag>
+
+                    <x-tag>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-gray-700">
+                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V8.25a.75.75 0 00-1.5 0v5.69l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z" clip-rule="evenodd" />
+                        </svg>
+
+                        {{ $rfc->noVotes->count() }}
+                    </x-tag>
+                </div>
+            </x-card-link>
         @endforeach
     </div>
 

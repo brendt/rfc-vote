@@ -1,5 +1,16 @@
 @component('layouts.base')
     <div class="grid mx-auto container max-w-[800px] px-4 gap-6 mt-4 md:mt-12 mb-8">
+        <x-form class="grid grid-cols-2 gap-2 bg-white p-4 shadow-lg border-gray-300 border flex"
+                method="{{ action([\Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'destroy']) }}"
+                method="post">
+
+            <h1 class="text-2xl font-bold col-span-2">Logout</h1>
+
+            <x-form-submit>
+                Logout
+            </x-form-submit>
+        </x-form>
+
         <x-form class="bg-white p-4 shadow-lg border-gray-300 border grid gap-2 grid-cols-2"
                 action="{{ action([\App\Http\Controllers\ProfileController::class, 'update']) }}"
                 method="post"

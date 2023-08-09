@@ -13,6 +13,7 @@ final readonly class HomeController
             ->where('published_at', '<=', now()->startOfDay())
             ->where(fn (Builder $builder) => $builder->whereNull('ends_at')->orWhere('ends_at', '>', now()))
             ->orderByDesc('created_at')
+            ->with(['arguments', 'yesVotes', 'noVotes'])
             ->get();
 
         return view('home', [

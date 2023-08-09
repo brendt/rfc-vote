@@ -107,4 +107,14 @@ class Rfc extends Model
 
         return $this->published_at && $this->published_at->lte(now());
     }
+
+    public function majorityYes(): bool
+    {
+        return $this->percentage_yes >= 50;
+    }
+
+    public function majorityNo(): bool
+    {
+        return $this->percentage_no > 50;
+    }
 }

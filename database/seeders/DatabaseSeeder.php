@@ -25,9 +25,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         foreach ($rfcs as $rfc) {
+            $majority = fake()->boolean() ? VoteType::YES : VoteType::NO;
+
+            $minority = $majority === VoteType::YES ? VoteType::NO : VoteType::YES;
+
             foreach ($users as $user) {
                 if (fake()->boolean(80)) {
-                    $user->createVote($rfc, fake()->boolean(70) ? VoteType::YES : VoteType::NO);
+                    $user->createVote($rfc, fake()->boolean(70) ? $majority : $minority);
 
                     if (fake()->boolean(20)) {
                         $user->saveArgument($rfc, fake()->paragraphs(fake()->numberBetween(1, 4), true));
