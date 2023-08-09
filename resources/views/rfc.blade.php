@@ -21,7 +21,6 @@ $metaImageUrl = action(\App\Http\Controllers\RfcMetaImageController::class, $rfc
     <meta name="image" content="$metaImageUrl"/>
 
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:card" content="article">
     <meta name="twitter:creator" content="@brendt_gd"/>
     HTML,
 ])
