@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Actions\RenderMetaImage;
 use Illuminate\Console\Command;
-use Spatie\Browsershot\Browsershot;
 
 class BrowsershotCommand extends Command
 {
