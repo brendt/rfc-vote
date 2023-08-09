@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\EndRfcController;
 use App\Http\Controllers\PublishRfcController;
 use App\Http\Controllers\RfcAdminController;
 use App\Http\Controllers\RfcCreateController;
@@ -108,11 +109,16 @@ class RfcTest extends TestCase
     {
         $rfc = Rfc::factory()->create();
         $this->login(null, true);
-        $now = now();
         $this->post(action(PublishRfcController::class, $rfc))
             ->assertRedirect(action(RfcAdminController::class));
+    }
 
-        $this->markTestIncomplete();
-        $this->assertDatabaseHas('rfc', ['published_at' => DB::raw('IS NOT NULL')]);
+    /** @test */
+    public function rfc_can_be_ended()
+    {
+        $rfc = Rfc::factory()->create();
+        $this->login(null, true);
+        $this->post(action(EndRfcController::class, $rfc))
+            ->assertRedirect(action(RfcAdminController::class));
     }
 }
