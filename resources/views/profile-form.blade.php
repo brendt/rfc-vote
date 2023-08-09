@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-span-2">
-                <x-form-input type="text" name="email" label="Email" />
+                <x-form-input type="email" name="email" label="Email" />
             </div>
 
             <div class="flex col-span-2 gap-4 items-center mt-4">
