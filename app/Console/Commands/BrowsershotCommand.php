@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Actions\RenderMetaImage;
+use App\Models\Rfc;
 use Illuminate\Console\Command;
 
 class BrowsershotCommand extends Command
@@ -11,6 +12,10 @@ class BrowsershotCommand extends Command
 
     public function handle(): void
     {
-        $this->info(strlen((new RenderMetaImage())('<h1>hi</h1>')));
+        $html = view('rfc-meta', [
+            'rfc' => Rfc::first(),
+        ])->render();
+
+        $this->info(strlen((new RenderMetaImage())($html)));
     }
 }
