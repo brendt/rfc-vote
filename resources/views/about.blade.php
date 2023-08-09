@@ -14,7 +14,7 @@ Besides a vote, people can also share their arguments on every RFC, explaining _
 Many people throughout the PHP community have already [contributed to this project](https://github.com/brendt/rfc-vote/graphs/contributors) — and [you can too](https://github.com/brendt/rfc-vote)!
 We also want to give a special shout-out to [Tighten](https://tighten.com/) for helping to create a design.
 
-The initial idea came from [Roman Pronskiy](https://twitter.com/pronskiy), who helps administer the [PHP Foundation](https://thephp.foundation/), and is developed (together with many open source enthousiasts) by [Brent Roose](https://twitter.com/brendt_gd), developer advocate for PHP at JetBrains.
+The initial idea came from [Roman Pronskiy](https://twitter.com/pronskiy), who helps administer the [PHP Foundation](https://thephp.foundation/), and is developed (together with many open source enthousiasts) by [Brent Roose](https://twitter.com/brendt_gd), developer advocate for PHP at [JetBrains](https://www.jetbrains.com/phpstorm/).
 
 ## Interesting links
 
