@@ -37,7 +37,9 @@ return [
         'redirect' => '/auth/callback/github',
     ],
 
-    'chrome' => [
-        'path' => env('CHROME_BINARY_PATH'),
+    'browsershot' => [
+        'chrome_path' => env('CHROME_BINARY_PATH'),
+        'node_path' => env('NODE_BINARY_PATH'),
+        'npm_path' => env('NPM_BINARY_PATH'),
     ],
 ];

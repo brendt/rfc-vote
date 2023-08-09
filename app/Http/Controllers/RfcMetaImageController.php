@@ -28,9 +28,7 @@ final readonly class RfcMetaImageController
 
         $image = (new RenderMetaImage())($html);
 
-        Log::debug(strlen($image));
-
-        return $image;
+        return strlen($image);
 
         return response(base64_decode($image))->header('Content-Type', 'image/png');
     }

@@ -10,8 +10,16 @@ final readonly class RenderMetaImage
     {
         $browsershot = Browsershot::html($html);
 
-        if ($chromePath = config('services.chrome.path')) {
+        if ($chromePath = config('services.browsershot.chrome_path')) {
             $browsershot->setChromePath($chromePath);
+        }
+
+        if ($nodePath = config('services.browsershot.node_path')) {
+            $browsershot->setNodeBinary($nodePath);
+        }
+
+        if ($npmPath = config('services.browsershot.npm_path')) {
+            $browsershot->setNpmBinary($npmPath);
         }
 
         return $browsershot
@@ -22,7 +30,6 @@ final readonly class RenderMetaImage
             ->noSandbox()
             ->ignoreHttpsErrors()
             ->dismissDialogs()
-            ->preventUnsuccessfulResponse()
             ->base64Screenshot();
     }
 }
