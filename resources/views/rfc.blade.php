@@ -28,7 +28,7 @@
         class="container mx-auto px-4 grid grid-cols-1 gap-6 md:gap-8 mt-4 md:mt-12 max-w-[1200px] mb-8">
 
         <div class="grid gap-4 md:px-8">
-            <h1 class="text-4xl">
+            <h1 class="text-4xl font-bold">
                 {{ $rfc->title }}
             </h1>
 
