@@ -49,7 +49,9 @@
                     {!! $argument->body !!}
                 </x-markdown>
                 <small class="flex gap-2 items-center justify-between">
-                     <x-user-name :user="$argument->user" />@if($argument->body_updated_at !== null) (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})@endif
+                    <div class="flex items-center gap-1">
+                        <x-user-name :user="$argument->user" />@if($argument->body_updated_at !== null) (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})@endif
+                    </div>
                     <div>
                         @if($user?->canDeleteArgument($argument))
                             <div class="flex items-center gap-1">
