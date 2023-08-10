@@ -72,4 +72,9 @@ class ArgumentList extends Component
         $this->isConfirmingDelete = null;
         $this->emit(Events::ARGUMENT_DELETED);
     }
+
+    public function cancelDeleteArgument(): void
+    {
+        $this->isConfirmingDelete = null;
+    }
 }
