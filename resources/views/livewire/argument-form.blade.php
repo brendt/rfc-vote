@@ -1,5 +1,5 @@
 <div>
-    @if($vote)
+    @if($vote && !$existingArgument)
         <div class="flex {{ $vote->type->getJustify() }}">
             <div class="
                     flex-1

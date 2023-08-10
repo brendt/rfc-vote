@@ -30,6 +30,7 @@ class ArgumentForm extends Component
     public function render()
     {
         $existingArgument = $this->user->getArgumentForRfc($this->rfc);
+
         $vote = $this->user->getVoteForRfc($this->rfc);
         $rowCount = count(explode(PHP_EOL, $this->body ?? '')) + 1;
 
