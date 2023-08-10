@@ -13,9 +13,11 @@ abstract class TestCase extends BaseTestCase
     use DatabaseMigrations;
     use RefreshDatabase;
 
-    public function login(User $user = null): User
+    public function login(User $user = null, bool $is_admin = false): User
     {
-        $user ??= User::factory()->create();
+        $user ??= User::factory()->create([
+            'is_admin' => $is_admin,
+        ]);
 
         $this->actingAs($user);
 
