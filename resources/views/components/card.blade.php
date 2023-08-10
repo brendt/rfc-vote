@@ -1,7 +1,7 @@
 @php
 $flexDirection = '';
 
-if (!str_contains($attributes->get('class'), 'flex-row')) {
+if (!str_contains($attributes->get('class', ''), 'flex-row')) {
     $flexDirection = 'flex-col';
 }
 @endphp

@@ -1,4 +1,10 @@
 <div>
+    @if (!$userVote)
+        <div class="font-bold mb-3 flex justify-center">
+            Click the bar to cast your vote!
+        </div>
+    @endif
+
     <div class="flex shadow-xl font-bold rounded-full overflow-hidden">
         <div
             class="
@@ -46,7 +52,7 @@
                 'p-1 px-3 rounded-full text-white shadow-md',
                 'bg-green-500' => $userVote->type === \App\Models\VoteType::YES,
                 'bg-red-500' => $userVote->type === \App\Models\VoteType::NO,
-            ])>{{ $userVote->type->value }}</span> Don't forget to leave your arguments:
+            ])>{{ $userVote->type->value }}</span>@if(!$userArgument) Don't forget to leave your arguments:@else!@endif
         </div>
     @endif
 </div>

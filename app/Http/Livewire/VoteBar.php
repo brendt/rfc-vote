@@ -15,12 +15,18 @@ class VoteBar extends Component
 
     public ?User $user = null;
 
+    protected $listeners = [
+        Events::ARGUMENT_CREATED->value => 'handleArgumentCreated',
+    ];
+
     public function render()
     {
         $userVote = $this->user?->getVoteForRfc($this->rfc);
+        $userArgument = $this->user?->getArgumentForRfc($this->rfc);
 
         return view('livewire.vote-bar', [
             'userVote' => $userVote,
+            'userArgument' => $userArgument,
         ]);
     }
 
@@ -51,5 +57,10 @@ class VoteBar extends Component
 
         $this->emit(Events::USER_UNDO_VOTE);
         $this->emit(Events::REPUTATION_UPDATED);
+    }
+
+    public function handleArgumentCreated(): void
+    {
+        $this->user->refresh();
     }
 }
