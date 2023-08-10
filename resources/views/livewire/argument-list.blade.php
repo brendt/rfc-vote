@@ -48,8 +48,21 @@
                 <x-markdown class="prose prose-md w-full max-w-full">
                     {!! $argument->body !!}
                 </x-markdown>
-                <small class="flex gap-1 items-center">
+                <small class="flex gap-2 items-center">
                      <x-user-name :user="$argument->user" />@if($argument->body_updated_at !== null) (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})@endif
+                    @if($user?->canDeleteArgument($argument))
+                            <div class="flex items-center gap-1">
+                                @if($isConfirmingDelete?->is($argument))
+                                    <span class="font-bold text-red-500">
+                                        Are you sure?
+                                    </span>
+                                @endif
+                                <x-tag-button
+                                    wire:click="deleteArgument('{{ $argument->id }}')"
+                                    class="bg-red-300 hover:bg-red-700 text-red-900 hover:text-white font-bold"
+                                >{{ $isConfirmingDelete?->is($argument) ? 'Yes, delete' : 'Delete' }}</x-tag-button>
+                            </div>
+                    @endif
                 </small>
             </div>
         </div>

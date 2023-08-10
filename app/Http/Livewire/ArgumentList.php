@@ -6,14 +6,16 @@ use App\Http\Controllers\RfcDetailController;
 use App\Models\Argument;
 use App\Models\Rfc;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
-use Session;
 
 class ArgumentList extends Component
 {
     public Rfc $rfc;
 
     public ?User $user = null;
+
+    public ?Argument $isConfirmingDelete = null;
 
     protected $listeners = [
         Events::USER_VOTED->value => 'handleUserVoted',
@@ -50,5 +52,24 @@ class ArgumentList extends Component
         $this->user->refresh();
         $this->rfc->refresh();
         $this->emit(Events::REPUTATION_UPDATED);
+    }
+
+    public function deleteArgument(Argument $argument): void
+    {
+        if (! $this->user) {
+            return;
+        }
+
+        if (! $this->isConfirmingDelete) {
+            $this->isConfirmingDelete = $argument;
+            return;
+        }
+
+        $this->user->deleteArgument($argument);
+
+        $this->user->refresh();
+        $this->rfc->refresh();
+        $this->isConfirmingDelete = null;
+        $this->emit(Events::ARGUMENT_DELETED);
     }
 }

@@ -15,8 +15,9 @@ class ArgumentForm extends Component
     public ?string $body = null;
 
     protected $listeners = [
-        Events::USER_VOTED->value => 'handleUserVoteChanged',
-        Events::USER_UNDO_VOTE->value => 'handleUserVoteChanged',
+        Events::USER_VOTED->value => 'refresh',
+        Events::USER_UNDO_VOTE->value => 'refresh',
+        Events::ARGUMENT_DELETED->value => 'refresh',
     ];
 
     public function mount()
@@ -39,10 +40,12 @@ class ArgumentForm extends Component
         ]);
     }
 
-    public function handleUserVoteChanged(): void
+    public function refresh(): void
     {
         $this->user->refresh();
         $this->rfc->refresh();
+        $existingArgument = $this->user->getArgumentForRfc($this->rfc);
+        $this->body = $existingArgument?->body;
     }
 
     public function storeArgument(): void

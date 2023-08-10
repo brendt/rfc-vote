@@ -125,6 +125,19 @@ class User extends Authenticatable
         return $argument;
     }
 
+    public function deleteArgument(Argument $argument): void
+    {
+        if (! $this->canDeleteArgument($argument)) {
+            return;
+        }
+
+        DB::transaction(function () use ($argument) {
+            $argument->user->decrement('reputation', ReputationType::GAIN_ARGUMENT_VOTE->getPoints() * $argument->votes->count());
+            $argument->user->removeReputation(ReputationType::MAKE_ARGUMENT);
+            $argument->delete();
+        });
+    }
+
     public function getVoteForRfc(Rfc $rfc): ?Vote
     {
         return $this->votes->first(fn (Vote $vote) => $vote->rfc_id === $rfc->id);
@@ -221,5 +234,10 @@ class User extends Authenticatable
         $verificationLink = URL::signedRoute('email.verify', ['token' => $token]);
 
         Mail::to($newEmail)->send(new EmailVerificationMail($verificationLink));
+    }
+
+    public function canDeleteArgument(Argument $argument): bool
+    {
+        return $this->is_admin || $argument->user_id === $this->id;
     }
 }
