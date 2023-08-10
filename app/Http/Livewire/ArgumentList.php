@@ -62,6 +62,7 @@ class ArgumentList extends Component
 
         if (! $this->isConfirmingDelete) {
             $this->isConfirmingDelete = $argument;
+
             return;
         }
 

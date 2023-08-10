@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\ArgumentDeleteController;
 use App\Http\Controllers\EndRfcController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
