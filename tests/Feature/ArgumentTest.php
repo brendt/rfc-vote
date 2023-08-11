@@ -24,11 +24,9 @@ class ArgumentTest extends TestCase
             ->assertSet('isConfirmingDelete', null)
             ->assertOk();
 
-
         $this->assertTrue($user->canDeleteArgument($argument));
         $this->assertDatabaseCount('arguments', 0);
     }
-
 
     /** @test */
     public function delete_can_be_canceled()
@@ -45,7 +43,6 @@ class ArgumentTest extends TestCase
 
         $this->assertDatabaseCount('arguments', 1);
     }
-
 
     /** @test */
     public function user_can_delete_only_his_own_arguments()
@@ -75,7 +72,6 @@ class ArgumentTest extends TestCase
         $this->assertDatabaseCount('arguments', 1);
     }
 
-
     /** @test */
     public function admin_can_edit_argument()
     {
@@ -93,7 +89,6 @@ class ArgumentTest extends TestCase
 
         $this->assertTrue($user->canEditArgument($argument));
     }
-
 
     /** @test */
     public function user_can_edit_only_his_own_arguments()
