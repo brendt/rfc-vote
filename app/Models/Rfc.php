@@ -61,6 +61,16 @@ class Rfc extends Model
         return $this->hasMany(Vote::class)->where('type', VoteType::NO);
     }
 
+    public function yesArguments(): HasMany
+    {
+        return $this->hasMany(Argument::class)->where('vote_type', VoteType::YES);
+    }
+
+    public function noArguments(): HasMany
+    {
+        return $this->hasMany(Argument::class)->where('vote_type', VoteType::NO);
+    }
+
     public function countTotal(): Attribute
     {
         return Attribute::make(
@@ -116,5 +126,13 @@ class Rfc extends Model
     public function majorityNo(): bool
     {
         return $this->percentage_no > 50;
+    }
+
+    public function updateVoteCount(): void
+    {
+        $this->update([
+            'count_yes' => $this->yesArguments()->sum('vote_count'),
+            'count_no' => $this->noArguments()->sum('vote_count'),
+        ]);
     }
 }

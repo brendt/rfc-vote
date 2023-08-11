@@ -68,7 +68,7 @@
                     </svg>
 
 
-                    {{ $rfc->yesVotes->count() }}
+                    {{ $rfc->count_yes }}
                 </x-tag>
 
                 <x-tag>
@@ -79,7 +79,7 @@
                               clip-rule="evenodd"/>
                     </svg>
 
-                    {{ $rfc->noVotes->count() }}
+                    {{ $rfc->count_no }}
                 </x-tag>
 
                 @if($user?->is_admin)
@@ -108,13 +108,6 @@
         <div class="col-span-3">
             <livewire:vote-bar :rfc="$rfc->withoutRelations()" :user="$user?->withoutRelations()"/>
         </div>
-
-        @if($user)
-            <div class="col-span-3  md:px-8">
-                <livewire:argument-form :rfc="$rfc->withoutRelations()"
-                                        :user="$user->withoutRelations()"/>
-            </div>
-        @endif
 
         <div class="col-span-3  md:px-8">
             <livewire:argument-list :rfc="$rfc" :user="$user"/>

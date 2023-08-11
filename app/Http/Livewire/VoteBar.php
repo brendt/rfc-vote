@@ -15,18 +15,30 @@ class VoteBar extends Component
 
     public ?User $user = null;
 
+    public ?VoteType $voteType = null;
+
+    public ?string $body;
+
     protected $listeners = [
-        Events::ARGUMENT_CREATED->value => 'handleArgumentCreated',
+        Events::ARGUMENT_CREATED->value => 'refresh',
+        Events::ARGUMENT_DELETED->value => 'refresh',
     ];
+
+    public function mount()
+    {
+        $userArgument = $this->user?->getArgumentForRfc($this->rfc);
+
+        $this->voteType = $userArgument?->vote_type;
+    }
 
     public function render()
     {
-        $userVote = $this->user?->getVoteForRfc($this->rfc);
         $userArgument = $this->user?->getArgumentForRfc($this->rfc);
+        $rowCount = count(explode(PHP_EOL, $this->body ?? '')) + 1;
 
         return view('livewire.vote-bar', [
-            'userVote' => $userVote,
             'userArgument' => $userArgument,
+            'rowCount' => $rowCount,
         ]);
     }
 
@@ -39,28 +51,42 @@ class VoteBar extends Component
             return;
         }
 
-        $this->user->createVote($this->rfc, VoteType::from($voteType));
-
-        $this->user->refresh();
-        $this->rfc->refresh();
-
-        $this->emit(Events::USER_VOTED);
-        $this->emit(Events::REPUTATION_UPDATED);
+        $this->voteType = VoteType::from($voteType);
     }
 
     public function undo(): void
     {
-        $this->user->undoVote($this->rfc);
+        $this->user->undoArgument($this->rfc);
 
-        $this->user->refresh();
-        $this->rfc->refresh();
+        $this->refresh();
 
         $this->emit(Events::USER_UNDO_VOTE);
         $this->emit(Events::REPUTATION_UPDATED);
     }
 
-    public function handleArgumentCreated(): void
+    public function storeArgument(): void
+    {
+        if (! $this->body || ! $this->voteType) {
+            return;
+        }
+
+        $this->user->createArgument(
+            rfc: $this->rfc,
+            voteType: $this->voteType,
+            body: $this->body,
+        );
+
+        $this->refresh();
+
+        $this->emit(Events::ARGUMENT_CREATED);
+    }
+
+    public function refresh(): void
     {
         $this->user->refresh();
+        $this->rfc->refresh();
+
+        $userArgument = $this->user?->getArgumentForRfc($this->rfc);
+        $this->voteType = $userArgument?->vote_type;
     }
 }

@@ -13,7 +13,7 @@ final readonly class StoreArgumentController
             'body' => ['required', 'string'],
         ]);
 
-        $request->user()->saveArgument($rfc, $validated['body']);
+        $request->user()->createArgument($rfc, $validated['body']);
 
         return redirect()->action(RfcDetailController::class, $rfc);
     }

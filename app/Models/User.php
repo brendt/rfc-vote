@@ -61,66 +61,32 @@ class User extends Authenticatable
         return $this->hasMany(Argument::class);
     }
 
-    public function createVote(Rfc $rfc, VoteType $type): Vote
-    {
-        return DB::transaction(function () use ($type, $rfc) {
-            $vote = $this->getVoteForRfc($rfc);
-
-            if (! $vote) {
-                $vote = new Vote([
-                    'user_id' => $this->id,
-                    'rfc_id' => $rfc->id,
-                ]);
-
-                $this->addReputation(ReputationType::VOTE_FOR_RFC);
-            }
-
-            $vote->type = $type;
-
-            $vote->save();
-
-            $rfc->update([
-                'count_yes' => $rfc->yesVotes()->count(),
-                'count_no' => $rfc->noVotes()->count(),
-            ]);
-
-            return $vote;
-        });
-    }
-
-    public function undoVote(Rfc $rfc): void
+    public function undoArgument(Rfc $rfc): void
     {
         DB::transaction(function () use ($rfc) {
-            $vote = $this->getVoteForRfc($rfc);
-            $vote->delete();
-            $this->removeReputation(ReputationType::VOTE_FOR_RFC);
-
-            $rfc->update([
-                'count_yes' => $rfc->yesVotes()->count(),
-                'count_no' => $rfc->noVotes()->count(),
-            ]);
+            $argument = $this->getArgumentForRfc($rfc);
+            $argument->delete();
+            $this->removeReputation(ReputationType::CREATE_ARGUMENT);
+            $rfc->updateVoteCount();
         });
     }
 
-    public function saveArgument(Rfc $rfc, string $body): Argument
+    public function createArgument(Rfc $rfc, VoteType $voteType, string $body): Argument
     {
-        $argument = $this->getArgumentForRfc($rfc);
+        $argument = new Argument([
+            'user_id' => $this->id,
+            'rfc_id' => $rfc->id,
+            'vote_type' => $voteType,
+            'body' => $body,
+        ]);
 
-        if (! $argument) {
-            $argument = new Argument([
-                'user_id' => $this->id,
-                'rfc_id' => $rfc->id,
-            ]);
-
-            $this->addReputation(ReputationType::MAKE_ARGUMENT);
-            $argument->body = $body;
+        DB::transaction(function () use ($argument) {
             $argument->save();
+            $this->addReputation(ReputationType::CREATE_ARGUMENT);
             $this->toggleArgumentVote($argument);
-        } else {
-            $argument->body_updated_at = now();
-            $argument->body = $body;
-            $argument->save();
-        }
+        });
+
+        $rfc->updateVoteCount();
 
         return $argument;
     }
@@ -133,7 +99,7 @@ class User extends Authenticatable
 
         DB::transaction(function () use ($argument) {
             $argument->user->decrement('reputation', ReputationType::GAIN_ARGUMENT_VOTE->getPoints() * $argument->votes->count());
-            $argument->user->removeReputation(ReputationType::MAKE_ARGUMENT);
+            $argument->user->removeReputation(ReputationType::CREATE_ARGUMENT);
             $argument->delete();
         });
     }
@@ -158,15 +124,6 @@ class User extends Authenticatable
         return $this->argumentVotes->first(fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id);
     }
 
-    public function hasAlreadyVotedForArgument(Argument $argument): bool
-    {
-        return $this
-            ->argumentVotes()
-            ->withTrashed()
-            ->where('argument_id', $argument->id)
-            ->exists();
-    }
-
     public function toggleArgumentVote(Argument $argument): void
     {
         DB::transaction(function () use ($argument) {
@@ -189,6 +146,8 @@ class User extends Authenticatable
             $argument->update([
                 'vote_count' => $argument->votes()->count(),
             ]);
+
+            $argument->rfc->updateVoteCount();
         });
     }
 
