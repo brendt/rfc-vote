@@ -20,13 +20,13 @@ class RfcCounter extends Component
 
     public function render()
     {
-        $count = match($this->voteType) {
+        $count = match ($this->voteType) {
             VoteType::YES => $this->rfc->count_yes,
             VoteType::NO => $this->rfc->count_no,
         };
 
-        $icon = match($this->voteType) {
-            VoteType::YES => <<<SVG
+        $icon = match ($this->voteType) {
+            VoteType::YES => <<<'SVG'
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                  class="w-4 h-4 text-gray-700">
                 <path fill-rule="evenodd"
@@ -34,7 +34,7 @@ class RfcCounter extends Component
                       clip-rule="evenodd"/>
             </svg>
             SVG,
-            VoteType::NO => <<<SVG
+            VoteType::NO => <<<'SVG'
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                          class="w-4 h-4 text-gray-700">
                 <path fill-rule="evenodd"
