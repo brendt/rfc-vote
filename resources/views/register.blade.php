@@ -5,12 +5,12 @@
                 method="{{ route('register') }}"
                 method="post">
 
-            <x-form-input name="name" label="Name" />
+            <x-form-input name="name" label="Name" required />
 
-            <x-form-input name="email" label="Email" />
+            <x-form-input name="email" label="Email" required />
 
-            <x-form-input type="password" name="password" label="Password" />
-            <x-form-input type="password" name="password_confirmation" label="Confirm your password" />
+            <x-form-input type="password" name="password" label="Password" required />
+            <x-form-input type="password" name="password_confirmation" label="Confirm your password" required />
 
             <div class="flex justify-end items-baseline gap-2 col-span-2">
                 <button type="submit" class="p-2 px-4 bg-blue-400 rounded text-white font-bold hover:bg-blue-600 hover:text-white">Register</button>
