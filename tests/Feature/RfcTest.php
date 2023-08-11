@@ -62,6 +62,7 @@ class RfcTest extends TestCase
         $this->post(action([RfcCreateController::class, 'store']), [
             'title' => $this->faker->text(10),
             'description' => $this->faker->text(50),
+            'teaser' => $this->faker->text(50),
             'url' => $this->faker->url,
         ])
             ->assertRedirect();
@@ -94,6 +95,7 @@ class RfcTest extends TestCase
             [
                 'title' => 'updated_title',
                 'description' => 'updated_description',
+                'teaser' => 'updated_tease',
                 'url' => $this->faker->url,
             ])
             ->assertRedirect(action([RfcEditController::class, 'update'], $rfc));

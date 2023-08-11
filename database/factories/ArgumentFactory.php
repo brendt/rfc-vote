@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Argument;
+use App\Models\Rfc;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
@@ -15,7 +16,7 @@ class ArgumentFactory extends Factory
     {
         return [
             'user_id' => fn () => User::factory()->create(),
-            'rfc_id' => fn () => User::factory()->create(),
+            'rfc_id' => fn () => Rfc::factory()->create(),
             'body' => $this->faker->word(),
             'vote_count' => 0,
             'created_at' => Carbon::now(),
