@@ -22,6 +22,7 @@ class VoteBar extends Component
     protected $listeners = [
         Events::ARGUMENT_CREATED->value => 'refresh',
         Events::ARGUMENT_DELETED->value => 'refresh',
+        Events::USER_VOTED_FOR_ARGUMENT->value => 'refresh',
     ];
 
     public function mount()
@@ -60,8 +61,7 @@ class VoteBar extends Component
 
         $this->refresh();
 
-        $this->emit(Events::USER_UNDO_VOTE);
-        $this->emit(Events::REPUTATION_UPDATED);
+        $this->emit(Events::ARGUMENT_DELETED);
     }
 
     public function storeArgument(): void

@@ -101,6 +101,7 @@ class User extends Authenticatable
             $argument->user->decrement('reputation', ReputationType::GAIN_ARGUMENT_VOTE->getPoints() * $argument->votes->count());
             $argument->user->removeReputation(ReputationType::CREATE_ARGUMENT);
             $argument->delete();
+            $argument->rfc->updateVoteCount();
         });
     }
 

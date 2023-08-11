@@ -22,9 +22,7 @@ class ArgumentList extends Component
     public ?string $body = null;
 
     protected $listeners = [
-        Events::USER_VOTED->value => 'refresh',
         Events::ARGUMENT_CREATED->value => 'refresh',
-        Events::USER_UNDO_VOTE->value => 'refresh',
     ];
 
     public function render()
@@ -53,9 +51,9 @@ class ArgumentList extends Component
 
         $this->user->toggleArgumentVote($argument);
 
-        $this->user->refresh();
-        $this->rfc->refresh();
-        $this->emit(Events::REPUTATION_UPDATED);
+        $this->refresh();
+
+        $this->emit(Events::USER_VOTED_FOR_ARGUMENT);
     }
 
     public function editArgument(Argument $argument): void
