@@ -71,6 +71,7 @@ class ArgumentList extends Component
         if (! $this->isEditing) {
             $this->isEditing = $argument;
             $this->body = $argument->body;
+
             return;
         }
 
