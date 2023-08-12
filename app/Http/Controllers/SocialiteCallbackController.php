@@ -17,7 +17,7 @@ final readonly class SocialiteCallbackController
         if (! $user) {
             $user = User::create([
                 'email' => $socialiteUser->getEmail(),
-                'name' => $socialiteUser->getName(),
+                'name' => $socialiteUser->getName() ?? $socialiteUser->getEmail(),
                 'reputation' => 0,
                 'socialite' => serialize($socialiteUser),
             ]);

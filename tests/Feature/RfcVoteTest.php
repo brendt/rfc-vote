@@ -24,8 +24,6 @@ class RfcVoteTest extends TestCase
             'rfc_id' => $rfc->id,
         ]);
 
-        $argument->user->createVote($rfc, VoteType::YES);
-
         $this
             ->get(action(RfcDetailController::class, $rfc))
             ->assertSuccessful()
@@ -35,17 +33,11 @@ class RfcVoteTest extends TestCase
             ->assertSee($rfc->description)
             ->assertSee($rfc->url)
             ->assertSee($argument->body)
-            ->assertSee($argument->user->name)
-            ->assertDontSeeLivewire('argument-form');
-
-        $user = $this->login();
-
-        $user->createVote($rfc, VoteType::YES);
+            ->assertSee($argument->user->name);
 
         $this
             ->get(action(RfcDetailController::class, $rfc))
-            ->assertSuccessful()
-            ->assertSeeLivewire('argument-form');
+            ->assertSuccessful();
     }
 
     /** @test */
@@ -65,21 +57,21 @@ class RfcVoteTest extends TestCase
     public function it_can_vote_for_rfc_and_increment_reputation()
     {
         $rfc = Rfc::factory()->create();
-
         $user = $this->login();
 
-        Argument::factory()->create([
-            'rfc_id' => $rfc->id,
-            'user_id' => $user->id,
-        ]);
-
         Livewire::test(VoteBar::class, ['rfc' => $rfc, 'user' => $user])
-            ->call('vote', VoteType::YES->value)
-            ->assertSuccessful();
+            ->assertSuccessful()
+            ->set('voteType', VoteType::YES)
+            ->set('body', 'test')
+            ->call('storeArgument');
 
-        $this->assertDatabaseCount('votes', 1);
-        $this->assertDatabaseHas('votes', ['type' => 'yes']);
-        $this->assertDatabaseHas('users', ['reputation' => $user->reputation + ReputationType::VOTE_FOR_RFC->getPoints()]);
+        $this->assertDatabaseCount('arguments', 1);
+        $this->assertDatabaseHas('users', [
+            'reputation' => $user->reputation
+                + ReputationType::CREATE_ARGUMENT->getPoints()
+                + ReputationType::VOTE_FOR_ARGUMENT->getPoints()
+                + ReputationType::GAIN_ARGUMENT_VOTE->getPoints(),
+        ]);
     }
 
     /** @test */
@@ -90,9 +82,8 @@ class RfcVoteTest extends TestCase
         $argument = Argument::factory()->create([
             'rfc_id' => $rfc->id,
             'user_id' => $user->id,
+            'vote_type' => VoteType::YES,
         ]);
-
-        $user->createVote($rfc, VoteType::YES);
 
         Livewire::test(VoteBar::class, ['rfc' => $rfc, 'user' => $argument->user])
             ->call('undo')
@@ -100,6 +91,6 @@ class RfcVoteTest extends TestCase
 
         $this->assertDatabaseCount('votes', 0);
         $this->assertDatabaseMissing('votes', ['type' => 'yes']);
-        $this->assertDatabaseHas('users', ['reputation' => $user->reputation - ReputationType::VOTE_FOR_RFC->getPoints()]);
+        $this->assertDatabaseHas('users', ['reputation' => $user->reputation - ReputationType::CREATE_ARGUMENT->getPoints()]);
     }
 }

@@ -13,6 +13,7 @@ class Argument extends Model
 
     protected $casts = [
         'body_updated_at' => 'datetime',
+        'vote_type' => VoteType::class,
     ];
 
     public function rfc(): BelongsTo

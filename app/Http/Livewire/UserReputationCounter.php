@@ -10,9 +10,7 @@ class UserReputationCounter extends Component
     public User $user;
 
     protected $listeners = [
-        Events::REPUTATION_UPDATED->value => 'handleReputationUpdate',
-        Events::ARGUMENT_CREATED->value => 'handleReputationUpdate',
-        Events::USER_VOTED->value => 'handleReputationUpdate',
+        Events::ARGUMENT_CREATED->value => 'refresh',
     ];
 
     public function render()
@@ -20,7 +18,7 @@ class UserReputationCounter extends Component
         return view('livewire.user-reputation-counter');
     }
 
-    public function handleReputationUpdate(): void
+    public function refresh(): void
     {
         $this->user->withoutRelations()->refresh();
     }

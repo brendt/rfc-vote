@@ -61,6 +61,7 @@ class RfcTest extends TestCase
 
         $this->post(action([RfcCreateController::class, 'store']), [
             'title' => $this->faker->text(10),
+            'teaser' => $this->faker->text(50),
             'description' => $this->faker->text(50),
             'teaser' => $this->faker->text(50),
             'url' => $this->faker->url,
@@ -89,19 +90,27 @@ class RfcTest extends TestCase
     public function rfc_can_be_updated()
     {
         $rfc = Rfc::factory()->create();
-        $this->login(null, true);
+
+        $this->login(isAdmin: true);
+
+        $newUrl = $this->faker->url;
 
         $this->post(action([RfcEditController::class, 'update'], $rfc),
             [
                 'title' => 'updated_title',
                 'description' => 'updated_description',
-                'teaser' => 'updated_tease',
-                'url' => $this->faker->url,
+                'teaser' => 'updated_teaser',
+                'url' => $newUrl,
             ])
             ->assertRedirect(action([RfcEditController::class, 'update'], $rfc));
 
         $this->assertDatabaseCount('rfcs', 1);
-        $this->assertDatabaseHas('rfcs', ['title' => 'updated_title', 'description' => 'updated_description']);
+        $this->assertDatabaseHas('rfcs', [
+            'title' => 'updated_title',
+            'description' => 'updated_description',
+            'teaser' => 'updated_teaser',
+            'url' => $newUrl,
+        ]);
     }
 
     /** @test */

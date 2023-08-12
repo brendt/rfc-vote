@@ -1,7 +1,7 @@
 <div
     class="
                 bg-white
-                @if ($vote?->type === \App\Models\VoteType::YES)
+                @if ($argument->vote_type === \App\Models\VoteType::YES)
                     border-l-green-400 border-l-8 md:mr-8
                 @else
                     border-r-red-400 border-r-8 md:ml-8
@@ -14,17 +14,17 @@
         class="
                     font-bold
                     py-2 px-4 cursor-pointer
-                    border-{{ $vote->type->getColor() }}-400
+                    border-{{ $argument->vote_type->getColor() }}-400
                     border-2
                     @if($user?->hasVotedForArgument($argument))
-                        bg-{{ $vote?->type->getColor() }}-400
+                        bg-{{ $argument->vote_type->getColor() }}-400
                         text-white
                         font-bold
                     @else
-                        bg-{{ $vote?->type->getColor() }}-200
-                        hover:bg-{{ $vote?->type->getColor() }}-400
+                        bg-{{ $argument->vote_type->getColor() }}-200
+                        hover:bg-{{ $argument->vote_type->getColor() }}-400
                         hover:text-white
-                        text-{{ $vote?->type->getColor() }}-800
+                        text-{{ $argument->vote_type->getColor() }}-800
                     @endif
                     text-center
                     rounded
