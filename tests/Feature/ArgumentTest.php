@@ -5,8 +5,6 @@ namespace Tests\Feature;
 use App\Http\Livewire\ArgumentList;
 use App\Models\Argument;
 use App\Models\Rfc;
-use App\Models\Vote;
-use App\Models\VoteType;
 use Livewire\Livewire;
 use Tests\TestCase;
 
