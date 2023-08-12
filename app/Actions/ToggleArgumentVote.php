@@ -28,15 +28,17 @@ final readonly class ToggleArgumentVote
                     reputationType: ReputationType::GAIN_ARGUMENT_VOTE,
                 );
             } else {
-                ArgumentVote::create([
-                    'argument_id' => $argument->id,
-                    'user_id' => $user->id,
-                ]);
+                if (!$argument->wasRecentlyCreated) {
+                    ArgumentVote::create([
+                        'argument_id' => $argument->id,
+                        'user_id' => $user->id,
+                    ]);
 
-                (new AddReputation)(
-                    user: $user,
-                    reputationType: ReputationType::VOTE_FOR_ARGUMENT,
-                );
+                    (new AddReputation)(
+                        user: $user,
+                        reputationType: ReputationType::VOTE_FOR_ARGUMENT,
+                    );
+                }
 
                 (new AddReputation)(
                     user: $argument->user,
