@@ -20,13 +20,8 @@
                 @if($user?->canEditArgument($argument))
                     <x-argument-card.button
                         wire:click="editArgument('{{ $argument->id }}')"
-                        class="
-                            @if ($isEditing?->is($argument))
-                                hover:text-green-800
-                            @else
-                                hover:text-blue-900
-                            @endif
-                        "
+                        class="{{ $isEditing?->is($argument) ? 'hover:text-green-800' : 'hover:text-blue-900' }}"
+                        :icon="$isEditing?->is($argument) ? 'icons.check' : 'icons.pen'"
                     >
                         {{ $isEditing?->is($argument) ? 'Save' : 'Edit' }}
                     </x-argument-card.button>
@@ -34,8 +29,10 @@
                     @if($isEditing?->is($argument))
                         <x-argument-card.button
                             class="hover:text-red-600"
+                            icon="icons.cancel"
                             wire:click="cancelEditArgument()"
-                        >Cancel
+                        >
+                            Cancel
                         </x-argument-card.button>
                     @endif
                 @endif
