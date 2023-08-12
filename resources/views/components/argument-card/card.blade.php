@@ -10,7 +10,7 @@
             </x-markdown>
         @endif
 
-        <small class="flex gap-2 items-center justify-between">
+        <div class="flex gap-2 items-center justify-between">
             <div class="flex items-center gap-1">
                 <x-user-name :user="$argument->user"/>@if($argument->body_updated_at !== null)
                     (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})
@@ -44,6 +44,6 @@
                     />
                 @endif
             </div>
-        </small>
+        </div>
     </div>
 </div>
