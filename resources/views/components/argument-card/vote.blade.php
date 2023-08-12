@@ -1,17 +1,26 @@
 @php
-    $arrowClasses = 'w-5 h-5 cursor-pointer text-black m-auto -mb-1 text-inherit group-hover:-translate-y-1 transition-all group-hover:stroke-[2]';
+    $arrowClasses = 'w-8 h-8 cursor-pointer text-black m-auto text-inherit';
 @endphp
 
 <div
     class="
-            relative
             cursor-pointer
+            flex
+            flex-col
+            gap-1
             transition-colors
-            min-w-[50px]
+            py-3
+            px-2
+            max-w-[50px]
+            mx-auto
             text-center
-            rounded-full
-            group
+            rounded-2xl
             text-lg
+            border
+            border-transparent
+            bg-gray-100
+            hover:border-gray-200
+            box-content
             @if ($argument->vote_type->getColor() === 'green')
                 text-green-700
                 hover:text-green-800
@@ -23,18 +32,10 @@
         wire:click="voteForArgument({{ $argument->id }})"
 >
     @if ($user?->hasVotedForArgument($argument))
-        <x-icons.chevron-up class="{{ $arrowClasses }}"></x-icons.chevron-up>
-    @else
         <x-icons.double-chevron-up class="{{ $arrowClasses }}"></x-icons.double-chevron-up>
+    @else
+        <x-icons.chevron-up class="{{ $arrowClasses }}"></x-icons.chevron-up>
     @endif
 
     <span class="font-bold">{{ $argument->vote_count }}</span>
-
-    <div class="text-center">
-        @if ($argument->vote_type->getColor() === 'green')
-            <span class="text-[1rem] font-bold uppercase">Yes</span>
-        @else
-            <span class="text-[1rem] font-bold uppercase">No</span>
-        @endif
-    </div>
 </div>
