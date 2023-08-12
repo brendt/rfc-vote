@@ -18,17 +18,25 @@
             </div>
             <div class="flex gap-2 items-center">
                 @if($user?->canEditArgument($argument))
-                    <x-tag-button
+                    <x-argument-card.button
                         wire:click="editArgument('{{ $argument->id }}')"
-                        class="bg-blue-300 hover:bg-blue-700 text-blue-900 hover:text-white font-bold"
-                    >{{ $isEditing?->is($argument) ? 'Save' : 'Edit' }}</x-tag-button>
+                        class="
+                            @if ($isEditing?->is($argument))
+                                hover:text-green-800
+                            @else
+                                hover:text-blue-900
+                            @endif
+                        "
+                    >
+                        {{ $isEditing?->is($argument) ? 'Save' : 'Edit' }}
+                    </x-argument-card.button>
 
                     @if($isEditing?->is($argument))
-                        <x-tag-button
-                            class="font-bold hover:bg-gray-700 bg-white hover:text-white"
+                        <x-argument-card.button
+                            class="hover:text-red-600"
                             wire:click="cancelEditArgument()"
                         >Cancel
-                        </x-tag-button>
+                        </x-argument-card.button>
                     @endif
                 @endif
 
