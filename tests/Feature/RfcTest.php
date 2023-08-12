@@ -108,7 +108,7 @@ class RfcTest extends TestCase
             'title' => 'updated_title',
             'description' => 'updated_description',
             'teaser' => 'updated_teaser',
-            'url' => $newUrl
+            'url' => $newUrl,
         ]);
     }
 
