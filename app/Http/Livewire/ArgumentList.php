@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Actions\DeleteArgument;
+use App\Actions\ToggleArgumentVote;
 use App\Http\Controllers\RfcDetailController;
 use App\Models\Argument;
 use App\Models\Rfc;
@@ -38,6 +40,7 @@ class ArgumentList extends Component
     {
         $this->rfc->refresh();
         $this->user->refresh();
+        $this->isConfirmingDelete = null;
     }
 
     public function voteForArgument(Argument $argument): void
@@ -49,7 +52,10 @@ class ArgumentList extends Component
             return;
         }
 
-        $this->user->toggleArgumentVote($argument);
+        (new ToggleArgumentVote)(
+            user: $this->user,
+            argument: $argument,
+        );
 
         $this->refresh();
 
@@ -100,11 +106,13 @@ class ArgumentList extends Component
             return;
         }
 
-        $this->user->deleteArgument($argument);
+        (new DeleteArgument)(
+            user: $this->user,
+            argument: $argument,
+        );
 
-        $this->user->refresh();
-        $this->rfc->refresh();
-        $this->isConfirmingDelete = null;
+        $this->refresh();
+
         $this->emit(Events::ARGUMENT_DELETED);
     }
 
