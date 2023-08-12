@@ -16,7 +16,6 @@ use App\Http\Controllers\RfcEditController;
 use App\Http\Controllers\RfcMetaImageController;
 use App\Http\Controllers\SocialiteCallbackController;
 use App\Http\Controllers\SocialiteRedirectController;
-use App\Http\Controllers\StoreArgumentController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
