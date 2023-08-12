@@ -40,6 +40,7 @@ jobs:
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          npm install
       - name: List Installed Dependencies
         run: composer show -D
 
@@ -47,6 +48,7 @@ jobs:
         run: |
           cp .env.ci .env
           php artisan key:generate
+          npm run build
 
       - name: Execute tests
         run: vendor/bin/phpunit
