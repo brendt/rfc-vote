@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="col-span-6 flex justify-end gap-1 items-baseline text-sm">
-                        @if($rfc->votes->isNotEmpty())
+                        @if($rfc->arguments->isNotEmpty())
                             <div
                                 class="border-gray-700 border flex font-bold text-sm min-w-[20%]">
                                 <div

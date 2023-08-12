@@ -46,21 +46,6 @@ class Rfc extends Model
         return $this->hasMany(Argument::class)->orderByDesc('vote_count')->orderByDesc('created_at');
     }
 
-    public function votes(): HasMany
-    {
-        return $this->hasMany(Vote::class);
-    }
-
-    public function yesVotes(): HasMany
-    {
-        return $this->hasMany(Vote::class)->where('type', VoteType::YES);
-    }
-
-    public function noVotes(): HasMany
-    {
-        return $this->hasMany(Vote::class)->where('type', VoteType::NO);
-    }
-
     public function yesArguments(): HasMany
     {
         return $this->hasMany(Argument::class)->where('vote_type', VoteType::YES);
@@ -102,11 +87,6 @@ class Rfc extends Model
                 return round(($this->count_no / $this->count_total) * 100);
             },
         );
-    }
-
-    public function getVoteForUser(User $user): ?Vote
-    {
-        return $this->votes->first(fn (Vote $vote) => $vote->user_id === $user->id);
     }
 
     public function isActive(): bool

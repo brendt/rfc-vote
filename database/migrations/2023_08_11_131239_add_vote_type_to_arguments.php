@@ -14,19 +14,5 @@ return new class extends Migration
         Schema::table('arguments', function (Blueprint $table) {
             $table->string('vote_type')->after('rfc_id')->default(VoteType::YES->value);
         });
-
-        Argument::each(function (Argument $argument) {
-            $vote = $argument->user->getVoteForRfc($argument->rfc);
-
-            if (! $vote) {
-                return;
-            }
-
-            $argument->update([
-                'vote_type' => $vote->type,
-            ]);
-        });
-
-        Rfc::each(fn (Rfc $rfc) => $rfc->updateVoteCount());
     }
 };

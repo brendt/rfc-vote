@@ -51,11 +51,6 @@ class User extends Authenticatable
         return $this->hasMany(ArgumentVote::class);
     }
 
-    public function votes(): HasMany
-    {
-        return $this->hasMany(Vote::class);
-    }
-
     public function arguments(): HasMany
     {
         return $this->hasMany(Argument::class);
@@ -103,11 +98,6 @@ class User extends Authenticatable
             $argument->delete();
             $argument->rfc->updateVoteCount();
         });
-    }
-
-    public function getVoteForRfc(Rfc $rfc): ?Vote
-    {
-        return $this->votes->first(fn (Vote $vote) => $vote->rfc_id === $rfc->id);
     }
 
     public function getArgumentForRfc(Rfc $rfc): ?Argument
