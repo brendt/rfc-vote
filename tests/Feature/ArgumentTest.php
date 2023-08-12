@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Http\Livewire\ArgumentList;
 use App\Models\Argument;
+use App\Models\Rfc;
 use App\Models\Vote;
 use App\Models\VoteType;
 use Livewire\Livewire;
@@ -47,28 +48,28 @@ class ArgumentTest extends TestCase
     /** @test */
     public function user_can_delete_only_his_own_arguments()
     {
-        $vote = Vote::factory()->create([
-            'type' => VoteType::YES,
-        ]);
+        $rfc = Rfc::factory()->create();
+        $user = $this->login();
+
         $arguments = Argument::factory(2)->sequence(
             [
-                'rfc_id' => $vote->rfc_id,
-                'user_id' => $vote->user->id,
+                'rfc_id' => $rfc->id,
+                'user_id' => $user->id,
             ],
             [
-                'rfc_id' => $vote->rfc_id,
+                'rfc_id' => $rfc->id,
             ],
         )->create();
 
-        Livewire::test(ArgumentList::class, ['rfc' => $vote->rfc, 'user' => $vote->user])
+        Livewire::test(ArgumentList::class, ['rfc' => $rfc, 'user' => $user])
             ->call('deleteArgument', $arguments[0]->id)
             ->assertNotSet('isConfirmingDelete', null)
             ->call('deleteArgument', $arguments[0]->id)
             ->assertSet('isConfirmingDelete', null)
             ->assertOk();
 
-        $this->assertTrue($vote->user->canDeleteArgument($arguments[0]));
-        $this->assertFalse($vote->user->canDeleteArgument($arguments[1]));
+        $this->assertTrue($user->canDeleteArgument($arguments[0]));
+        $this->assertFalse($user->canDeleteArgument($arguments[1]));
         $this->assertDatabaseCount('arguments', 1);
     }
 
@@ -93,26 +94,26 @@ class ArgumentTest extends TestCase
     /** @test */
     public function user_can_edit_only_his_own_arguments()
     {
-        $vote = Vote::factory()->create([
-            'type' => VoteType::YES,
-        ]);
+        $rfc = Rfc::factory()->create();
+        $user = $this->login();
+
         $arguments = Argument::factory(2)->sequence(
             [
-                'rfc_id' => $vote->rfc_id,
-                'user_id' => $vote->user->id,
+                'rfc_id' => $rfc->id,
+                'user_id' => $user->id,
             ],
             [
-                'rfc_id' => $vote->rfc_id,
+                'rfc_id' => $rfc->id,
             ],
         )->create();
 
-        Livewire::test(ArgumentList::class, ['rfc' => $vote->rfc, 'user' => $vote->user])
+        Livewire::test(ArgumentList::class, ['rfc' => $rfc, 'user' => $user])
             ->call('editArgument', $arguments[1]->id)
             ->assertSet('isEditing', null)
             ->assertSet('body', null)
             ->assertOk();
 
-        $this->assertTrue($vote->user->canEditArgument($arguments[0]));
-        $this->assertFalse($vote->user->canEditArgument($arguments[1]));
+        $this->assertTrue($user->canEditArgument($arguments[0]));
+        $this->assertFalse($user->canEditArgument($arguments[1]));
     }
 }
