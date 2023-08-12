@@ -1,4 +1,4 @@
-<div class="bg-white rounded-xl shadow-sm p-6 flex gap-6 items-center relative overflow-hidden">
+<div class="bg-white rounded-xl shadow-sm p-6 flex gap-6 items-center">
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
     <div class="grid gap-2 md:gap-4 w-full">

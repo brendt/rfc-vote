@@ -31,5 +31,4 @@
             <span class="text-[1rem] font-bold uppercase">No</span>
         @endif
     </div>
-
 </div>
