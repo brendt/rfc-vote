@@ -32,9 +32,9 @@
         wire:click="voteForArgument({{ $argument->id }})"
 >
     @if ($user?->hasVotedForArgument($argument))
-        <x-icons.double-chevron-up class="{{ $arrowClasses }}"></x-icons.double-chevron-up>
+        <x-icons.arrow-up-filled class="{{ $arrowClasses }}"></x-icons.arrow-up-filled>
     @else
-        <x-icons.chevron-up class="{{ $arrowClasses }}"></x-icons.chevron-up>
+        <x-icons.arrow-up-empty class="{{ $arrowClasses }}"></x-icons.arrow-up-empty>
     @endif
 
     <span class="font-bold">{{ $argument->vote_count }}</span>
