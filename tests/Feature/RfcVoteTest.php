@@ -73,24 +73,4 @@ class RfcVoteTest extends TestCase
                 + ReputationType::GAIN_ARGUMENT_VOTE->getPoints(),
         ]);
     }
-
-    /** @test */
-    public function it_can_undo_a_vote_for_rfc_and_decrement_reputation()
-    {
-        $rfc = Rfc::factory()->create();
-        $user = $this->login();
-        $argument = Argument::factory()->create([
-            'rfc_id' => $rfc->id,
-            'user_id' => $user->id,
-            'vote_type' => VoteType::YES,
-        ]);
-
-        Livewire::test(VoteBar::class, ['rfc' => $rfc, 'user' => $argument->user])
-            ->call('undo')
-            ->assertSuccessful();
-
-        $this->assertDatabaseCount('votes', 0);
-        $this->assertDatabaseMissing('votes', ['type' => 'yes']);
-        $this->assertDatabaseHas('users', ['reputation' => $user->reputation - ReputationType::CREATE_ARGUMENT->getPoints()]);
-    }
 }

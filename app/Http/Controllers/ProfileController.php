@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
+use App\Actions\RequestEmailChange;
 use App\Models\EmailChangeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -68,7 +69,10 @@ final readonly class ProfileController
             return redirect()->action([self::class, 'edit']);
         }
 
-        $user->requestEmailChange($validated['email']);
+        (new RequestEmailChange)(
+            user: $user,
+            newEmail: $validated['email'],
+        );
 
         flash('An email with a verification link has been sent to your new email address. Please click the link to verify your email.');
 

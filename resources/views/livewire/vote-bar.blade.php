@@ -8,8 +8,13 @@
     <div class="flex shadow-xl font-bold rounded-full overflow-hidden">
         <div
             class="
-                    p-4 flex-grow text-left hover:bg-green-600 hover:text-white cursor-pointer
+                    p-4 flex-grow text-left
                     min-w-[15%]
+
+                    @if(!$voteType)
+                    hover:bg-green-600 hover:text-white cursor-pointer
+                    @endIf
+
                     @if($voteType === \App\Models\VoteType::YES)
                     bg-green-600 text-white
                     @else
@@ -17,9 +22,7 @@
                     @endif
                 "
             style="width: {{ $rfc->percentage_yes }}%;"
-            @if($voteType === \App\Models\VoteType::YES)
-                wire:click="undo()"
-            @else
+            @if(! $voteType)
                 wire:click="vote('{{ \App\Models\VoteType::YES }}')"
             @endif
         >
@@ -27,8 +30,12 @@
         </div>
         <div
             class="
-                    p-4 flex-grow text-right hover:bg-red-600 hover:text-white cursor-pointer
+                    p-4 flex-grow text-right
                     min-w-[15%]
+
+                    @if(!$voteType)
+                    hover:bg-red-600 hover:text-white cursor-pointer
+                    @endIf
 
                     @if($voteType === \App\Models\VoteType::NO)
                     bg-red-600 text-white
@@ -37,9 +44,7 @@
                     @endif
                 "
             style="width: {{ $rfc->percentage_no }}%;"
-            @if($voteType === \App\Models\VoteType::NO)
-                wire:click="undo()"
-            @else
+            @if(!$voteType)
                 wire:click="vote('{{ \App\Models\VoteType::NO }}')"
             @endif >
             {{ $rfc->percentage_no }}%

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Actions\CreateArgument;
 use App\Http\Controllers\RfcDetailController;
 use App\Models\Rfc;
 use App\Models\User;
@@ -55,23 +56,15 @@ class VoteBar extends Component
         $this->voteType = VoteType::from($voteType);
     }
 
-    public function undo(): void
-    {
-        $this->user->undoArgument($this->rfc);
-
-        $this->refresh();
-
-        $this->emit(Events::ARGUMENT_DELETED);
-    }
-
     public function storeArgument(): void
     {
         if (! $this->body || ! $this->voteType) {
             return;
         }
 
-        $this->user->createArgument(
+        (new CreateArgument)(
             rfc: $this->rfc,
+            user: $this->user,
             voteType: $this->voteType,
             body: $this->body,
         );
