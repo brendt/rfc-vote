@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Argument;
-use App\Models\Rfc;
 use App\Models\VoteType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
