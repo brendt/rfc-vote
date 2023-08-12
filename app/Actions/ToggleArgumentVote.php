@@ -38,12 +38,12 @@ final readonly class ToggleArgumentVote
                         user: $user,
                         reputationType: ReputationType::VOTE_FOR_ARGUMENT,
                     );
-                }
 
-                (new AddReputation)(
-                    user: $argument->user,
-                    reputationType: ReputationType::GAIN_ARGUMENT_VOTE,
-                );
+                    (new AddReputation)(
+                        user: $argument->user,
+                        reputationType: ReputationType::GAIN_ARGUMENT_VOTE,
+                    );
+                }
             }
 
             $argument->update([

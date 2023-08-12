@@ -69,7 +69,6 @@ class RfcVoteTest extends TestCase
         $this->assertDatabaseHas('users', [
             'reputation' => $user->reputation
                 + ReputationType::CREATE_ARGUMENT->getPoints()
-                + ReputationType::GAIN_ARGUMENT_VOTE->getPoints(),
         ]);
     }
 }
