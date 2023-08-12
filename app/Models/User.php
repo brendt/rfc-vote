@@ -81,14 +81,4 @@ class User extends Authenticatable
 
         return url($this->avatar);
     }
-
-    public function canDeleteArgument(Argument $argument): bool
-    {
-        return $this->is_admin || $argument->user_id === $this->id;
-    }
-
-    public function canEditArgument(Argument $argument): bool
-    {
-        return $this->is_admin || $argument->user_id === $this->id;
-    }
 }

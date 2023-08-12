@@ -11,7 +11,7 @@ final readonly class DeleteArgument
 {
     public function __invoke(User $user, Argument $argument): void
     {
-        if (! $user->canDeleteArgument($argument)) {
+        if (! $user->can('delete', $argument)) {
             return;
         }
 
