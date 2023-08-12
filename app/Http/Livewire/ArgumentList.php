@@ -68,7 +68,7 @@ class ArgumentList extends Component
             return;
         }
 
-        if (! $this->user->canEditArgument($argument)) {
+        if (! $this->user->can('edit', $argument)) {
             return;
         }
 

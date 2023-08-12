@@ -23,7 +23,7 @@ class ArgumentTest extends TestCase
             ->assertSet('isConfirmingDelete', null)
             ->assertOk();
 
-        $this->assertTrue($user->canDeleteArgument($argument));
+        $this->assertTrue($user->can('delete', $argument));
         $this->assertDatabaseCount('arguments', 0);
     }
 
@@ -66,8 +66,8 @@ class ArgumentTest extends TestCase
             ->assertSet('isConfirmingDelete', null)
             ->assertOk();
 
-        $this->assertTrue($user->canDeleteArgument($arguments[0]));
-        $this->assertFalse($user->canDeleteArgument($arguments[1]));
+        $this->assertTrue($user->can('delete', $arguments[0]));
+        $this->assertFalse($user->can('delete', $arguments[1]));
         $this->assertDatabaseCount('arguments', 1);
     }
 
@@ -86,7 +86,7 @@ class ArgumentTest extends TestCase
             ->assertSet('body', null)
             ->assertOk();
 
-        $this->assertTrue($user->canEditArgument($argument));
+        $this->assertTrue($user->can('edit', $argument));
     }
 
     /** @test */
@@ -111,7 +111,7 @@ class ArgumentTest extends TestCase
             ->assertSet('body', null)
             ->assertOk();
 
-        $this->assertTrue($user->canEditArgument($arguments[0]));
-        $this->assertFalse($user->canEditArgument($arguments[1]));
+        $this->assertTrue($user->can('edit', $arguments[0]));
+        $this->assertFalse($user->can('edit', $arguments[1]));
     }
 }

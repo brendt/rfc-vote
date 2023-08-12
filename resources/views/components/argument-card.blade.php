@@ -49,7 +49,7 @@
                 @endif
             </div>
             <div class="flex gap-2 items-center">
-                @if($user?->canEditArgument($argument))
+                @if($user?->can('edit', $argument))
                     <x-tag-button
                         wire:click="editArgument('{{ $argument->id }}')"
                         class="bg-blue-300 hover:bg-blue-700 text-blue-900 hover:text-white font-bold"
@@ -64,7 +64,7 @@
                     @endif
                 @endif
 
-                @if($user?->canDeleteArgument($argument))
+                @if($user?->can('delete', $argument))
                     <div class="flex items-center gap-1">
                         @if($isConfirmingDelete?->is($argument))
                             <span class="font-bold text-red-500">
