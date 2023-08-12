@@ -1,28 +1,27 @@
 <div
     class="
-            font-bold
             px-3
             py-1
-            cursor-pointer
-            border-{{ $argument->vote_type->getColor() }}-400
-            border-2
             relative
-            @if($user?->hasVotedForArgument($argument))
-                bg-{{ $argument->vote_type->getColor() }}-400
-                text-white
-                font-bold
-            @else
-                bg-{{ $argument->vote_type->getColor() }}-200
-                hover:bg-{{ $argument->vote_type->getColor() }}-400
-                hover:text-white
-                text-{{ $argument->vote_type->getColor() }}-800
-            @endif
+            cursor-pointer
+            transition-colors
             text-center
             rounded-full
+            group
+            text-lg
+            @if ($argument->vote_type->getColor() === 'green')
+                text-green-700
+                hover:text-green-800
+            @else
+                text-red-700
+                hover:text-red-800
+            @endif
         "
         wire:click="voteForArgument({{ $argument->id }})"
 >
-    <x-argument-card.vote-arrow :argument="$argument"/>
+    <x-icons.chevron-up
+        class="w-5 h-5 cursor-pointer text-black -mb-1 text-inherit group-hover:-translate-y-1 transition-all group-hover:stroke-[3]"
+    ></x-icons.chevron-up>
 
-    {{ $argument->vote_count }}
+    <span class="font-bold">{{ $argument->vote_count }}</span>
 </div>
