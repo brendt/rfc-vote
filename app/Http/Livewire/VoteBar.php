@@ -55,15 +55,6 @@ class VoteBar extends Component
         $this->voteType = VoteType::from($voteType);
     }
 
-    public function undo(): void
-    {
-        $this->user->undoArgument($this->rfc);
-
-        $this->refresh();
-
-        $this->emit(Events::ARGUMENT_DELETED);
-    }
-
     public function storeArgument(): void
     {
         if (! $this->body || ! $this->voteType) {

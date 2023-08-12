@@ -56,16 +56,6 @@ class User extends Authenticatable
         return $this->hasMany(Argument::class);
     }
 
-    public function undoArgument(Rfc $rfc): void
-    {
-        DB::transaction(function () use ($rfc) {
-            $argument = $this->getArgumentForRfc($rfc);
-            $argument->delete();
-            $this->removeReputation(ReputationType::CREATE_ARGUMENT);
-            $rfc->updateVoteCount();
-        });
-    }
-
     public function createArgument(Rfc $rfc, VoteType $voteType, string $body): Argument
     {
         $argument = new Argument([
