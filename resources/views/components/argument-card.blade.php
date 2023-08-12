@@ -1,21 +1,13 @@
-<div
-    class="
-                bg-white
-                @if ($argument->vote_type === \App\Models\VoteType::YES)
-                    border-l-green-400 border-l-8 md:mr-8
-                @else
-                    border-r-red-400 border-r-8 md:ml-8
-                @endif
-                shadow-md
-                p-4 flex gap-4 items-center
-            "
->
+<div class="bg-white rounded-xl shadow-md p-6 flex gap-6 items-center">
     <div
         class="
                     font-bold
-                    py-2 px-4 cursor-pointer
+                    px-3
+                    py-1
+                    cursor-pointer
                     border-{{ $argument->vote_type->getColor() }}-400
                     border-2
+                    relative
                     @if($user?->hasVotedForArgument($argument))
                         bg-{{ $argument->vote_type->getColor() }}-400
                         text-white
@@ -27,10 +19,12 @@
                         text-{{ $argument->vote_type->getColor() }}-800
                     @endif
                     text-center
-                    rounded
+                    rounded-full
                 "
         wire:click="voteForArgument({{ $argument->id }})"
     >
+        <x-argument-vote-arrow :argument="$argument"/>
+
         {{ $argument->vote_count }}
     </div>
 
