@@ -12,12 +12,14 @@
 
         <div class="flex gap-2 items-center justify-between">
             <div class="flex items-center gap-1">
-                <x-user-name :user="$argument->user"/>@if($argument->body_updated_at !== null)
+                <x-user-name :user="$argument->user" />
+
+                @if($argument->body_updated_at !== null)
                     (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})
                 @endif
             </div>
             <div class="flex gap-2 items-center">
-                @if($user?->canEditArgument($argument))
+                @if($user?->can('edit', $argument))
                     <x-argument-card.button
                         wire:click="editArgument('{{ $argument->id }}')"
                         class="{{ $isEditing?->is($argument) ? 'hover:text-green-800' : 'hover:text-blue-900' }}"
@@ -37,7 +39,7 @@
                     @endif
                 @endif
 
-                @if($user?->canDeleteArgument($argument))
+                @if($user?->can('delete', $argument))
                     <x-argument-card.delete-button
                         :argument="$argument"
                         :is-confirming-delete="$isConfirmingDelete"
