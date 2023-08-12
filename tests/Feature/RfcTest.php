@@ -63,6 +63,7 @@ class RfcTest extends TestCase
             'title' => $this->faker->text(10),
             'teaser' => $this->faker->text(50),
             'description' => $this->faker->text(50),
+            'teaser' => $this->faker->text(50),
             'url' => $this->faker->url,
         ])
             ->assertRedirect();
