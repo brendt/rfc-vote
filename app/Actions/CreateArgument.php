@@ -29,11 +29,6 @@ final readonly class CreateArgument
                 user: $user,
                 reputationType: ReputationType::CREATE_ARGUMENT,
             );
-
-            (new ToggleArgumentVote)(
-                user: $user,
-                argument: $argument,
-            );
         });
 
         return $argument;

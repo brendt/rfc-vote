@@ -52,6 +52,10 @@ class ArgumentList extends Component
             return;
         }
 
+        if ($argument->user()->is($this->user)) {
+            return;
+        }
+
         (new ToggleArgumentVote)(
             user: $this->user,
             argument: $argument,
