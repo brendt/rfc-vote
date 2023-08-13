@@ -18,7 +18,7 @@ class VoteBar extends Component
 
     public ?VoteType $voteType = null;
 
-    public ?string $body;
+    public ?string $body = null;
 
     protected $listeners = [
         Events::ARGUMENT_CREATED->value => 'refresh',
@@ -46,7 +46,7 @@ class VoteBar extends Component
 
     public function vote(string $voteType): void
     {
-        if (! $this->user) {
+        if (!$this->user) {
             Session::put('url.intended', action(RfcDetailController::class, $this->rfc));
             $this->redirect(route('login'));
 
@@ -58,7 +58,7 @@ class VoteBar extends Component
 
     public function storeArgument(): void
     {
-        if (! $this->body || ! $this->voteType) {
+        if (!$this->body || !$this->voteType) {
             return;
         }
 
