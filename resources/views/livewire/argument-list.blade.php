@@ -1,6 +1,6 @@
 <div class="grid gap-2 md:gap-4">
     @if($userArgument)
-        <x-argument-card
+        <x-argument-card.card
             :user="$user"
             :rfc="$rfc"
             :argument="$userArgument"
@@ -16,7 +16,7 @@
             }
         @endphp
 
-        <x-argument-card
+        <x-argument-card.card
             :user="$user"
             :rfc="$rfc"
             :argument="$argument"
