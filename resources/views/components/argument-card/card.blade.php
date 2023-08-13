@@ -17,7 +17,7 @@
         <div class="flex gap-2 items-center justify-between">
             <div class="flex items-center gap-1 text-sm">
                 <x-user-name :user="$argument->user" /> voted <span @class([
-                'p-1 px-2 rounded-full text-white shadow-md ml-1',
+                'p-1 px-2 rounded-full text-white shadow-md ml-1 font-bold text-xs',
                 'bg-green-500' => $argument->vote_type->isYes(),
                 'bg-red-500' => $argument->vote_type->isNo(),
             ])>{{ $argument->vote_type->value }}</span>
