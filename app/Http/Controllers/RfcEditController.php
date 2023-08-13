@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RfcRequest;
 use App\Models\Rfc;
-use Illuminate\Http\Request;
 
 final readonly class RfcEditController
 {
@@ -15,18 +15,9 @@ final readonly class RfcEditController
         ]);
     }
 
-    public function update(Rfc $rfc, Request $request)
+    public function update(Rfc $rfc, RfcRequest $request)
     {
-        $validated = $request->validate([
-            'title' => ['required', 'string'],
-            'teaser' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'published_at' => ['nullable', 'date'],
-            'ends_at' => ['nullable', 'date'],
-            'url' => ['required', 'url'],
-        ]);
-
-        $rfc->update($validated);
+        $rfc->update($request->validated());
 
         flash('Success');
 
