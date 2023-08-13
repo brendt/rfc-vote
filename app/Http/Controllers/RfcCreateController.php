@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RfcRequest;
 use App\Models\Rfc;
-use Illuminate\Http\Request;
 
 final readonly class RfcCreateController
 {
@@ -15,18 +15,9 @@ final readonly class RfcCreateController
         ]);
     }
 
-    public function store(Request $request)
+    public function store(RfcRequest $request)
     {
-        $validated = $request->validate([
-            'title' => ['required', 'string'],
-            'teaser' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'published_at' => ['nullable', 'date'],
-            'ends_at' => ['nullable', 'date'],
-            'url' => ['required', 'url'],
-        ]);
-
-        $rfc = new Rfc($validated);
+        $rfc = new Rfc($request->validated());
         $rfc->save();
 
         flash('Success');
