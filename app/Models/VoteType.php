@@ -7,6 +7,16 @@ enum VoteType: string
     case YES = 'yes';
     case NO = 'no';
 
+    public function isYes(): bool
+    {
+        return $this === self::YES;
+    }
+
+    public function isNo(): bool
+    {
+        return $this === self::NO;
+    }
+
     public function getColor(): string
     {
         return match ($this) {

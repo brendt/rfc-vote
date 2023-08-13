@@ -1,3 +1,7 @@
+@php
+    /** @var \App\Models\Argument $argument */
+@endphp
+
 <div class="bg-white rounded-xl shadow-sm p-6 flex gap-6 items-center">
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
@@ -11,14 +15,20 @@
         @endif
 
         <div class="flex gap-2 items-center justify-between">
-            <div class="flex items-center gap-1">
-                <x-user-name :user="$argument->user" />
-
-                @if($argument->body_updated_at !== null)
-                    (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})
-                @endif
+            <div class="flex items-center gap-1 text-sm">
+                <x-user-name :user="$argument->user" /> voted <span @class([
+                'p-1 px-2 rounded-full text-white shadow-md ml-1',
+                'bg-green-500' => $argument->vote_type->isYes(),
+                'bg-red-500' => $argument->vote_type->isNo(),
+            ])>{{ $argument->vote_type->value }}</span>
             </div>
             <div class="flex gap-2 items-center">
+                @if($argument->body_updated_at !== null)
+                    <span class="text-sm">
+                    (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})
+                    </span>
+                @endif
+
                 @if($user?->can('edit', $argument))
                     <x-argument-card.button
                         wire:click="editArgument('{{ $argument->id }}')"
