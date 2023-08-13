@@ -4,7 +4,7 @@
      */
 @endphp
 
-<span class="flex items-center gap-3 relative group">
+<span class="flex items-center gap-2 relative group">
     @if ($user->getAvatarUrl())
         <img
             src="{{ $user->getAvatarUrl() }}"

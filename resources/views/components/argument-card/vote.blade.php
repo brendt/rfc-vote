@@ -1,10 +1,10 @@
 @php
-    $arrowClasses = 'w-8 h-8 ' . ($argument->user()->is($user) ? 'cursor-not-allowed' : 'cursor-pointer') . ' text-black m-auto text-inherit';
+    /** @var \App\Models\Argument $argument */
 @endphp
 
 <div
     class="
-            {{$argument->user()->is($user) ? "cursor-not-allowed" : "cursor-pointer"}}
+            {{ $argument->user()->is($user) ? "cursor-not-allowed" : "hover:border-gray-200 cursor-pointer" }}
             flex
             flex-col
             gap-1
@@ -19,22 +19,21 @@
             border
             border-transparent
             bg-gray-100
-            hover:border-gray-200
             box-content
-            @if ($argument->vote_type->getColor() === 'green')
+            @if ($argument->vote_type->isYes())
                 text-green-700
-                hover:text-green-800
+                {{ $argument->user()->is($user) ? '' : 'hover:text-green-800' }}
             @else
                 text-red-700
-                hover:text-red-800
+                {{ $argument->user()->is($user) ? '' : 'hover:text-red-800' }}
             @endif
         "
     wire:click="voteForArgument({{ $argument->id }})"
 >
     @if ($user?->hasVotedForArgument($argument))
-        <x-icons.arrow-up-filled class="{{ $arrowClasses }}"></x-icons.arrow-up-filled>
+        <x-icons.arrow-up-filled class="w-8 h-8 text-black m-auto text-inherit"></x-icons.arrow-up-filled>
     @else
-        <x-icons.arrow-up-empty class="{{ $arrowClasses }}"></x-icons.arrow-up-empty>
+        <x-icons.arrow-up-empty class="w-8 h-8 text-black m-auto text-inherit"></x-icons.arrow-up-empty>
     @endif
 
     <span class="font-bold">{{ $argument->vote_count }}</span>
