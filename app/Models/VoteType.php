@@ -56,4 +56,9 @@ enum VoteType: string
             self::NO => 'flex-row-reverse',
         };
     }
+
+    public function class(string $yes, string $no): string
+    {
+        return $this->isYes() ? $yes : $no;
+    }
 }

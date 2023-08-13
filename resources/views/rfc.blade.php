@@ -48,7 +48,7 @@
                     Read the RFC
                 </x-tag-link>
 
-                <x-tag>
+                <x-tag class="font-bold">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                          class="w-4 h-4 text-gray-700">
                         <path fill-rule="evenodd"
