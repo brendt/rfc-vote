@@ -1,10 +1,10 @@
 @php
-    $arrowClasses = 'w-8 h-8 cursor-pointer text-black m-auto text-inherit';
+    $arrowClasses = 'w-8 h-8 ' . ($argument->user()->is($user) ? 'cursor-not-allowed' : 'cursor-pointer') . ' text-black m-auto text-inherit';
 @endphp
 
 <div
     class="
-            cursor-pointer
+            {{$argument->user()->is($user) ? "cursor-not-allowed" : "cursor-pointer"}}
             flex
             flex-col
             gap-1
@@ -29,7 +29,7 @@
                 hover:text-red-800
             @endif
         "
-        wire:click="voteForArgument({{ $argument->id }})"
+    wire:click="voteForArgument({{ $argument->id }})"
 >
     @if ($user?->hasVotedForArgument($argument))
         <x-icons.arrow-up-filled class="{{ $arrowClasses }}"></x-icons.arrow-up-filled>
