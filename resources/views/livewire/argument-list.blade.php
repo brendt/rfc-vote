@@ -1,7 +1,7 @@
 <div class="grid gap-2 md:gap-4">
     <div class="px-8">
         @php
-            $availableVotes = $user->getAvailableVotesForRfc($rfc);
+            $availableVotes = $user?->getAvailableVotesForRfc($rfc);
         @endphp
 
         You have {{ $availableVotes }} {{ Str::plural('vote', $availableVotes) }} available.
