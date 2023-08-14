@@ -73,7 +73,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @param \App\Models\Rfc $rfc
+     * @param  \App\Models\Rfc  $rfc
      * @return \Illuminate\Support\Collection<\App\Models\ArgumentVote>
      */
     public function getArgumentVotesForRfc(Rfc $rfc): Collection
@@ -95,7 +95,7 @@ class User extends Authenticatable
 
     public function getVotesPerRfc(): int
     {
-        return match(true) {
+        return match (true) {
             default => 3,
             $this->reputation > 1000 => 4,
             $this->reputation > 5000 => 5,
