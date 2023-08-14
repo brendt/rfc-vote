@@ -8,21 +8,7 @@
 
     <div class="grid gap-2 md:gap-4 w-full">
         @if(!$readonly && $isEditing?->is($argument))
-            <div>
-                <div wire:ignore>
-                <textarea id="argument-editor" x-init="
-                test = new EasyMDE({
-                    element: document.getElementById('argument-editor'),
-                    forceSync:true,
-                    renderingConfig:{codeSyntaxHighlighting:true},
-                    previewClass:['editor-preview', 'prose', 'prose-code:text-[color:var(--tw-prose-code)]'  , 'w-full', 'max-w-full']
-                });
-                test.codemirror.on('change', () => {
-                 $dispatch('input', test.value());
-                });
-                " wire:model="body" class="border-gray-200 rounded-lg" rows="5"></textarea>
-                </div>
-            </div>
+            <x-markdown-editor wire:model="body" />
         @else
             <x-markdown class="prose prose-md w-full max-w-full">
                 {!! $argument->body !!}
