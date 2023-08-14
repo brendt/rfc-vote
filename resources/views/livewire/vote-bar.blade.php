@@ -57,7 +57,11 @@
                 'p-1 px-3 rounded-full text-white shadow-md',
                 'bg-green-500' => $voteType === \App\Models\VoteType::YES,
                 'bg-red-500' => $voteType === \App\Models\VoteType::NO,
-            ])>{{ $voteType->value }}</span>@if(!$userArgument) Next, give your arguments:@else!@endif
+            ])>{{ $voteType->value }}</span>@if(!$userArgument)
+                Next, give your arguments:
+            @else
+                !
+            @endif
         </div>
     @endif
 
@@ -107,9 +111,15 @@
                     type="submit"
                     class="
                     font-bold
-                    py-2 px-4 cursor-pointer
-                    bg-{{ $voteType->getColor() }}-400
+                    class='
+                    @if(empty($this->body))
+                     cursor-not-allowed
+                    @else
+                    cursor-pointer
                     hover:bg-{{ $voteType->getColor() }}-600
+                    @endif
+                    py-2 px-4
+                    bg-{{ $voteType->getColor() }}-400
                     text-white
                     text-center
                     rounded-full

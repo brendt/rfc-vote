@@ -18,7 +18,7 @@ class VoteBar extends Component
 
     public ?VoteType $voteType = null;
 
-    public ?string $body;
+    public ?string $body = null;
 
     protected $listeners = [
         Events::ARGUMENT_CREATED->value => 'refresh',
