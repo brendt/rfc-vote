@@ -51,6 +51,7 @@
                         <img
                             src="{{ $user->getAvatarUrl() }}"
                             class="rounded-full w-8 h-8 transition-transform group-hover:scale-110"
+                            alt="{{ $user->name }} user avatar"
                         />
                     @endif
                 </a>
