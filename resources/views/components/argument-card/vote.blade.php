@@ -4,7 +4,7 @@
 
 <div
     class="
-            {{ $user->can('vote', $argument) ?  "hover:border-gray-200 cursor-pointer" : "cursor-not-allowed" }}
+            {{ $user?->can('vote', $argument) ?  "hover:border-gray-200 cursor-pointer" : "cursor-not-allowed" }}
             flex
             flex-col
             gap-1
@@ -32,7 +32,7 @@
 >
     @if ($user?->hasVotedForArgument($argument))
         <x-icons.arrow-up-filled class="w-8 h-8 text-black m-auto text-inherit"></x-icons.arrow-up-filled>
-    @elseif($user->can('vote', $argument))
+    @elseif($user?->can('vote', $argument))
         <x-icons.arrow-up-empty class="w-8 h-8 text-black m-auto text-inherit"></x-icons.arrow-up-empty>
     @endif
 
