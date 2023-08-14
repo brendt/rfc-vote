@@ -1,4 +1,5 @@
 <div class="grid gap-2 md:gap-4">
+    @if($user)
     <div class="px-8">
         @php
             $availableVotes = $user->getAvailableVotesForRfc($rfc);
@@ -6,6 +7,7 @@
 
         You have {{ $availableVotes }} {{ Str::plural('vote', $availableVotes) }} available.
     </div>
+    @endif
 
     @if($userArgument)
         <x-argument-card.card

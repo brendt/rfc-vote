@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Spatie\Browsershot\Browsershot;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,7 +13,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(Browsershot::class, function () {
+            $browsershot = new Browsershot();
+
+            if ($chromePath = config('services.browsershot.chrome_path')) {
+                $browsershot->setChromePath($chromePath);
+            }
+
+            if ($nodePath = config('services.browsershot.node_path')) {
+                $browsershot->setNodeBinary($nodePath);
+            }
+
+            if ($npmPath = config('services.browsershot.npm_path')) {
+                $browsershot->setNpmBinary($npmPath);
+            }
+
+            return $browsershot;
+        });
     }
 
     /**
@@ -20,7 +37,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
         Model::unguard();
     }
 }

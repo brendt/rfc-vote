@@ -26,11 +26,6 @@ final readonly class DeleteArgument
 
             (new RemoveReputation)(
                 user: $argumentUser,
-                reputationType: ReputationType::CREATE_ARGUMENT,
-            );
-
-            (new RemoveReputation)(
-                user: $argumentUser,
                 reputationType: ReputationType::VOTE_FOR_ARGUMENT,
             );
 
