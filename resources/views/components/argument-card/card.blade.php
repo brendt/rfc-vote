@@ -1,12 +1,13 @@
 @php
     /** @var \App\Models\Argument $argument */
+    $readonly ??= false;
 @endphp
 
 <div class="bg-white rounded-xl shadow-sm p-6 flex gap-6 items-center">
-    <x-argument-card.vote :argument="$argument" :user="$user"/>
+    <x-argument-card.vote :argument="$argument" :user="$user" />
 
     <div class="grid gap-2 md:gap-4 w-full">
-        @if($isEditing?->is($argument))
+        @if(!$readonly && $isEditing?->is($argument))
             <div>
                 <div wire:ignore>
                 <textarea id="argument-editor" x-init="
@@ -30,7 +31,7 @@
 
         <div class="flex gap-2 items-center justify-between">
             <div class="flex items-center gap-1 text-sm">
-                <x-user-name :user="$argument->user"/>
+                <x-user-name :user="$argument->user" />
                 <span @class([
                     'p-1 px-2 rounded-full text-white ml-1 font-bold text-xs',
                     'bg-green-500' => $argument->vote_type->isYes(),
@@ -46,7 +47,7 @@
                     </span>
                 @endif
 
-                @if($user?->can('edit', $argument))
+                @if(!$readonly && $user?->can('edit', $argument))
                     <x-argument-card.button
                         wire:click="editArgument('{{ $argument->id }}')"
                         class="{{ $isEditing?->is($argument) ? 'hover:text-green-800' : 'hover:text-blue-900' }}"
@@ -66,13 +67,19 @@
                     @endif
                 @endif
 
-                @if($user?->can('delete', $argument))
+                @if(!$readonly && $user?->can('delete', $argument))
                     <x-argument-card.delete-button
                         :argument="$argument"
                         :is-confirming-delete="$isConfirmingDelete"
                     />
                 @endif
+                @if($readonly)
+                    <span class="text-sm">
+                    Read the RFC: <a href="{{ action(\App\Http\Controllers\RfcDetailController::class, $rfc) }}" class="underline hover:no-underline">{{ $rfc->title }}</a>
+                    </span>
+                @endif
             </div>
         </div>
+
     </div>
 </div>
