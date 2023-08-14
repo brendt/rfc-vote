@@ -7,7 +7,7 @@
 
     <div class="grid gap-2 md:gap-4 w-full">
         @if($isEditing?->is($argument))
-            <textarea wire:model="body" class="border-gray-200 rounded-lg" rows="5"></textarea>
+            <textarea wire:model="body" class="border-gray-200 rounded-lg markdown-editor" rows="5"></textarea>
         @else
             <x-markdown class="prose prose-md w-full max-w-full">
                 {!! $argument->body !!}
