@@ -2,7 +2,7 @@
     /**
      * @var string $slot
      * @var string|null $heading
-     * @var Illuminate\Support\ViewErrorBag $errors
+     * @var Illuminate\View\ComponentAttributeBag $attributes
      */
 @endphp
 
