@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use Horizon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Browsershot\Browsershot;
 
