@@ -15,7 +15,7 @@ final readonly class RfcDetailController
 
         $user = auth()->user();
 
-        $user->load([
+        $user?->load([
             'arguments',
             'argumentVotes.argument',
         ]);
