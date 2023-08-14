@@ -56,6 +56,15 @@ class ArgumentList extends Component
             return;
         }
 
+        if (
+            ! (
+                $this->user->hasVotedForArgument($argument)
+                || $this->user->can('vote', $this->rfc)
+            )
+        ) {
+            return;
+        }
+
         (new ToggleArgumentVote)(
             user: $this->user,
             argument: $argument,

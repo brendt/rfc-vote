@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -71,6 +72,16 @@ class User extends Authenticatable
         return $this->argumentVotes->first(fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id);
     }
 
+    /**
+     * @param \App\Models\Rfc $rfc
+     * @return \Illuminate\Support\Collection<\App\Models\ArgumentVote>
+     */
+    public function getArgumentVotesForRfc(Rfc $rfc): Collection
+    {
+        return $this->argumentVotes
+            ->filter(fn (ArgumentVote $vote) => $vote->argument->rfc_id === $rfc->id);
+    }
+
     public function getAvatarUrl(): ?string
     {
         if (! $this->avatar) {
@@ -80,5 +91,20 @@ class User extends Authenticatable
         }
 
         return url($this->avatar);
+    }
+
+    public function getVotesPerRfc(): int
+    {
+        return match(true) {
+            default => 3,
+            $this->reputation > 1000 => 4,
+            $this->reputation > 5000 => 5,
+            $this->reputation > 10_000 => 6,
+        };
+    }
+
+    public function getAvailableVotesForRfc(Rfc $rfc): int
+    {
+        return $this->getVotesPerRfc() - $this->getArgumentVotesForRfc($rfc)->count();
     }
 }

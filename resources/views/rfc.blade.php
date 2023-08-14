@@ -86,7 +86,7 @@
         </div>
 
         <div class="col-span-3">
-            <livewire:vote-bar :rfc="$rfc->withoutRelations()" :user="$user?->withoutRelations()"/>
+            <livewire:vote-bar :rfc="$rfc" :user="$user"/>
         </div>
 
         <div class="col-span-3  md:px-8">

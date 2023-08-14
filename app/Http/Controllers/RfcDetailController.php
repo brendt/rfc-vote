@@ -10,9 +10,15 @@ final readonly class RfcDetailController
     {
         $rfc->load([
             'arguments.user',
+            'arguments.rfc',
         ]);
 
         $user = auth()->user();
+
+        $user->load([
+            'arguments',
+            'argumentVotes.argument',
+        ]);
 
         return view('rfc', [
             'rfc' => $rfc,
