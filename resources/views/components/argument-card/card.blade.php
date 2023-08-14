@@ -1,14 +1,27 @@
 @php
     /** @var \App\Models\Argument $argument */
-    $readonly ??= false;
 @endphp
 
 <div class="bg-white rounded-xl shadow-sm p-6 flex gap-6 items-center">
-    <x-argument-card.vote :argument="$argument" :user="$user" />
+    <x-argument-card.vote :argument="$argument" :user="$user"/>
 
     <div class="grid gap-2 md:gap-4 w-full">
-        @if(!$readonly && $isEditing?->is($argument))
-            <textarea wire:model="body" class="border-gray-200 rounded-lg markdown-editor" rows="5"></textarea>
+        @if($isEditing?->is($argument))
+            <div>
+                <div wire:ignore>
+                <textarea id="argument-editor" x-init="
+                test = new EasyMDE({
+                    element: document.getElementById('argument-editor'),
+                    forceSync:true,
+                    renderingConfig:{codeSyntaxHighlighting:true},
+                    previewClass:['editor-preview', 'prose', 'prose-code:text-[color:var(--tw-prose-code)]'  , 'w-full', 'max-w-full']
+                });
+                test.codemirror.on('change', () => {
+                 $dispatch('input', test.value());
+                });
+                " wire:model="body" class="border-gray-200 rounded-lg" rows="5"></textarea>
+                </div>
+            </div>
         @else
             <x-markdown class="prose prose-md w-full max-w-full">
                 {!! $argument->body !!}
@@ -17,7 +30,7 @@
 
         <div class="flex gap-2 items-center justify-between">
             <div class="flex items-center gap-1 text-sm">
-                <x-user-name :user="$argument->user" />
+                <x-user-name :user="$argument->user"/>
                 <span @class([
                     'p-1 px-2 rounded-full text-white ml-1 font-bold text-xs',
                     'bg-green-500' => $argument->vote_type->isYes(),
@@ -33,7 +46,7 @@
                     </span>
                 @endif
 
-                @if(!$readonly && $user?->can('edit', $argument))
+                @if($user?->can('edit', $argument))
                     <x-argument-card.button
                         wire:click="editArgument('{{ $argument->id }}')"
                         class="{{ $isEditing?->is($argument) ? 'hover:text-green-800' : 'hover:text-blue-900' }}"
@@ -53,19 +66,13 @@
                     @endif
                 @endif
 
-                @if(!$readonly && $user?->can('delete', $argument))
+                @if($user?->can('delete', $argument))
                     <x-argument-card.delete-button
                         :argument="$argument"
                         :is-confirming-delete="$isConfirmingDelete"
                     />
                 @endif
-                @if($readonly)
-                    <span class="text-sm">
-                    Read the RFC: <a href="{{ action(\App\Http\Controllers\RfcDetailController::class, $rfc) }}" class="underline hover:no-underline">{{ $rfc->title }}</a>
-                    </span>
-                @endif
             </div>
         </div>
-
     </div>
 </div>
