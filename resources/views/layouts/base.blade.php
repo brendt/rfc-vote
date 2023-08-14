@@ -17,36 +17,41 @@
     $user = auth()->user();
 @endphp
 
-<div class="
-    bg-purple-800
-    bg-gradient-to-l from-purple-700 to-purple-900
-    flex justify-between text-white gap-4 items-center w-full z-10
-    p-4 md:p-8
-">
-    <div class="text-xl font-bold">
-        <a href="/">RFC Vote {{ app()->isProduction() ? '' : ' (local)' }}</a>
-    </div>
+<nav class="bg-purple-800 bg-gradient-to-l from-purple-700 to-purple-900 z-10 px-4 py-5">
+    <div class="container flex justify-between text-white gap-4 items-center m-auto">
+        <div class="text-xl font-bold">
+            <a href="/">RFC Vote {{ app()->isProduction() ? '' : ' (local)' }}</a>
+        </div>
 
-    <div class="flex justify-end items-baseline gap-4 font-bold">
-        <a href="{{ action(\App\Http\Controllers\AboutController::class) }}" class="hover:underline">About</a>
+        <div class="flex justify-end items-baseline gap-6 font-bold">
+            <a href="{{ action(\App\Http\Controllers\AboutController::class) }}" class="hover:underline">About</a>
 
-        @if($user)
-            @if($user->is_admin)
-                <a href="{{ action(\App\Http\Controllers\RfcAdminController::class) }}" class="hover:underline">Admin</a>
-            @endif
-            <a class="flex gap-2 items-center hover:underline" href="{{ action([\App\Http\Controllers\ProfileController::class, 'edit']) }}">
-                <span class="front-bold">{{ $user->name }}</span>
-                @if($user->getAvatarUrl())
-                    <img src="{{ $user->getAvatarUrl() }}" class="border-purple-200 rounded-full w-[30px] h-[30px]"/>
+            @if($user)
+                @if($user->is_admin)
+                    <a href="{{ action(\App\Http\Controllers\RfcAdminController::class) }}" class="hover:underline">Admin</a>
                 @endif
-            </a>
-        @else
-            <div>
-                <a href="{{ action(\App\Http\Controllers\LoginController::class) }}" class="hover:underline">Login</a>
-            </div>
-        @endif
+
+                <a
+                    class="flex gap-3 items-center bg-purple-900 hover:bg-gray-800 group transition-colors pl-5 rounded-full"
+                    href="{{ action([\App\Http\Controllers\ProfileController::class, 'edit']) }}"
+                >
+                    <span class="front-bold">{{ $user->name }}</span>
+
+                    @if($user->getAvatarUrl())
+                        <img
+                            src="{{ $user->getAvatarUrl() }}"
+                            class="border-purple-200 rounded-full w-8 h-8 transition-transform group-hover:scale-105"
+                        />
+                    @endif
+                </a>
+            @else
+                <div>
+                    <a href="{{ action(\App\Http\Controllers\LoginController::class) }}" class="hover:underline">Login</a>
+                </div>
+            @endif
+        </div>
     </div>
-</div>
+</nav>
 
 <div class="flex-1">
     @if(flash()->message)
