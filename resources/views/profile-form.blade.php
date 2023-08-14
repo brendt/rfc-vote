@@ -73,7 +73,12 @@
             heading="Email"
         >
             <div class="col-span-2">
-                <x-form.input type="email" name="email" label="Your Email Address" />
+                <x-form.input
+                    type="email"
+                    name="email"
+                    label="Your Email Address"
+                    value="{{ $user->email ?? old('email') }}"
+                />
             </div>
 
             <p class="text-red-600 leading-5 font-bold mt-2 tracking-wide">
