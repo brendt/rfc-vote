@@ -24,7 +24,7 @@
             </div>
 
             <div class="flex gap-4 items-center my-4">
-                @if($user->getAvatarUrl())
+                @if ($user->getAvatarUrl())
                     <img
                         src="{{ $user->getAvatarUrl() }}"
                         class="shadow-xl rounded-full"
