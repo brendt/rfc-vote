@@ -16,7 +16,8 @@ class RenderMetaImageJob implements ShouldQueue
 
     public function __construct(
         public Rfc $rfc,
-    ) {}
+    ) {
+    }
 
     public function handle(Browsershot $browsershot): void
     {

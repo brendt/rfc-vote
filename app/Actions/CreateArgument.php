@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use App\Models\Argument;
-use App\Models\ReputationType;
 use App\Models\Rfc;
 use App\Models\User;
 use App\Models\VoteType;
@@ -20,7 +19,7 @@ final readonly class CreateArgument
             'body' => $body,
         ]);
 
-        DB::transaction(function () use ($rfc, $user, $argument) {
+        DB::transaction(function () use ($user, $argument) {
             $argument->save();
 
             (new ToggleArgumentVote)(
