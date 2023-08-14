@@ -79,6 +79,7 @@ class User extends Authenticatable
     public function getArgumentVotesForRfc(Rfc $rfc): Collection
     {
         return $this->argumentVotes
+            ->reject(fn (ArgumentVote $vote) => $vote->argument->user_id === $this->id)
             ->filter(fn (ArgumentVote $vote) => $vote->argument->rfc_id === $rfc->id);
     }
 

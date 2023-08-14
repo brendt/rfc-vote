@@ -23,11 +23,9 @@ final readonly class CreateArgument
         DB::transaction(function () use ($rfc, $user, $argument) {
             $argument->save();
 
-            $rfc->updateVoteCount();
-
-            (new AddReputation)(
+            (new ToggleArgumentVote)(
                 user: $user,
-                reputationType: ReputationType::CREATE_ARGUMENT,
+                argument: $argument,
             );
         });
 

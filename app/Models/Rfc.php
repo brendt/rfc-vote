@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\RenderMetaImageJob;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,11 +16,16 @@ class Rfc extends Model
     protected $casts = [
         'published_at' => 'datetime:Y-m-d',
         'ends_at' => 'datetime:Y-m-d',
+        'meta_image_valid_until' => 'datetime',
     ];
 
     protected static function boot(): void
     {
         parent::boot();
+
+        static::created(function (Rfc $rfc) {
+            $rfc->updateVoteCount();
+        });
 
         static::saving(function (Rfc $rfc) {
             if ($rfc->slug !== null) {
@@ -114,5 +120,7 @@ class Rfc extends Model
             'count_yes' => $this->yesArguments()->sum('vote_count'),
             'count_no' => $this->noArguments()->sum('vote_count'),
         ]);
+
+        dispatch(new RenderMetaImageJob($this));
     }
 }
