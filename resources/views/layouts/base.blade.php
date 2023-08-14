@@ -23,17 +23,27 @@
             <a href="/">RFC Vote {{ app()->isProduction() ? '' : ' (local)' }}</a>
         </div>
 
-        <div class="flex justify-end items-baseline gap-6 font-bold">
-            <a href="{{ action(\App\Http\Controllers\AboutController::class) }}" class="hover:underline">About</a>
+        <div class="flex justify-end items-baseline gap-4 md:gap-6 font-bold">
+            <x-navbar.link
+                href="{{ action(App\Http\Controllers\AboutController::class) }}"
+                :isActive="request()->is('about')"
+            >
+                About
+            </x-navbar.link>
 
             @if($user)
                 @if($user->is_admin)
-                    <a href="{{ action(\App\Http\Controllers\RfcAdminController::class) }}" class="hover:underline">Admin</a>
+                    <x-navbar.link
+                        href="{{ action(App\Http\Controllers\RfcAdminController::class) }}"
+                        :isActive="request()->is('admin/*')"
+                    >
+                        Admin
+                    </x-navbar.link>
                 @endif
 
                 <a
                     class="flex gap-3 items-center bg-purple-900 hover:bg-gray-800 group transition-colors pl-5 rounded-full"
-                    href="{{ action([\App\Http\Controllers\ProfileController::class, 'edit']) }}"
+                    href="{{ action([App\Http\Controllers\ProfileController::class, 'edit']) }}"
                 >
                     <span class="front-bold">{{ $user->name }}</span>
 
@@ -46,7 +56,7 @@
                 </a>
             @else
                 <div>
-                    <a href="{{ action(\App\Http\Controllers\LoginController::class) }}" class="hover:underline">Login</a>
+                    <a href="{{ action(App\Http\Controllers\LoginController::class) }}" class="hover:underline">Login</a>
                 </div>
             @endif
         </div>
