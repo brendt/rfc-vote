@@ -5,8 +5,9 @@
 @endphp
 
 <span
+
     @class([
-        'flex items-center gap-2 relative group text-xs font-bold rounded-full pr-3 cursor-default',
+        'flex items-center gap-2 relative group text-xs font-bold rounded-full pr-3 cursor-pointer',
         'bg-purple-200 text-black' => $user->reputation < 1000,
         'bg-purple-400 text-purple-100' =>  $user->reputation >= 1000,
         'bg-purple-600 text-white' => $user->reputation >= 5000,
@@ -18,9 +19,11 @@
         />
     @endif
 
+    <a href="{{ action(\App\Http\Controllers\PublicProfileController::class, $user) }}" class="group-hover:underline">
     {{ $user->name }}
+    </a>
 
-    <div class="hidden group-hover:flex flex gap-1 items-center">
+    <div class="hidden group-hover:flex gap-1 items-center">
         <span>
             {{ $user->reputation }}
         </span>
