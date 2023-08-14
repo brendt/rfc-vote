@@ -10,7 +10,7 @@
 
     <div
         class="
-            absolute bottom-0 top-6 -left-1 -right-1
+            absolute bottom-0 top-6 -left-0.5 -right-0.5
             transition-transform
             duration-300
             group-hover:opacity-100

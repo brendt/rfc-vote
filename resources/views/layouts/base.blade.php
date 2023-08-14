@@ -56,7 +56,12 @@
                 </a>
             @else
                 <div>
-                    <a href="{{ action(App\Http\Controllers\LoginController::class) }}" class="hover:underline">Login</a>
+                    <x-navbar.link
+                        href="{{ action(App\Http\Controllers\LoginController::class) }}"
+                        :isActive="request()->is('login')"
+                    >
+                        Login
+                    </x-navbar.link>
                 </div>
             @endif
         </div>
