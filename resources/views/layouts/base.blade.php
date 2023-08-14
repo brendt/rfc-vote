@@ -50,7 +50,7 @@
                     @if($user->getAvatarUrl())
                         <img
                             src="{{ $user->getAvatarUrl() }}"
-                            class="border-purple-200 rounded-full w-8 h-8 transition-transform group-hover:scale-105"
+                            class="rounded-full w-8 h-8 transition-transform group-hover:scale-110"
                         />
                     @endif
                 </a>
