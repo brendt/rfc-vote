@@ -11,3 +11,12 @@ CHROME_BINARY_PATH=/usr/bin/google-chrome-stable
 NODE_BINARY_PATH=/usr/bin/node
 NPM_BINARY_PATH=/usr/bin/npm
 ```
+For horizon to work properly make sure that you have the following in `.env` file:
+```dotenv
+REDIS_HOST=redis
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+# And the following as well
+QUEUE_CONNECTION=redis
+```

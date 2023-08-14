@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicProfileController;
 use App\Http\Controllers\PublishRfcController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RfcAdminController;
@@ -69,3 +70,4 @@ Route::get('/auth/redirect/{driver}', SocialiteRedirectController::class);
 Route::get('/auth/callback/{driver}', SocialiteCallbackController::class);
 
 Route::get('/forgot-password', ForgotPasswordController::class);
+Route::get('/profile/{user}', PublicProfileController::class);
