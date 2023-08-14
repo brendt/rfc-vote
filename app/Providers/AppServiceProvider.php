@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
+use Horizon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Horizon\Horizon;
 use Spatie\Browsershot\Browsershot;
 
 class AppServiceProvider extends ServiceProvider
@@ -40,9 +40,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::unguard();
-
-        Horizon::auth(function (Request $request) {
-            return $request->user()?->is_admin;
-        });
     }
 }
