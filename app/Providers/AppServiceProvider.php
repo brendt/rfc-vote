@@ -17,8 +17,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(Meta::class, function () {
             return new Meta(
-                title: "RFC Vote",
-                description: "A community project for voting on PHP RFCs",
+                title: 'RFC Vote',
+                description: 'A community project for voting on PHP RFCs',
                 image: url('meta.png'),
             );
         });
