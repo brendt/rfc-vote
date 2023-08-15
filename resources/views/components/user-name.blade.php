@@ -19,7 +19,7 @@
         />
     @endif
 
-    <a href="{{ action(\App\Http\Controllers\PublicProfileController::class, ['user' => $user->id]) }}" class="group-hover:underline">
+    <a href="{{ action(\App\Http\Controllers\PublicProfileController::class, $user) }}" class="group-hover:underline">
     {{ $user->name }}
     </a>
 
