@@ -7,6 +7,7 @@
     @vite('resources/css/app.css')
     @livewireStyles
 
+    @include('feed::links')
     <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
     <meta charset="UTF-8">
     {!!  $meta ?? null  !!}
@@ -92,10 +93,15 @@
         </div>
     </div>
 
-    <div class="text-center">
+    <div class="md:text-center">
         <p>
             Special thanks to <a class="text-purple-200 underline hover:no-underline" href="https://github.com/brendt/rfc-vote/graphs/contributors">numerous contributors</a> for sending PRs, and <a href="https://tighten.com/" class="text-purple-200 underline hover:no-underline">Tighten</a> for helping out with the design!
         </p>
+    </div>
+
+    <div class="flex justify-center gap-2 text-sm">
+        <a href="/feed" class="underline hover:no-underline text-purple-200">RSS</a>
+        <a href="https://github.com/brendt/rfc-vote" class="underline hover:no-underline text-purple-200">GitHub</a>
     </div>
 </div>
 

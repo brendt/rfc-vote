@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\RfcDetailController;
 use App\Jobs\RenderMetaImageJob;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 
-class Rfc extends Model
+class Rfc extends Model implements Feedable
 {
     use HasFactory;
 
@@ -118,5 +122,25 @@ class Rfc extends Model
         ]);
 
         dispatch(new RenderMetaImageJob($this));
+    }
+
+    public static function getFeedItems(): Collection
+    {
+        return self::query()
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->get();
+    }
+
+    public function toFeedItem(): FeedItem
+    {
+        return FeedItem::create()
+            ->id($this->id)
+            ->title($this->title)
+            ->summary($this->teaser)
+            ->updated($this->updated_at)
+            ->link(action(RfcDetailController::class, $this))
+            ->authorName('Brent')
+            ->authorEmail('brendt@stitcher.io');
     }
 }
