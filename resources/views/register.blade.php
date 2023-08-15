@@ -1,30 +1,72 @@
 @component('layouts.base')
 
-    <div class="mx-auto container max-w-[800px] px-4 gap-6 md:gap-12 mt-4 md:mt-12 mb-8 bg-white p-4 shadow-lg border-gray-300 border">
-        <x-form class="grid grid-cols-2 gap-4 p-4"
-                method="{{ route('register') }}"
-                method="post">
+    <div class="mx-auto max-w-[500px] mt-4 md:mt-12">
+        <x-form.wrapper
+            method="{{ route('register') }}"
+            method="post"
+            :heading="__('Register your account')"
+        >
+            <div class="space-y-3">
+                <x-form.input
+                    name="name"
+                    :label="__('Name')"
+                    :value="old('name')"
+                    :placeholder="__('Enter your name')"
+                    required
+                />
 
-            <x-form-input name="name" label="Name" required />
+                <x-form.input
+                    name="email"
+                    :label="__('Email')"
+                    :value="old('email')"
+                    :placeholder="__('Enter your email address')"
+                    required
+                />
 
-            <x-form-input name="email" label="Email" required />
+                <x-form.input
+                    type="password"
+                    name="password"
+                    :label="__('Password')"
+                    :placeholder="__('Enter your password')"
+                    required
+                />
 
-            <x-form-input type="password" name="password" label="Password" required />
-            <x-form-input type="password" name="password_confirmation" label="Confirm your password" required />
-
-            <div class="flex justify-end items-baseline gap-2 col-span-2">
-                <button type="submit" class="p-2 px-4 bg-blue-400 rounded text-white font-bold hover:bg-blue-600 hover:text-white">Register</button>
+                <x-form.input
+                    type="password"
+                    name="password_confirmation"
+                    :label="__('Confirm your password')"
+                    :placeholder="__('Confirm your password')"
+                    required
+                />
             </div>
-        </x-form>
+
+            <div class="text-right mt-6">
+                <x-form.button type="submit">
+                    <x-icons.register class="h-6 w-6" />
+                    {{ __('Register') }}
+                </x-form.button>
+            </div>
+        </x-form.wrapper>
 
         <hr>
 
-        <div class="flex items-baseline gap-2 p-4 mt-4 justify-center">
-            <a href="{{ action(\App\Http\Controllers\LoginController::class) }}" class="underline hover:no-underline">Login</a>
-            <span>or</span>
-            <a href="{{ action(\App\Http\Controllers\SocialiteRedirectController::class, 'github') }}" class="p-2 px-4 bg-black rounded text-white font-bold hover:bg-gray-200 hover:text-black">
-                {{ __('Log in with GitHub') }}
+        <div class="flex items-center gap-3 mt-8 justify-center">
+            <a
+                href="{{ action(App\Http\Controllers\LoginController::class) }}"
+                class="underline hover:no-underline"
+            >
+                Login
             </a>
+
+            <span>or</span>
+
+            <x-buttons.main
+                href="{{ action(App\Http\Controllers\SocialiteRedirectController::class, 'github') }}"
+                class="!bg-gray-900 hover:!bg-gray-700"
+            >
+                <x-icons.github class="h-6 w-6 fill-white" />
+                {{ __('Log in with GitHub') }}
+            </x-buttons.main>
         </div>
     </div>
 

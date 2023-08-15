@@ -52,7 +52,7 @@
 
         <hr>
 
-        <div class="flex items-center gap-3  mt-8 justify-center">
+        <div class="flex items-center gap-3 mt-8 justify-center">
             <a
                 href="{{ action(App\Http\Controllers\RegisterController::class) }}"
                 class="underline hover:no-underline"
