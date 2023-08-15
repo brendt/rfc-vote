@@ -2,7 +2,7 @@
     <div wire:ignore>
                 <textarea id="argument-editor" x-init="
                 editor = new EasyMDE({
-                    element: document.getElementById('argument-editor'),
+                    element: $el,
                     forceSync:true,
                     renderingConfig:{codeSyntaxHighlighting:true},
                     previewClass:['editor-preview', 'prose', 'prose-code:text-[color:var(--tw-prose-code)]'  , 'w-full', 'max-w-full']
