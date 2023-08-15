@@ -6,7 +6,7 @@
      */
 @endphp
 
-<form {{ $attributes->merge(['class' => 'bg-white p-6 rounded-lg shadow-md']) }}>
+<form {{ $attributes->merge(['class' => 'bg-white p-8 rounded-lg shadow-md']) }}>
     @csrf
 
     @isset($heading)
