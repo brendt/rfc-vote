@@ -2,6 +2,16 @@
     $metaImageUrl = action(\App\Http\Controllers\RfcMetaImageController::class, $rfc);
 @endphp
 
+@push('styles')
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+@endpush
+
+@push('scripts')
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+@endpush
+
 @component('layouts.base', [
     'meta' => <<<HTML
     <meta property="og:type" content="article">

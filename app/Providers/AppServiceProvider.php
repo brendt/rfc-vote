@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Browsershot\Browsershot;
+use Tests\FakeBrowsershot;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(Browsershot::class, function () {
+            if (config('services.browsershot.fake')) {
+                return new FakeBrowsershot();
+            }
+
             $browsershot = new Browsershot();
 
             if ($chromePath = config('services.browsershot.chrome_path')) {

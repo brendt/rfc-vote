@@ -41,5 +41,6 @@ return [
         'chrome_path' => env('CHROME_BINARY_PATH'),
         'node_path' => env('NODE_BINARY_PATH'),
         'npm_path' => env('NPM_BINARY_PATH'),
+        'fake' => env('BROWSERSHOT_FAKE', false),
     ],
 ];
