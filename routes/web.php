@@ -36,7 +36,7 @@ Route::get('/rfc/{rfc}', RfcDetailController::class);
 Route::get('/rfc/{rfc}/meta.png', RfcMetaImageController::class);
 Route::get('/login', LoginController::class)->name('login');
 Route::get('/register', RegisterController::class)->name('register');
-Route::get('/register-pending', fn () => view('register-pending'))->name('register-pending');
+Route::view('/register-pending', 'register-pending')->name('register-pending');
 Route::get('/logout', LogoutController::class);
 Route::get('/about', AboutController::class);
 Route::get('email/verify/{token}', [ProfileController::class, 'verifyEmail'])->name('email.verify');
@@ -61,9 +61,7 @@ Route::middleware([
     Route::post('/profile/password', [ProfileController::class, 'updatePassword']);
     Route::post('/profile/email', [ProfileController::class, 'updateEmail']);
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
 });
 
 Route::get('/auth/redirect/{driver}', SocialiteRedirectController::class);

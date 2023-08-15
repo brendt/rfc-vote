@@ -9,9 +9,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('twitter_url')->nullable()->after('avatar');
-            $table->string('github_url')->nullable()->after('avatar');
-            $table->string('website_url')->nullable()->after('avatar');
+            $table->after('avatar', function (Blueprint $table) {
+                $table->string('twitter_url')->nullable();
+                $table->string('github_url')->nullable();
+                $table->string('website_url')->nullable();
+            });
         });
     }
 };
