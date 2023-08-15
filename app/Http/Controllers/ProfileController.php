@@ -27,6 +27,7 @@ final readonly class ProfileController
     {
         $validated = collect($request->validate([
             'name' => ['required', 'string'],
+            'username' => ['required', 'string', Rule::unique('users', 'username')->ignore($request->user()->id)],
             'website_url' => ['nullable', 'url'],
             'github_url' => ['nullable', 'url'],
             'twitter_url' => ['nullable', 'url'],

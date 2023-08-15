@@ -23,6 +23,15 @@
                 />
             </div>
 
+            <div class="col-span-2 mt-4">
+                <x-form.input
+                    type="text"
+                    name="username"
+                    label="Username"
+                    value="{{ $user->username ?? old('username') }}"
+                />
+            </div>
+
             <div class="flex gap-4 items-center my-4">
                 @if ($user->getAvatarUrl())
                     <img
