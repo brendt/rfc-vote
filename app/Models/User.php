@@ -120,10 +120,10 @@ class User extends Authenticatable
     public function getVotesPerRfc(): int
     {
         return match (true) {
+            $this->reputation >= 10_000 => 6,
+            $this->reputation >= 5000 => 5,
+            $this->reputation >= 1000 => 4,
             default => 3,
-            $this->reputation > 1000 => 4,
-            $this->reputation > 5000 => 5,
-            $this->reputation > 10_000 => 6,
         };
     }
 

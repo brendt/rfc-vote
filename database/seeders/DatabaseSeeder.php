@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Brent',
             'email' => 'brendt@stitcher.io',
             'is_admin' => true,
+            'reputation' => 10_000
         ]);
 
         $users = User::factory()->count(50)->create();
