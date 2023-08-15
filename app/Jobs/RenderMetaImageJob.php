@@ -29,6 +29,7 @@ class RenderMetaImageJob implements ShouldQueue
             ->setHtml($html)
             ->windowSize(1200, 627)
             ->setScreenshotType('png')
+            ->deviceScaleFactor(2)
             ->setCustomTempPath(storage_path())
             ->base64Screenshot();
 

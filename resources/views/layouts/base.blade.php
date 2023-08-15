@@ -10,9 +10,10 @@
     @include('feed::links')
     @stack('styles')
     @stack('scripts')
-    <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
-    <meta charset="UTF-8">
-    {!!  $meta ?? null  !!}
+
+    {{ app(\App\Support\Meta::class)->render() }}
+
+    @stack('meta')
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
 

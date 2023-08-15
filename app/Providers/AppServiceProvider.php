@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Support\Meta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Browsershot\Browsershot;
@@ -14,6 +15,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton(Meta::class, function () {
+            return new Meta(
+                title: "RFC Vote",
+                description: "RFC Vote",
+                image: url('meta.png'),
+            );
+        });
+
         $this->app->singleton(Browsershot::class, function () {
             if (config('services.browsershot.fake')) {
                 return new FakeBrowsershot();
