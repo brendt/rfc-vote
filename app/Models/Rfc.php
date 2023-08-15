@@ -86,11 +86,7 @@ class Rfc extends Model
     {
         return Attribute::make(
             get: function () {
-                if ($this->count_total === 0) {
-                    return 0;
-                }
-
-                return round(($this->count_no / $this->count_total) * 100);
+                return 100 - $this->percentage_yes;
             },
         );
     }
