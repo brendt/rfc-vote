@@ -10,7 +10,8 @@ final class Meta
         public string $title,
         public string $description,
         public string $image,
-    ) {}
+    ) {
+    }
 
     public function title(string $title): self
     {
@@ -41,6 +42,7 @@ final class Meta
         {$this->renderImage()}
         {$this->renderMisc()}
         HTML;
+
         return new HtmlString($meta);
     }
 
@@ -75,7 +77,7 @@ final class Meta
 
     private function renderMisc(): string
     {
-        return <<<HTML
+        return <<<'HTML'
         <meta name="viewport" content="initial-scale=1, viewport-fit=cover" />
         <meta charset="UTF-8">
         <meta name="twitter:card" content="summary_large_image"/>
