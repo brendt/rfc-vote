@@ -1,4 +1,4 @@
-<div class="z-50" {{$attributes}}>
+<div class="markdown-editor z-50">
     <div wire:ignore>
                 <textarea id="argument-editor" x-init="
                 editor = new EasyMDE({
