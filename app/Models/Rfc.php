@@ -90,6 +90,10 @@ class Rfc extends Model implements Feedable
     {
         return Attribute::make(
             get: function () {
+                if ($this->count_no === 0) {
+                    return 0;
+                }
+
                 return 100 - $this->percentage_yes;
             },
         );

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Actions\CreateArgument;
 use App\Models\Rfc;
 use App\Models\User;
 use App\Models\VoteType;
@@ -30,10 +31,10 @@ class DatabaseSeeder extends Seeder
             $minority = $majority === VoteType::YES ? VoteType::NO : VoteType::YES;
 
             foreach ($users as $user) {
-                continue;
                 if (fake()->boolean(80)) {
-                    $user->createArgument(
+                    (new CreateArgument())(
                         rfc: $rfc,
+                        user: $user,
                         voteType: fake()->boolean(70) ? $majority : $minority,
                         body: fake()->paragraphs(fake()->numberBetween(1, 4), true),
                     );
