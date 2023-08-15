@@ -92,15 +92,14 @@
                     </small>
 
                     <div class="grid gap-2">
-                    <textarea name="body" wire:model="body"
-                              rows="{{ $rowCount }}"
-                              class="
+                        <x-markdown-editor
+                            wire:model="body"
+                            class="
                                 w-full border border-{{ $voteType->getColor() }}-200
                                 active:border-{{ $voteType->getColor() }}-400
                                 rounded
                                "
-                    ></textarea>
-
+                        />
                         @error('body')
                         {{ $message }}
                         @enderror
