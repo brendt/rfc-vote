@@ -1,102 +1,124 @@
 @component('layouts.base')
     <div class="grid mx-auto container max-w-[800px] px-4 gap-6 mt-4 md:mt-12 mb-8">
-        <x-form class="grid grid-cols-2 gap-2 bg-white p-4 shadow-lg border-gray-300 border"
-                action="{{ action([\Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'destroy']) }}"
-                method="post">
-
-            <h1 class="text-2xl font-bold col-span-2">Logout</h1>
-
-            <x-form-submit>
-                Logout
-            </x-form-submit>
-        </x-form>
-
-        <x-form class="bg-white p-4 shadow-lg border-gray-300 border grid gap-2 grid-cols-2"
-                action="{{ action([\App\Http\Controllers\ProfileController::class, 'update']) }}"
-                method="post"
-                enctype="multipart/form-data"
+        <x-form.wrapper
+            action="{{ action([Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'destroy']) }}"
+            method="post"
+            heading="Logout"
         >
+            <x-form.button type="submit">Logout</x-form.button>
+        </x-form.wrapper>
 
-            <h1 class="text-2xl font-bold col-span-2">Profile</h1>
-
-            @bind($user)
-
+        <x-form.wrapper
+            action="{{ action([App\Http\Controllers\ProfileController::class, 'update']) }}"
+            method="post"
+            enctype="multipart/form-data"
+            heading="Profile"
+        >
             <div class="col-span-2">
-                <x-form-input type="text" name="name" label="Name" />
+                <x-form.input
+                    type="text"
+                    name="name"
+                    label="Name"
+                    value="{{ $user->name ?? old('name') }}"
+                />
             </div>
 
-            <div class="flex col-span-2 gap-4 items-center mt-4">
-                @if($user->getAvatarUrl())
-                    <img src="{{ $user->getAvatarUrl() }}" class="border-4 border-purple-800 shadow-xl rounded-full max-w-[100px]"/>
+            <div class="flex gap-4 items-center my-4">
+                @if ($user->getAvatarUrl())
+                    <img
+                        src="{{ $user->getAvatarUrl() }}"
+                        class="shadow-xl rounded-full"
+                        width="80"
+                        height="80"
+                        alt="Your avatar"
+                    />
                 @endif
 
-                <x-form-input type="file" name="avatar" label="Choose a new avatar" />
+                <x-form.input type="file" name="avatar" label="Choose a new avatar" />
             </div>
 
             <div class="col-span-2 mt-6">
-                <h2 class="text-xl font-bold">Social links</h2>
-                <x-form-input type="text" name="website_url" label="Website" />
-                <x-form-input type="text" name="github_url" label="GitHub" />
-                <x-form-input type="text" name="twitter_url" label="Twitter" />
+                <h2 class="text-xl font-bold mb-2">Social links</h2>
+
+                <div class="space-y-3">
+                    <x-form.input
+                        type="text"
+                        name="website_url"
+                        label="Website"
+                        value="{{ $user->website_url ?? old('website_url') }}"
+                    />
+                    <x-form.input
+                        type="text"
+                        name="github_url"
+                        label="GitHub"
+                        value="{{ $user->github_url ?? old('github_url') }}"
+                    />
+                    <x-form.input
+                        type="text"
+                        name="twitter_url"
+                        label="Twitter"
+                        value="{{ $user->twitter_url ?? old('twitter_url') }}"
+                    />
+
+                    <div class="text-right">
+                        <x-form.button type="submit">Save</x-form.button>
+                    </div>
+                </div>
             </div>
+        </x-form.wrapper>
 
-            <div class="flex justify-end items-baseline gap-2 col-span-2">
-                <x-form-submit>
-                    Save
-                </x-form-submit>
-            </div>
-            @endbind()
-        </x-form>
-
-        <x-form class="bg-white p-4 shadow-lg border-gray-300 border"
-                action="{{ action([\App\Http\Controllers\ProfileController::class, 'updateEmail']) }}"
-                method="post">
-
-            <h2 class="text-xl font-bold mt-2">Email</h2>
-
-            @bind($user)
-
+        <x-form.wrapper
+            action="{{ action([App\Http\Controllers\ProfileController::class, 'updateEmail']) }}"
+            method="post"
+            heading="Email"
+        >
             <div class="col-span-2">
-                <x-form-input type="email" name="email" label="Email" />
+                <x-form.input
+                    type="email"
+                    name="email"
+                    label="Your Email Address"
+                    value="{{ $user->email ?? old('email') }}"
+                />
             </div>
 
-            <p class="text-red-600 font-bold mt-2">
+            <p class="text-red-600 leading-5 font-bold mt-2 tracking-wide">
                 Note: you will need to confirm your new email address. Also: if you logged in with GitHub and change your email address, your GitHub login won't work anymore.
             </p>
 
-            <div class="flex justify-end items-baseline gap-2 col-span-2">
-                <x-form-submit>
-                    Change your email
-                </x-form-submit>
+            <div class="text-right mt-4">
+                <x-form.button type="submit">Change your email</x-form.button>
             </div>
-            @endbind()
-        </x-form>
+        </x-form.wrapper>
 
-        <x-form class="bg-white p-4 shadow-lg border-gray-300 border"
-                action="{{ action([\App\Http\Controllers\ProfileController::class, 'updatePassword']) }}"
-                method="post">
+        <x-form.wrapper
+            action="{{ action([App\Http\Controllers\ProfileController::class, 'updatePassword']) }}"
+            method="post"
+            heading="Password"
+        >
+            <p class="mb-4 text-gray-600">
+                @if ($user->password)
+                    You're logged in with a password, so you can change your password here.
+                @else
+                    You're logged in with GitHub, so you haven't set a password yet. You can choose a password if you'd like to be able to use the password login as well.
+                @endif
+            </p>
 
-            <h2 class="text-xl font-bold mt-2">Password</h2>
+            <div class="space-y-3">
+                @if ($user->password)
+                    <x-form.input type="password" name="current_password" label="Current password" />
+                    <x-form.input type="password" name="new_password" label="New password" />
+                    <x-form.input type="password" name="new_password_confirmation" label="Confirm your new password" />
+                @else
+                    <x-form.input type="password" name="password" label="Choose a password" />
+                    <x-form.input type="password" name="password_confirmation" label="Confirm your password" />
+                @endif
 
-            @bind($user)
-
-            @if($user->password)
-                <p class="mt-2">You can change your password here if you need to.</p>
-                <x-form-input type="password" name="current_password" label="Current password" />
-                <x-form-input type="password" name="new_password" label="New password" />
-                <x-form-input type="password" name="new_password_confirmation" label="Confirm your new password" />
-            @else
-                <p class="mt-2">You're logged in with Github, so you haven't set a password yet. You can choose a password if you'd like to be able to use the password login as well.</p>
-                <x-form-input type="password" name="password" label="Choose a password" />
-                <x-form-input type="password" name="password_confirmation" label="Confirm your password" />
-            @endif
-
-            <div class="flex justify-end items-baseline gap-2 col-span-2">
-                <x-form-submit>
-                    {{ @$user->password ? "Change your password" : "Set your password" }}
-                </x-form-submit>
+                <div class="text-right">
+                    <x-form.button type="submit">
+                        {{ @$user->password ? "Change your password" : "Set your password" }}
+                    </x-form.button>
+                </div>
             </div>
-            @endbind()
-        </x-form>
+        </x-form.wrapper>
     </div>
 @endcomponent
