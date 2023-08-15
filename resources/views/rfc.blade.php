@@ -12,7 +12,9 @@
     <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
 @endpush
 
-@component('layouts.base')
+@component('layouts.base', [
+    'pageTitle' => $rfc->title . ' – RFC Vote',
+])
     <div
         class="container mx-auto px-4 grid grid-cols-1 gap-6 md:gap-8 mt-4 md:mt-12 max-w-[1200px] mb-8"
     >
