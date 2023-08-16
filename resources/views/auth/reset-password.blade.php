@@ -1,36 +1,49 @@
 @component('layouts.base')
-        <x-authentication-card>
-            <x-slot name="logo">
-{{--                <x-authentication-card-logo />--}}
-            </x-slot>
-
-        <x-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('password.update') }}">
-            @csrf
+    <div class="max-w-lg m-auto mt-12">
+        <x-form.wrapper
+            method="POST"
+            action="{{ route('password.update') }}"
+            :heading="__('Reset Password')"
+        >
+            <x-success-message />
 
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            </div>
+            <div class="space-y-4">
+                <x-form.input
+                    :label="__('Email')"
+                    type="email"
+                    name="email"
+                    :value="old('email', $request->email)"
+                    :placeholder="__('Enter your email')"
+                    required autofocus autocomplete="username"
+                />
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
+                <x-form.input
+                    :label="__('New password')"
+                    type="password"
+                    name="password"
+                    :placeholder="__('Enter your new password')"
+                    required
+                    autocomplete="new-password"
+                />
 
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
+                <x-form.input
+                    :label="__('Confirm new password')"
+                    type="password"
+                    name="password_confirmation"
+                    :placeholder="__('Confirm your new password')"
+                    required
+                    autocomplete="new-password"
+                />
 
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Reset Password') }}
-                </x-button>
+                <div class="text-right mt-7">
+                    <x-form.button type="submit">
+                        <x-icons.arrow-path class="w-5 h-5" />
+                        {{ __('Reset Password') }}
+                    </x-form.button>
+                </div>
             </div>
-        </form>
-    </x-authentication-card>
+        </x-form.wrapper>
+    </div>
 @endcomponent
