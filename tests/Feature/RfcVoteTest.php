@@ -33,7 +33,7 @@ class RfcVoteTest extends TestCase
             ->assertSee($rfc->description)
             ->assertSee($rfc->url)
             ->assertSee($argument->body)
-            ->assertSee($argument->user->name);
+            ->assertSee($argument->user->username);
 
         $this
             ->get(action(RfcDetailController::class, $rfc))

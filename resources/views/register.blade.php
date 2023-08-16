@@ -24,6 +24,14 @@
                 />
 
                 <x-form.input
+                    name="username"
+                    :label="__('Username')"
+                    :value="old('username')"
+                    :placeholder="__('Enter your username')"
+                    required
+                />
+
+                <x-form.input
                     type="password"
                     name="password"
                     :label="__('Password')"
