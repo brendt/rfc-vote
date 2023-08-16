@@ -22,4 +22,9 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('user_argument_views');
+    }
 };
