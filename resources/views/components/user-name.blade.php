@@ -54,7 +54,7 @@
 
         @if($user->twitter_url)
             <a
-                href="{{ $user->twitter_url }}" class="text-black"
+                href="{{ $user->twitter_url }}" class="pl-1 text-inherit"
                 target="_blank" rel="noopener noreferrer"
             >𝕏</a>
         @endif
