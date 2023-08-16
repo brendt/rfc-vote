@@ -5,7 +5,9 @@
 @endphp
 
 <div class="
-    {{ $user?->hasSeenArgument($argument) ? 'bg-white' : 'bg-blue-100' }}
+    {{ $user?->hasSeenArgument($argument) ? 'border-transparent' : 'border-blue-400' }}
+    border-2
+    bg-white
     rounded-xl shadow-sm px-3 py-4 md:p-6 flex gap-6 items-center">
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
