@@ -4,7 +4,8 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
 @endpush
 
 @push('scripts')
@@ -16,7 +17,7 @@
     'pageTitle' => $rfc->title . ' – RFC Vote',
 ])
     <div
-        class="container mx-auto px-4 grid grid-cols-1 gap-6 md:gap-8 mt-4 md:mt-12 max-w-[1200px] mb-8"
+        class="container mx-auto px-4 mt-4 md:mt-12 max-w-[1200px] mb-8"
     >
         <div class="grid gap-4 md:px-8">
             <h1 class="text-4xl font-bold">
@@ -50,8 +51,10 @@
                     {{ $rfc->arguments->count() }}
                 </x-tag>
 
-                <livewire:rfc-counter :rfc="$rfc" :vote-type="\App\Models\VoteType::YES"></livewire:rfc-counter>
-                <livewire:rfc-counter :rfc="$rfc" :vote-type="\App\Models\VoteType::NO"></livewire:rfc-counter>
+                <livewire:rfc-counter :rfc="$rfc"
+                                      :vote-type="\App\Models\VoteType::YES"></livewire:rfc-counter>
+                <livewire:rfc-counter :rfc="$rfc"
+                                      :vote-type="\App\Models\VoteType::NO"></livewire:rfc-counter>
 
                 @if($user?->is_admin)
                     <x-tag-link
@@ -71,16 +74,37 @@
                 @endif
             </div>
 
+
             <x-markdown class="prose">
                 {!! $rfc->description !!}
             </x-markdown>
+
+
+            @if(!$user || $user->shouldSeeTutorial())
+                <x-markdown class="prose">
+## How voting works
+
+The goal of this website is to provide a platform for the PHP community to
+express their thoughts and feelings about the proposals for the PHP language in an easy way.
+
+While voting is an essential part of expressing how you feel about a potential new PHP feature, it's only _a part_. That's why you must do one of two things if you want to vote:
+
+- Write an argument explaining _why_ you vote yes or no
+- Read existing arguments, and vote for those
+
+Every user has three votes they can distribute amongst existing arguments. On top of that, they can write one argument of their own.
+All arguments and their votes are counted towards the final result.
+
+You can read more about our goals in the [about page](/about).
+                </x-markdown>
+            @endif
         </div>
 
-        <div class="col-span-3">
+        <div class="col-span-3 mt-4 md:mt-8">
             <livewire:vote-bar :rfc="$rfc" :user="$user"/>
         </div>
 
-        <div class="col-span-3  md:px-8">
+        <div class="col-span-3 mt-4 md:mt-8 md:px-8">
             <livewire:argument-list :rfc="$rfc" :user="$user"/>
         </div>
     </div>

@@ -9,7 +9,8 @@
         <div
             class="
                     p-4 flex-grow text-left
-                    min-w-[15%]
+                    md:min-w-[15%]
+                    min-w-[20%]
 
                     @if(!$voteType)
                     hover:bg-green-600 hover:text-white cursor-pointer
@@ -31,7 +32,8 @@
         <div
             class="
                     p-4 flex-grow text-right
-                    min-w-[15%]
+                    md:min-w-[15%]
+                    min-w-[20%]
 
                     @if(!$voteType)
                     hover:bg-red-600 hover:text-white cursor-pointer

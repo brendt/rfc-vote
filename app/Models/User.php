@@ -157,4 +157,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return now()->diffInMinutes($argumentView->created_at) > 5;
     }
+
+    public function shouldSeeTutorial(): bool
+    {
+        if ($this->arguments->count() > 3) {
+            return false;
+        }
+
+        if ($this->argumentVotes->count() > 10) {
+            return false;
+        }
+
+        return true;
+    }
 }
