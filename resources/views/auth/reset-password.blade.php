@@ -5,8 +5,6 @@
             action="{{ route('password.update') }}"
             :heading="__('Reset Password')"
         >
-            <x-success-message />
-
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
             <div class="space-y-4">
