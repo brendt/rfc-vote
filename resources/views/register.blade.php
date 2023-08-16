@@ -42,7 +42,7 @@
                 <x-form.input
                     type="password"
                     name="password_confirmation"
-                    :label="__('Confirm your password')"
+                    :label="__('Password Confirm')"
                     :placeholder="__('Confirm your password')"
                     required
                 />
