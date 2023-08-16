@@ -3,12 +3,12 @@
         <x-form.wrapper
             method="POST"
             action="{{ route('password.email') }}"
-            :heading="__('Reset password')"
+            :heading="__('Forgot your password?')"
         >
             <x-success-message />
 
             <p class="mb-5 text-gray-500">
-                {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+                {{ __('No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
             </p>
 
             <x-form.input
