@@ -1,9 +1,12 @@
 @php
     /** @var \App\Models\Argument $argument */
+    /** @var \App\Models\User $user */
     $readonly ??= false;
 @endphp
 
-<div class="bg-white rounded-xl shadow-sm px-3 py-4 md:p-6 flex gap-6 items-center">
+<div class="
+    {{ $user->hasSeenArgument($argument) ? 'bg-white' : 'bg-blue-100' }}
+    rounded-xl shadow-sm px-3 py-4 md:p-6 flex gap-6 items-center">
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
     <div class="grid gap-2 md:gap-4 w-full">

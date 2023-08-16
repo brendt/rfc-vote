@@ -4,13 +4,16 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use PhpParser\Node\Arg;
 use Str;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -64,6 +67,18 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getRouteKeyName()
     {
         return 'username';
+    }
+
+    public function viewedArguments(): BelongsToMany
+    {
+        return $this
+            ->belongsToMany(Argument::class, 'user_argument_views')
+            ->withTimestamps();
+    }
+
+    public function argumentViews(): HasMany
+    {
+        return $this->hasMany(UserArgumentView::class);
     }
 
     public function argumentVotes(): HasMany
@@ -131,5 +146,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAvailableVotesForRfc(Rfc $rfc): int
     {
         return $this->getVotesPerRfc() - $this->getArgumentVotesForRfc($rfc)->count();
+    }
+
+    public function hasSeenArgument(Argument $argument): bool
+    {
+        $argumentView = $this->argumentViews
+            ->first(fn (UserArgumentView $userArgumentView) => $userArgumentView->argument_id === $argument->id);
+
+        if ($argumentView === null) {
+            return false;
+        }
+
+        return now()->diffInMinutes($argumentView->created_at) > 5;
     }
 }
