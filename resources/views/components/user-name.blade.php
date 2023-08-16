@@ -20,7 +20,7 @@
     @endif
 
     <a href="{{ action(\App\Http\Controllers\PublicProfileController::class, $user) }}" class="group-hover:underline">
-        {{ $user->name }}
+        {{ $user->username }}
     </a>
 
     <div class="hidden group-hover:flex gap-1 items-center">

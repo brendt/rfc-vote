@@ -17,7 +17,7 @@
                     class="rounded-full shadow-sm w-[40px] h-[40px]"
                 />
 
-                <h1 class="text-2xl font-bold">{{ $user->name }}</h1>
+                <h1 class="text-2xl font-bold">{{ $user->username }}</h1>
             </div>
 
             <div class="flex gap-2 items-center">

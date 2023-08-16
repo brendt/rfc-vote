@@ -49,7 +49,7 @@
                     class="flex gap-3 items-center bg-purple-900 hover:bg-gray-800 group transition-colors pl-5 rounded-full"
                     href="{{ action([App\Http\Controllers\ProfileController::class, 'edit']) }}"
                 >
-                    <span class="front-bold">{{ $user->name }}</span>
+                    <span class="front-bold">{{ $user->username }}</span>
 
                     @if($user->getAvatarUrl())
                         <img
