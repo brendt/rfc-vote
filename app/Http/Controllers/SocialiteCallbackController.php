@@ -23,6 +23,12 @@ final readonly class SocialiteCallbackController
             ]);
         }
 
+        if (! $user->email_verified_at) {
+            $user->update([
+                'email_verified_at' => now(),
+            ]);
+        }
+
         Auth::login($user);
 
         return redirect()->to('/');
