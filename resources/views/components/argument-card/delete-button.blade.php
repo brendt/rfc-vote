@@ -1,4 +1,4 @@
-<div class="flex items-center gap-1">
+<div class="flex flex-col md:flex-row items-center justify-center gap-1">
     @if($isConfirmingDelete?->is($argument))
         <span class="font-bold text-red-500 px-2">
             Are you sure?

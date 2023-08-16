@@ -3,7 +3,7 @@
     $readonly ??= false;
 @endphp
 
-<div class="bg-white rounded-xl shadow-sm p-6 flex gap-6 items-center">
+<div class="bg-white rounded-xl shadow-sm px-3 py-4 md:p-6 flex gap-6 items-center">
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
     <div class="grid gap-2 md:gap-4 w-full">
@@ -15,7 +15,7 @@
             </x-markdown>
         @endif
 
-        <div class="flex gap-2 items-center justify-between">
+        <div class="flex gap-2 flex-col md:flex-row md:items-center md:justify-between">
             <div class="flex items-center gap-1 text-sm">
                 <x-user-name :user="$argument->user" />
                 <span @class([
@@ -26,7 +26,8 @@
                     {{ $argument->vote_type->value }}
                 </span>
             </div>
-            <div class="flex gap-2 items-center">
+
+            <div class="flex gap-2 flex-col md:flex-row md:items-center">
                 @if($argument->body_updated_at !== null)
                     <span class="text-sm">
                     (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})

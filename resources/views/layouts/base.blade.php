@@ -23,11 +23,11 @@
 
 <nav class="bg-purple-800 bg-gradient-to-l from-purple-700 to-purple-900 z-10 px-4 py-5">
     <div class="container flex justify-between text-white gap-4 items-center m-auto">
-        <div class="text-xl font-bold">
-            <a href="/">RFC Vote {{ app()->isProduction() ? '' : ' (local)' }}</a>
+        <div class="text-lg md:text-xl font-bold">
+            <a href="/">RFC Vote<span class="hidden md:inline"> {{ app()->isProduction() ? '' : ' (local)' }}</span></a>
         </div>
 
-        <div class="flex justify-end items-baseline gap-4 md:gap-6 font-bold">
+        <div class="flex justify-end items-baseline gap-4 md:gap-6 font-bold text-sm md:text-md">
             <x-navbar.link
                 href="{{ action(App\Http\Controllers\AboutController::class) }}"
                 :isActive="request()->is('about')"
