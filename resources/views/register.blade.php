@@ -16,6 +16,14 @@
                 />
 
                 <x-form.input
+                    name="username"
+                    :label="__('Username')"
+                    :value="old('username')"
+                    :placeholder="__('Enter your username')"
+                    required
+                />
+
+                <x-form.input
                     name="email"
                     :label="__('Email')"
                     :value="old('email')"
