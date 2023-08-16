@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +13,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Str;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -52,9 +53,9 @@ class User extends Authenticatable
 
             $username = Str::slug(explode(' ', $user->name)[0] ?? '', '');
 
-            $usernameCount = self::query()->where('username', 'like', "{$username}%")->count();
+            $usernameCount = self::query()->where('username', 'like', "{$username}%")->count() + 1;
 
-            $user->username = $usernameCount === 0 ? $username : "{$username}-{$usernameCount}";
+            $user->username = $usernameCount === 1 ? $username : "{$username}-{$usernameCount}";
 
             $user->save();
         });

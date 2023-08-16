@@ -72,3 +72,4 @@ Route::get('/auth/callback/{driver}', SocialiteCallbackController::class);
 Route::get('/forgot-password', ForgotPasswordController::class);
 Route::get('/profile/{user}', PublicProfileController::class);
 Route::feeds();
+Route::mailPreview();
