@@ -3,6 +3,13 @@
 <x-markdown>
 ## Shaping PHP, together
 
+<blockquote>
+... voting is just the last step of the RFC process:
+   While the vote is the final arbiter, the discussion phase that precedes it
+   is where concerns are heard and the proposal is shaped.
+    <br><div style="text-align: right"><a href="https://externals.io/message/110936#110937">Nikita Popov</a></div>
+</blockquote>
+
 Thank you for checking out RFC Vote!
 
 This project is dedicated to providing a platform for the PHP community to express their thoughts and feelings about the proposals for the PHP language in an easier way.

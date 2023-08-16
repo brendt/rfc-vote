@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,6 +47,18 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getRouteKeyName()
     {
         return 'username';
+    }
+
+    public function viewedArguments(): BelongsToMany
+    {
+        return $this
+            ->belongsToMany(Argument::class, 'user_argument_views')
+            ->withTimestamps();
+    }
+
+    public function argumentViews(): HasMany
+    {
+        return $this->hasMany(UserArgumentView::class);
     }
 
     public function argumentVotes(): HasMany
@@ -113,5 +126,30 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAvailableVotesForRfc(Rfc $rfc): int
     {
         return $this->getVotesPerRfc() - $this->getArgumentVotesForRfc($rfc)->count();
+    }
+
+    public function hasSeenArgument(Argument $argument): bool
+    {
+        $argumentView = $this->argumentViews
+            ->first(fn (UserArgumentView $userArgumentView) => $userArgumentView->argument_id === $argument->id);
+
+        if ($argumentView === null) {
+            return false;
+        }
+
+        return now()->diffInMinutes($argumentView->created_at) > 5;
+    }
+
+    public function shouldSeeTutorial(): bool
+    {
+        if ($this->arguments->count() > 3) {
+            return false;
+        }
+
+        if ($this->argumentVotes->count() > 10) {
+            return false;
+        }
+
+        return true;
     }
 }
