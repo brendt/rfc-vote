@@ -18,10 +18,6 @@ final class GenerateUsername
 
     private function generateUsername(string $string): string
     {
-        $username = Str::slug(explode(' ', $string)[0] ?? '', '');
-
-        $usernameCount = User::query()->where('username', 'like', "{$username}%")->count() + 1;
-
-        return $usernameCount === 1 ? $username : "{$username}-{$usernameCount}";
+        return Str::slug(explode(' ', $string)[0] ?? '', '');
     }
 }

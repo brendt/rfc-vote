@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Actions\GenerateUsername;
 use App\Providers\RouteServiceProvider;
+use Faker\Guesser\Name;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
@@ -33,8 +35,11 @@ class RegistrationTest extends TestCase
             return;
         }
 
+        $name = 'Test User';
+
         $response = $this->post('/register', [
-            'name' => 'Test User',
+            'name' => $name,
+            'username' => (new GenerateUsername)($name),
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
