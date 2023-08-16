@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Actions\GenerateUsername;
 use App\Providers\RouteServiceProvider;
-use Faker\Guesser\Name;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;

@@ -26,6 +26,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $name = $this->faker->name();
+
         return [
             'name' => $name,
             'username' => (new GenerateUsername)($name),

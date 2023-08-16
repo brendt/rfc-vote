@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Actions\GenerateUsername;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
+use Laravel\Socialite\Facades\Socialite;
 
 final readonly class SocialiteCallbackController
 {
@@ -33,7 +32,8 @@ final readonly class SocialiteCallbackController
         return redirect()->to('/');
     }
 
-    private function resolveUserName(SocialiteUser $socialiteUser): string {
+    private function resolveUserName(SocialiteUser $socialiteUser): string
+    {
         $username = (new GenerateUsername)($socialiteUser->getNickname()); // normalize username to our rules
 
         /**
