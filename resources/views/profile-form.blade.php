@@ -65,7 +65,7 @@
                     <x-form.input
                         type="text"
                         name="twitter_url"
-                        label="Twitter"
+                        label="𝕏 (Twitter)"
                         value="{{ $user->twitter_url ?? old('twitter_url') }}"
                     />
 
