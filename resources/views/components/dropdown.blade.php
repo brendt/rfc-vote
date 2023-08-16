@@ -1,27 +1,15 @@
 @props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white', 'dropdownClasses' => ''])
 
 @php
-switch ($align) {
-    case 'left':
-        $alignmentClasses = 'origin-top-left left-0';
-        break;
-    case 'top':
-        $alignmentClasses = 'origin-top';
-        break;
-    case 'none':
-    case 'false':
-        $alignmentClasses = '';
-        break;
-    case 'right':
-    default:
-        $alignmentClasses = 'origin-top-right right-0';
-        break;
-}
+$alignmentClasses = match ($align) {
+    'left' => 'origin-top-left left-0',
+    'top' => 'origin-top',
+    'none', 'false' => '',
+    'right', default => 'origin-top-right right-0',
+};
 
-switch ($width) {
-    case '48':
-        $width = 'w-48';
-        break;
+$width = match ($width) {
+    '48' => 'w-48',
 }
 @endphp
 
