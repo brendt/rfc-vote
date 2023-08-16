@@ -61,9 +61,7 @@ Route::middleware([
     Route::post('/profile/password', [ProfileController::class, 'updatePassword']);
     Route::post('/profile/email', [ProfileController::class, 'updateEmail']);
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::redirect('/dashboard', '/')->name('dashboard');
 });
 
 Route::get('/auth/redirect/{driver}', SocialiteRedirectController::class);
