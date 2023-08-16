@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Argument;
 use App\Models\Rfc;
-use App\Models\UserArgumentView;
 use App\Support\Meta;
 
 final readonly class RfcDetailController
 {
-    public function __construct(private Meta $meta) {}
+    public function __construct(private Meta $meta)
+    {
+    }
 
     public function __invoke(Rfc $rfc)
     {
