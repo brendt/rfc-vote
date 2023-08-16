@@ -21,7 +21,7 @@ final readonly class SocialiteCallbackController
             $user = User::create([
                 'email' => $socialiteUser->getEmail(),
                 'name' => $socialiteUser->getName() ?? $socialiteUser->getEmail(),
-                'username' => $this->resolveUserName($socialiteUser),
+                'username' => $this->resolveUsername($socialiteUser),
                 'reputation' => 0,
                 'socialite' => serialize($socialiteUser),
             ]);
@@ -38,7 +38,7 @@ final readonly class SocialiteCallbackController
         return redirect()->to('/');
     }
 
-    private function resolveUserName(SocialiteUser $socialiteUser): string
+    private function resolveUsername(SocialiteUser $socialiteUser): string
     {
         $username = (new GenerateUsername)($socialiteUser->getNickname()); // normalize username to our rules
 
