@@ -51,7 +51,7 @@
                 @if(!$readonly && $user?->can('edit', $argument))
                     <x-argument-card.button
                         wire:click="editArgument('{{ $argument->id }}')"
-                        class="{{ $isEditing?->is($argument) ? 'hover:text-green-800' : 'hover:text-blue-900' }}"
+                        class="{{ $isEditing?->is($argument) ? 'hover:text-green-800' : 'hover:text-blue-900' }} {{ empty($this->body) && $isEditing?->is($argument) ? 'cursor-not-allowed' : '' }}"
                         :icon="$isEditing?->is($argument) ? 'icons.check' : 'icons.pen'"
                     >
                         {{ $isEditing?->is($argument) ? 'Save' : 'Edit' }}
