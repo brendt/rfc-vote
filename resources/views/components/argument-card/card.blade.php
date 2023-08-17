@@ -1,11 +1,14 @@
 @php
-    /** @var \App\Models\Argument $argument */
-    /** @var \App\Models\User $user */
+    /**
+     * @var App\Models\Argument $argument
+     * @var App\Models\User $user
+     */
+
     $readonly ??= false;
-    $anchorLink = $argument->user->username.'-'.$argument->id;
+    $anchorLink = $argument->user->username . '-' . $argument->id;
 @endphp
 
-<div id="{{$anchorLink}}" class="bg-white rounded-xl shadow-md px-3 py-4 md:p-6 flex gap-6 items-center">
+<div id="{{$anchorLink}}" class="bg-white rounded-xl shadow-md px-6 py-5 md:px-8 md:py-6 flex gap-6 items-center">
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
     <div class="grid gap-2 md:gap-4 w-full">
