@@ -12,7 +12,6 @@ use Illuminate\Support\Collection;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Str;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -44,23 +43,6 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
-
-    protected static function booted()
-    {
-        self::saving(function (User $user) {
-            if ($user->username) {
-                return;
-            }
-
-            $username = Str::slug(explode(' ', $user->name)[0] ?? '', '');
-
-            $usernameCount = self::query()->where('username', 'like', "{$username}%")->count() + 1;
-
-            $user->username = $usernameCount === 1 ? $username : "{$username}-{$usernameCount}";
-
-            $user->save();
-        });
-    }
 
     public function getRouteKeyName()
     {
