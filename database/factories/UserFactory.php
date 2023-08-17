@@ -25,7 +25,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $name = $this->faker->name();
+        $name = $this->faker->unique()->firstName . ' ' . $this->faker->unique()->lastName;
 
         return [
             'name' => $name,
