@@ -6,7 +6,7 @@
 @endphp
 
 <div id="{{$anchorLink}}" class="
-    {{ $user?->hasSeenArgument($argument) ? 'border-transparent' : 'border-blue-400' }}
+    {{ ($user && ! $user->hasSeenArgument($argument)) ? 'border-blue-400' : 'border-transparent' }}
     border-2
     bg-white
     rounded-xl shadow-sm px-3 py-4 md:p-6 flex gap-6 items-center">
