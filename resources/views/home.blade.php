@@ -1,8 +1,8 @@
 @component('layouts.base')
 
-    <div class="container max-w-[1200px] mx-auto px-4 grid lg:grid-cols-3 gap-4 mt-4 md:mt-8">
+    <div class="container max-w-[1200px] mx-auto px-4 grid lg:grid-cols-3 gap-5 mt-4 md:mt-8">
         @foreach ($rfcs as $rfc)
-            <x-card-link :href="action(\App\Http\Controllers\RfcDetailController::class, $rfc)" class="md:pt-8">
+            <x-card-link :href="action(App\Http\Controllers\RfcDetailController::class, $rfc)">
                 <div class="font-bold px-2">
                     {{ $rfc->title }}
                 </div>
