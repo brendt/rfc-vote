@@ -8,7 +8,7 @@
     $anchorLink = $argument->user->username . '-' . $argument->id;
 @endphp
 
-<div id="{{ $anchorLink }}" class="bg-white rounded-xl shadow-md w-full group px-6 pt-5 md:px-8 md:pt-7 flex gap-6 items-center">
+<div id="{{ $anchorLink }}" class="bg-white rounded-xl shadow-md w-full group/card px-6 pt-5 md:px-8 md:pt-7 flex gap-6 items-center">
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
     <div class="grid gap-2 md:gap-4 w-full">
@@ -20,40 +20,38 @@
             </x-markdown>
         @endif
 
-        <div class="flex gap-2 flex-col md:flex-row md:items-center md:justify-between">
-            <div class="flex gap-2 flex-col md:flex-row md:items-center mt-3 lg:mt-0">
-                @if(!$readonly && $user?->can('edit', $argument))
+        <div class="flex gap-2 flex-col md:flex-row md:items-center md:justify-end">
+            @if(!$readonly && $user?->can('edit', $argument))
+                <x-argument-card.button
+                    wire:click="editArgument('{{ $argument->id }}')"
+                    class="{{ $isEditing?->is($argument) ? 'hover:text-green-800' : 'hover:text-blue-900' }}"
+                    :icon="$isEditing?->is($argument) ? 'icons.check' : 'icons.pen'"
+                >
+                    {{ $isEditing?->is($argument) ? 'Save' : 'Edit' }}
+                </x-argument-card.button>
+
+                @if($isEditing?->is($argument))
                     <x-argument-card.button
-                        wire:click="editArgument('{{ $argument->id }}')"
-                        class="{{ $isEditing?->is($argument) ? 'hover:text-green-800' : 'hover:text-blue-900' }}"
-                        :icon="$isEditing?->is($argument) ? 'icons.check' : 'icons.pen'"
+                        class="hover:text-red-600"
+                        icon="icons.cancel"
+                        wire:click="cancelEditArgument()"
                     >
-                        {{ $isEditing?->is($argument) ? 'Save' : 'Edit' }}
+                        Cancel
                     </x-argument-card.button>
+                @endif
+            @endif
 
-                    @if($isEditing?->is($argument))
-                        <x-argument-card.button
-                            class="hover:text-red-600"
-                            icon="icons.cancel"
-                            wire:click="cancelEditArgument()"
-                        >
-                            Cancel
-                        </x-argument-card.button>
-                    @endif
-                @endif
-
-                @if(!$readonly && $user?->can('delete', $argument))
-                    <x-argument-card.delete-button
-                        :argument="$argument"
-                        :is-confirming-delete="$isConfirmingDelete"
-                    />
-                @endif
-                @if($readonly)
-                    <span class="text-sm">
-                    Read the RFC: <a href="{{ action(\App\Http\Controllers\RfcDetailController::class, $rfc) }}" class="underline hover:no-underline">{{ $rfc->title }}</a>
-                    </span>
-                @endif
-            </div>
+            @if(!$readonly && $user?->can('delete', $argument))
+                <x-argument-card.delete-button
+                    :argument="$argument"
+                    :is-confirming-delete="$isConfirmingDelete"
+                />
+            @endif
+            @if($readonly)
+                <span class="text-sm">
+                Read the RFC: <a href="{{ action(\App\Http\Controllers\RfcDetailController::class, $rfc) }}" class="underline hover:no-underline">{{ $rfc->title }}</a>
+                </span>
+            @endif
         </div>
 
         <x-argument-card.card-footer
