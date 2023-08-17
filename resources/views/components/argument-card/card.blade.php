@@ -5,11 +5,7 @@
     $anchorLink = $argument->user->username.'-'.$argument->id;
 @endphp
 
-<div id="{{$anchorLink}}" class="
-    {{ ($user && ! $user->hasSeenArgument($argument)) ? 'border-blue-400' : 'border-transparent' }}
-    border-2
-    bg-white
-    rounded-xl shadow-sm px-3 py-4 md:p-6 flex gap-6 items-center">
+<div id="{{$anchorLink}}" class="bg-white rounded-xl shadow-md px-3 py-4 md:p-6 flex gap-6 items-center">
 
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
