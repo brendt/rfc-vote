@@ -2,9 +2,10 @@
     /** @var \App\Models\Argument $argument */
     /** @var \App\Models\User $user */
     $readonly ??= false;
+    $anchorLink = $argument->user->username.'-'.$argument->id;
 @endphp
 
-<div class="
+<div id="{{$anchorLink}}" class="
     {{ $user?->hasSeenArgument($argument) ? 'border-transparent' : 'border-blue-400' }}
     border-2
     bg-white
@@ -38,6 +39,14 @@
                     (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})
                     </span>
                 @endif
+
+                <x-argument-card.button
+                    href="{{'#'.$anchorLink}}"
+                    :icon='"icons.envelope"'
+                >
+                    Share
+                </x-argument-card.button>
+
 
                 @if(!$readonly && $user?->can('edit', $argument))
                     <x-argument-card.button
