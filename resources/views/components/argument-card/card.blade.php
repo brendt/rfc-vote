@@ -40,13 +40,6 @@
                 </div>
 
                 <div class="flex gap-2 flex-col md:flex-row md:items-center">
-                    <x-argument-card.button
-                        href="{{'#'.$anchorLink}}"
-                        :icon='"icons.hashtag"'
-                    >
-                        Link
-                    </x-argument-card.button>
-
                     @if(!$readonly && $user?->can('edit', $argument))
                         <x-argument-card.button
                             wire:click="editArgument('{{ $argument->id }}')"
