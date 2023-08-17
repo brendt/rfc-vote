@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\DisableEmailOptinController;
+use App\Http\Controllers\EnableEmailOptinController;
 use App\Http\Controllers\EndRfcController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\MailPreviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicProfileController;
 use App\Http\Controllers\PublishRfcController;
@@ -49,6 +52,7 @@ Route::middleware(AdminMiddleware::class)->prefix('/admin')->group(function () {
     Route::post('/rfc/{rfc}', [RfcEditController::class, 'update']);
     Route::post('/rfc/{rfc}/publish', PublishRfcController::class);
     Route::post('/rfc/{rfc}/end', EndRfcController::class);
+    Route::get('/mail-preview', MailPreviewController::class);
 });
 
 Route::middleware([
@@ -56,6 +60,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::get('/email-optin/enable', EnableEmailOptinController::class);
+    Route::get('/email-optin/disable', DisableEmailOptinController::class);
     Route::get('/profile', [ProfileController::class, 'edit']);
     Route::post('/profile', [ProfileController::class, 'update']);
     Route::post('/profile/password', [ProfileController::class, 'updatePassword']);

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Mail\Mailable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -38,6 +39,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'reputation' => 'int',
+        'email_optin' => 'bool',
     ];
 
     protected $appends = [
@@ -47,6 +49,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getRouteKeyName()
     {
         return 'username';
+    }
+
+    public function mails(): HasMany
+    {
+        return $this->hasMany(UserMail::class);
     }
 
     public function viewedArguments(): BelongsToMany
@@ -151,5 +158,10 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return true;
+    }
+
+    public function hasGottenMail(Mailable $mailable): bool
+    {
+        return $this->mails()->where('mail_type', $mailable::class)->exists();
     }
 }

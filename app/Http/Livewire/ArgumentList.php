@@ -92,6 +92,10 @@ class ArgumentList extends Component
             return;
         }
 
+        if (empty($this->body)) {
+            return;
+        }
+
         $this->isEditing->update([
             'body' => $this->body,
             'body_updated_at' => now(),

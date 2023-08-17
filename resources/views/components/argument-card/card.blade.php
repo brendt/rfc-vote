@@ -32,9 +32,9 @@
 
                 @if($isEditing?->is($argument))
                     <x-argument-card.button
-                        class="hover:text-red-600"
-                        icon="icons.cancel"
-                        wire:click="cancelEditArgument()"
+                        wire:click="editArgument('{{ $argument->id }}')"
+                        class="{{ $isEditing?->is($argument) ? 'hover:text-green-800' : 'hover:text-blue-900' }} {{ empty($this->body) && $isEditing?->is($argument) ? 'cursor-not-allowed' : '' }}"
+                        :icon="$isEditing?->is($argument) ? 'icons.check' : 'icons.pen'"
                     >
                         Cancel
                     </x-argument-card.button>
