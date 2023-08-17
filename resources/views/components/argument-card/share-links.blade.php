@@ -5,7 +5,9 @@
      */
 @endphp
 
-<div class="flex flex-col gap-3 group-hover:opacity-100 opacity-0 duration-300 transition-opacity">
+<div class="flex gap-5 lg:gap-3 group-hover:opacity-100 text-gray-700 lg:opacity-0 duration-300 transition-opacity">
+    <small>{{ __('Share on') }}:</small>
+
     <x-argument-card.share-link
         href="{{ '#' . $anchorLink }}"
         title="{{ __('Copy the ') }}"
