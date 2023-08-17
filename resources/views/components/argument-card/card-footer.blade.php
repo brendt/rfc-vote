@@ -11,7 +11,7 @@
 
     <div class="flex flex-col md:flex-row gap-1 md:gap-3 items-center">
         <small class="flex items-center gap-1">
-            @if ($user->getAvatarUrl())
+            @if ($user?->getAvatarUrl())
                 <a
                     href="{{ action(App\Http\Controllers\PublicProfileController::class, $user) }}"
                     class="flex items-center gap-1.5 group/username"
