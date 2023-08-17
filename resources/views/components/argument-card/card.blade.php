@@ -6,7 +6,6 @@
 @endphp
 
 <div id="{{$anchorLink}}" class="bg-white rounded-xl shadow-md px-3 py-4 md:p-6 flex gap-6 items-center">
-
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
     <div class="grid gap-2 md:gap-4 w-full">
