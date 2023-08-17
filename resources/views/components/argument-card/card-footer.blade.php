@@ -5,7 +5,7 @@
      */
 @endphp
 
-<div class="flex gap-4 items-center justify-end my-4 mr-4 text-gray-500 opacity-90">
+<div class="flex gap-4 items-center justify-end py-4 pr-4 text-gray-500 opacity-90">
     {{-- Label that shows when argument has been created --}}
     <small>
         {{ __('Created') }} {{ $argument->created_at->diffForHumans() }}
