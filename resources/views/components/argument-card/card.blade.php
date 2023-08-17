@@ -10,6 +10,7 @@
     border-2
     bg-white
     rounded-xl shadow-sm px-3 py-4 md:p-6 flex gap-6 items-center">
+
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
     <div class="grid gap-2 md:gap-4 w-full">
@@ -31,22 +32,21 @@
                 ])>
                     {{ $argument->vote_type->value }}
                 </span>
-            </div>
 
-            <div class="flex gap-2 flex-col md:flex-row md:items-center">
                 @if($argument->body_updated_at !== null)
                     <span class="text-sm">
                     (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})
                     </span>
                 @endif
+            </div>
 
+            <div class="flex gap-2 flex-col md:flex-row md:items-center">
                 <x-argument-card.button
                     href="{{'#'.$anchorLink}}"
-                    :icon='"icons.envelope"'
+                    :icon='"icons.hashtag"'
                 >
-                    Share
+                    Link
                 </x-argument-card.button>
-
 
                 @if(!$readonly && $user?->can('edit', $argument))
                     <x-argument-card.button
