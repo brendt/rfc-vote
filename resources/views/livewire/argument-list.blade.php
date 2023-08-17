@@ -1,4 +1,4 @@
-<div class="grid gap-2 md:gap-4">
+<div class="grid gap-4 md:gap-6">
     @if($user)
     <div class="px-8">
         @php
