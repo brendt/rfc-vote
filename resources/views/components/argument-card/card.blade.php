@@ -21,22 +21,6 @@
         @endif
 
         <div class="flex gap-2 flex-col md:flex-row md:items-center md:justify-between">
-            <div class="flex items-center gap-1 text-sm">
-                <span @class([
-                    'p-1 px-2 rounded-full text-white ml-1 font-bold text-xs',
-                    'bg-green-500' => $argument->vote_type->isYes(),
-                    'bg-red-500' => $argument->vote_type->isNo(),
-                ])>
-                    {{ $argument->vote_type->value }}
-                </span>
-
-                @if($argument->body_updated_at !== null)
-                    <span class="text-sm">
-                    (edited at {{ $argument->body_updated_at->format("Y-m-d H:i") }})
-                    </span>
-                @endif
-            </div>
-
             <div class="flex gap-2 flex-col md:flex-row md:items-center mt-3 lg:mt-0">
                 @if(!$readonly && $user?->can('edit', $argument))
                     <x-argument-card.button
