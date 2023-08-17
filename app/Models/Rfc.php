@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Actions\SendNewRfcMails;
 use App\Http\Controllers\RfcDetailController;
+use App\Jobs\SendNewRfcMailJob;
 use App\Jobs\RenderMetaImageJob;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -29,6 +31,8 @@ class Rfc extends Model implements Feedable
 
         static::created(function (Rfc $rfc) {
             $rfc->updateVoteCount();
+
+            (new SendNewRfcMails)($rfc);
         });
 
         static::saving(function (Rfc $rfc) {

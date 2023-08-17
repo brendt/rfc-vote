@@ -75,8 +75,12 @@
 
 <div class="flex-1">
     @if(flash()->message)
-        <div class="mt-4 z-50 bg-blue-400 max-w-[766px] mx-auto p-4 border border-blue-800 text-white font-bold">
-            {{ flash()->message }}
+        <div
+            class="container mx-auto px-4 mt-4 md:mt-12 max-w-[1200px] mb-8"
+        >
+            <div class="p-4 md:px-8 bg-blue-200 mb-4 md:mb-8 rounded-full text-blue-900 font-bold">
+                {{ flash()->message }}
+            </div>
         </div>
     @endif
 

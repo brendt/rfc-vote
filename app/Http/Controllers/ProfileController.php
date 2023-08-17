@@ -62,20 +62,23 @@ final readonly class ProfileController
 
         $validated = $request->validate([
             'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore($request->user()->id)],
+            'email_optin' => ['nullable'],
         ]);
 
-        if ($validated['email'] === $user->email) {
-            flash('No changes were made');
+        $user->update([
+            'email_optin' => $validated['email_optin'] ?? false,
+        ]);
+
+        if ($validated['email'] !== $user->email) {
+            (new RequestEmailChange)(
+                user: $user,
+                newEmail: $validated['email'],
+            );
+
+            flash('An email with a verification link has been sent to your new email address. Please click the link to verify your email.');
 
             return redirect()->action([self::class, 'edit']);
         }
-
-        (new RequestEmailChange)(
-            user: $user,
-            newEmail: $validated['email'],
-        );
-
-        flash('An email with a verification link has been sent to your new email address. Please click the link to verify your email.');
 
         return redirect()->action([self::class, 'edit']);
     }

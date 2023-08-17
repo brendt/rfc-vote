@@ -19,6 +19,8 @@
     <div
         class="container mx-auto px-4 mt-4 md:mt-12 max-w-[1200px] mb-8"
     >
+        <x-email-optin-banner :user="$user"/>
+
         <div class="grid gap-4 md:px-8">
             <h1 class="text-4xl font-bold">
                 {{ $rfc->title }}
