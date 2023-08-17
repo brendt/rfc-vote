@@ -18,7 +18,7 @@ final readonly class DisableEmailOptinController
             'email_optin' => false,
         ]);
 
-        flash("Your email preferences were updated!");
+        flash('Your email preferences were updated!');
 
         return redirect()->to($request->get('back', '/'));
     }

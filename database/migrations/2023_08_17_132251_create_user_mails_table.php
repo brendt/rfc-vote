@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('user_mails', function (Blueprint $table) {
@@ -15,7 +16,7 @@ return new class extends Migration {
 
             $table->string('mail_type');
             $table->string('subject');
-            
+
             $table->timestamps();
         });
     }

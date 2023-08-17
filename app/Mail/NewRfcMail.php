@@ -17,7 +17,8 @@ class NewRfcMail extends Mailable
     public function __construct(
         public Rfc $rfc,
         public User $user,
-    ) {}
+    ) {
+    }
 
     public function envelope(): Envelope
     {
