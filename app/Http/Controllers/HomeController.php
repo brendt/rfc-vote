@@ -31,7 +31,7 @@ final readonly class HomeController
         $yesterday = now()->subDay()->endOfDay()->toDateTimeString();
 
         $argumentId = DB::select(<<<SQL
-        SELECT argument_id, COUNT(*) as c, DATE_FORMAT(created_at, "%Y-%m-%d") as day
+        SELECT argument_id, COUNT(*) as c, DATE(created_at) as day
         FROM argument_votes
         WHERE created_at <= "$yesterday"
         GROUP BY argument_id, day
