@@ -30,15 +30,19 @@ final readonly class HomeController
     {
         $yesterday = now()->subDay()->endOfDay()->toDateTimeString();
 
-        $argumentId = DB::select(<<<SQL
+        $row = DB::select(<<<SQL
         SELECT argument_id, COUNT(*) as c, DATE(created_at) as day
         FROM argument_votes
         WHERE created_at <= "$yesterday"
         GROUP BY argument_id, day
         ORDER BY day DESC, c DESC
         LIMIT 1
-        SQL)[0]->argument_id;
+        SQL)[0] ?? null;
 
-        return Argument::find($argumentId);
+        if (!$row) {
+            return null;
+        }
+
+        return Argument::find($row->argument_id);
     }
 }
