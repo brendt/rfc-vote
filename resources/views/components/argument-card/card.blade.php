@@ -51,7 +51,7 @@
 
         <x-argument-card.card-footer
             :argument="$argument"
-            :user="$argument->user"
+            :user="$user"
             :anchor-link="$anchorLink"
             :readonly="$readonly"
         />
