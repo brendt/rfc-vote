@@ -22,7 +22,7 @@
                         alt="{{ $user->username }} avatar"
                     />
 
-                    <span class="group-hover/username:underline">{{ $user->username }}</span>
+                    <div class="group-hover/username:underline">{{ \Illuminate\Support\Str::limit($user->username, 18) }}</div>
                 </a>
             @endif
 

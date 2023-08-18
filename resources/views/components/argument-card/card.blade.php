@@ -15,7 +15,7 @@
         @if(!$readonly && $isEditing?->is($argument))
             <x-markdown-editor wire:model="body" />
         @else
-            <x-markdown class="prose prose-md w-full max-w-full">
+            <x-markdown class="prose prose-md w-full max-w-full break-words overflow-hidden">
                 {!! $argument->body !!}
             </x-markdown>
         @endif
