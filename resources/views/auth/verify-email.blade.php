@@ -16,7 +16,7 @@
                 </x-success-message>
             @endif
 
-            <div class="flex justify-end gap-3 items-center mt-7">
+            <div class="flex justify-end gap-2 items-center mt-7">
                 <x-form.button type="submit">
                     <x-icons.envelope class="w-6 h-6" />
                     {{ __('Resend Verification Email') }}
@@ -24,7 +24,7 @@
 
                 <x-form.button
                     type="button"
-                    class="!bg-transparent !text-red-900 hover:!bg-gray-100"
+                    class="!bg-transparent !text-gray-700 hover:!bg-gray-100"
                     onclick="document.getElementById('logout-form').submit()"
                 >
                     {{ __('Logout') }}
