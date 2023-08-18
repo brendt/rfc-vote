@@ -1,4 +1,7 @@
 @component('layouts.base')
+    <div class="container mx-auto px-4 mt-4 md:mt-12 max-w-[1200px] mb-8">
+        <x-email-optin-banner :user="auth()->user()"/>
+    </div>
 
     <div class="container max-w-[1200px] mx-auto px-4 grid lg:grid-cols-3 gap-4 mt-4 md:mt-8">
         @foreach ($rfcs as $rfc)
