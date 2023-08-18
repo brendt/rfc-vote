@@ -15,6 +15,7 @@
 
 @component('layouts.base', [
     'pageTitle' => $rfc->title . ' – RFC Vote',
+    'showToTopArrow' => true,
 ])
     <div
         class="container mx-auto px-4 mt-4 md:mt-12 max-w-[1200px] mb-8"

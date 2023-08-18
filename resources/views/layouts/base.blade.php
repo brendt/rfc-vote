@@ -87,7 +87,7 @@
     {{ $slot }}
 </div>
 
-@if(request()->is('rfc/*'))
+@if(isset($showToTopArrow) && $showToTopArrow === true)
     <div id="scrollTopButton" class="sticky hidden w-full justify-end bottom-0 right-0 pb-3 pr-5">
         <button onclick="scrollToTop()"
                 class="transition rounded-full bg-purple-600 p-4 text-white shadow-md hover:bg-purple-700 duration-700 ease-in-out hover:-translate-y-3 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg active:bg-purple-800 active:shadow-lg">
