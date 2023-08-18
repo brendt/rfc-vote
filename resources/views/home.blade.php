@@ -33,7 +33,7 @@
                                     @class([
                                         'p-1 flex-grow bg-gradient-to-r',
                                         'from-teal-700 to-teal-500' => $rfc->majorityYes(),
-                                        'from-pink-500 to-pink-600' => ! $rfc->majorityYes(),
+                                        'from-pink-500 to-teal-600' => ! $rfc->majorityYes(),
                                     ])
                                     style="width: {{ $rfc->percentage_yes }}%;"
                                 ></div>
