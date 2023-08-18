@@ -31,3 +31,8 @@ REDIS_PORT=6379
 # And the following as well
 QUEUE_CONNECTION=redis
 ```
+
+### Styling guides
+
+- For green and red colors for `yes` and `no` votes, use custom colors defined in `tailwind.config.js` file.
+- For global CSS variables, use `_variables.css` file in the `resources/css` directory.
