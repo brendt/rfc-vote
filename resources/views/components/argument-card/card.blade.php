@@ -15,7 +15,7 @@
         @if(!$readonly && $isEditing?->is($argument))
             <x-markdown-editor wire:model="body" />
         @else
-            <x-markdown class="prose prose-md w-full max-w-full">
+            <x-markdown class="prose prose-md w-full max-w-full break-words overflow-hidden">
                 {!! $argument->body !!}
             </x-markdown>
         @endif
@@ -47,17 +47,13 @@
                     :is-confirming-delete="$isConfirmingDelete"
                 />
             @endif
-            @if($readonly)
-                <span class="text-sm">
-                Read the RFC: <a href="{{ action(\App\Http\Controllers\RfcDetailController::class, $rfc) }}" class="underline hover:no-underline">{{ $rfc->title }}</a>
-                </span>
-            @endif
         </div>
 
         <x-argument-card.card-footer
             :argument="$argument"
             :user="$argument->user"
             :anchor-link="$anchorLink"
+            :readonly="$readonly"
         />
     </div>
 </div>

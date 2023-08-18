@@ -78,7 +78,7 @@
         <div
             class="container mx-auto px-4 mt-4 md:mt-12 max-w-[1200px] mb-8"
         >
-            <div class="p-4 md:px-8 bg-blue-200 mb-4 md:mb-8 rounded-full text-blue-900 font-bold">
+            <div class="p-4 md:px-8 bg-blue-200 mb-4 md:mb-8 rounded-md md:rounded-full text-blue-900 font-bold">
                 {{ flash()->message }}
             </div>
         </div>

@@ -12,7 +12,7 @@
                     md:min-w-[15%]
                     min-w-[20%]
 
-                    @if(!$voteType)
+                    @if(! $hasVoted)
                     hover:bg-green-600 hover:text-white cursor-pointer
                     @endIf
 
@@ -23,7 +23,7 @@
                     @endif
                 "
             style="width: {{ $rfc->percentage_yes }}%;"
-            @if(! $voteType)
+            @if(! $hasVoted)
                 wire:click="vote('{{ \App\Models\VoteType::YES }}')"
             @endif
         >
@@ -35,7 +35,7 @@
                     md:min-w-[15%]
                     min-w-[20%]
 
-                    @if(!$voteType)
+                    @if(! $hasVoted)
                     hover:bg-red-600 hover:text-white cursor-pointer
                     @endIf
 
@@ -46,7 +46,7 @@
                     @endif
                 "
             style="width: {{ $rfc->percentage_no }}%;"
-            @if(!$voteType)
+            @if(! $hasVoted)
                 wire:click="vote('{{ \App\Models\VoteType::NO }}')"
             @endif >
             {{ $rfc->percentage_no }}%
@@ -108,26 +108,36 @@
                     </div>
                 </div>
 
-                <button
-                    type="submit"
-                    class="
-                    font-bold
-                    class='
-                    @if(empty($this->body))
-                     cursor-not-allowed
-                    @else
-                    cursor-pointer
-                    hover:bg-{{ $voteType->getColor() }}-600
-                    @endif
-                    py-2 px-4
-                    bg-{{ $voteType->getColor() }}-400
-                    text-white
-                    text-center
-                    rounded-full
-                "
-                    wire:click="storeArgument"
-                >Submit
-                </button>
+                <div class="flex flex-col gap-2">
+                    <button
+                        type="submit"
+                        class="
+                            font-bold
+                            class='
+                            @if(empty($this->body))
+                             cursor-not-allowed
+                            @else
+                            cursor-pointer
+                            hover:bg-{{ $voteType->getColor() }}-600
+                            @endif
+                            py-2 px-4
+                            bg-{{ $voteType->getColor() }}-400
+                            text-white
+                            text-center
+                            rounded-full
+                        "
+                        wire:click="storeArgument"
+                    >Submit
+                    </button>
+
+                    <button class="
+                        bg-gray-100
+                        hover:bg-gray-200
+                        py-2 px-4
+                        text-center
+                        rounded-full
+                    " wire:click="cancel">Cancel</button>
+                </div>
             </div>
         </div>
     @endif
