@@ -4,25 +4,35 @@
      * @var App\Models\User|null $user
      * @var string $anchorLink
      */
+
+    $argumentUser = $argument->user;
 @endphp
 
 <div class="flex flex-col lg:flex-row gap-4 items-center justify-between mb-3 mt-1 opacity-80 border-t pt-3">
     <x-argument-card.share-links :argument="$argument" :anchor-link="$anchorLink" />
 
     <div class="flex flex-col md:flex-row gap-1 md:gap-3 items-center">
+        @if($readonly)
+            <span class="text-xs">
+                Read the RFC: <a href="{{ action(\App\Http\Controllers\RfcDetailController::class, $argument->rfc) }}" class="underline hover:no-underline">{{ $argument->rfc->title }}</a>
+            </span>
+
+            <span class="hidden md:block">•</span>
+        @endif
+
         <small class="flex items-center gap-1">
-            @if ($user?->getAvatarUrl())
+            @if ($argumentUser?->getAvatarUrl())
                 <a
-                    href="{{ action(App\Http\Controllers\PublicProfileController::class, $user) }}"
+                    href="{{ action(App\Http\Controllers\PublicProfileController::class, $argumentUser) }}"
                     class="flex items-center gap-1.5 group/username"
                 >
                     <img
-                        src="{{ $user->getAvatarUrl() }}"
+                        src="{{ $argumentUser->getAvatarUrl() }}"
                         class="rounded-full shadow-sm w-[20px] h-[20px]"
-                        alt="{{ $user->username }} avatar"
+                        alt="{{ $argumentUser->username }} avatar"
                     />
 
-                    <div class="group-hover/username:underline">{{ \Illuminate\Support\Str::limit($user->username, 18) }}</div>
+                    <div class="group-hover/username:underline">{{ \Illuminate\Support\Str::limit($argumentUser->username, 18) }}</div>
                 </a>
             @endif
 

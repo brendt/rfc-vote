@@ -1,3 +1,15 @@
-<a href="{{ $href }}" class="flex rounded">
-    <x-card {{ $attributes->merge(['class' => 'border-4 border-transparent hover:bg-gray-50 hover:border-purple-400']) }}>{{ $slot }}</x-card>
+@php
+    /**
+     * @var Illuminate\View\ComponentAttributeBag $attributes
+     */
+
+    $flexDirection = str_contains($attributes->get('class', ''), 'flex-row') ? '' : 'flex-col';
+@endphp
+
+<a
+    {{ $attributes->merge([
+        'class' => "bg-white hover:shadow-lg transition-all opacity-90 hover:opacity-100 rounded-lg shadow-md flex justify-between gap-2 p-4 md:p-7 {$flexDirection}"
+    ]) }}
+>
+    {{ $slot }}
 </a>
