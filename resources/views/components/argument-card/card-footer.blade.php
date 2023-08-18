@@ -16,9 +16,9 @@
             <span class="text-xs">
                 Read the RFC: <a href="{{ action(\App\Http\Controllers\RfcDetailController::class, $argument->rfc) }}" class="underline hover:no-underline">{{ $argument->rfc->title }}</a>
             </span>
-        @endif
 
-        <span class="hidden md:block">•</span>
+            <span class="hidden md:block">•</span>
+        @endif
 
         <small class="flex items-center gap-1">
             @if ($argumentUser?->getAvatarUrl())
