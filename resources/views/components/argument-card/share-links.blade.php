@@ -9,7 +9,16 @@
     <small>{{ __('Share') }}:</small>
 
     <x-argument-card.share-link
+        x-init=""
         href="{{ '#' . $anchorLink }}"
+        x-data="{anchorLink: '{{url()->current().'#'.$anchorLink}}'}"
+        x-on:click="(function clipboardCopy() {
+            $el.classList.add('text-green-700');
+            setTimeout(() => {
+             $el.classList.remove('text-green-700');
+            }, 800)
+            $clipboard(anchorLink);
+        })()"
         title="{{ __('Copy the ') }}"
         icon="icons.link"
     />
