@@ -47,17 +47,13 @@
                     :is-confirming-delete="$isConfirmingDelete"
                 />
             @endif
-            @if($readonly)
-                <span class="text-sm">
-                Read the RFC: <a href="{{ action(\App\Http\Controllers\RfcDetailController::class, $rfc) }}" class="underline hover:no-underline">{{ $rfc->title }}</a>
-                </span>
-            @endif
         </div>
 
         <x-argument-card.card-footer
             :argument="$argument"
-            :user="$argument->user"
+            :user="$user"
             :anchor-link="$anchorLink"
+            :readonly="$readonly"
         />
     </div>
 </div>
