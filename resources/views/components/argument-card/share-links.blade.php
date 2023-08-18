@@ -22,7 +22,6 @@
             }catch(e) {
                throw e;
             }
-
         })()"
         title="{{ __('Copy the ') }}"
         icon="icons.link"
