@@ -167,6 +167,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hasVotedForRfc(Rfc $rfc): bool
     {
-        return $this->arguments->first(fn(Argument $argument) => $argument->rfc_id === $rfc->id)?->exists() ?: false;
+        return $this->getArgumentForRfc($rfc)?->exists() ?: false;
     }
 }
