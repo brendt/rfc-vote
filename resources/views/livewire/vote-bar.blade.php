@@ -12,7 +12,7 @@
             @class([
                 'py-1.5 lg:py-3 px-6 flex-grow text-left md:min-w-[15%] min-w-[20%] rounded-l-full bg-gradient-to-r from-agree to-agree-light text-white hover:opacity-100 transition-opacity duration-300',
                 'cursor-not-allowed opacity-100' => $hasVoted,
-                'hover:bg-green-600 cursor-pointer opacity-70' => ! $hasVoted,
+                'hover:bg-green-600 cursor-pointer opacity-80' => ! $hasVoted,
             ])
             style="width: {{ $rfc->percentage_yes }}%;"
 
@@ -28,7 +28,7 @@
             @class([
                 'py-1.5 lg:py-3 px-6 flex-grow text-right md:min-w-[15%]min-w-[20%] rounded-r-full bg-gradient-to-r from-disagree to-disagree-light text-white hover:opacity-100 transition-opacity duration-300',
                 'cursor-not-allowed opacity-100' => $hasVoted,
-                'hover:bg-red-600 cursor-pointer opacity-70' => ! $hasVoted,
+                'hover:bg-red-600 cursor-pointer opacity-80' => ! $hasVoted,
             ])
             style="width: {{ $rfc->percentage_no }}%;"
 
@@ -41,16 +41,20 @@
     </div>
 
     @if($voteType)
-        <div class="flex justify-center mt-6 font-bold items-baseline gap-1">
-            {{ $userArgument ? "You've voted" : "You're voting" }}&nbsp;<span @class([
-                'p-1 px-3 rounded-full text-white shadow-md',
-                'bg-green-500' => $voteType === App\Models\VoteType::YES,
-                'bg-red-500' => $voteType === App\Models\VoteType::NO,
-            ])>{{ $voteType->value }}</span>@if(!$userArgument)
-                Next, give your arguments:
-            @else
-                !
-            @endif
+        <div class="flex justify-center mt-5 items-center gap-1">
+            <span class="text-gray-600 tracking-wide">
+                {{ $userArgument ? "You've voted" : "You're voting" }}
+            </span>
+
+            <span @class([
+                'uppercase ml-1 font-black text-lg',
+                'text-agree' => $voteType === App\Models\VoteType::YES,
+                'text-disagree' => $voteType === App\Models\VoteType::NO,
+            ])>
+                {{ $voteType->value }}
+            </span>
+
+            {{ $userArgument ? '!' : '! Please, give your arguments below:' }}
         </div>
     @endif
 
