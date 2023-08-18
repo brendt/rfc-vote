@@ -1,12 +1,14 @@
 <div class="grid gap-4 md:gap-6">
     @if($user)
-    <div class="px-8">
-        @php
-            $availableVotes = $user->getAvailableVotesForRfc($rfc);
-        @endphp
+        <div class="px-2">
+            @php
+                $availableVotes = $user->getAvailableVotesForRfc($rfc);
+            @endphp
 
-        You have {{ $availableVotes }} {{ Str::plural('vote', $availableVotes) }} available.
-    </div>
+            <span class="text-gray-600 tracking-wide">
+                You have {{ $availableVotes }} {{ Str::plural('vote', $availableVotes) }} available
+            </span>
+        </div>
     @endif
 
     @if($userArgument)
