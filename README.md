@@ -1,8 +1,12 @@
+# RFC Vote
+
+[https://rfc.stitcher.io/](https://rfc.stitcher.io/)
+
 This is a small app meant to gather feedback on how RFCs are received in the PHP community.
 
-# Local Development
+### Local Development
 
-## Laravel Sail
+##### Laravel Sail
 Follow the official [docs](https://laravel.com/docs/10.x/sail#introduction).
 
 For `browsershot` to work properly add the following in `.env` file:
