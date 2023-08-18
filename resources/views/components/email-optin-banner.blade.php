@@ -8,7 +8,7 @@
     <x-success-message class="mb-10">
         {{ __("We've added email notifications. We'll email you when a new RFC is added so that you don't have to check the website manually.") }}
 
-        <a href="{{ $url }}" class="text-black underline hover:no-underline">
+        <a href="{{ $url }}" class="font-bold text-purple-700 hover:text-black underline">
             {{ __('Enable it here') }}
         </a>
     </x-success-message>
