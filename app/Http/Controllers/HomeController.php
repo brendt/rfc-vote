@@ -39,7 +39,7 @@ final readonly class HomeController
         LIMIT 1
         SQL)[0] ?? null;
 
-        if (!$row) {
+        if (! $row) {
             return null;
         }
 
