@@ -13,11 +13,16 @@
         href="{{ '#' . $anchorLink }}"
         x-data="{anchorLink: '{{url()->current().'#'.$anchorLink}}'}"
         x-on:click="(function clipboardCopy() {
-            $el.classList.add('text-green-700');
-            setTimeout(() => {
-             $el.classList.remove('text-green-700');
-            }, 800)
-            $clipboard(anchorLink);
+            try{
+                $clipboard(anchorLink);
+                $el.classList.add('text-green-700');
+                setTimeout(() => {
+                 $el.classList.remove('text-green-700');
+                }, 800)
+            }catch(e) {
+               throw e;
+            }
+
         })()"
         title="{{ __('Copy the ') }}"
         icon="icons.link"
