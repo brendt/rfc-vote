@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,6 +87,17 @@
     {{ $slot }}
 </div>
 
+@if(isset($showToTopArrow) && $showToTopArrow === true)
+    <div id="scrollTopButton" class="sticky hidden w-full justify-end bottom-0 right-0 pb-3 pr-5">
+        <button onclick="scrollToTop()"
+                class="transition rounded-full bg-purple-600 p-4 text-white shadow-md hover:bg-purple-700 duration-700 ease-in-out hover:-translate-y-3 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg active:bg-purple-800 active:shadow-lg">
+            <x-dynamic-component
+                :component="'icons.arrow-double-up'"
+            />
+        </button>
+    </div>
+@endif
+
 <div class="
     p-8 text-white mt-8
     flex justify-center md:gap-6 gap-4 flex-col
@@ -113,5 +124,24 @@
 </div>
 
 @livewireScripts
+
+
+<script>
+    const scrollFunction = () => {
+        const myButton = document.getElementById("scrollTopButton");
+        const scrollThreshold = (document.documentElement.scrollHeight - window.innerHeight) * (60 / 100);
+        if (document.documentElement.scrollTop > scrollThreshold) {
+            myButton.classList.remove("hidden");
+            myButton.classList.add("flex");
+        } else {
+            myButton.classList.remove("flex");
+            myButton.classList.add("hidden");
+        }
+    };
+    window.addEventListener("scroll", scrollFunction);
+    const scrollToTop = () => {
+        window.scrollTo({top: 0});
+    }
+</script>
 </body>
 </html>
