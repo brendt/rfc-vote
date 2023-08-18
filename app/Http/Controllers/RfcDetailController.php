@@ -17,6 +17,7 @@ final readonly class RfcDetailController
         $rfc->load([
             'arguments.user',
             'arguments.rfc',
+            'arguments.comments.user',
         ]);
 
         $user = auth()->user();

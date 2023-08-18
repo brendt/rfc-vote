@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Actions\CreateArgument;
+use App\Models\ArgumentComment;
 use App\Models\Rfc;
 use App\Models\User;
 use App\Models\VoteType;
@@ -33,12 +34,22 @@ class DatabaseSeeder extends Seeder
 
             foreach ($users as $user) {
                 if (fake()->boolean(80)) {
-                    (new CreateArgument())(
+                    $argument = (new CreateArgument())(
                         rfc: $rfc,
                         user: $user,
                         voteType: fake()->boolean(70) ? $majority : $minority,
                         body: fake()->paragraphs(fake()->numberBetween(1, 4), true),
                     );
+
+                    ArgumentComment::factory()->count(fake()->numberBetween(0, 5))
+                        ->sequence(
+                            ['argument_id' => $argument->id, 'user_id' => $users->random()->id],
+                            ['argument_id' => $argument->id, 'user_id' => $users->random()->id],
+                            ['argument_id' => $argument->id, 'user_id' => $users->random()->id],
+                            ['argument_id' => $argument->id, 'user_id' => $users->random()->id],
+                            ['argument_id' => $argument->id, 'user_id' => $users->random()->id],
+                        )
+                        ->create();
                 }
             }
         }

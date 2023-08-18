@@ -20,6 +20,12 @@
             <span class="hidden md:block">•</span>
         @endif
 
+        <span class="text-xs cursor-pointer" wire:click="openComments({{ $argument->id }})">
+            {{ $argument->comments->count() }} {{ Str::plural('comment', $argument->comments->count()) }}
+        </span>
+
+        <span class="hidden md:block">•</span>
+
         <small class="flex items-center gap-1">
             @if ($argumentUser?->getAvatarUrl())
                 <a
