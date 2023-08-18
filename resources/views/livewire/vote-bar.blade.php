@@ -26,7 +26,7 @@
         {{-- Right (red) bar --}}
         <div
             @class([
-                'py-1.5 lg:py-3 px-6 flex-grow text-right md:min-w-[15%]min-w-[20%] rounded-r-full bg-gradient-to-r from-disagree to-disagree-light text-white hover:opacity-100',
+                'py-1.5 lg:py-3 px-6 flex-grow text-right md:min-w-[15%] min-w-[20%] rounded-r-full bg-gradient-to-r from-disagree to-disagree-light text-white hover:opacity-100',
                 'cursor-not-allowed opacity-100' => $hasVoted,
                 'hover:bg-red-600 cursor-pointer opacity-80 shadow-md hover:shadow-[0px_0px_7px_var(--color-disagree-light)]' => ! $hasVoted,
             ])
