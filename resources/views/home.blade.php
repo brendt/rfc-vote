@@ -18,16 +18,16 @@
                             <div
                                 @class([
                                     'p-1 flex-grow bg-gradient-to-r',
-                                    'from-green-700 to-green-500' => $rfc->majorityYes(),
-                                    'from-gray-500 to-gray-600' => ! $rfc->majorityYes(),
+                                    'from-teal-700 to-teal-500' => $rfc->majorityYes(),
+                                    'from-pink-500 to-pink-600' => ! $rfc->majorityYes(),
                                 ])
                                 style="width: {{ $rfc->percentage_yes }}%;"
                             ></div>
                             <div
                                 @class([
                                     'p-1 flex-grow bg-gradient-to-r',
-                                    'from-red-700 to-red-500' => $rfc->majorityNo(),
-                                    'from-gray-600 to-gray-500' => ! $rfc->majorityNo(),
+                                    'from-pink-700 to-pink-500' => $rfc->majorityNo(),
+                                    'from-pink-600 to-pink-500' => ! $rfc->majorityNo(),
                                 ])
                                 style="width: {{ $rfc->percentage_no }}%;"
                             ></div>
@@ -37,7 +37,7 @@
                     <div class="flex justify-between p-1 px-2 text-sm">
                         <span
                             @class([
-                                'text-green-700 font-bold' => $rfc->majorityYes(),
+                                'text-teal-700 font-bold' => $rfc->majorityYes(),
                                 'text-gray-700' => ! $rfc->majorityYes(),
                             ])
                         >{{ $rfc->percentage_yes }}%</span>
