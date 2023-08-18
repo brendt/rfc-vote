@@ -48,11 +48,13 @@ final class Meta
 
     private function renderTitle(): string
     {
+        $title = htmlentities($this->title);
+
         return <<<HTML
-        <meta name="title" content="$this->title">
-        <meta name="twitter:title" content="$this->title">
-        <meta property="og:title" content="$this->title">
-        <meta itemprop="name" content="$this->title">
+        <meta name="title" content="$title">
+        <meta name="twitter:title" content="$title">
+        <meta property="og:title" content="$title">
+        <meta itemprop="name" content="$title">
         HTML;
     }
 
