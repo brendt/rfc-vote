@@ -1,17 +1,18 @@
 <div>
     @if (!$voteType)
-        <div class="font-bold mb-3 flex justify-center">
-            Click the bar to cast your vote!
+        <div class="mb-3 text-gray-600 tracking-wide flex gap-2 items-center justify-center">
+            <x-icons.information-circle class="w-6 h-6" />
+            {{ __('Click the bar to cast your vote!') }}
         </div>
     @endif
 
-    <div class="flex shadow-xl font-bold rounded-full overflow-hidden">
+    <div class="flex shadow-lg font-bold rounded-full overflow-hidden p-1.5 lg:p-3 bg-gray-200 max-w-[1100px] mx-auto">
+        {{-- Left (green) bar --}}
         <div
             @class([
-                'p-4 flex-grow text-left md:min-w-[15%] min-w-[20%]',
-                'hover:bg-green-600 hover:text-white cursor-pointer' => ! $hasVoted,
-                'bg-green-600 text-white' => $voteType === App\Models\VoteType::YES,
-                'bg-green-300 text-green-900' => $voteType !== App\Models\VoteType::YES,
+                'py-1.5 lg:py-3 px-6 flex-grow text-left md:min-w-[15%] min-w-[20%] rounded-l-full bg-gradient-to-r from-agree to-agree-light text-white hover:opacity-100 transition-opacity duration-300',
+                'cursor-not-allowed opacity-100' => $hasVoted,
+                'hover:bg-green-600 cursor-pointer opacity-70' => ! $hasVoted,
             ])
             style="width: {{ $rfc->percentage_yes }}%;"
 
@@ -22,18 +23,19 @@
             {{ $rfc->percentage_yes }}%
         </div>
 
+        {{-- Right (red) bar --}}
         <div
             @class([
-                'p-4 flex-grow text-right md:min-w-[15%]min-w-[20%]',
-                'hover:bg-red-600 hover:text-white cursor-pointer' => ! $hasVoted,
-                'bg-red-600 text-white' => $voteType === App\Models\VoteType::NO,
-                'bg-red-300 text-red-900' => $voteType !== App\Models\VoteType::NO,
+                'py-1.5 lg:py-3 px-6 flex-grow text-right md:min-w-[15%]min-w-[20%] rounded-r-full bg-gradient-to-r from-disagree to-disagree-light text-white hover:opacity-100 transition-opacity duration-300',
+                'cursor-not-allowed opacity-100' => $hasVoted,
+                'hover:bg-red-600 cursor-pointer opacity-70' => ! $hasVoted,
             ])
             style="width: {{ $rfc->percentage_no }}%;"
 
             @if(! $hasVoted)
                 wire:click="vote('{{ \App\Models\VoteType::NO }}')"
-            @endif >
+            @endif
+        >
             {{ $rfc->percentage_no }}%
         </div>
     </div>
