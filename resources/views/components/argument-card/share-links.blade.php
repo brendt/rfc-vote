@@ -5,7 +5,7 @@
      */
 @endphp
 
-<div class="flex gap-5 lg:gap-3 group-hover/card:opacity-100 text-gray-700 lg:opacity-0 duration-300 transition-opacity">
+<div class="flex items-center gap-5 lg:gap-3 group-hover/card:opacity-100 text-gray-700 lg:opacity-0 duration-300 transition-opacity">
     <small>{{ __('Share') }}:</small>
 
     <x-argument-card.share-link
@@ -16,9 +16,12 @@
             try{
                 $clipboard(anchorLink);
                 $el.classList.add('text-green-700');
+                const currentInnerHtml = $el.innerHTML;
+                $el.innerHTML = '<small>Copied!<small>';
                 setTimeout(() => {
                  $el.classList.remove('text-green-700');
-                }, 800)
+                 $el.innerHTML = currentInnerHtml;
+                }, 1000)
             }catch(e) {
                throw e;
             }
