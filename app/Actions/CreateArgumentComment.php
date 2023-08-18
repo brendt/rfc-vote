@@ -23,8 +23,8 @@ final readonly class CreateArgumentComment
 
         $usersToNotify = $argument->comments
             ->map(fn (ArgumentComment $comment) => $comment->user)
-            ->reject(fn (User $other) => $other->is($user))
             ->add($argument->user)
+            ->reject(fn (User $other) => $other->is($user))
             ->unique(fn (User $user) => $user->id);
 
         foreach ($usersToNotify as $userToNotify) {

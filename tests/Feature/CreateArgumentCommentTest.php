@@ -47,6 +47,7 @@ class CreateArgumentCommentTest extends TestCase
         ]);
 
         Message::truncate();
+        $argument->refresh();
 
         (new CreateArgumentComment)(
             argument: $argument,
@@ -69,6 +70,32 @@ class CreateArgumentCommentTest extends TestCase
         // C !> C
         $this->assertDatabaseMissing('messages', [
             'user_id' => $c->id,
+        ]);
+
+        Message::truncate();
+        $argument->refresh();
+
+        (new CreateArgumentComment)(
+            argument: $argument,
+            user: $a,
+            body: 'test a',
+        );
+
+        // A !> A
+        $this->assertDatabaseMissing('messages', [
+            'user_id' => $a->id,
+        ]);
+
+        // A > B
+        $this->assertDatabaseHas('messages', [
+            'user_id' => $b->id,
+            'sender_id' => $a->id,
+        ]);
+
+        // A > C
+        $this->assertDatabaseHas('messages', [
+            'user_id' => $c->id,
+            'sender_id' => $a->id,
         ]);
     }
 }
