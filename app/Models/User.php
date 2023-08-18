@@ -85,7 +85,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getArgumentForRfc(Rfc $rfc): ?Argument
     {
-        return $this->arguments->first(fn(Argument $argument) => $argument->rfc_id === $rfc->id);
+        return $this->arguments->first(fn (Argument $argument) => $argument->rfc_id === $rfc->id);
     }
 
     public function hasVotedForArgument(Argument $argument): bool
@@ -95,23 +95,23 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getArgumentVoteForArgument(Argument $argument): ?ArgumentVote
     {
-        return $this->argumentVotes->first(fn(ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id);
+        return $this->argumentVotes->first(fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id);
     }
 
     /**
-     * @param \App\Models\Rfc $rfc
+     * @param  \App\Models\Rfc  $rfc
      * @return \Illuminate\Support\Collection<\App\Models\ArgumentVote>
      */
     public function getArgumentVotesForRfc(Rfc $rfc): Collection
     {
         return $this->argumentVotes
-            ->reject(fn(ArgumentVote $vote) => $vote->argument->user_id === $this->id)
-            ->filter(fn(ArgumentVote $vote) => $vote->argument->rfc_id === $rfc->id);
+            ->reject(fn (ArgumentVote $vote) => $vote->argument->user_id === $this->id)
+            ->filter(fn (ArgumentVote $vote) => $vote->argument->rfc_id === $rfc->id);
     }
 
     public function getAvatarUrl(): ?string
     {
-        if (!$this->avatar) {
+        if (! $this->avatar) {
             $hash = md5(strtolower(trim($this->email)));
 
             return "https://www.gravatar.com/avatar/{$hash}";
@@ -138,7 +138,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasSeenArgument(Argument $argument): bool
     {
         $argumentView = $this->argumentViews
-            ->first(fn(UserArgumentView $userArgumentView) => $userArgumentView->argument_id === $argument->id);
+            ->first(fn (UserArgumentView $userArgumentView) => $userArgumentView->argument_id === $argument->id);
 
         if ($argumentView === null) {
             return false;
@@ -167,6 +167,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hasVotedForRfc(Rfc $rfc): bool
     {
-        return $this->arguments->first(fn(Argument $argument) => $argument->rfc_id === $rfc->id)?->exists() ?: false;
+        return $this->arguments->first(fn (Argument $argument) => $argument->rfc_id === $rfc->id)?->exists() ?: false;
     }
 }
