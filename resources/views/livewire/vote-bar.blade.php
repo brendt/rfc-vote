@@ -7,28 +7,20 @@
 
     <div class="flex shadow-xl font-bold rounded-full overflow-hidden">
         <div
-            class="
-                    p-4 flex-grow text-left
-                    md:min-w-[15%]
-                    min-w-[20%]
-
-                    @if(! $hasVoted)
-                    hover:bg-green-600 hover:text-white cursor-pointer
-                    @endIf
-
-                    @if($voteType === \App\Models\VoteType::YES)
-                    bg-green-600 text-white
-                    @else
-                    bg-green-300 text-green-900
-                    @endif
-                "
+            @class([
+                'p-4 flex-grow text-left md:min-w-[15%] min-w-[20%]',
+                'hover:bg-green-600 hover:text-white cursor-pointer' => ! $hasVoted,
+                $voteType === App\Models\VoteType::YES ? 'bg-green-600 text-white' : 'bg-green-300 text-green-900',
+            ])
             style="width: {{ $rfc->percentage_yes }}%;"
+
             @if(! $hasVoted)
                 wire:click="vote('{{ \App\Models\VoteType::YES }}')"
             @endif
         >
             {{ $rfc->percentage_yes }}%
         </div>
+
         <div
             class="
                     p-4 flex-grow text-right
