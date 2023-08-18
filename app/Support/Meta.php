@@ -58,11 +58,13 @@ final class Meta
 
     private function renderDescription(): string
     {
+        $description = htmlentities($this->description);
+
         return <<<HTML
-        <meta name="description" content="$this->description">
-        <meta name="twitter:description" content="$this->description">
-        <meta property="og:description" content="$this->description">
-        <meta itemprop="description" content="$this->description">
+        <meta name="description" content="$description">
+        <meta name="twitter:description" content="$description">
+        <meta property="og:description" content="$description">
+        <meta itemprop="description" content="$description">
         HTML;
     }
 
