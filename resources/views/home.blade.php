@@ -30,21 +30,21 @@
                         <div class="bg-gray-200 p-1 rounded-full">
                             <div class="flex font-bold rounded-full overflow-hidden">
                                 <div
-                                    class="p-1 flex-grow bg-gradient-to-r from-teal-700 to-teal-500"
+                                    class="p-1 flex-grow bg-gradient-to-r from-agree to-agree-light"
                                     style="width: {{ $rfc->percentage_yes }}%;"
                                 ></div>
                                 <div
-                                    class="p-1 flex-grow bg-gradient-to-r from-pink-700 to-pink-500"
+                                    class="p-1 flex-grow bg-gradient-to-r from-disagree to-disagree-light"
                                     style="width: {{ $rfc->percentage_no }}%;"
                                 ></div>
                             </div>
                         </div>
 
                         <div class="flex justify-between p-1 px-2 text-sm">
-                            <span class="text-teal-700 font-bold">
+                            <span class="text-agree font-bold">
                                 {{ $rfc->percentage_yes }}%
                             </span>
-                            <span class="text-pink-700 font-bold">
+                            <span class="text-disagree font-bold">
                                 {{ $rfc->percentage_no }}%
                             </span>
                         </div>
