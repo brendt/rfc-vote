@@ -149,6 +149,7 @@ class ArgumentList extends Component
     {
         if ($this->showingComments?->is($argument)) {
             $this->showingComments = null;
+
             return;
         }
 
