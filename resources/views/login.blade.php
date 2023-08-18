@@ -28,7 +28,7 @@
                 />
             </div>
 
-            <div class="mt-6 justify-between flex items-baseline">
+            <div class="mt-6 justify-between flex items-baseline flex-wrap">
                 <a
                     href="{{ action(App\Http\Controllers\ForgotPasswordController::class) }}"
                    class="text-purple-900 hover:underline"
