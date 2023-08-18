@@ -10,9 +10,9 @@
         {{-- Left (green) bar --}}
         <div
             @class([
-                'py-1.5 lg:py-3 px-6 flex-grow text-left md:min-w-[15%] min-w-[20%] rounded-l-full bg-gradient-to-r from-agree to-agree-light text-white hover:opacity-100 transition-opacity duration-300',
+                'py-1.5 lg:py-3 px-6 flex-grow text-left md:min-w-[15%] min-w-[20%] rounded-l-full text-white bg-agree-light transition-colors duration-300',
                 'cursor-not-allowed opacity-100' => $hasVoted,
-                'hover:bg-green-600 cursor-pointer opacity-80' => ! $hasVoted,
+                'hover:bg-agree cursor-pointer opacity-80' => ! $hasVoted,
             ])
             style="width: {{ $rfc->percentage_yes }}%;"
 
@@ -26,9 +26,9 @@
         {{-- Right (red) bar --}}
         <div
             @class([
-                'py-1.5 lg:py-3 px-6 flex-grow text-right md:min-w-[15%]min-w-[20%] rounded-r-full bg-gradient-to-r from-disagree to-disagree-light text-white hover:opacity-100 transition-opacity duration-300',
-                'cursor-not-allowed opacity-100' => $hasVoted,
-                'hover:bg-red-600 cursor-pointer opacity-80' => ! $hasVoted,
+                'py-1.5 lg:py-3 px-6 flex-grow text-right md:min-w-[15%] min-w-[20%] rounded-r-full bg-disagree-light text-white transition-colors duration-300',
+                'cursor-not-allowed' => $hasVoted,
+                'hover:bg-disagree cursor-pointer' => ! $hasVoted,
             ])
             style="width: {{ $rfc->percentage_no }}%;"
 
