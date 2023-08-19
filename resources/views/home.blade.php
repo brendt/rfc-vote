@@ -3,18 +3,6 @@
         <x-email-optin-banner :user="auth()->user()"/>
     </div>
 
-    @if($argumentOfTheDay)
-        <div class="container max-w-[1200px] mx-auto px-4 grid mt-4 md:mt-8 gap-4">
-            <h2 class="text-xl font-bold">Argument of the day</h2>
-            <x-argument-card.card
-                :user="$argumentOfTheDay->user"
-                :rfc="$argumentOfTheDay->rfc"
-                :argument="$argumentOfTheDay"
-                :readonly="true"
-            />
-        </div>
-    @endif
-
     <div class="container max-w-[1200px] mx-auto px-4 grid gap-4 mt-4 md:mt-8">
         <h2 class="text-xl font-bold">Open RFCs</h2>
         <div class="grid lg:grid-cols-3 gap-5">
@@ -86,5 +74,17 @@
             @endforeach
         </div>
     </div>
+
+    @if($argumentOfTheDay)
+        <div class="container max-w-[1200px] mx-auto px-4 grid mt-4 md:mt-8 gap-4">
+            <h2 class="text-xl font-bold">Argument of the day</h2>
+            <x-argument-card.card
+                :user="$argumentOfTheDay->user"
+                :rfc="$argumentOfTheDay->rfc"
+                :argument="$argumentOfTheDay"
+                :readonly="true"
+            />
+        </div>
+    @endif
 
 @endcomponent
