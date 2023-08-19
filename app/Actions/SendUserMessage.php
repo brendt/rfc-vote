@@ -19,5 +19,7 @@ final readonly class SendUserMessage
             'url' => $url,
             'body' => $body,
         ]);
+
+        $to->updateUnreadMessageCount();
     }
 }

@@ -72,6 +72,8 @@ class CreateArgumentCommentTest extends TestCase
             'user_id' => $c->id,
         ]);
 
+        $this->assertSame(1, $a->refresh()->unread_message_count);
+
         Message::truncate();
         $argument->refresh();
 
@@ -97,5 +99,8 @@ class CreateArgumentCommentTest extends TestCase
             'user_id' => $c->id,
             'sender_id' => $a->id,
         ]);
+
+        $this->assertSame(1, $b->refresh()->unread_message_count);
+        $this->assertSame(1, $c->refresh()->unread_message_count);
     }
 }

@@ -40,6 +40,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'reputation' => 'int',
         'email_optin' => 'bool',
+        'unread_message_count' => 'int',
     ];
 
     protected $appends = [
@@ -86,6 +87,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function messages(): HasMany
     {
         return $this->hasMany(Message::class);
+    }
+
+    public function unreadMessages(): HasMany
+    {
+        return $this->hasMany(Message::class)->where('status', MessageStatus::UNREAD);
     }
 
     public function getArgumentForRfc(Rfc $rfc): ?Argument
@@ -168,5 +174,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasGottenMail(Mailable $mailable): bool
     {
         return $this->mails()->where('mail_type', $mailable::class)->exists();
+    }
+
+    public function updateUnreadMessageCount(): void
+    {
+        $this->update([
+            'unread_message_count' => $this->unreadMessages()->count(),
+        ]);
     }
 }
