@@ -5,7 +5,7 @@
             action="{{ route('password.email') }}"
             :heading="__('Forgot your password?')"
         >
-            <x-success-message />
+            <x-success-message>{{ session('status') }}</x-success-message>
 
             <p class="mb-5 text-gray-500">
                 {{ __('No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
