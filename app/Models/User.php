@@ -164,9 +164,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->mails()->where('mail_type', $mailable::class)->exists();
     }
-
-    public function hasVotedForRfc(Rfc $rfc): bool
-    {
-        return $this->getArgumentForRfc($rfc)?->exists() ?: false;
-    }
 }

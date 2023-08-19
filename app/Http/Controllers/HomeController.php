@@ -11,6 +11,8 @@ final readonly class HomeController
 {
     public function __invoke()
     {
+        $user = auth()->user();
+
         $rfcs = Rfc::query()
             ->where('published_at', '<=', now()->startOfDay())
             ->where(fn (Builder $builder) => $builder->whereNull('ends_at')->orWhere('ends_at', '>', now()))
@@ -24,6 +26,7 @@ final readonly class HomeController
         return view('home', [
             'rfcs' => $rfcs,
             'argumentOfTheDay' => $argumentOfTheDay,
+            'user' => $user,
         ]);
     }
 

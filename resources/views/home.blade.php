@@ -52,19 +52,19 @@
 
                         <livewire:rfc-counter :rfc="$rfc" :vote-type="\App\Models\VoteType::YES"/>
                         <livewire:rfc-counter :rfc="$rfc" :vote-type="\App\Models\VoteType::NO"/>
-                        @if(auth()->user()?->hasVotedForRfc($rfc))
+                        @if(isset($user) && $rfc->hasRfcVotedByUser($user))
                             @php
-                                $argumentVoteType = auth()->user()->getArgumentForRfc($rfc)?->vote_type
+                                $argumentType = $rfc->userArgument($user)?->vote_type
                             @endphp
                             <x-tag class="font-bold">
                                 <small class="flex items-center gap-1">
                                     You voted
                                     <b @class([
                                     'tracking-wide uppercase',
-                                    'text-green-700' => $argumentVoteType?->isYes(),
-                                '   text-red-700' => $argumentVoteType?->isNo(),
+                                    'text-green-700' => $argumentType?->isYes(),
+                                '   text-red-700' => $argumentType?->isNo(),
                                     ])>
-                                        {{ $argumentVoteType->value }}
+                                        {{ $argumentType->value }}
                                     </b>
                                 </small>
                             </x-tag>
