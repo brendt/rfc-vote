@@ -1,5 +1,5 @@
 @php
-    $metaImageUrl = action(\App\Http\Controllers\RfcMetaImageController::class, $rfc);
+    $metaImageUrl = action(App\Http\Controllers\RfcMetaImageController::class, $rfc);
 @endphp
 
 @push('styles')
@@ -17,17 +17,15 @@
     'pageTitle' => $rfc->title . ' – RFC Vote',
     'showToTopArrow' => true,
 ])
-    <div
-        class="container mx-auto px-4 mt-4 md:mt-12 max-w-[1200px] mb-8"
-    >
+    <div class="container mx-auto px-4 mt-5 max-w-[1200px] mb-8">
         <x-email-optin-banner :user="$user"/>
 
-        <div class="grid gap-4 md:px-8">
-            <h1 class="text-4xl font-bold">
+        <div class="grid gap-4 bg-white p-10 rounded-xl">
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-800">
                 {{ $rfc->title }}
             </h1>
 
-            <div class="flex justify-start text-xs items-center flex-wrap gap-1">
+            <div class="flex justify-start text-xs items-center flex-wrap gap-2 border-b pb-6 mb-2">
                 <x-tag-link
                     :href="$rfc->url"
                     target="_blank"
