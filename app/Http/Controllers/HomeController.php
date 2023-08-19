@@ -16,6 +16,7 @@ final readonly class HomeController
             ->where(fn (Builder $builder) => $builder->whereNull('ends_at')->orWhere('ends_at', '>', now()))
             ->orderByDesc('created_at')
             ->with(['arguments', 'yesArguments', 'noArguments'])
+            ->limit(3)
             ->get();
 
         $argumentOfTheDay = $this->getArgumentOfTheDay();

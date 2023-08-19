@@ -39,6 +39,8 @@ export default {
                 'agree-light': 'var(--color-agree-light)',
                 'disagree': 'var(--color-disagree)',
                 'disagree-light': 'var(--color-disagree-light)',
+                'main': 'var(--color-main)',
+                'main-light': 'var(--color-main-light)',
             },
         },
     },

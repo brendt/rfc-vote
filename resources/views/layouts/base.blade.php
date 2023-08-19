@@ -21,7 +21,7 @@
     $user = auth()->user();
 @endphp
 
-<nav class="bg-purple-800 bg-gradient-to-l from-purple-700 to-purple-900 z-10 px-4 py-5">
+<nav class="bg-main bg-gradient-to-r from-main to-main-light z-10 p-4">
     <div class="container flex justify-between text-white gap-4 items-center m-auto">
         <div class="text-lg md:text-xl font-bold">
             <a href="/">RFC Vote<span class="hidden md:inline"> {{ app()->isProduction() ? '' : ' (local)' }}</span></a>
