@@ -1,7 +1,7 @@
 @php
     /**
      * @var Illuminate\View\ComponentAttributeBag $attributes
-     * @var string $slot
+     * @var Illuminate\View\ComponentSlot $slot
      */
 
     $styles = 'bg-purple-800 hover:bg-purple-900 inline-flex gap-3 px-4 py-2.5 px-4 transition-colors rounded-md font-bold text-white';
