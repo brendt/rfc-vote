@@ -38,7 +38,7 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-start text-xs mt-3 gap-2 uppercase items-center">
+                    <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">
                         <x-tag class="font-bold">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                  fill="currentColor" class="w-4 h-4 text-gray-700">
