@@ -22,7 +22,7 @@
     <div
         x-cloak
         x-show="isVisible"
-        class="bg-white rounded-md border right-5 absolute divide-y"
+        class="bg-white rounded-sm border right-5 absolute divide-y"
     >
         @if ($user?->can('edit', $argument))
             <x-argument-card.button
@@ -44,7 +44,7 @@
     </div>
 
     @if ($isConfirmingDelete?->is($argument))
-        <div class="absolute right-6 bg-white flex flex-col gap-2 p-3 border rounded-md min-w-[140px]">
+        <div class="absolute right-6 bg-white flex flex-col gap-2 p-3 border rounded-sm min-w-[140px]">
             <b>{{ __('Are you sure?') }}</b>
 
             <x-buttons.main-small
