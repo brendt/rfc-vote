@@ -22,48 +22,46 @@
     <div
         x-cloak
         x-show="isVisible"
-        class="bg-white shadow-md rounded-md border right-5 absolute"
+        class="bg-white rounded-md border right-5 absolute divide-y"
     >
-        <div>
-            @if ($user?->can('edit', $argument))
-                <x-argument-card.button
-                    wire:click="editArgument('{{ $argument->id }}')"
-                    icon="icons.pen"
-                >
-                    {{ __('Edit') }}
-                </x-argument-card.button>
-            @endif
+        @if ($user?->can('edit', $argument))
+            <x-argument-card.button
+                wire:click="editArgument('{{ $argument->id }}')"
+                icon="icons.pen"
+            >
+                {{ __('Edit') }}
+            </x-argument-card.button>
+        @endif
 
-            @if ($user?->can('delete', $argument))
-                <x-argument-card.button
-                    wire:click="deleteArgument('{{ $argument->id }}')"
-                    icon="icons.trash"
-                >
-                    {{ __('Delete') }}
-                </x-argument-card.button>
-            @endif
-        </div>
+        @if ($user?->can('delete', $argument))
+            <x-argument-card.button
+                wire:click="deleteArgument('{{ $argument->id }}')"
+                icon="icons.trash"
+            >
+                {{ __('Delete') }}
+            </x-argument-card.button>
+        @endif
     </div>
 
     @if ($isConfirmingDelete?->is($argument))
-        <div class="absolute right-6 bg-white flex flex-col gap-3 p-3 shadow-xl border rounded-md min-w-[140px]">
+        <div class="absolute right-6 bg-white flex flex-col gap-2 p-3 border rounded-md min-w-[140px]">
             <b>{{ __('Are you sure?') }}</b>
 
-            <x-buttons.main
+            <x-buttons.main-small
                 wire:click="deleteArgument('{{ $argument->id }}')"
-                class="!bg-agree hover:!bg-agree-light"
+                class="!bg-agree hover:!bg-agree-dark"
             >
-                <x-icons.check class="w-6 h-6" />
+                <x-icons.check class="w-4 h-4" />
                 {{ __('Yes') }}!
-            </x-buttons.main>
+            </x-buttons.main-small>
 
-            <x-buttons.main
+            <x-buttons.main-small
                 wire:click="cancelDeleteArgument()"
-                class="!bg-disagree hover:!bg-disagree-light"
+                class="!bg-disagree hover:!bg-disagree-dark"
             >
-                <x-icons.cancel class="w-6 h-6" />
+                <x-icons.cancel class="w-4 h-4" />
                 {{ __('No') }}!
-            </x-buttons.main>
+            </x-buttons.main-small>
         </div>
     @endif
 </div>

@@ -26,7 +26,7 @@
             <div class="flex items-center justify-end gap-3">
                 <x-buttons.main
                     wire:click="editArgument('{{ $argument->id }}')"
-                    class="!bg-agree hover:!bg-agree-light"
+                    class="!bg-agree hover:!bg-agree-dark"
                 >
                     <x-icons.check class="w-6 h-6" />
                     {{ __('Save') }}
@@ -35,7 +35,7 @@
                 @if ($isConfirmingDelete?->is($argument))
                     <x-buttons.main
                         wire:click="cancelDeleteArgument()"
-                        class="!bg-disagree hover:!bg-disagree-light"
+                        class="!bg-disagree hover:!bg-disagree-dark"
                     >
                         <x-icons.cancel class="w-6 h-6" />
                         {{ __('Cancel') }}
@@ -43,7 +43,7 @@
                 @else
                     <x-buttons.main
                         wire:click="cancelEditArgument()"
-                        class="!bg-disagree hover:!bg-disagree-light {{ empty($this->body) && $isEditing?->is($argument) ? 'cursor-not-allowed' : '' }}"
+                        class="!bg-disagree hover:!bg-disagree-dark {{ empty($this->body) && $isEditing?->is($argument) ? 'cursor-not-allowed' : '' }}"
                     >
                         <x-icons.cancel class="w-6 h-6" />
                         {{ __('Cancel') }}
