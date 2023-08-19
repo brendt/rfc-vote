@@ -38,7 +38,7 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-start text-xs mt-3 gap-2 uppercase">
+                    <div class="flex justify-start text-xs mt-3 gap-2 uppercase items-center">
                         <x-tag class="font-bold">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                  fill="currentColor" class="w-4 h-4 text-gray-700">
@@ -52,6 +52,23 @@
 
                         <livewire:rfc-counter :rfc="$rfc" :vote-type="\App\Models\VoteType::YES"/>
                         <livewire:rfc-counter :rfc="$rfc" :vote-type="\App\Models\VoteType::NO"/>
+                        @if(isset($user) && $rfc->hasRfcVotedByUser($user))
+                            @php
+                                $argumentType = $rfc->userArgument($user)?->vote_type
+                            @endphp
+                            <x-tag class="font-bold">
+                                <small class="flex items-center gap-1">
+                                    You voted
+                                    <b @class([
+                                    'tracking-wide uppercase',
+                                    'text-green-700' => $argumentType?->isYes(),
+                                '   text-red-700' => $argumentType?->isNo(),
+                                    ])>
+                                        {{ $argumentType->value }}
+                                    </b>
+                                </small>
+                            </x-tag>
+                        @endif
                     </div>
                 </x-card-link>
             @endforeach
