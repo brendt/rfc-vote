@@ -27,7 +27,7 @@
             <a href="/">RFC Vote<span class="hidden md:inline"> {{ app()->isProduction() ? '' : ' (local)' }}</span></a>
         </div>
 
-        <div class="flex justify-end items-baseline gap-4 md:gap-6 font-bold text-sm md:text-md">
+        <div class="flex justify-end items-center gap-4 md:gap-6 font-bold text-sm md:text-md">
             <x-navbar.link
                 href="{{ action(App\Http\Controllers\AboutController::class) }}"
                 :isActive="request()->is('about')"
@@ -44,6 +44,15 @@
                         Admin
                     </x-navbar.link>
                 @endif
+
+                <x-navbar.link
+                    href="{{ action(App\Http\Controllers\RfcAdminController::class) }}"
+                    :isActive="request()->is('admin/*')"
+                >
+                    <span class="flex gap-1">
+                    <x-icons.inbox class="w-5 h-5" /> {{ $user->unread_message_count >= 1 ? $user->unread_message_count : '' }}
+                    </span>
+                </x-navbar.link>
 
                 <a
                     class="flex gap-3 items-center bg-purple-900 hover:bg-gray-800 group transition-colors pl-5 rounded-full"

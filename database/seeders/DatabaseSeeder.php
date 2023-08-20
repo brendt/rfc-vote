@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Actions\CreateArgument;
+use App\Actions\SendUserMessage;
 use App\Models\ArgumentComment;
 use App\Models\Rfc;
 use App\Models\User;
@@ -13,12 +14,19 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->create([
+        $mainUser = User::factory()->create([
             'name' => 'Brent',
             'email' => 'brendt@stitcher.io',
             'is_admin' => true,
             'reputation' => 10_000,
         ]);
+
+        (new SendUserMessage)(
+            to: $mainUser,
+            sender: User::factory()->create(),
+            url: '/',
+            body: 'test',
+        );
 
         $users = User::factory()->count(50)->create();
 
