@@ -1,6 +1,6 @@
 @component('layouts.base')
 
-    <div class="container mx-auto px-4 mt-4 md:mt-12 max-w-[1200px] mb-8">
+    <div class="container mx-auto px-4 mt-8 md:mt-12 max-w-[1200px] mb-8">
         <x-profile.header :user="$user" />
 
         <div class="grid gap-4 mt-6">
