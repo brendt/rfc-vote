@@ -11,6 +11,7 @@
             transition-colors
             py-3
             px-2
+            mb-5
             max-w-[50px]
             mx-auto
             text-center
