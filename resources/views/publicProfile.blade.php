@@ -6,7 +6,7 @@
         <div class="flex gap-2">
             <div
                 @class([
-                     'flex items-center gap-2 relative text-xs font-bold rounded-full pr-3 cursor-default',
+                    'flex items-center gap-2 relative text-xs font-bold rounded-full pr-3 cursor-default',
                     'bg-purple-200 text-black' => $user->reputation < 1000,
                     'bg-purple-400 text-purple-100' =>  $user->reputation >= 1000,
                     'bg-purple-600 text-white' => $user->reputation >= 5000,
@@ -15,6 +15,7 @@
                 <img
                     src="{{ $user->getAvatarUrl() }}"
                     class="rounded-full shadow-sm w-[40px] h-[40px]"
+                    alt="{{ $user->username }}'s avatar"
                 />
 
                 <h1 class="text-2xl font-bold">{{ $user->username }}</h1>
