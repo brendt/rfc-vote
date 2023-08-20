@@ -90,7 +90,7 @@
 @if(isset($showToTopArrow) && $showToTopArrow === true)
     <div class="sticky flex w-full justify-end bottom-0 right-0 pb-3 pr-5"
          x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY; updateVisibility() })"
-         x-data="{ isVisible: false, scrolled: 0, updateVisibility() { this.isVisible = (this.scrolled / (document.documentElement.scrollHeight - window.innerHeight)) >= 0.7; } }"
+         x-data="{ isVisible: false, scrolled: 0, updateVisibility() { this.isVisible = (this.scrolled / (document.documentElement.scrollHeight - window.innerHeight)) >= 0.5; } }"
          x-show="isVisible"
     >
         <div x-show="isVisible"
@@ -102,7 +102,7 @@
              x-transition:leave-start="opacity-100 transform"
              x-transition:leave-end="opacity-0 transform"
         >
-            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});"
+            <button onclick="window.scrollTo({top: 0});"
                     class="rounded-full bg-purple-600 p-4 text-white shadow-md hover:bg-purple-700 duration-700 hover:-translate-y-3 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg active:bg-purple-800 active:shadow-lg"
             >
                 <x-icons.arrow-double-up/>
