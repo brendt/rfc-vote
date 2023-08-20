@@ -40,6 +40,8 @@ final readonly class SocialiteCallbackController
 
         Auth::login($user);
 
+        $request->session()->regenerate();
+
         return redirect()->to('/');
     }
 
