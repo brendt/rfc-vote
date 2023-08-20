@@ -4,7 +4,7 @@
      */
 @endphp
 
-<div class="flex gap-6 justify-between items-center">
+<div class="flex flex-col md:flex-row gap-6 justify-between items-center">
     <div class="flex gap-5">
         <div>
             <img
@@ -31,26 +31,28 @@
         </div>
     </div>
 
-    <div class="flex gap-5">
-        <x-profile.header-block
-            :value="number_format($user->reputation)"
-            :label="__('Total Reputation')"
-        >
-            <x-icons.trophy class="w-full" />
-        </x-profile.header-block>
+    <div class="w-full md:w-auto">
+        <div class="flex gap-5 overflow-auto pb-4">
+            <x-profile.header-block
+                :value="number_format($user->reputation)"
+                :label="__('Total Reputation')"
+            >
+                <x-icons.trophy class="w-full" />
+            </x-profile.header-block>
 
-        <x-profile.header-block
-            :value="number_format($user->arguments_count)"
-            :label="__('Total Arguments')"
-        >
-            <x-icons.chat-bubble class="w-full" />
-        </x-profile.header-block>
+            <x-profile.header-block
+                :value="number_format($user->arguments_count)"
+                :label="__('Total Arguments')"
+            >
+                <x-icons.chat-bubble class="w-full" />
+            </x-profile.header-block>
 
-        <x-profile.header-block
-            :value="number_format($user->argument_votes_count)"
-            :label="__('Total Votes for Arguments')"
-        >
-            <x-icons.arrow-up-empty class="w-full" />
-        </x-profile.header-block>
+            <x-profile.header-block
+                :value="number_format($user->argument_votes_count)"
+                :label="__('Total Votes for Arguments')"
+            >
+                <x-icons.arrow-up-empty class="w-full" />
+            </x-profile.header-block>
+        </div>
     </div>
 </div>
