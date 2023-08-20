@@ -100,8 +100,8 @@
             x-transition:enter-end="opacity-100 transform translate-y-0"
 
             x-transition:leave="transition ease-in duration-300"
-            x-transition:leave-start="opacity-100 transform"
-            x-transition:leave-end="opacity-0 transform"
+            x-transition:leave-start="opacity-100 transform translate-y-0"
+            x-transition:leave-end="opacity-0 transform translate-y-2"
             onclick="window.scrollTo({top: 0});"
             class="rounded-full bg-purple-600 p-4 text-white shadow-md hover:bg-purple-700 duration-700 hover:-translate-y-3 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg active:bg-purple-800 active:shadow-lg"
         >
