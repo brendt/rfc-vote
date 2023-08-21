@@ -46,7 +46,7 @@ final readonly class RfcDetailController
             ->where('published_at', '<=', now()->startOfDay())
             ->where(fn(Builder $builder) => $builder->whereNull('ends_at')->orWhere('ends_at', '>', now()))
             ->when(filled($user), fn(Builder $builder) => $builder->whereDoesntHave('arguments', fn(Builder $builder) => $builder->where('user_id', $user->id)))
-            ->whereRaw('`rfcs`.`id` >= FLOOR(1 + RAND() * (SELECT MAX(`id`) FROM `rfcs`))')
+            ->inRandomOrder()
             ->with(['arguments', 'yesArguments', 'noArguments'])
             ->limit(3)
             ->get();
