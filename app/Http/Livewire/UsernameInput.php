@@ -30,6 +30,7 @@ class UsernameInput extends Component
         ];
     }
 
+
     public function render(): View|Application|Factory|ApplicationAlias
     {
         return view('livewire.username-input');
@@ -38,5 +39,10 @@ class UsernameInput extends Component
     public function updated(string $propertyName): void
     {
         $this->validateOnly($propertyName);
+    }
+
+    public function render(): View|Application|Factory|ApplicationAlias
+    {
+        return view('livewire.username-input');
     }
 }
