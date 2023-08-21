@@ -22,4 +22,17 @@
     <x-profile.user-menu.dropdown-link href="{{ action([App\Http\Controllers\ProfileController::class, 'edit']) }}">
         {{ __('Edit profile') }}
     </x-profile.user-menu.dropdown-link>
+
+    <x-profile.user-menu.dropdown-link onclick="document.getElementById('logout-form').submit()">
+        {{ __('Logout') }}
+    </x-profile.user-menu.dropdown-link>
 </div>
+
+<form
+    id="logout-form"
+    class="hidden"
+    action="{{ action([Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'destroy']) }}"
+    method="post"
+>
+    @csrf
+</form>
