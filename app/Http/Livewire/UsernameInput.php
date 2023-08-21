@@ -21,8 +21,6 @@ class UsernameInput extends Component
 
     public bool $required;
 
-    public mixed $message;
-
     protected function rules(): array
     {
         return [
@@ -30,11 +28,6 @@ class UsernameInput extends Component
         ];
     }
 
-
-    public function render(): View|Application|Factory|ApplicationAlias
-    {
-        return view('livewire.username-input');
-    }
 
     public function updated(string $propertyName): void
     {
