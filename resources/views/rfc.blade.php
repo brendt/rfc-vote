@@ -20,7 +20,7 @@
     <div class="container mx-auto px-4 mt-5 max-w-[1200px] mb-8">
         <x-email-optin-banner :user="$user"/>
 
-        <div class="grid gap-4 bg-white p-10 rounded-xl">
+        <div class="grid gap-4 bg-white p-7 md:px-14 md:py-12 rounded-xl">
             <h1 class="text-2xl md:text-4xl font-bold text-gray-800">
                 {{ $rfc->title }}
             </h1>
@@ -75,14 +75,12 @@
                 @endif
             </div>
 
-
-            <x-markdown class="prose">
+            <x-markdown class="prose text-lg max-w-full">
                 {!! $rfc->description !!}
             </x-markdown>
 
-
             @if(!$user || $user->shouldSeeTutorial())
-                <x-markdown class="prose">
+                <x-markdown class="prose text-lg max-w-full">
 ## How voting works
 
 The goal of this website is to provide a platform for the PHP community to
