@@ -7,7 +7,7 @@
 
 <a
     {{ $attributes->merge([
-        'class' => 'relative group w-full md:w-auto p-4 md:p-1 md:border-none ' . ($isActive ? 'bg-slate-100 md:bg-transparent rounded-xl' : 'border-b')
+        'class' => 'relative group w-full md:w-auto p-4 md:p-1 md:border-none ' . ($isActive ? 'bg-slate-100 md:bg-transparent rounded-xl' : 'border-b last:border-none')
     ]) }}
 >
     {{ $slot }}
