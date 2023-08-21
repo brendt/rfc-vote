@@ -22,12 +22,32 @@
 @endphp
 
 <nav class="bg-main bg-gradient-to-r from-main to-main-light z-10 p-4">
-    <div class="container flex justify-between text-white gap-4 items-center m-auto">
-        <div class="text-lg md:text-xl font-bold">
-            <a href="/">RFC Vote<span class="hidden md:inline"> {{ app()->isProduction() ? '' : ' (local)' }}</span></a>
+    <div
+        class="container flex justify-between text-white gap-4 items-center m-auto relative"
+        x-data="{ open: false }"
+    >
+        <div class="text-lg md:text-xl font-bold relative z-20">
+            <a href="/">
+                RFC Vote
+                <span>{{ app()->isProduction() ? '' : ' (local)' }}</span>
+            </a>
         </div>
 
-        <div class="flex justify-end items-baseline gap-4 md:gap-6 font-bold text-sm md:text-md">
+        <x-navbar.mobile-menu-trigger />
+
+        {{-- Overlay --}}
+        <div
+            x-cloak
+            x-show="open"
+            @click="open = false"
+            class="bg-slate-900/60 fixed inset-0 z-10"
+        ></div>
+
+        <div
+            class="md:flex justify-end items-baseline md:gap-6 font-bold text-sm md:text-md inset-x-2 top-14 z-10"
+            :class="open ? 'flex absolute bg-white text-gray-700 flex-col rounded-xl shadow-lg text-[1.1em] py-8 px-4' : 'hidden gap-4'"
+            x-cloak
+        >
             <x-navbar.link
                 href="{{ action(App\Http\Controllers\HomeController::class) }}"
                 :isActive="request()->is('/')"
