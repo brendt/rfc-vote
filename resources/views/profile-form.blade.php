@@ -135,5 +135,31 @@
                 </div>
             </div>
         </x-form.wrapper>
+
+        <x-form.wrapper
+            action="{{ action([App\Http\Controllers\ProfileController::class, 'requestVerification']) }}"
+            method="post"
+            heading="Verification"
+        >
+            <p class="mb-4 text-gray-600">
+                TODO
+            </p>
+
+            @if($user->pendingVerificationRequests->isEmpty())
+                <div class="space-y-3">
+                    <x-form.textarea name="motivation" label="Motivation" rows="5"></x-form.textarea>
+
+                    <div class="text-right">
+                        <x-form.button type="submit">
+                            {{ "Request Verification" }}
+                        </x-form.button>
+                    </div>
+                </div>
+            @else
+                <p>You already have a pending verification request.</p>
+            @endif
+        </x-form.wrapper>
+
+
     </div>
 @endcomponent

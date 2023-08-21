@@ -83,6 +83,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(EmailChangeRequest::class);
     }
 
+    public function verificationRequests(): HasMany
+    {
+        return $this->hasMany(VerificationRequest::class);
+    }
+
+    public function pendingVerificationRequests(): HasMany
+    {
+        return $this->hasMany(VerificationRequest::class)->where('status', VerificationRequestStatus::PENDING);
+    }
+
     public function getArgumentForRfc(Rfc $rfc): ?Argument
     {
         return $this->arguments->first(fn (Argument $argument) => $argument->rfc_id === $rfc->id);

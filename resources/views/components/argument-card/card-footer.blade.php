@@ -33,6 +33,10 @@
                     />
 
                     <div class="group-hover/username:underline">{{ \Illuminate\Support\Str::limit($argumentUser->username, 18) }}</div>
+
+                    @if($user->flair)
+                        <x-tag class="text-xs text-white" style="background-color: {{ $user->flair_color }}">{{ $user->flair }}</x-tag>
+                    @endif
                 </a>
             @endif
 

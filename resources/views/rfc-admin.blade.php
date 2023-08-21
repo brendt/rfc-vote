@@ -1,4 +1,4 @@
-@component('layouts.base')
+@component('layouts.admin')
     <div class="grid gap-4 px-4">
         <div class="p-4 flex justify-end bg-white">
             <a href="{{ action([\App\Http\Controllers\RfcCreateController::class, 'create']) }}"
