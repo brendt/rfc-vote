@@ -74,14 +74,19 @@
 
                 <x-profile.user-menu.menu :user="$user" />
             @else
-                <div>
-                    <x-navbar.link
-                        href="{{ action(App\Http\Controllers\LoginController::class) }}"
-                        :isActive="request()->is('login')"
-                    >
-                        Login
-                    </x-navbar.link>
-                </div>
+                <x-navbar.link
+                    href="{{ action(App\Http\Controllers\LoginController::class) }}"
+                    :isActive="request()->is('login')"
+                >
+                    Login
+                </x-navbar.link>
+
+                <x-navbar.link
+                    href="{{ action(App\Http\Controllers\RegisterController::class) }}"
+                    :isActive="request()->is('register')"
+                >
+                    Register
+                </x-navbar.link>
             @endif
         </div>
     </div>
