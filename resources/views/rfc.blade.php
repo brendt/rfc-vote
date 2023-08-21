@@ -45,7 +45,7 @@
 
                 @if($user?->is_admin)
                     <x-tag
-                        :href="action([App\Http\Controllers\RfcEditController::class, 'edit'], ['rfc' => $rfc, 'back' => action(\App\Http\Controllers\RfcDetailController::class, $rfc)])"
+                        :href="action([App\Http\Controllers\RfcEditController::class, 'edit'], ['rfc' => $rfc, 'back' => action(App\Http\Controllers\RfcDetailController::class, $rfc)])"
                         class="bg-blue-100"
                     >
                         <x-icons.pen class="w-4 h-4" />
