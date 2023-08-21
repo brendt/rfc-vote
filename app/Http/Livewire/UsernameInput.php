@@ -28,7 +28,6 @@ class UsernameInput extends Component
         ];
     }
 
-
     public function updated(string $propertyName): void
     {
         $this->validateOnly($propertyName);

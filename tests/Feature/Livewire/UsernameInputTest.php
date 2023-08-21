@@ -17,23 +17,23 @@ class UsernameInputTest extends TestCase
 
     public function test_has_data_passed_correctly(): void
     {
-        $value       = 'just-a-test';
+        $value = 'just-a-test';
         $placeholder = 'placeholder';
-        $label       = 'label';
-        $required    = true;
+        $label = 'label';
+        $required = true;
 
         Livewire::test(
             UsernameInput::class,
             [
-                'value'       => $value,
+                'value' => $value,
                 'placeholder' => $placeholder,
-                'label'       => $label,
-                'required'    => $required,
+                'label' => $label,
+                'required' => $required,
             ]
         )
-                ->assertSet('value', $value)
-                ->assertSet('placeholder', $placeholder)
-                ->assertSet('label', $label)
-                ->assertSet('required', $required);
+            ->assertSet('value', $value)
+            ->assertSet('placeholder', $placeholder)
+            ->assertSet('label', $label)
+            ->assertSet('required', $required);
     }
 }
