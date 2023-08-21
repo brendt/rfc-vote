@@ -4,7 +4,10 @@
     </div>
 
     <div class="container max-w-[1200px] mx-auto px-4 grid gap-4 mt-4 md:mt-8">
-        <h2 class="text-xl font-bold">Open RFCs</h2>
+        <x-home.title>
+            {{ __('Open RFCs') }}
+        </x-home.title>
+
         <div class="grid lg:grid-cols-3 gap-5">
             @foreach ($rfcs as $rfc)
                 <x-card-link :href="action(App\Http\Controllers\RfcDetailController::class, $rfc)">
@@ -77,7 +80,10 @@
 
     @if($argumentOfTheDay)
         <div class="container max-w-[1200px] mx-auto px-4 grid mt-4 md:mt-8 gap-4">
-            <h2 class="text-xl font-bold">Argument of the day</h2>
+            <x-home.title>
+                {{ __('Argument of the Day') }}
+            </x-home.title>
+
             <x-argument-card.card
                 :user="$argumentOfTheDay->user"
                 :rfc="$argumentOfTheDay->rfc"
