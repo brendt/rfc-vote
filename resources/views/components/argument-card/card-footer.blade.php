@@ -39,9 +39,9 @@
             {{ __('voted') }}
 
             <b @class([
-                'tracking-wide uppercase',
-                'text-green-700' => $argument->vote_type->isYes(),
-                'text-red-700' => $argument->vote_type->isNo(),
+                'tracking-wide uppercase ml-0.5',
+                'text-agree' => $argument->vote_type->isYes(),
+                'text-disagree' => $argument->vote_type->isNo(),
             ])>
                 {{ $argument->vote_type->value }}
             </b>
