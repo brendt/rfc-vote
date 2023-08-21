@@ -29,6 +29,13 @@
 
         <div class="flex justify-end items-baseline gap-4 md:gap-6 font-bold text-sm md:text-md">
             <x-navbar.link
+                href="{{ action(App\Http\Controllers\HomeController::class) }}"
+                :isActive="request()->is('/')"
+            >
+                Open RFCs
+            </x-navbar.link>
+
+            <x-navbar.link
                 href="{{ action(App\Http\Controllers\AboutController::class) }}"
                 :isActive="request()->is('about')"
             >
