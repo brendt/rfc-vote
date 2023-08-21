@@ -3,24 +3,24 @@
 namespace Tests\Unit\Rules;
 
 use App\Rules\UsernameFormatRule;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Support\Facades\Validator;
+use PHPUnit\Framework\TestCase;
 
 class UsernameFormatRuleTest extends TestCase
 {
-    public function test_it_can_validate_a_username():void
+    public function test_it_can_validate_a_username(): void
     {
-       $rule = new UsernameFormatRule();
+        $rule = new UsernameFormatRule();
 
-       $validator = Validator::make(
-           ['username' => 'just-a-test'],
-           ['username' => $rule],
-       );
+        $validator = Validator::make(
+            ['username' => 'just-a-test'],
+            ['username' => $rule],
+        );
 
-       $this->assertFalse($validator->fails());
+        $this->assertFalse($validator->fails());
     }
 
-    public function test_it_can_invalidate_a_username():void
+    public function test_it_can_invalidate_a_username(): void
     {
         $rule = new UsernameFormatRule();
 
