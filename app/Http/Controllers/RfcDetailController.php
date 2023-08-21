@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Argument;
 use App\Models\Rfc;
 use App\Support\Meta;
+use Illuminate\Database\Eloquent\Builder;
 
 final readonly class RfcDetailController
 {
@@ -41,9 +42,20 @@ final readonly class RfcDetailController
             );
         }
 
+        $additionalRfcs = Rfc::query()
+            ->where('published_at', '<=', now()->startOfDay())
+            ->where(fn(Builder $builder) => $builder->whereNull('ends_at')->orWhere('ends_at', '>', now()))
+            ->when(filled($user), fn(Builder $builder) => $builder->whereDoesntHave('arguments', fn(Builder $builder) => $builder->where('user_id', $user->id)))
+            ->whereRaw('`rfcs`.`id` >= FLOOR(1 + RAND() * (SELECT MAX(`id`) FROM `rfcs`))')
+            ->with(['arguments', 'yesArguments', 'noArguments'])
+            ->limit(3)
+            ->get();
+
+
         return view('rfc', [
             'rfc' => $rfc,
             'user' => $user,
+            'additionalRfcs' => $additionalRfcs,
         ]);
     }
 }

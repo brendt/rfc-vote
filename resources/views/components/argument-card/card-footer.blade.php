@@ -56,7 +56,7 @@
         </small>
 
         {{-- Label that shows if the argument haven't been seen --}}
-        @if ($user && !$user->hasSeenArgument($argument))
+        @if (!$readonly && $user && !$user->hasSeenArgument($argument))
             <span class="hidden md:block">•</span>
             <small class="flex gap-1.5 items-center">
                 <x-icons.check-badge class="w-4 h-4" />
