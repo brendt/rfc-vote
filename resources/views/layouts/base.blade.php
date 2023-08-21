@@ -45,20 +45,7 @@
                     </x-navbar.link>
                 @endif
 
-                <a
-                    class="flex gap-3 items-center bg-purple-900 hover:bg-gray-800 group transition-colors pl-5 rounded-full"
-                    href="{{ action([App\Http\Controllers\ProfileController::class, 'edit']) }}"
-                >
-                    <span class="front-bold">{{ $user->username }}</span>
-
-                    @if($user->getAvatarUrl())
-                        <img
-                            src="{{ $user->getAvatarUrl() }}"
-                            class="rounded-full w-8 h-8 transition-transform group-hover:scale-110"
-                            alt="{{ $user->name }} user avatar"
-                        />
-                    @endif
-                </a>
+                <x-profile.user-menu.menu :user="$user" />
             @else
                 <div>
                     <x-navbar.link
