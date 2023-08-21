@@ -34,6 +34,7 @@ class VerificationRequestsList extends Component
     {
         if (! $this->isAccepting) {
             $this->isAccepting = $request;
+
             return;
         }
 
@@ -45,7 +46,6 @@ class VerificationRequestsList extends Component
         $request->update([
             'status' => VerificationRequestStatus::ACCEPTED,
         ]);
-
 
         $request->user->update([
             'flair' => $this->flair,
@@ -59,6 +59,7 @@ class VerificationRequestsList extends Component
     {
         if (! $this->isDenying) {
             $this->isDenying = $request;
+
             return;
         }
 
