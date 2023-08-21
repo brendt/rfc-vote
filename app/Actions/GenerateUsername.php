@@ -18,6 +18,6 @@ final class GenerateUsername
 
     private function generateUsername(string $string): string
     {
-        return Str::slug(explode(' ', $string)[0] ?? '', '');
+        return Str::slug($string);
     }
 }
