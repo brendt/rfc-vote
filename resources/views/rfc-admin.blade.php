@@ -7,27 +7,37 @@
             >New</a>
         </div>
 
-        <div class="grid gap-2">
+        <div class="grid gap-2 divide-y divide-gray-300">
             @foreach($rfcs as $rfc)
-                <div
-                    class="grid grid-cols-12 p-4 gap-4 items-center {{ $rfc->isActive() ? 'bg-white border-l-8 border-blue-800' : 'bg-gray-50' }}">
-                    <div class="grid col-span-2">
-                        <span class="font-bold">
+                <div class="grid grid-cols-12 p-4 gap-4 items-center">
+                    <div class="grid col-span-2 gap-1">
+                        <h2 class="font-bold">
                             {{ $rfc->title }}
-                        </span>
-                        <div class="flex">
+                        </h2>
+
+                        <div class="flex text-gray-500 text-sm">
                             {{ $rfc->published_at?->format('Y-m-d') }}
-                            <span>&nbsp;—&nbsp;</span> {{ $rfc->ends_at?->format('Y-m-d') }}
+                            <span>&nbsp;—&nbsp;</span> {{ $rfc->ends_at?->format('Y-m-d') ?? 'unknown' }}
+                        </div>
+
+                        <div>
+                            <div @class([
+                                'inline-flex gap-2 items-baseline border-t border rounded-full px-2',
+                                $rfc->isActive() ? 'border-agree-light bg-green-50' : 'border-disagree-light bg-red-50',
+                            ])>
+                                <div class="w-3 h-3 rounded-full {{ $rfc->isActive() ? 'bg-agree-light' : 'bg-disagree-light' }}"></div>
+                                <span class="text-sm">{{ $rfc->isActive() ? 'Active' : 'Not active' }}</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-span-4">
+                    <div class="col-span-6">
                         {{ $rfc->description }}
                     </div>
 
-                    <div class="col-span-6 flex justify-end gap-2 items-center text-sm">
+                    <div class="col-span-4 flex justify-end gap-3 items-center text-sm">
                         @if($rfc->arguments->isNotEmpty())
-                            <div class="flex font-bold text-sm min-w-[20%] text-white rounded-md">
+                            <div class="flex font-bold text-sm w-full text-white rounded-md">
                                 <div
                                     class="rounded-l-md pl-2 py-[6px] items-center text-left border-r border-gray-700 min-w-[30%] bg-agree text-xs"
                                     style="width: {{ $rfc->percentage_yes }}%;"
