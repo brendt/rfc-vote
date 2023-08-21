@@ -71,32 +71,31 @@
             <livewire:argument-list :rfc="$rfc" :user="$user"/>
         </div>
 
+        <div class="mt-12 md:px-8">
+            <h2 class="text-2xl text-gray-600 font-bold tracking-wide md:mb-1">
+                {{ __('Check out another RFCs') }}
+            </h2>
+            <div class="flex flex-col justify-center lg:flex-row mt-4 space-x-0 space-y-4 lg:space-x-4 lg:space-y-0">
+                @foreach($additionalRfcs as $additionalRfc)
+                    <x-card-link :href="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)" class="flex-1">
+                        <div class="text-xl text-gray-800 font-bold px-2 border-b pb-4 mb-2">
+                            {{ $additionalRfc->title }}
+                        </div>
 
-        <h2 class="text-2xl text-gray-600 font-bold mt-12 tracking-wide md:mb-1">
-            {{ __('Check out another RFCs') }}
-        </h2>
-        <div class="flex flex-col justify-center lg:flex-row mt-4 space-x-0 space-y-4 lg:space-x-4 lg:space-y-0">
-            @foreach($additionalRfcs as $additionalRfc)
+                        <x-markdown class="px-2 text-gray-800">{!! $additionalRfc->teaser !!}</x-markdown>
 
-                <x-card-link :href="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)"
-                             class="flex-1">
-                    <div class="text-xl text-gray-800 font-bold px-2 border-b pb-4 mb-2">
-                        {{ $rfc->title }}
-                    </div>
+                        <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">
+                            <x-tag class="font-bold">
+                                <x-icons.chat-bubble class="w-4 h-4"/>
+                                {{ $additionalRfc->arguments->count() }}
+                            </x-tag>
 
-                    <x-markdown class="px-2 text-gray-800">{!! $additionalRfc->teaser !!}</x-markdown>
-
-                    <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">
-                        <x-tag class="font-bold">
-                            <x-icons.chat-bubble class="w-4 h-4"/>
-                            {{ $rfc->arguments->count() }}
-                        </x-tag>
-
-                        <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::YES"/>
-                        <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::NO"/>
-                    </div>
-                </x-card-link>
-            @endforeach
+                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::YES"/>
+                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::NO"/>
+                        </div>
+                    </x-card-link>
+                @endforeach
+            </div>
         </div>
     </div>
 @endcomponent
