@@ -1,7 +1,8 @@
 @component('layouts.base')
     <div class="grid gap-4 px-4">
         <div class="p-4 flex justify-end bg-white">
-            <a href="{{ action([\App\Http\Controllers\RfcCreateController::class, 'create']) }}"
+            <a
+                href="{{ action([\App\Http\Controllers\RfcCreateController::class, 'create']) }}"
                class="bg-green-100 border border-green-500 text-green-500 hover:bg-green-500 hover:text-white p-2 py-1 font-bold rounded text-center"
             >New</a>
         </div>
@@ -29,21 +30,13 @@
                             <div
                                 class="border-gray-700 border flex font-bold text-sm min-w-[20%]">
                                 <div
-                                    class="
-                                    p-1 px-4 flex-grow text-left border-r border-gray-700
-                                    min-w-[30%]
-                                    bg-green-300 text-green-900
-                                "
+                                    class="p-1 px-4 flex-grow text-left border-r border-gray-700 min-w-[30%] bg-green-300 text-green-900"
                                     style="width: {{ $rfc->percentage_yes }}%;"
                                 >
                                     {{ $rfc->percentage_yes }}%
                                 </div>
                                 <div
-                                    class="
-                            p-1 px-4 flex-grow text-right border-gray-700
-                            min-w-[30%]
-                            bg-red-300 text-red-900
-                        "
+                                    class="p-1 px-4 flex-grow text-right border-gray-700 min-w-[30%] bg-red-300 text-red-900"
                                     style="width: {{ $rfc->percentage_no }}%;"
                                 >
                                     {{ $rfc->percentage_no }}%
