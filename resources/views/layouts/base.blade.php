@@ -23,7 +23,7 @@
 
 <nav class="bg-main bg-gradient-to-r from-main to-main-light z-10 p-4">
     <div
-        class="container flex justify-between text-white gap-4 items-center m-auto relative"
+        class="container flex justify-between text-white gap-4 items-center m-auto relative px-2"
         x-data="{ open: false }"
     >
         <div class="text-lg md:text-xl font-bold relative z-20">
