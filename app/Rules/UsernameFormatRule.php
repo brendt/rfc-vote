@@ -12,7 +12,7 @@ class UsernameFormatRule implements ValidationRule
     {
 
         if (! is_string($value) || $value !== (new GenerateUsername())($value)) {
-            $fail('The :attribute must be valid. Only lowercase ASCII characters are allowed. Hyphens can be used. Whitespace, underscores, and multiple hyphens are not permitted. The username cannot start or end with a hyphen.');
+            $fail(__('The :attribute must be valid. Only lowercase ASCII characters are allowed. Hyphens can be used. Whitespace, underscores, and multiple hyphens are not permitted. The username cannot start or end with a hyphen.'));
         }
     }
 }
