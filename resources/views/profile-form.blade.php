@@ -1,14 +1,6 @@
 @component('layouts.base')
     <div class="grid mx-auto container max-w-[800px] px-4 gap-6 mt-4 md:mt-12 mb-8">
         <x-form.wrapper
-            action="{{ action([Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'destroy']) }}"
-            method="post"
-            heading="Logout"
-        >
-            <x-form.button type="submit">Logout</x-form.button>
-        </x-form.wrapper>
-
-        <x-form.wrapper
             action="{{ action([App\Http\Controllers\ProfileController::class, 'update']) }}"
             method="post"
             enctype="multipart/form-data"
