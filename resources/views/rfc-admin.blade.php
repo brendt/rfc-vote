@@ -2,15 +2,15 @@
     <div class="grid gap-4 px-4">
         <div class="p-4 flex justify-end bg-white">
             <a
-                href="{{ action([\App\Http\Controllers\RfcCreateController::class, 'create']) }}"
+                href="{{ action([App\Http\Controllers\RfcCreateController::class, 'create']) }}"
                class="bg-green-100 border border-green-500 text-green-500 hover:bg-green-500 hover:text-white p-2 py-1 font-bold rounded text-center"
             >New</a>
         </div>
 
         <div class="grid gap-2 divide-y divide-gray-300">
             @foreach($rfcs as $rfc)
-                <div class="grid grid-cols-12 p-4 gap-4 items-center">
-                    <div class="grid col-span-2 gap-1">
+                <div class="grid grid-cols-6 lg:grid-cols-12 p-4 gap-4 items-center">
+                    <div class="col-span-6 lg:col-span-2 space-y-1">
                         <h2 class="font-bold">
                             {{ $rfc->title }}
                         </h2>
@@ -35,7 +35,7 @@
                         {{ $rfc->description }}
                     </div>
 
-                    <div class="col-span-4 flex justify-end gap-3 items-center text-sm">
+                    <div class="col-span-6 md:col-span-4 flex gap-3 items-center text-sm">
                         @if($rfc->arguments->isNotEmpty())
                             <div class="flex font-bold text-sm w-full text-white rounded-md">
                                 <div
@@ -62,7 +62,7 @@
                         </x-buttons.main-small-solid>
 
                         @if($rfc->published_at === null)
-                            <form action="{{ action(\App\Http\Controllers\PublishRfcController::class, $rfc) }}" method="post">
+                            <form action="{{ action(App\Http\Controllers\PublishRfcController::class, $rfc) }}" method="post">
                                 @csrf()
                                 <x-buttons.main-small-solid type="submit">
                                     Publish
@@ -71,7 +71,7 @@
                         @endif
 
                         @if($rfc->ends_at === null)
-                            <form action="{{ action(\App\Http\Controllers\EndRfcController::class, $rfc) }}" method="post">
+                            <form action="{{ action(App\Http\Controllers\EndRfcController::class, $rfc) }}" method="post">
                                 @csrf()
                                 <x-buttons.main-small-solid type="submit" class="!border-disagree !text-disagree">
                                     End
