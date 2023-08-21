@@ -25,47 +25,47 @@
                         {{ $rfc->description }}
                     </div>
 
-                    <div class="col-span-6 flex justify-end gap-1 items-baseline text-sm">
+                    <div class="col-span-6 flex justify-end gap-2 items-center text-sm">
                         @if($rfc->arguments->isNotEmpty())
-                            <div
-                                class="border-gray-700 border flex font-bold text-sm min-w-[20%]">
+                            <div class="flex font-bold text-sm min-w-[20%] text-white rounded-md">
                                 <div
-                                    class="p-1 px-4 flex-grow text-left border-r border-gray-700 min-w-[30%] bg-green-300 text-green-900"
+                                    class="rounded-l-md pl-2 py-[6px] items-center text-left border-r border-gray-700 min-w-[30%] bg-agree text-xs"
                                     style="width: {{ $rfc->percentage_yes }}%;"
                                 >
-                                    {{ $rfc->percentage_yes }}%
+                                    {{ $rfc->percentage_yes }}<small>%</small>
                                 </div>
+
+                                <div class="bg-white w-[1px]"></div>
+
                                 <div
-                                    class="p-1 px-4 flex-grow text-right border-gray-700 min-w-[30%] bg-red-300 text-red-900"
+                                    class="rounded-r-md pr-2 py-[6px] items-center text-right border-gray-700 min-w-[30%] bg-disagree text-xs"
                                     style="width: {{ $rfc->percentage_no }}%;"
                                 >
-                                    {{ $rfc->percentage_no }}%
+                                    {{ $rfc->percentage_no }}<small>%</small>
                                 </div>
                             </div>
                         @endif
 
-                        <a
-                            href="{{ action([\App\Http\Controllers\RfcEditController::class, 'edit'], $rfc) }}"
-                            class="bg-blue-100 border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white p-1 px-3 py-1 font-bold rounded text-center"
-                        >Edit</a>
+                        <x-buttons.main-small-solid href="{{ action([App\Http\Controllers\RfcEditController::class, 'edit'], $rfc) }}">
+                            <x-icons.pen class="w-4 h-4" />
+                            Edit
+                        </x-buttons.main-small-solid>
 
                         @if($rfc->published_at === null)
                             <form action="{{ action(\App\Http\Controllers\PublishRfcController::class, $rfc) }}" method="post">
                                 @csrf()
-                                <button
-                                    type="submit"
-                                    class="bg-blue-100 border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white p-1 px-3 py-1 font-bold rounded text-center"
-                                >Publish</button>
+                                <x-buttons.main-small-solid type="submit">
+                                    Publish
+                                </x-buttons.main-small-solid>
                             </form>
                         @endif
 
                         @if($rfc->ends_at === null)
                             <form action="{{ action(\App\Http\Controllers\EndRfcController::class, $rfc) }}" method="post">
                                 @csrf()
-                                <button
-                                    type="submit"
-                                    class="bg-gray-100 border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white p-1 px-3 py-1 font-bold rounded text-center"
-                                >End</button>
+                                <x-buttons.main-small-solid type="submit" class="!border-disagree !text-disagree">
+                                    End
+                                </x-buttons.main-small-solid>
                             </form>
                         @endif
                     </div>
