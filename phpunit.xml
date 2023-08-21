@@ -6,7 +6,10 @@
 >
     <testsuites>
         <testsuite name="Feature">
-            <directory>tests/Feature</directory>
+            <directory>./tests/Feature</directory>
+        </testsuite>
+        <testsuite name="Unit">
+            <directory>./tests/Unit</directory>
         </testsuite>
     </testsuites>
     <source>
