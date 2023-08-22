@@ -46,7 +46,6 @@ final readonly class HomeController
         if (! $row) {
             return null;
         }
-
         return Argument::find($row->argument_id);
     }
 }
