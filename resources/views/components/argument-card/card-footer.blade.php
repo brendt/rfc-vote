@@ -21,6 +21,16 @@
         @endif
 
         <small class="flex items-center gap-1">
+            @if($argumentUser?->flair)
+                <span
+                    aria-label="User role"
+                    class="text-xs border px-3 py-0.5 rounded-full mr-1.5"
+                    title="This user is {{ Str::title($argumentUser->flair) }}"
+                >
+                    {{ Str::title($argumentUser->flair) }}
+                </span>
+            @endif
+
             @if ($argumentUser?->getAvatarUrl())
                 <a
                     href="{{ action(App\Http\Controllers\PublicProfileController::class, $argumentUser) }}"
@@ -33,10 +43,6 @@
                     />
 
                     <div class="group-hover/username:underline">{{ \Illuminate\Support\Str::limit($argumentUser->username, 18) }}</div>
-
-                    @if($user->flair)
-                        <x-tag class="text-xs text-white" style="background-color: {{ $user->flair_color }}">{{ $user->flair }}</x-tag>
-                    @endif
                 </a>
             @endif
 
