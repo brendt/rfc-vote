@@ -1,7 +1,7 @@
 @php
-/**
- * @var string $verificationLink
- */
+    /**
+     * @var string $verificationLink
+     */
 @endphp
 
 @component('mail::layout')
