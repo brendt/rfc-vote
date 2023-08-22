@@ -60,7 +60,7 @@ class UsernameInputTest extends TestCase
     {
         return [
             'Value is required' => ['value', ['value' => null]],
-            'Value must have a minimum length of 1' => ['value', ['value' => '']],
+            'Value must have a minimum length of 2' => ['value', ['value' => 's']],
             'Value must have a maximum length of 50' => [
                 'value',
                 ['value' => (new GenerateUsername)(Str::random(51))],

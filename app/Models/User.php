@@ -170,6 +170,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function usernameValidationRules(): array
     {
-        return ['required', 'string', 'min:1', 'max:50', 'unique:users,username', new UsernameFormatRule];
+        return [new UsernameFormatRule];
     }
 }

@@ -85,7 +85,7 @@ class RegistrationTest extends TestCase
     {
         return [
             'Username is required' => ['username', ['username' => null]],
-            'Username must have a minimum length of 1' => ['username', ['username' => '']],
+            'Username must have a minimum length of 2' => ['username', ['username' => '']],
             'Username must have a maximum length of 50' => [
                 'username',
                 ['username' => (new GenerateUsername)(Str::random(51))],
