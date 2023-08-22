@@ -40,7 +40,7 @@ class GatherRfcMetaData
         $html = str_replace(['→'], ['-'], $result->output());
 
         $dom = new DOMDocument();
-        @$dom->loadHTML('<?xml encoding="utf-8"?>' . $html);
+        @$dom->loadHTML('<?xml encoding="utf-8"?>'.$html);
 
         $xpath = new DOMXPath($dom);
         $title = $xpath->query('//h1[1] | //h2[1]')[0]->textContent ?? '';
@@ -52,12 +52,12 @@ class GatherRfcMetaData
             'section' => $rfc->sections()[$rfc->name]['section'] ?? 'Unknown',
             'slug' => $rfc->name,
             'title' => $this->removeExcessWhitespace($title),
-            'wiki URL' => 'https://wiki.php.net/rfc/' . $rfc->name,
+            'wiki URL' => 'https://wiki.php.net/rfc/'.$rfc->name,
         ];
 
         /** @var DOMElement $item */
         foreach ($listItems as $item) {
-            if (!preg_match('#<li>(.*)</li>#sm', $item->C14N(), $matches)) {
+            if (! preg_match('#<li>(.*)</li>#sm', $item->C14N(), $matches)) {
                 continue;
             }
 
@@ -130,7 +130,7 @@ class GatherRfcMetaData
         $result = Process::command(['pandoc', '--from', 'html', '--to', 'rst'])->input(
             $value
         )->run()
-        ->throw();
+            ->throw();
 
         return $this->removeExcessWhitespace($result->output());
     }

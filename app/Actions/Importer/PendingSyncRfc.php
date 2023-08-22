@@ -5,8 +5,11 @@ namespace App\Actions\Importer;
 class PendingSyncRfc
 {
     private array $metadata;
+
     private array $rawMetadata;
+
     private string $text;
+
     private string $raw;
 
     public function __construct(public readonly string $name, private array $sections)

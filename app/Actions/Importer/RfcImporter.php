@@ -33,6 +33,6 @@ class RfcImporter
                 GatherRfcMetaData::class,
                 CleanMetaData::class,
                 GenerateRfcMarkdownText::class,
-            ])->then(fn($rfc) => $rfc->toArray());
+            ])->then(fn ($rfc) => $rfc->toArray());
     }
 }

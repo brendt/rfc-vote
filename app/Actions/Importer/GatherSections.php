@@ -13,7 +13,6 @@ use PhpRfcs\Wiki;
 use RuntimeException;
 use Tidy;
 
-
 class GatherSections
 {
     private Tidy $tidy;
@@ -22,7 +21,8 @@ class GatherSections
     {
         $this->tidy = $this->initializeTidy();
     }
-    public function index(?string $slug = null)
+
+    public function index(string $slug = null)
     {
         $rfcs = $this->addFromRfcsPage([]);
         $rfcs = $this->addOrphanedRfcPages($rfcs);
@@ -75,7 +75,7 @@ class GatherSections
     private function addFromRfcsPage(array $rfcs = null): array
     {
         $body = \Http::withHeaders([
-            'X-DokuWiki-Do', 'export_xhtmlbody'
+            'X-DokuWiki-Do', 'export_xhtmlbody',
         ])->get('https://wiki.php.net/rfc')
             ->throw()
             ->body();
@@ -85,7 +85,7 @@ class GatherSections
 
     private function addOrphanedRfcPages(array $rfcs): array
     {
-        $body = Http::get('https://wiki.php.net/rfc' . '?do=index&idx=rfc')
+        $body = Http::get('https://wiki.php.net/rfc'.'?do=index&idx=rfc')
             ->throw()
             ->body();
 
@@ -97,14 +97,14 @@ class GatherSections
         $contents = $this->tidy->repairString($body);
 
         $dom = new DOMDocument();
-        @$dom->loadHTML('<?xml encoding="utf-8">' . $contents);
+        @$dom->loadHTML('<?xml encoding="utf-8">'.$contents);
 
         $xpath = new DOMXPath($dom);
 
         // Find all <a> tags having a data-wiki-id attribute.
         $links = $xpath->query('//a[@data-wiki-id]');
 
-        if (!$links instanceof DOMNodeList) {
+        if (! $links instanceof DOMNodeList) {
             throw new RuntimeException('Could not find data-wiki-id links on page');
         }
 
@@ -120,7 +120,7 @@ class GatherSections
                 $rfcs[$slug] = [
                     'slug' => $slug,
                     'section' => $inspectSection ? $this->getSectionHeading($link) : 'Unknown',
-                    'url' => 'https://wiki.php.net/rfc' . '/' . $slug,
+                    'url' => 'https://wiki.php.net/rfc'.'/'.$slug,
                 ];
             }
         }
@@ -161,4 +161,3 @@ class GatherSections
         ], encoding: 'utf8');
     }
 }
-

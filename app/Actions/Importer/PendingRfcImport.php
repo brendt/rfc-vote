@@ -14,12 +14,11 @@ readonly class PendingRfcImport
 
     public function __invoke(
         array $rfcs,
-    ): void
-    {
+    ): void {
         $rfcs = $this->importer->__invoke($rfcs);
 
         PendingRfc::upsert($rfcs, [
-            'title'
+            'title',
         ]);
     }
 }

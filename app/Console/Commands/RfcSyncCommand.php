@@ -3,11 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Actions\Importer\PendingRfcImport;
-use App\Models\PendingRfc;
-use App\Models\Rfc;
-use Feed;
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 
 class RfcSyncCommand extends Command
 {
