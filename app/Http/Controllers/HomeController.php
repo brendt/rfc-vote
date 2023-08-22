@@ -45,5 +45,6 @@ final readonly class HomeController
             ->first();
 
         return $row?->argument;
+
     }
 }
