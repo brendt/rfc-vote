@@ -4,7 +4,7 @@
      * @var Illuminate\View\ComponentSlot $slot
      */
 
-    $styles = 'bg-purple-800 hover:bg-purple-900 inline-flex items-center justify-center gap-3 px-3 py-1 transition-colors rounded-md font-bold text-white text-sm cursor-pointer';
+    $styles = 'bg-none hover:bg-purple-50 hover:text-gray-700 hover:border-gray-600 inline-flex items-center justify-center gap-2 px-2 py-1 transition-colors rounded-md border border-main-light font-bold text-sm cursor-pointer text-main-dark';
 @endphp
 
 @if ($attributes->has('href'))
