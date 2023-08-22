@@ -40,14 +40,14 @@ class UsernameInputTest extends TestCase
     public function test_value_is_required(): void
     {
         Livewire::test(UsernameInput::class)
-                ->set('value', '')
-                ->assertHasErrors(['value' => 'required']);
+            ->set('value', '')
+            ->assertHasErrors(['value' => 'required']);
     }
 
     public function test_value_follows_specific_rule(): void
     {
         Livewire::test(UsernameInput::class)
-                ->set('value', 'Another bad username')
-                ->assertSee('The value must be valid. Only lowercase ASCII characters are allowed. Hyphens can be used. Whitespace, underscores, and multiple hyphens are not permitted. The username cannot start or end with a hyphen.');
+            ->set('value', 'Another bad username')
+            ->assertSee('The value must be valid. Only lowercase ASCII characters are allowed. Hyphens can be used. Whitespace, underscores, and multiple hyphens are not permitted. The username cannot start or end with a hyphen.');
     }
 }

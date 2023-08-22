@@ -17,7 +17,7 @@ class RegistrationTest extends TestCase
 
     public function test_registration_screen_can_be_rendered(): void
     {
-        if (!Features::enabled(Features::registration())) {
+        if (! Features::enabled(Features::registration())) {
             $this->markTestSkipped('Registration support is not enabled.');
 
             return;
@@ -30,7 +30,7 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register(): void
     {
-        if (!Features::enabled(Features::registration())) {
+        if (! Features::enabled(Features::registration())) {
             $this->markTestSkipped('Registration support is not enabled.');
 
             return;
@@ -39,12 +39,12 @@ class RegistrationTest extends TestCase
         $name = 'Test User';
 
         $response = $this->post('/register', [
-            'name'                  => $name,
-            'username'              => (new GenerateUsername)($name),
-            'email'                 => 'test@example.com',
-            'password'              => 'password',
+            'name' => $name,
+            'username' => (new GenerateUsername)($name),
+            'email' => 'test@example.com',
+            'password' => 'password',
             'password_confirmation' => 'password',
-            'terms'                 => Jetstream::hasTermsAndPrivacyPolicyFeature(),
+            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
         ]);
 
         $this->assertAuthenticated();
@@ -58,7 +58,7 @@ class RegistrationTest extends TestCase
     {
         $controlUser = User::factory()->create(
             [
-                'email'    => 'test@test.com',
+                'email' => 'test@test.com',
                 'username' => 'test',
             ]
         );
@@ -66,12 +66,12 @@ class RegistrationTest extends TestCase
         $dummyUser = User::factory()->make();
 
         $response = $this->post('/register', [
-            'name'                  => $dummyUser->name,
-            'username'              => $dummyUser->username,
-            'email'                 => $dummyUser->email,
-            'password'              => 'password',
+            'name' => $dummyUser->name,
+            'username' => $dummyUser->username,
+            'email' => $dummyUser->email,
+            'password' => 'password',
             'password_confirmation' => 'password',
-            'terms'                 => Jetstream::hasTermsAndPrivacyPolicyFeature(),
+            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
             ...$inputData,
         ])->assertSessionHasErrors([$fieldKey]);
     }
@@ -84,15 +84,15 @@ class RegistrationTest extends TestCase
     public static function validationDataProvider(): array
     {
         return [
-            'Username is required'                      => ['username', ['username' => null]],
-            'Username must have a minimum length of 1'  => ['username', ['username' => '']],
+            'Username is required' => ['username', ['username' => null]],
+            'Username must have a minimum length of 1' => ['username', ['username' => '']],
             'Username must have a maximum length of 50' => [
                 'username',
-                ['username' => (new GenerateUsername)(Str::random(51))]
+                ['username' => (new GenerateUsername)(Str::random(51))],
             ],
-            'Username must follow a slug like format'   => ['username', ['username' => 'this is not ok']],
-            'Username must be a string'                 => ['username', ['username' => ['test']]],
-            'Username is unique'                        => ['username', ['username' => 'test']],
+            'Username must follow a slug like format' => ['username', ['username' => 'this is not ok']],
+            'Username must be a string' => ['username', ['username' => ['test']]],
+            'Username is unique' => ['username', ['username' => 'test']],
         ];
     }
 }
