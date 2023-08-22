@@ -2,44 +2,23 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\Importer\PendingRfcImport;
+use App\Models\PendingRfc;
 use App\Models\Rfc;
-use App\Support\ExternalsRssFeed;
+use Feed;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
 class RfcSyncCommand extends Command
 {
-    protected $signature = 'rfc:sync';
+    protected $signature = 'rfc:sync {rfc? : sdssd} {--force}';
 
-    protected $description = 'Sync RFCs from Externals RSS feed';
+    protected $description = 'Sync all or one rfc';
 
-    public function __construct(private readonly ExternalsRssFeed $feed)
+    public function handle(PendingRfcImport $import): void
     {
-        parent::__construct();
-    }
+        $import(array_filter([$this->argument('rfc')]));
 
-    public function handle(): int
-    {
-        $rss = $this->feed->load();
-
-        foreach ($rss->item as $item) {
-            if (! Str::startsWith((string) ($item->title ?? null), ['[VOTE]'])) {
-                continue;
-            }
-
-            $rfc = Rfc::updateOrCreate(['title' => $item->title]);
-
-            $this->info("✅  {$rfc->title}");
-
-            if (! $rfc->url) {
-                preg_match('/\"(https:\/\/wiki\.php\.net\/rfc\/(.*))\"/', $item->description, $matches);
-                $url = $matches[1] ?? null;
-                $rfc->url = $url;
-                $rfc->save();
-                $this->comment("\t{$url}");
-            }
-        }
-
-        return self::SUCCESS;
+        $this->info('Imported');
     }
 }
