@@ -1,5 +1,5 @@
 @component('layouts.base')
-    <div class="container max-w-[600px] mx-auto prose px-4">
+    <div class="container max-w-[600px] mx-auto prose px-4 mb-10">
 <x-markdown>
 ## Shaping PHP, together
 
