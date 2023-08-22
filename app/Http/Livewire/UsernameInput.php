@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
+use App\Rules\UsernameFormatRule;
 use Illuminate\Contracts\Foundation\Application as ApplicationAlias;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -24,7 +24,7 @@ class UsernameInput extends Component
     protected function rules(): array
     {
         return [
-            'value' => User::usernameValidationRules(),
+            'value' => new UsernameFormatRule,
         ];
     }
 

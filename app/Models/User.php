@@ -167,9 +167,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->mails()->where('mail_type', $mailable::class)->exists();
     }
-
-    public static function usernameValidationRules(): array
-    {
-        return [new UsernameFormatRule];
-    }
 }
