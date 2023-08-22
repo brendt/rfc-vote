@@ -1,3 +1,8 @@
+@slot('header')
+    @component('mail::header')
+    @endcomponent
+@endslot
+
 @component('mail::message')
 {{ __('You have been invited to join the :team team!', ['team' => $invitation->team->name]) }}
 
@@ -13,7 +18,6 @@
 @else
 {{ __('You may accept this invitation by clicking the button below:') }}
 @endif
-
 
 @component('mail::button', ['url' => $acceptUrl])
 {{ __('Accept Invitation') }}
