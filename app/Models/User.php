@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Rules\UsernameFormatRule;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -95,7 +96,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getArgumentVoteForArgument(Argument $argument): ?ArgumentVote
     {
-        return $this->argumentVotes->first(fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id);
+        return $this->argumentVotes->first(
+            fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id
+        );
     }
 
     /**
@@ -163,5 +166,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasGottenMail(Mailable $mailable): bool
     {
         return $this->mails()->where('mail_type', $mailable::class)->exists();
+    }
+
+    public static function usernameValidationRules(): array
+    {
+        return  ['required', 'string', 'min:1', 'max:50', 'unique:users,username', new UsernameFormatRule];
     }
 }
