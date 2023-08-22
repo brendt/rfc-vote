@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Argument;
+use App\Models\ArgumentVote;
 use App\Models\Rfc;
-use DB;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 final readonly class HomeController
 {
@@ -34,18 +35,15 @@ final readonly class HomeController
     {
         $yesterday = now()->subDay()->endOfDay()->toDateTimeString();
 
-        $row = DB::select(<<<SQL
-        SELECT argument_id, COUNT(*) as c, DATE(created_at) as day
-        FROM argument_votes
-        WHERE created_at <= "$yesterday"
-        GROUP BY argument_id, day
-        ORDER BY day DESC, c DESC
-        LIMIT 1
-        SQL)[0] ?? null;
+        $row = ArgumentVote::query()
+            ->select('argument_id', DB::raw('COUNT(*) as c'), DB::raw('DATE(created_at) as day'))
+            ->where('created_at', '<=', $yesterday)
+            ->groupBy('argument_id', 'day')
+            ->orderBy('day', 'desc')
+            ->orderBy('c', 'desc')
+            ->with('argument')
+            ->first();
 
-        if (! $row) {
-            return null;
-        }
-        return Argument::find($row->argument_id);
+        return $row?->argument;
     }
 }
