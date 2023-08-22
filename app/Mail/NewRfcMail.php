@@ -26,7 +26,7 @@ class NewRfcMail extends Mailable
     {
         return $this->markdown('emails.new-rfc')
             ->subject("New RFC: {$this->rfc->title}")
-            ->with('user',$this->user)
-            ->with('rfc',$this->rfc);
+            ->with('user', $this->user)
+            ->with('rfc', $this->rfc);
     }
 }

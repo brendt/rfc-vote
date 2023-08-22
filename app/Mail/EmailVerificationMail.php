@@ -24,6 +24,6 @@ class EmailVerificationMail extends Mailable
     {
         return $this->markdown('emails.email-verification')
             ->subject('Email Verification Mail')
-            ->with('verificationLink',$this->verificationLink);
+            ->with('verificationLink', $this->verificationLink);
     }
 }
