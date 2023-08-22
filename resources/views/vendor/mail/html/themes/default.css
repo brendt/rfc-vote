@@ -103,8 +103,8 @@ img {
 }
 
 .header a {
-    color: #3d4852;
-    font-size: 19px;
+    color: #4d1080;
+    font-size: 24px;
     font-weight: bold;
     text-decoration: none;
 }
@@ -223,7 +223,7 @@ img {
 
 .button {
     -webkit-text-size-adjust: none;
-    border-radius: 4px;
+    border-radius: 50px;
     color: #fff;
     display: inline-block;
     overflow: hidden;
@@ -237,6 +237,14 @@ img {
     border-left: 18px solid #2d3748;
     border-right: 18px solid #2d3748;
     border-top: 8px solid #2d3748;
+}
+
+.button-purple {
+    background-color: #763dac;
+    border-bottom: 12px solid #763dac;
+    border-left: 35px solid #763dac;
+    border-right: 35px solid #763dac;
+    border-top: 12px solid #763dac;
 }
 
 .button-green,
