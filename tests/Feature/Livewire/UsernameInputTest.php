@@ -56,15 +56,6 @@ class UsernameInputTest extends TestCase
             ->assertHasErrors([$fieldKey]);
     }
 
-    public function test_value_follows_specific_rule(): void
-    {
-        Livewire::test(UsernameInput::class)
-            ->set('value', 'Another bad username')
-            ->assertSee(
-                'The value must be valid. Only lowercase ASCII characters are allowed. Hyphens can be used. Whitespace, underscores, and multiple hyphens are not permitted. The username cannot start or end with a hyphen.'
-            );
-    }
-
     public static function validationDataProvider(): array
     {
         return [
@@ -75,6 +66,7 @@ class UsernameInputTest extends TestCase
                 ['value' => (new GenerateUsername)(Str::random(51))],
             ],
             'Value is unique' => ['value', ['value' => 'test']],
+            'Value must be valid' => ['value', ['value' => 'Another bad username']],
         ];
     }
 }
