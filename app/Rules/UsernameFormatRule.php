@@ -26,7 +26,7 @@ class UsernameFormatRule implements ValidationRule, ValidatorAwareRule
         $validator = FacadeValidator::make(
             [$attribute => $value],
             [$attribute => $this->rules],
-        )->after(function ($validator) use ($value, $fail) {
+        )->after(function () use ($value, $fail) {
             if (! is_string($value)) {
                 return;
             }
