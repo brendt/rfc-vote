@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class EmailVerificationMail extends Mailable
@@ -12,6 +13,11 @@ class EmailVerificationMail extends Mailable
 
     public function __construct(public string $verificationLink)
     {
+    }
+
+    public function envelope(): Envelope
+    {
+        return new Envelope(subject: 'Email Verification Mail');
     }
 
     public function build(): Mailable
