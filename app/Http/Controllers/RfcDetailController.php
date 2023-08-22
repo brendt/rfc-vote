@@ -45,6 +45,7 @@ final readonly class RfcDetailController
         $additionalRfcs = Rfc::query()
             ->where('published_at', '<=', now()->startOfDay())
             ->where(fn (Builder $builder) => $builder->whereNull('ends_at')->orWhere('ends_at', '>', now()))
+            ->where('id', '!=', $rfc->id)
             ->when(filled($user), fn (Builder $builder) => $builder->whereDoesntHave('arguments', fn (Builder $builder) => $builder->where('user_id', $user->id)))
             ->with(['arguments', 'yesArguments', 'noArguments'])
             ->inRandomOrder()
