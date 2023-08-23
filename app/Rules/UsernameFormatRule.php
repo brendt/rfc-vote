@@ -15,9 +15,9 @@ class UsernameFormatRule implements ValidationRule, ValidatorAwareRule
 
     protected array $rules = [
         'required',
+        'string',
         'doesnt_start_with:-,_',
         'doesnt_end_with:-,_',
-        'string',
         'min:2',
         'max:50',
         'unique:users,username',
