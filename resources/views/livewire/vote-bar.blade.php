@@ -6,7 +6,7 @@
         </div>
     @endif
 
-    <div class="flex shadow-lg font-bold rounded-full overflow-hidden p-1.5 lg:p-3 bg-gray-200 max-w-[1100px] mx-auto">
+    <div class="flex shadow-lg font-bold rounded-full overflow-hidden p-1.5 lg:p-3 bg-gray-200 dark:bg-secondary-dark-mode max-w-[1100px] mx-auto">
         {{-- Left (green) bar --}}
         <div
             @class([

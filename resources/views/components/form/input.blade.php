@@ -8,7 +8,7 @@
 
 <div>
     <label>
-        <b class="text-sm text-gray-600">{{ $label }}</b>
+        <b class="text-sm text-gray-600 dark:text-white">{{ $label }}</b>
 
         <input
             {{ $attributes->merge([

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,13 +15,13 @@
 
     @stack('meta')
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class=" bg-gray-100 min-h-screen flex flex-col dark:bg-background-dark-mode">
 
 @php
     $user = auth()->user();
 @endphp
 
-<nav class="bg-main bg-gradient-to-r from-main to-main-light z-10 p-4">
+<nav class="z-10 p-4 bg-main dark:bg-primary-dark-mode !dark:bg-gradient-to-r !dark:from-main !dark:to-main-light">
     <div
         class="container flex justify-between text-white gap-4 items-center m-auto relative px-2"
         x-data="{ open: false }"
@@ -107,7 +107,7 @@
 </div>
 
 @if(isset($showToTopArrow) && $showToTopArrow === true)
-    <div class="sticky flex self-end justify-end bottom-6 right-6"
+    <div class="sticky flex self-end justify-end bottom-0 pb-3 right-6"
          x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY; updateVisibility() })"
          x-data="{ isVisible: false, scrolled: 0, updateVisibility() { this.isVisible = (this.scrolled / (document.documentElement.scrollHeight - window.innerHeight)) >= 0.5; } }"
          x-show="isVisible"

@@ -8,7 +8,7 @@
 
 <a
     {{ $attributes->merge([
-        'class' => "bg-white hover:shadow-lg transition-all opacity-90 hover:opacity-100 rounded-lg shadow-md flex justify-between gap-2 p-4 md:p-7 {$flexDirection}"
+        'class' => "dark:bg-secondary-dark-mode bg-white hover:shadow-lg transition-all opacity-90 hover:opacity-100 rounded-lg shadow-md flex justify-between gap-2 p-4 md:p-7 {$flexDirection}"
     ]) }}
 >
     {{ $slot }}
