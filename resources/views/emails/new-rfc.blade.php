@@ -14,7 +14,7 @@
 <h1>New RFC is out!</h1>
 <p>Hi <b>{{ $user->name }}</b>! There's a new RFC in town <b>"{{ $rfc->title }}"</b>! Check it out, vote, and share your arguments!</p>
 
-@component('mail::button', ['url' => action(App\Http\Controllers\RfcDetailController::class, $rfc), 'color' => 'purple'])
+@component('mail::button', ['url' => action(App\Http\Controllers\RfcDetailController::class, $rfc)])
     Go to the RFC
 @endcomponent
 
