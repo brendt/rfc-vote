@@ -91,7 +91,10 @@ class RegistrationTest extends TestCase
                 ['username' => (new GenerateUsername)(Str::random(51))],
             ],
             'Username must follow a slug like format' => ['username', ['username' => 'this is not ok']],
-            'Username must be a string' => ['username', ['username' => ['test']]],
+            'Username should not start with hyphen' => ['username', ['username' => '-this-is-not-ok']],
+            'Username should not end with hyphen' => ['username', ['username' => 'this-is-not-ok-']],
+            'Username should not start with underscore' => ['username', ['username' => '_this-is-not-ok']],
+            'Username should not end with underscore' => ['username', ['username' => 'this-is-not-ok_']],
             'Username is unique' => ['username', ['username' => 'test']],
         ];
     }
