@@ -59,14 +59,18 @@ class UsernameInputTest extends TestCase
     public static function validationDataProvider(): array
     {
         return [
-            'Value is required' => ['value', ['value' => null]],
-            'Value must have a minimum length of 2' => ['value', ['value' => 's']],
-            'Value must have a maximum length of 50' => [
+            'Username is required' => ['value', ['value' => null]],
+            'Username must have a minimum length of 2' => ['value', ['value' => 't']],
+            'Username must have a maximum length of 50' => [
                 'value',
                 ['value' => (new GenerateUsername)(Str::random(51))],
             ],
-            'Value is unique' => ['value', ['value' => 'test']],
-            'Value must be valid' => ['value', ['value' => 'Another bad username']],
+            'Username must follow a slug like format' => ['value', ['value' => 'this is not ok']],
+            'Username should not start with hyphen' => ['value', ['value' => '-this-is-not-ok']],
+            'Username should not end with hyphen' => ['value', ['value' => 'this-is-not-ok-']],
+            'Username should not start with underscore' => ['value', ['value' => '_this-is-not-ok']],
+            'Username should not end with underscore' => ['value', ['value' => 'this-is-not-ok_']],
+            'Username is unique' => ['value', ['value' => 'test']],
         ];
     }
 }
