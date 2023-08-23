@@ -6,7 +6,7 @@ use App\Actions\GenerateUsername;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
-use Illuminate\Support\Facades\Validator as FacadeValidator;
+use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Validation\Validator;
 
 class UsernameFormatRule implements ValidationRule, ValidatorAwareRule
@@ -15,6 +15,8 @@ class UsernameFormatRule implements ValidationRule, ValidatorAwareRule
 
     protected array $rules = [
         'required',
+        'doesnt_start_with:-,_',
+        'doesnt_end_with:-,_',
         'string',
         'min:2',
         'max:50',
@@ -23,7 +25,7 @@ class UsernameFormatRule implements ValidationRule, ValidatorAwareRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $validator = FacadeValidator::make(
+        $validator = ValidatorFacade::make(
             [$attribute => $value],
             [$attribute => $this->rules],
         )->after(function () use ($value, $fail) {
@@ -34,7 +36,7 @@ class UsernameFormatRule implements ValidationRule, ValidatorAwareRule
             if ($value !== (new GenerateUsername())($value)) {
                 $fail(
                     __(
-                        'The :attribute must be valid. Only lowercase ASCII characters are allowed. Hyphens can be used. Whitespace, underscores, and multiple hyphens are not permitted. The username cannot start or end with a hyphen.'
+                        'The :attribute must be valid. Only lowercase characters and non-repeating hyphens (-) are allowed.'
                     )
                 );
             }

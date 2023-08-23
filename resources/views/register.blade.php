@@ -28,7 +28,7 @@
                     :label="__('Username')"
                     :value="old('username')"
                     :placeholder="__('Enter your username')"
-                    required=""
+                    required="true"
                 />
 
                 <x-form.input
