@@ -1,19 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ config('app.name') }} - Email Verification</title>
-</head>
-<body style="font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6;">
-<h1 style="font-size: 24px; font-weight: bold;"></h1>
+@php
+    /**
+     * @var App\Models\User $user
+     * @var App\Models\Rfc $rfc
+     */
+@endphp
 
-<x-markdown>
-Hi {{ $user->name }}!
+@component('mail::layout')
+@slot('header')
+    @component('mail::header')
+    @endcomponent
+@endslot
 
-There's a new RFC in town: [{{ $rfc->title }}]({{ action(\App\Http\Controllers\RfcDetailController::class, $rfc) }}).
+<h1>New RFC is out!</h1>
+<p>Hi <b>{{ $user->name }}</b>! There's a new RFC in town <b>"{{ $rfc->title }}"</b>! Check it out, vote, and share your arguments!</p>
 
-Check it out, vote, and share your arguments!
+@component('mail::button', ['url' => action(App\Http\Controllers\RfcDetailController::class, $rfc)])
+    Go to the RFC
+@endcomponent
 
-Thanks,<br>{{ config('app.name') }}
-</x-markdown>
-</body>
-</html>
+<p>If you're having trouble clicking the button, copy and paste the URL into your web browser:</p>
+
+<a href="{{ action(App\Http\Controllers\RfcDetailController::class, $rfc) }}">
+    {{ action(App\Http\Controllers\RfcDetailController::class, $rfc) }}
+</a>
+
+@slot('footer')
+    @component('mail::footer')
+    @endcomponent
+@endslot
+
+@endcomponent
