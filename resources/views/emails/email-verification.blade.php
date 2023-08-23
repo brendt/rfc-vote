@@ -13,7 +13,7 @@
 <h1>Verify your Email</h1>
 <p>You have requested to change your email address. Please click the button below to verify your new email:</p>
 
-@component('mail::button', ['url' => $verificationLink, 'color' => 'purple'])
+@component('mail::button', ['url' => $verificationLink])
 Verify email
 @endcomponent
 
