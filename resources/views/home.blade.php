@@ -1,9 +1,9 @@
 @component('layouts.base')
-    <div class="container mx-auto px-4 mt-4 md:mt-12 max-w-[1200px]">
-        <x-email-optin-banner :user="auth()->user()"/>
-    </div>
+    <div class="container max-w-[1200px] mx-auto px-4 grid gap-4 my-10">
+        <div class="px-4 max-w-[1200px]">
+            <x-email-optin-banner :user="auth()->user()"/>
+        </div>
 
-    <div class="container max-w-[1200px] mx-auto px-4 grid gap-4 mt-4 md:mt-8">
         <x-home.title>
             {{ __('Open RFCs') }}
         </x-home.title>
@@ -67,10 +67,8 @@
                 </x-card-link>
             @endforeach
         </div>
-    </div>
 
-    @if($argumentOfTheDay)
-        <div class="container max-w-[1200px] mx-auto px-4 grid mt-4 md:mt-8 gap-4">
+        @if($argumentOfTheDay)
             <x-home.title>
                 {{ __('Argument of the Day') }}
             </x-home.title>
@@ -81,7 +79,7 @@
                 :argument="$argumentOfTheDay"
                 :readonly="true"
             />
-        </div>
-    @endif
+        @endif
+    </div>
 
 @endcomponent

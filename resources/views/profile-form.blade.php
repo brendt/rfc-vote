@@ -1,5 +1,5 @@
 @component('layouts.base')
-    <div class="grid mx-auto container max-w-[800px] px-4 gap-6 mt-4 md:mt-12 mb-8">
+    <div class="grid mx-auto container max-w-[800px] px-4 gap-6 my-4 md:my-12">
         <x-form.wrapper
             action="{{ action([App\Http\Controllers\ProfileController::class, 'update']) }}"
             method="post"
