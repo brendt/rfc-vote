@@ -59,10 +59,9 @@ class FromRstToMarkDown
         $doodlePattern = "#<doodle(?'attributes'[^>]*)>(?'choices'.*)</doodle>#msU";
         $attributesPattern = "#((?'attr'[a-zA-Z]+)=\"(?'value'[^\"]*)\")#msU";
 
-        if (!preg_match_all($doodlePattern, $content, $doodleMatches)) {
+        if (! preg_match_all($doodlePattern, $content, $doodleMatches)) {
             return $content;
         }
-
 
         foreach ($doodleMatches[0] as $value) {
             $content = str_replace($value, '', $content);
@@ -78,7 +77,7 @@ class FromRstToMarkDown
     {
         $pattern = '#<blockquote.*>(.*)</blockquote>#msU';
 
-        if (!preg_match_all($pattern, $content, $matches)) {
+        if (! preg_match_all($pattern, $content, $matches)) {
             return $content;
         }
 
@@ -94,7 +93,7 @@ class FromRstToMarkDown
                 $para = wordwrap($para, 68);
                 $para = explode("\n", $para);
                 foreach ($para as &$p) {
-                    $p = '    ' . $p;
+                    $p = '    '.$p;
                 }
                 $para = rtrim(implode("\n", $para));
             }
@@ -123,7 +122,7 @@ class FromRstToMarkDown
             return preg_replace(self::FILE_HEADER_REGEX, '', $content);
         }
 
-        return trim($content) . "\n";
+        return trim($content)."\n";
     }
 
     private function toRst(string $content, string $from = 'dokuwiki'): string

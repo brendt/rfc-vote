@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Actions\Importer;
@@ -9,13 +10,14 @@ use DOMNode;
 use DOMNodeList;
 use DOMXPath;
 use Illuminate\Support\Facades\Http;
-use PhpRfcs\Wiki;
 use Tidy;
 
 class History
 {
     private const PHP_PEOPLE_URL = 'https://people.php.net/';
+
     private const FIRST_INCREMENT = 20;
+
     private const GIT_DATE = 'D M j H:i:s Y O';
 
     /**
@@ -38,7 +40,7 @@ class History
             'first' => $first,
         ];
 
-        $rfcPageResponse = Http::get("https://wiki.php.net/rfc/". $rfcSlug .http_build_query($queryParams));
+        $rfcPageResponse = Http::get('https://wiki.php.net/rfc/'.$rfcSlug.http_build_query($queryParams));
 
         if ($rfcPageResponse->failed()) {
             return [];
@@ -47,14 +49,14 @@ class History
         $contents = $this->tidy->repairString($rfcPageResponse->getBody()->getContents());
 
         $dom = new DOMDocument();
-        @$dom->loadHTML('<?xml encoding="utf-8">' . $contents);
+        @$dom->loadHTML('<?xml encoding="utf-8">'.$contents);
 
         $xpath = new DOMXPath($dom);
 
         // Find each individual history "row" on the page.
         $rows = $xpath->query("//form[@id='page__revisions']/div/ul/li/div");
 
-        if (!$rows instanceof DOMNodeList) {
+        if (! $rows instanceof DOMNodeList) {
             return $history;
         }
 
@@ -70,8 +72,8 @@ class History
             $userSpan = $xpath->query("span[@class='user']", $row)?->item(0)->firstChild;
             $user = str_replace(["\n", "\r", "\t", "\v", "\0"], '', trim((string) $userSpan?->textContent));
 
-            if (!array_key_exists($user, $this->people)) {
-                $peopleUrl = $this->uriFactory->createUri(self::PHP_PEOPLE_URL)->withPath('/' . $user);
+            if (! array_key_exists($user, $this->people)) {
+                $peopleUrl = $this->uriFactory->createUri(self::PHP_PEOPLE_URL)->withPath('/'.$user);
                 $peopleRequest = $this->requestFactory->createRequest('GET', $peopleUrl);
                 $peopleResponse = $this->httpClient->sendRequest($peopleRequest);
                 $peopleContents = $peopleResponse->getBody()->getContents();
@@ -84,7 +86,7 @@ class History
                     preg_match('#<h1 property="foaf:name">(.*)</h1>#', $peopleContents, $matches);
                     $this->people[$user] = [
                         'name' => trim($matches[1]),
-                        'email' => $user . '@php.net',
+                        'email' => $user.'@php.net',
                     ];
                 }
             }
@@ -160,4 +162,3 @@ class History
         ], encoding: 'utf8');
     }
 }
-

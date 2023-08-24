@@ -3,8 +3,8 @@
 namespace App\Actions\Importer;
 
 use App\Models\PendingRfc;
-use Illuminate\Support\Facades\Pipeline;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Pipeline;
 
 class RfcImporter
 {
@@ -29,7 +29,6 @@ class RfcImporter
         foreach ($rfcs as $rfc) {
             $this->gatherRfcData($rfc, $sections, $command);
 
-
             $bar->advance();
         }
 
@@ -48,7 +47,7 @@ class RfcImporter
                 FromRstToMarkDown::class,
             ])->then(function (PendingSyncRfc $rfc) {
                 PendingRfc::query()->upsert([
-                    $rfc->toArray()
+                    $rfc->toArray(),
                 ], ['slug']);
 
                 return $rfc;

@@ -72,11 +72,11 @@ class PendingSyncRfc
     public function toArray(): array
     {
         return collect([
-            'description' => $this->text
+            'description' => $this->text,
         ])->merge(
             collect($this->metadata)
                 ->mapWithKeys(function ($v, $k) {
-                    $k = match($k) {
+                    $k = match ($k) {
                         'PHP Version' => 'php_version',
                         'Date' => 'created_at',
                         default => Str::snake($k)
