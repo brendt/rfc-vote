@@ -7,6 +7,8 @@ use App\Actions\SendUserMessage;
 use App\Models\ArgumentComment;
 use App\Models\Rfc;
 use App\Models\User;
+use App\Models\VerificationRequest;
+use App\Models\VerificationRequestStatus;
 use App\Models\VoteType;
 use Illuminate\Database\Seeder;
 
@@ -29,6 +31,14 @@ class DatabaseSeeder extends Seeder
         );
 
         $users = User::factory()->count(50)->create();
+
+        foreach ($users as $user) {
+            VerificationRequest::create([
+                'user_id' => $user->id,
+                'status' => VerificationRequestStatus::PENDING,
+                'motivation' => 'hello',
+            ]);
+        }
 
         $rfcs = Rfc::factory()->count(10)->create([
             'title' => 'Interface Default Methods',

@@ -20,6 +20,7 @@ use App\Http\Controllers\RfcEditController;
 use App\Http\Controllers\RfcMetaImageController;
 use App\Http\Controllers\SocialiteCallbackController;
 use App\Http\Controllers\SocialiteRedirectController;
+use App\Http\Controllers\VerificationRequestsAdminController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,7 @@ Route::get('email/verify/{token}', [ProfileController::class, 'verifyEmail'])->n
 
 Route::middleware(AdminMiddleware::class)->prefix('/admin')->group(function () {
     Route::get('/rfc', RfcAdminController::class);
+    Route::get('/verification-requests', VerificationRequestsAdminController::class);
     Route::get('/rfc/new', [RfcCreateController::class, 'create']);
     Route::post('/rfc/new', [RfcCreateController::class, 'store']);
     Route::get('/rfc/{rfc}', [RfcEditController::class, 'edit']);
@@ -66,6 +68,7 @@ Route::middleware([
     Route::post('/profile', [ProfileController::class, 'update']);
     Route::post('/profile/password', [ProfileController::class, 'updatePassword']);
     Route::post('/profile/email', [ProfileController::class, 'updateEmail']);
+    Route::post('/profile/request-verification', [ProfileController::class, 'requestVerification']);
 
     Route::redirect('/dashboard', '/')->name('dashboard');
 });

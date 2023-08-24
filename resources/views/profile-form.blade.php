@@ -1,13 +1,5 @@
 @component('layouts.base')
-    <div class="grid mx-auto container max-w-[800px] px-4 gap-6 mt-4 md:mt-12 mb-8">
-        <x-form.wrapper
-            action="{{ action([Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'destroy']) }}"
-            method="post"
-            heading="Logout"
-        >
-            <x-form.button type="submit">Logout</x-form.button>
-        </x-form.wrapper>
-
+    <div class="grid mx-auto container max-w-[800px] px-4 gap-6 my-4 md:my-12">
         <x-form.wrapper
             action="{{ action([App\Http\Controllers\ProfileController::class, 'update']) }}"
             method="post"
@@ -135,5 +127,40 @@
                 </div>
             </div>
         </x-form.wrapper>
+
+        <x-form.wrapper
+            action="{{ action([App\Http\Controllers\ProfileController::class, 'requestVerification']) }}"
+            method="post"
+            heading="Verification"
+        >
+            <p class="mb-2 text-gray-600">
+                Please let us know if you're a PHP internal developer or an RFC Vote contributor by filling in this form. Verified users will get a badge before their username.
+            </p>
+            <p class="mb-4 text-gray-600">
+                If you're not an internal developer or RFC Vote contributor, but would still like a badge, you can also fill in the form to explain why: we might add other types of badges in the future.
+            </p>
+
+            @if($user->flair)
+                <div class="flex gap-2 items-baseline">
+                    <p class="text-green-600 font-bold">Your current badge:</p>
+
+                    <x-profile.flair :user="$user"/>
+                </div>
+            @elseif($user->pendingVerificationRequests->isEmpty())
+                <div class="space-y-3">
+                    <x-form.textarea name="motivation" label="Motivation" rows="5"></x-form.textarea>
+
+                    <div class="text-right">
+                        <x-form.button type="submit">
+                            {{ "Request Verification" }}
+                        </x-form.button>
+                    </div>
+                </div>
+            @else
+                <p class="text-green-600 font-bold">Your verification request is pending.</p>
+            @endif
+        </x-form.wrapper>
+
+
     </div>
 @endcomponent

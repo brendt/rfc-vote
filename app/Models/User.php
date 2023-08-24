@@ -40,7 +40,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'reputation' => 'int',
         'email_optin' => 'bool',
-        'unread_message_count' => 'int',
+        'flair' => UserFlair::class,
     ];
 
     protected $appends = [
@@ -84,14 +84,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(EmailChangeRequest::class);
     }
 
-    public function messages(): HasMany
+    public function verificationRequests(): HasMany
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(VerificationRequest::class);
     }
 
-    public function unreadMessages(): HasMany
+    public function pendingVerificationRequests(): HasMany
     {
-        return $this->hasMany(Message::class)->where('status', MessageStatus::UNREAD);
+        return $this->hasMany(VerificationRequest::class)->where('status', VerificationRequestStatus::PENDING);
     }
 
     public function getArgumentForRfc(Rfc $rfc): ?Argument
@@ -106,7 +106,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getArgumentVoteForArgument(Argument $argument): ?ArgumentVote
     {
-        return $this->argumentVotes->first(fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id);
+        return $this->argumentVotes->first(
+            fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id
+        );
     }
 
     /**
@@ -174,12 +176,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasGottenMail(Mailable $mailable): bool
     {
         return $this->mails()->where('mail_type', $mailable::class)->exists();
-    }
-
-    public function updateUnreadMessageCount(): void
-    {
-        $this->update([
-            'unread_message_count' => $this->unreadMessages()->count(),
-        ]);
     }
 }

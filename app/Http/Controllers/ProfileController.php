@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Actions\RequestEmailChange;
 use App\Models\EmailChangeRequest;
+use App\Models\VerificationRequest;
+use App\Models\VerificationRequestStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -134,6 +136,23 @@ final readonly class ProfileController
         $emailChangeRequest->delete();
 
         flash('Your email has been successfully changed.');
+
+        return redirect()->action([self::class, 'edit']);
+    }
+
+    public function requestVerification(Request $request)
+    {
+        $validated = $request->validate([
+            'motivation' => ['required', 'string'],
+        ]);
+
+        VerificationRequest::create([
+            'user_id' => $request->user()->id,
+            'status' => VerificationRequestStatus::PENDING,
+            'motivation' => $validated['motivation'],
+        ]);
+
+        flash('Your verification request was submitted.');
 
         return redirect()->action([self::class, 'edit']);
     }

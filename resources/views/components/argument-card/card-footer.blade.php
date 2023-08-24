@@ -27,6 +27,8 @@
         <span class="hidden md:block">•</span>
 
         <small class="flex items-center gap-1">
+            <x-profile.flair :user="$argumentUser" />
+
             @if ($argumentUser?->getAvatarUrl())
                 <a
                     href="{{ action(App\Http\Controllers\PublicProfileController::class, $argumentUser) }}"
@@ -45,9 +47,9 @@
             {{ __('voted') }}
 
             <b @class([
-                'tracking-wide uppercase',
-                'text-green-700' => $argument->vote_type->isYes(),
-                'text-red-700' => $argument->vote_type->isNo(),
+                'tracking-wide uppercase ml-0.5',
+                'text-agree' => $argument->vote_type->isYes(),
+                'text-disagree' => $argument->vote_type->isNo(),
             ])>
                 {{ $argument->vote_type->value }}
             </b>
@@ -62,7 +64,7 @@
         </small>
 
         {{-- Label that shows if the argument haven't been seen --}}
-        @if ($user && !$user->hasSeenArgument($argument))
+        @if (!$readonly && $user && !$user->hasSeenArgument($argument))
             <span class="hidden md:block">•</span>
             <small class="flex gap-1.5 items-center">
                 <x-icons.check-badge class="w-4 h-4" />

@@ -1,6 +1,6 @@
 @component('layouts.base')
 
-    <div class="mx-auto max-w-[500px] mt-4 md:mt-12">
+    <div class="mx-auto max-w-[500px] my-4 md:my-12">
         <x-form.wrapper
             method="{{ route('register') }}"
             method="post"
@@ -23,12 +23,12 @@
                     required
                 />
 
-                <x-form.input
+                <livewire:username-input
                     name="username"
                     :label="__('Username')"
                     :value="old('username')"
                     :placeholder="__('Enter your username')"
-                    required
+                    required="true"
                 />
 
                 <x-form.input
@@ -50,7 +50,7 @@
 
             <div class="text-right mt-6">
                 <x-form.button type="submit">
-                    <x-icons.register class="h-6 w-6" />
+                    <x-icons.register class="h-6 w-6"/>
                     {{ __('Register') }}
                 </x-form.button>
             </div>
@@ -72,7 +72,7 @@
                 href="{{ action(App\Http\Controllers\SocialiteRedirectController::class, 'github') }}"
                 class="!bg-gray-900 hover:!bg-gray-700"
             >
-                <x-icons.github class="h-6 w-6 fill-white" />
+                <x-icons.github class="h-6 w-6 fill-white"/>
                 {{ __('Log in with GitHub') }}
             </x-buttons.main>
         </div>

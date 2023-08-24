@@ -1,8 +1,11 @@
 :root {
     --color-agree: #0f766e;
     --color-agree-light: #14b8a6;
+    --color-agree-dark: #0b5b55;
     --color-disagree: #d11a66;
     --color-disagree-light: #f43f5e;
+    --color-disagree-dark: #a91552;
     --color-main: #5b1497;
     --color-main-light: #8c50c7;
+    --color-main-dark: #4d1080;
 }

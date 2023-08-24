@@ -59,6 +59,16 @@ class Rfc extends Model implements Feedable
         return $this->hasMany(Argument::class)->orderByDesc('vote_count')->orderByDesc('created_at');
     }
 
+    public function userArgument(User $user)
+    {
+        return $this->arguments->first(fn (Argument $argument) => $argument->user_id === $user->id);
+    }
+
+    public function hasRfcVotedByUser(User $user): bool
+    {
+        return $this->userArgument($user)?->exists() ?: false;
+    }
+
     public function yesArguments(): HasMany
     {
         return $this->hasMany(Argument::class)->where('vote_type', VoteType::YES);

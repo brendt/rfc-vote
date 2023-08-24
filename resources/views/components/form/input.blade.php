@@ -24,4 +24,6 @@
             </span>
         @endisset
     @enderror
+
+    {{$slot}}
 </div>
