@@ -3,20 +3,24 @@
 namespace App\Actions\Importer;
 
 use Illuminate\Support\Facades\Http;
+use PhpRfcs\Wiki;
 
 class DownloadRfc
 {
-    private const url = 'https://wiki.php.net/rfc';
+    private const url = "https://wiki.php.net/rfc";
 
     public function handle(PendingSyncRfc $rfc, $next)
     {
-        $text = Http::withHeaders([
-            'X-DokuWiki-Do' => 'export_raw',
-        ])->get(self::url.'/'.$rfc->name)
-            ->throw()->body();
+        $response = Http::withHeaders([
+            'X-DokuWiki-Do' => 'export_raw'
+        ])->get(self::url . '/' . $rfc->name);
+
+        if ($response->failed()) {
+            return $next($rfc->fail());
+        }
 
         return $next(
-            $rfc->setRawText($text)
+            $rfc->setRawText($response->body())
         );
     }
 }

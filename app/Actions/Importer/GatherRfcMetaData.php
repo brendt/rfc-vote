@@ -11,12 +11,16 @@ class GatherRfcMetaData
 {
     public function handle(PendingSyncRfc $pendingRfc, \Closure $next)
     {
+        if ($pendingRfc->failed()) {
+            return $next($pendingRfc);
+        }
+
         $metaData = $this->convertFromPandocToHTML($pendingRfc);
 
-        return $next($pendingRfc->setRawRfcData($metaData[$pendingRfc->name]));
+        return $next($pendingRfc->setRawRfcData($metaData));
     }
 
-    private function convertFromPandocToHTML(PendingSyncRfc $rfc)
+    private function convertFromPandocToHTML(PendingSyncRfc $rfc): array
     {
         // Find Dokuwiki links in the form of "[[http://foobar|http://foobar]]"
         // and replace them with just "http://foobar". Pandoc is having trouble
@@ -40,7 +44,7 @@ class GatherRfcMetaData
         $html = str_replace(['→'], ['-'], $result->output());
 
         $dom = new DOMDocument();
-        @$dom->loadHTML('<?xml encoding="utf-8"?>'.$html);
+        @$dom->loadHTML('<?xml encoding="utf-8"?>' . $html);
 
         $xpath = new DOMXPath($dom);
         $title = $xpath->query('//h1[1] | //h2[1]')[0]->textContent ?? '';
@@ -48,16 +52,16 @@ class GatherRfcMetaData
         // This is the metadata list that appears at the top of the RFCs.
         $listItems = $xpath->query('/html/body/ul[1]/li');
 
-        $metadata[$rfc->name] = [
+        $metadata = [
             'section' => $rfc->sections()[$rfc->name]['section'] ?? 'Unknown',
             'slug' => $rfc->name,
             'title' => $this->removeExcessWhitespace($title),
-            'wiki URL' => 'https://wiki.php.net/rfc/'.$rfc->name,
+            'url' => 'https://wiki.php.net/rfc/' . $rfc->name,
         ];
 
         /** @var DOMElement $item */
         foreach ($listItems as $item) {
-            if (! preg_match('#<li>(.*)</li>#sm', $item->C14N(), $matches)) {
+            if (!preg_match('#<li>(.*)</li>#sm', $item->C14N(), $matches)) {
                 continue;
             }
 
@@ -82,19 +86,20 @@ class GatherRfcMetaData
                 $rawKey = 'extra';
                 $rawValue = array_merge(
                     $metadata['extra'] ?? [],
-                    [$this->convertToMarkdown(trim($itemKeyValue[0] ?? '', '*'))],
+                    [$this->convertToRst(trim($itemKeyValue[0] ?? '', '*'))],
                 );
             }
 
             $value = match ($rawKey) {
                 'extra' => $rawValue,
-                default => $this->convertToMarkdown($rawValue),
+                default => $this->convertToRst($rawValue),
             };
 
-            $metadata[$rfc->name][$rawKey] = $value;
+            $metadata[$rawKey] = $value;
         }
 
-        ksort($metadata[$rfc->name], SORT_NATURAL);
+
+        ksort($metadata, SORT_NATURAL);
 
         return $metadata;
     }
@@ -106,7 +111,7 @@ class GatherRfcMetaData
         return preg_replace('#\s{2,}#m', ' ', $value);
     }
 
-    private function convertToMarkdown(string $value): string
+    private function convertToRst(string $value): string
     {
         if ($value === '') {
             return $value;
@@ -130,7 +135,7 @@ class GatherRfcMetaData
         $result = Process::command(['pandoc', '--from', 'html', '--to', 'rst'])->input(
             $value
         )->run()
-            ->throw();
+        ->throw();
 
         return $this->removeExcessWhitespace($result->output());
     }

@@ -2,15 +2,15 @@
 
 namespace App\Actions\Importer;
 
+use App\Models\PendingRfc;
 use Illuminate\Support\Facades\Pipeline;
+use Illuminate\Console\Command;
 
 class RfcImporter
 {
-    public function __invoke(array $rfcs = []): array
+    public function __invoke(Command $command, array $rfcs = []): array
     {
         $historySections = new GatherSections;
-
-        $importData = [];
 
         $sections = $historySections->index();
 
@@ -18,21 +18,40 @@ class RfcImporter
             $rfcs = array_keys($sections);
         }
 
+        $numberOfRfcs = count($rfcs);
+
+        $command->info(\Str::plural("Gathering data for {$numberOfRfcs} rfc", $numberOfRfcs));
+
+        $bar = $command->getOutput()->createProgressBar($numberOfRfcs);
+
+        $rfcData = [];
+
         foreach ($rfcs as $rfc) {
-            $importData[$rfc] = $this->gatherRfcData($rfc, $sections);
+            $this->gatherRfcData($rfc, $sections, $command);
+
+
+            $bar->advance();
         }
 
-        return $importData;
+        $bar->finish();
+
+        return $rfcData;
     }
 
-    private function gatherRfcData(string $rfcTitle, array $sections)
+    private function gatherRfcData(string $rfcTitle, array $sections, Command $command)
     {
-        return Pipeline::send(new PendingSyncRfc($rfcTitle, $sections))
+        Pipeline::send(new PendingSyncRfc($rfcTitle, $sections))
             ->through([
                 DownloadRfc::class,
                 GatherRfcMetaData::class,
                 CleanMetaData::class,
-                GenerateRfcMarkdownText::class,
-            ])->then(fn ($rfc) => $rfc->toArray());
+                FromRstToMarkDown::class,
+            ])->then(function (PendingSyncRfc $rfc) {
+                PendingRfc::query()->upsert([
+                    $rfc->toArray()
+                ], ['slug']);
+
+                return $rfc;
+            });
     }
 }

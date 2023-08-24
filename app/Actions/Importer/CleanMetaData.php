@@ -9,29 +9,18 @@ class CleanMetaData
     private const EMAIL_REGEX = '#([\w.\-]+(@| at |\.at\.|\#at\#)[\w.\-]+(( dot | \. )[\w.\-]+)*)#sm';
 
     private const TYPE_INFORMATIONAL = 'Informational';
-
     private const TYPE_PROCESS = 'Process';
-
     private const TYPE_STANDARDS_TRACK = 'Standards Track';
-
     private const TYPE_UNKNOWN = 'Unknown';
 
     private const STATUS_ACCEPTED = 'Accepted';
-
     private const STATUS_ACTIVE = 'Active';
-
     private const STATUS_DECLINED = 'Declined';
-
     private const STATUS_DRAFT = 'Draft';
-
     private const STATUS_IMPLEMENTED = 'Implemented';
-
     private const STATUS_SUPERSEDED = 'Superseded';
-
     private const STATUS_UNKNOWN = 'Unknown';
-
     private const STATUS_VOTING = 'Voting';
-
     private const STATUS_WITHDRAWN = 'Withdrawn';
 
     private const STATUS_NORMALIZING_EXPRESSIONS = [
@@ -42,7 +31,7 @@ class CleanMetaData
         '#^Partially Accepted \(in PHP 7\.0\)#i' => self::STATUS_ACCEPTED,
         '#^Passed Proposal 1\. 2 and 3 declined\.$#i' => self::STATUS_ACCEPTED,
         '#^Ready for Review & Discussion$#i' => self::STATUS_DRAFT,
-        '#^Work in Progress$#i' => self::STATUS_DRAFT,
+        '#^Work[\-\s]?in[\-\s]?Progress$#i' => self::STATUS_DRAFT,
         '#^in the works$#i' => self::STATUS_DRAFT,
         '#^revising after v1\.0$#i' => self::STATUS_DRAFT,
         '#^updated stream_resolve_include_path\(\) was added in PHP 5\.3\.3$#i' => self::STATUS_IMPLEMENTED,
@@ -108,7 +97,6 @@ class CleanMetaData
         'PHP 8.4' => self::TYPE_STANDARDS_TRACK,
         'Process and Policy' => self::TYPE_PROCESS,
     ];
-
     private array $rfcNumbers = [];
 
     public function __construct(
@@ -116,21 +104,25 @@ class CleanMetaData
     ) {
     }
 
-    public function handle(PendingSyncRfc $rfc, \Closure $next): array
+    public function handle(PendingSyncRfc $rfc, \Closure $next): PendingSyncRfc
     {
-        $rfcData = $rfc->rawRfcData();
+        if ($rfc->failed()) {
+            return $next($rfc);
+        }
 
         return $next(
-            $rfc->setMetaData($this->cleanAndSanitizeMetadata($rfcData))
+            $rfc->setMetaData($this->cleanAndSanitizeMetadata($rfc))
         );
     }
 
-    private function cleanAndSanitizeMetadata(array $raw): array
+    private function cleanAndSanitizeMetadata(PendingSyncRfc $rfc): array
     {
         $clean = [];
 
-        foreach ($raw as $rawKey => $rawValue) {
-            if ($rawKey === 'first published at' && str_contains($rawValue, '://wiki.php.net/rfc/'.$raw['slug'])) {
+        $data = $rfc->rawRfcData();
+
+        foreach ($data as $rawKey => $rawValue) {
+            if ($rawKey === 'first published at' && str_contains($rawValue, '://wiki.php.net/rfc/' . $data['slug'])) {
                 // If the wiki URL is the same as "first published at," skip it.
                 continue;
             }
@@ -160,7 +152,7 @@ class CleanMetaData
                 in_array($cleanKey, ['authors', 'date', 'status', 'version', 'PHP version'])
                 && $rawValue !== $cleanValue
             ) {
-                if (! isset($clean[ucwords("original $cleanKey")])) {
+                if (!isset($clean[ucwords("original $cleanKey")])) {
                     $clean[ucwords("original $cleanKey")] = $rawValue;
                 } else {
                     $clean[ucwords("original $rawKey")] = $rawValue;
@@ -170,11 +162,11 @@ class CleanMetaData
 
         // Some RFC pages do not have a Date property. Use the earliest commit
         // date for the RFC in order to sort the RFCs properly.
-        if (! array_key_exists('Date', $clean) || $clean['Date'] === '0000-00-00') {
+        if (!array_key_exists('Date', $clean) || $clean['Date'] === '0000-00-00') {
             $clean['Date'] = $this->getEarliestCommitDateForRfc($clean['Slug']);
         }
 
-        if (! array_key_exists('Status', $clean)) {
+        if (!array_key_exists('Status', $clean)) {
             $clean['Status'] = 'Unknown';
         }
 
@@ -195,9 +187,11 @@ class CleanMetaData
             $clean['Type'] = self::TYPE_STANDARDS_TRACK;
         }
 
-        if (! array_key_exists('Version', $clean) || $clean['Version'] === null) {
+        if (!array_key_exists('Version', $clean) || $clean['Version'] === null) {
             $clean['Version'] = '1.0';
         }
+
+
 
         ksort($clean, SORT_NATURAL);
 
@@ -267,13 +261,11 @@ class CleanMetaData
 
             if ($email === '' && preg_match(self::EMAIL_REGEX, $name) === 1 && $previousEmail === '') {
                 $orphanedEmails[$position ? $position - 1 : 0] = $name;
-
                 continue;
             }
 
             if ($name === '' && preg_match(self::EMAIL_REGEX, $email) === 1 && $previousEmail === '') {
                 $orphanedEmails[$position ? $position - 1 : 0] = $email;
-
                 continue;
             }
 
@@ -312,7 +304,7 @@ class CleanMetaData
 
     private function determinePhpVersion(string $version, ?string $section): ?string
     {
-        return $this->parseVersion((string) $section) ?? $this->parseVersion($version);
+        return $this->parseVersion((string)$section) ?? $this->parseVersion($version);
     }
 
     private function parseVersion(string $version): ?string
@@ -359,6 +351,9 @@ class CleanMetaData
         return self::STATUS_UNKNOWN;
     }
 
+    /**
+     * @return string
+     */
     private function getEarliestCommitDateForRfc(string $rfcSlug): string
     {
         $date = $this->revisions->gatherEarliestRevisionDate($rfcSlug);
@@ -370,3 +365,4 @@ class CleanMetaData
         return $date;
     }
 }
+
