@@ -74,17 +74,27 @@ class RegistrationTest extends TestCase
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
             ...$inputData,
         ])->assertSessionHasErrors([$fieldKey]);
+    }
 
+    public function test_registration_form_contains_username_component(): void
+    {
+        $this->get('/register')->assertSeeLivewire('username-input');
     }
 
     public static function validationDataProvider(): array
     {
         return [
             'Username is required' => ['username', ['username' => null]],
-            'Username must have a minimum length of 1' => ['username', ['username' => '']],
-            'Username must have a maximum length of 50' => ['username', ['username' => (new GenerateUsername)(Str::random(51))]],
+            'Username must have a minimum length of 2' => ['username', ['username' => '']],
+            'Username must have a maximum length of 50' => [
+                'username',
+                ['username' => (new GenerateUsername)(Str::random(51))],
+            ],
             'Username must follow a slug like format' => ['username', ['username' => 'this is not ok']],
-            'Username must be a string' => ['username', ['username' => ['test']]],
+            'Username should not start with hyphen' => ['username', ['username' => '-this-is-not-ok']],
+            'Username should not end with hyphen' => ['username', ['username' => 'this-is-not-ok-']],
+            'Username should not start with underscore' => ['username', ['username' => '_this-is-not-ok']],
+            'Username should not end with underscore' => ['username', ['username' => 'this-is-not-ok_']],
             'Username is unique' => ['username', ['username' => 'test']],
         ];
     }
