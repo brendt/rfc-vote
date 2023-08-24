@@ -73,7 +73,7 @@
                 @endif
 
                 <x-navbar.link
-                    href="#"
+                    href="{{ action(\App\Http\Controllers\MessagesController::class) }}"
                     :isActive="request()->is('messages')"
                 >
                     <span class="flex gap-1">

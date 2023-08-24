@@ -94,9 +94,34 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(VerificationRequest::class)->where('status', VerificationRequestStatus::PENDING);
     }
 
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class)
+            ->orderByDesc('created_at');
+    }
+
+    public function inboxMessages(): HasMany
+    {
+        return $this->hasMany(Message::class)
+            ->whereIn('status', [MessageStatus::UNREAD, MessageStatus::READ])
+            ->orderByDesc('created_at')
+            ->orderByDesc('id');
+    }
+
+    public function archivedMessages(): HasMany
+    {
+        return $this->hasMany(Message::class)
+            ->whereIn('status', [MessageStatus::ARCHIVED])
+            ->orderByDesc('created_at')
+            ->orderByDesc('id');
+    }
+
     public function unreadMessages(): HasMany
     {
-        return $this->hasMany(Message::class)->where('status', MessageStatus::UNREAD);
+        return $this->hasMany(Message::class)
+            ->where('status', MessageStatus::UNREAD)
+            ->orderByDesc('created_at')
+            ->orderByDesc('id');
     }
 
     public function getArgumentForRfc(Rfc $rfc): ?Argument

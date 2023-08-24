@@ -23,12 +23,14 @@ class DatabaseSeeder extends Seeder
             'reputation' => 10_000,
         ]);
 
-        (new SendUserMessage)(
-            to: $mainUser,
-            sender: User::factory()->create(),
-            url: '/',
-            body: 'test',
-        );
+        foreach(range(1, 10) as $i) {
+            (new SendUserMessage)(
+                to: $mainUser,
+                sender: User::factory()->create(),
+                url: '/',
+                body: $i . fake()->paragraphs(random_int(1, 3), true),
+            );
+        }
 
         $users = User::factory()->count(50)->create();
 

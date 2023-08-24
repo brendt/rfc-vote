@@ -20,29 +20,14 @@
             <span class="hidden md:block">•</span>
         @endif
 
-        <span class="text-xs cursor-pointer" wire:click="openComments({{ $argument->id }})">
-            {{ $argument->comments->count() }} {{ Str::plural('comment', $argument->comments->count()) }}
-        </span>
-
-        <span class="hidden md:block">•</span>
+{{--        <span class="text-xs cursor-pointer" wire:click="openComments({{ $argument->id }})">--}}
+{{--            {{ $argument->comments->count() }} {{ Str::plural('comment', $argument->comments->count()) }}--}}
+{{--        </span>--}}
+{{----}}
+{{--        <span class="hidden md:block">•</span>--}}
 
         <small class="flex items-center gap-1">
-            <x-profile.flair :user="$argumentUser" />
-
-            @if ($argumentUser?->getAvatarUrl())
-                <a
-                    href="{{ action(App\Http\Controllers\PublicProfileController::class, $argumentUser) }}"
-                    class="flex items-center gap-1.5 group/username"
-                >
-                    <img
-                        src="{{ $argumentUser->getAvatarUrl() }}"
-                        class="rounded-full shadow-sm w-[20px] h-[20px]"
-                        alt="{{ $argumentUser->username }} avatar"
-                    />
-
-                    <div class="group-hover/username:underline">{{ \Illuminate\Support\Str::limit($argumentUser->username, 18) }}</div>
-                </a>
-            @endif
+            <x-profile.username :user="$argumentUser" />
 
             {{ __('voted') }}
 

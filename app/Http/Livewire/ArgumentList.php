@@ -29,11 +29,6 @@ class ArgumentList extends Component
         Events::ARGUMENT_CREATED->value => 'refresh',
     ];
 
-    public function booted()
-    {
-        $this->showingComments = $this->rfc->arguments->first();
-    }
-
     public function render()
     {
         $userArgument = $this->user?->getArgumentForRfc($this->rfc);
