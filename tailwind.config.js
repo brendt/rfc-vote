@@ -4,6 +4,7 @@ import typography from '@tailwindcss/typography';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: 'class',
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
@@ -44,6 +45,12 @@ export default {
                 'main': 'var(--color-main)',
                 'main-light': 'var(--color-main-light)',
                 'main-dark': 'var(--color-main-dark)',
+                'background': 'var(--color-background)',
+                'navbar-background': 'var(--color-navbar-background)',
+                'footer-background': 'var(--color-footer-background)',
+                'rfc-card': 'var(--color-rfc-card)',
+                'argument-card': 'var(--color-argument-card)',
+                'white': 'var(--color-white)',
             },
         },
     },

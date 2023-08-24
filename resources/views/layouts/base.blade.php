@@ -1,5 +1,8 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth"
+      x-data="{ darkMode: false }"
+      x-bind:class="{ 'dark': darkMode }"
+>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,13 +18,13 @@
 
     @stack('meta')
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col bg-background transition-colors duration-300">
 
 @php
     $user = auth()->user();
 @endphp
 
-<nav class="bg-main bg-gradient-to-r from-main to-main-light z-10 p-4">
+<nav class="bg-navbar-background !dark:bg-gradient-to-r !dark:from-main !dark:to-main-light z-10 p-4">
     <div
         class="container flex justify-between text-white gap-4 items-center m-auto relative px-2"
         x-data="{ open: false }"
@@ -44,7 +47,7 @@
         ></div>
 
         <div
-            class="md:flex justify-end items-baseline md:gap-6 font-bold text-sm md:text-md inset-x-2 top-14 z-10"
+            class="md:flex justify-end md:items-center md:gap-6 font-bold text-sm md:text-md inset-x-2 top-14 z-10"
             :class="open ? 'flex absolute bg-white text-gray-700 flex-col rounded-xl shadow-lg text-[1.1em] py-8 px-4' : 'hidden gap-4'"
             x-cloak
         >
@@ -88,6 +91,24 @@
                     Register
                 </x-navbar.link>
             @endif
+
+            <div>
+{{--                <button id="header__sun"  title="Switch to system theme" class="relative focus:outline-none focus:shadow-outline text-gray-500"--}}
+{{--                        x-on:click="darkMode = false">--}}
+{{--                    <x-icons.system-mode/>--}}
+{{--                </button>--}}
+                <button id="header__moon" title="Switch to light mode" class="relative focus:outline-none focus:shadow-outline text-gray-500"
+                        x-on:click="darkMode = true"
+                        x-bind:class="{ 'hidden': darkMode }">
+                    <x-icons.dark-mode />
+                </button>
+                <button id="header__indeterminate" title="Switch to dark mode" class="relative focus:outline-none focus:shadow-outline text-gray-500"
+                        x-on:click="darkMode = false"
+                        x-bind:class="{ 'hidden': !darkMode }">
+                    <x-icons.light-mode/>
+                </button>
+            </div>
+
         </div>
     </div>
 </nav>

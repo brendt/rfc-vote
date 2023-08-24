@@ -8,4 +8,21 @@
     --color-main: #5b1497;
     --color-main-light: #8c50c7;
     --color-main-dark: #4d1080;
+
+    --color-background: #F3F4F6;
+    --color-navbar-background: #5b1497;
+    --color-footer-background: #4d1080;
+    --color-rfc-card: #FEFEFE;
+    --color-argument-card: #FEFEFE;
+    --color-white: #ffffff;
+}
+
+.dark{
+    /*--color-background: #161B22;*/
+    --color-background: #1f252e;
+    --color-navbar-background: #0D1117;
+    --color-footer-background: #0D1117;
+    --color-rfc-card: #191e26;
+    --color-argument-card: #191e26;
+    --color-white: #E6EDF3;
 }

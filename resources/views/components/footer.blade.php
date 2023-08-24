@@ -1,6 +1,7 @@
 <div class="
-    p-8 text-white flex justify-center md:gap-6 gap-4 flex-col bg-purple-800
-    bg-gradient-to-br from-main to-main-dark
+    p-8 text-white flex justify-center md:gap-6 gap-4 flex-col
+    bg-footer-background
+    !dark:bg-gradient-to-br !dark:from-main !dark:to-main-dark
 ">
     <div class="flex font-bold flex-wrap md:flex-nowrap gap-4 flex-1 justify-center">
         <span class="w-full md:w-auto">
