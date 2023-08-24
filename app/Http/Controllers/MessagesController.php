@@ -13,7 +13,7 @@ final readonly class MessagesController
             'archivedMessages.sender',
         ]);
 
-        return view('messages',[
+        return view('messages', [
             'user' => $user,
         ]);
     }
