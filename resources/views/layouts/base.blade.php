@@ -1,7 +1,15 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth"
-      x-data="{ darkMode: false }"
-      x-bind:class="{ 'dark': darkMode }"
+<html lang="en"
+      class="scroll-smooth"
+      x-cloak
+      x-data="{
+        darkMode: localStorage.getItem('theme') === 'dark',
+        toggle() {
+          this.darkMode = !this.darkMode;
+          localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+        }
+      }"
+      :class="{ 'dark': darkMode }"
 >
 <head>
     <meta charset="utf-8">
@@ -18,7 +26,7 @@
 
     @stack('meta')
 </head>
-<body class="min-h-screen flex flex-col bg-background transition-colors duration-300">
+<body class="min-h-screen flex flex-col bg-background transition-colors duration-100">
 
 @php
     $user = auth()->user();
@@ -93,22 +101,17 @@
             @endif
 
             <div>
-{{--                <button id="header__sun"  title="Switch to system theme" class="relative focus:outline-none focus:shadow-outline text-gray-500"--}}
-{{--                        x-on:click="darkMode = false">--}}
-{{--                    <x-icons.system-mode/>--}}
-{{--                </button>--}}
                 <button id="header__moon" title="Switch to light mode" class="relative focus:outline-none focus:shadow-outline text-gray-500"
-                        x-on:click="darkMode = true"
+                        @click="toggle()"
                         x-bind:class="{ 'hidden': darkMode }">
                     <x-icons.dark-mode />
                 </button>
                 <button id="header__indeterminate" title="Switch to dark mode" class="relative focus:outline-none focus:shadow-outline text-gray-500"
-                        x-on:click="darkMode = false"
+                        @click="toggle()"
                         x-bind:class="{ 'hidden': !darkMode }">
                     <x-icons.light-mode/>
                 </button>
             </div>
-
         </div>
     </div>
 </nav>
