@@ -105,7 +105,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getArgumentVoteForArgument(Argument $argument): ?ArgumentVote
     {
-        return $this->argumentVotes->first(fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id);
+        return $this->argumentVotes->first(
+            fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id
+        );
     }
 
     /**
