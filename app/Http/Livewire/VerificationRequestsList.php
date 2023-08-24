@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\UserFlair;
 use App\Models\VerificationRequest;
 use App\Models\VerificationRequestStatus;
 use Illuminate\Support\Collection;
@@ -17,8 +18,6 @@ class VerificationRequestsList extends Component
     public ?VerificationRequest $isDenying = null;
 
     public ?string $flair = null;
-
-    public ?string $flairColor = null;
 
     public function mount(): void
     {
@@ -38,9 +37,14 @@ class VerificationRequestsList extends Component
             return;
         }
 
+        if (! $this->isAccepting->is($request)) {
+            $this->isAccepting = $request;
+
+            return;
+        }
+
         $this->validate([
             'flair' => ['required', 'string'],
-            'flairColor' => ['required', 'regex:/^#([a-f0-9]{6}|[a-f0-9]{3})$/i'],
         ]);
 
         $request->update([
@@ -48,8 +52,7 @@ class VerificationRequestsList extends Component
         ]);
 
         $request->user->update([
-            'flair' => $this->flair,
-            'flair_color' => $this->flairColor,
+            'flair' => UserFlair::from($this->flair),
         ]);
 
         $this->refresh();
@@ -63,6 +66,12 @@ class VerificationRequestsList extends Component
             return;
         }
 
+        if (! $this->isDenying->is($request)) {
+            $this->isDenying = $request;
+
+            return;
+        }
+
         $request->update([
             'status' => VerificationRequestStatus::DENIED,
         ]);
@@ -70,12 +79,16 @@ class VerificationRequestsList extends Component
         $this->refresh();
     }
 
+    public function cancelAccept(): void
+    {
+        $this->refresh();
+    }
+
     public function refresh(): void
     {
         $this->isAccepting = null;
         $this->isDenying = null;
-        $this->flair = null;
-        $this->flairColor = null;
+        $this->flair = UserFlair::ADMIN->value;
 
         $this->pendingRequests = VerificationRequest::query()
             ->where('status', VerificationRequestStatus::PENDING)

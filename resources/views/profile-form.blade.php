@@ -133,11 +133,20 @@
             method="post"
             heading="Verification"
         >
+            <p class="mb-2 text-gray-600">
+                Please let us know if you're a PHP internal developer or an RFC Vote contributor by filling in this form. Verified users will get a badge before their username.
+            </p>
             <p class="mb-4 text-gray-600">
-                TODO
+                If you're not an internal developer or RFC Vote contributor, but would still like a badge, you can also fill in the form to explain why: we might add other types of badges in the future.
             </p>
 
-            @if($user->pendingVerificationRequests->isEmpty())
+            @if($user->flair)
+                <div class="flex gap-2 items-baseline">
+                    <p class="text-green-600 font-bold">Your current badge:</p>
+
+                    <x-profile.flair :user="$user"/>
+                </div>
+            @elseif($user->pendingVerificationRequests->isEmpty())
                 <div class="space-y-3">
                     <x-form.textarea name="motivation" label="Motivation" rows="5"></x-form.textarea>
 
@@ -148,7 +157,7 @@
                     </div>
                 </div>
             @else
-                <p>You already have a pending verification request.</p>
+                <p class="text-green-600 font-bold">Your verification request is pending.</p>
             @endif
         </x-form.wrapper>
 

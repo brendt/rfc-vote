@@ -28,6 +28,8 @@
             </p>
 
             <x-profile.social :user="$user" />
+
+            <x-profile.flair :user="$user" />
         </div>
     </div>
 

@@ -10,7 +10,6 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('flair')->nullable();
-            $table->string('flair_color')->nullable();
         });
     }
 
@@ -18,7 +17,6 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('flair');
-            $table->dropColumn('flair_color');
         });
     }
 };

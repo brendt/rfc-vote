@@ -21,15 +21,7 @@
         @endif
 
         <small class="flex items-center gap-1">
-            @if($argumentUser?->flair)
-                <span
-                    aria-label="User role"
-                    class="text-xs border px-3 py-0.5 rounded-full mr-1.5"
-                    title="This user is {{ Str::title($argumentUser->flair) }}"
-                >
-                    {{ Str::title($argumentUser->flair) }}
-                </span>
-            @endif
+            <x-profile.flair :user="$argumentUser" />
 
             @if ($argumentUser?->getAvatarUrl())
                 <a

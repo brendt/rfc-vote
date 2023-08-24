@@ -40,6 +40,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'reputation' => 'int',
         'email_optin' => 'bool',
+        'flair' => UserFlair::class,
     ];
 
     protected $appends = [
