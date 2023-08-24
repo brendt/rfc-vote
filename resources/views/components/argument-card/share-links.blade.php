@@ -38,7 +38,7 @@
     />
 
     <x-argument-card.share-link
-        :href="'https://www.linkedin.com/sharing/share-offsite/?url=PHP RFC Votes for '  . url()->current()"
+        :href="'https://www.linkedin.com/sharing/share-offsite/?url='  . url()->current()"
         target="_blank"
         title="{{ __('Share on LinkedIn') }}"
         icon="icons.linkedin"
