@@ -3,7 +3,7 @@
       class="scroll-smooth"
       x-cloak
       x-data="{
-        darkMode: localStorage.getItem('theme') === 'dark',
+        darkMode: localStorage.getItem('theme') === null ? window.matchMedia('(prefers-color-scheme: dark)').matches : localStorage.getItem('theme') === 'dark',
         toggle() {
           this.darkMode = !this.darkMode;
           localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
@@ -145,7 +145,7 @@
             x-transition:leave="transition ease-in duration-300"
             x-transition:leave-start="opacity-100 transform translate-y-0"
             x-transition:leave-end="opacity-0 transform translate-y-2"
-            onclick="window.scrollTo({top: 0});"
+            @click="window.scrollTo({top: 0});"
             class="rounded-full bg-purple-600 p-4 text-white shadow-md hover:bg-purple-700 duration-700 hover:-translate-y-3 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg active:bg-purple-800 active:shadow-lg"
         >
             <x-icons.arrow-double-up/>
