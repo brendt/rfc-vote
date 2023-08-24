@@ -99,7 +99,12 @@
                         ])
                         wire:click="storeArgument"
                     >
-                        Submit
+                        <span wire:loading wire:target="storeArgument">
+                             <x-icons.loading  class="w-6 h-6"></x-icons.loading>
+                        </span>
+                        <span wire:loading.remove wire:target="storeArgument">
+                            Submit
+                        </span>
                     </button>
 
                     <button
