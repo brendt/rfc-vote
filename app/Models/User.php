@@ -94,6 +94,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(VerificationRequest::class)->where('status', VerificationRequestStatus::PENDING);
     }
 
+    public function unreadMessages(): HasMany
+    {
+        return $this->hasMany(Message::class)->where('status', MessageStatus::UNREAD);
+    }
+
     public function getArgumentForRfc(Rfc $rfc): ?Argument
     {
         return $this->arguments->first(fn (Argument $argument) => $argument->rfc_id === $rfc->id);
@@ -176,5 +181,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasGottenMail(Mailable $mailable): bool
     {
         return $this->mails()->where('mail_type', $mailable::class)->exists();
+    }
+
+    public function updateUnreadMessageCount(): void
+    {
+        $this->update([
+            'unread_message_count' => $this->unreadMessages()->count(),
+        ]);
     }
 }
