@@ -1,4 +1,4 @@
-<x-tag class="{{ $voteType->class(yes: 'bg-green-600', no: 'bg-red-600') }} text-white font-bold">
+<x-tag class="{{ $voteType->class(yes: 'bg-agree', no: 'bg-disagree') }} text-white font-bold uppercase">
     {{ $count }}
     {{ $voteType->value }}
 </x-tag>

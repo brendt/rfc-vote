@@ -1,11 +1,11 @@
 @component('layouts.base')
-    <div class="max-w-lg m-auto mt-12">
+    <div class="max-w-lg m-auto my-12">
         <x-form.wrapper
             method="POST"
             action="{{ route('password.email') }}"
             :heading="__('Forgot your password?')"
         >
-            <x-success-message />
+            <x-success-message>{{ session('status') }}</x-success-message>
 
             <p class="mb-5 text-gray-500">
                 {{ __('No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}

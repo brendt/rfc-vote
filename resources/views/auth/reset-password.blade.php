@@ -1,5 +1,5 @@
 @component('layouts.base')
-    <div class="max-w-lg m-auto mt-12">
+    <div class="max-w-lg m-auto my-12">
         <x-form.wrapper
             method="POST"
             action="{{ route('password.update') }}"

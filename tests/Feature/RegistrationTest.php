@@ -2,8 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Actions\GenerateUsername;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
 use Tests\TestCase;
@@ -33,8 +36,11 @@ class RegistrationTest extends TestCase
             return;
         }
 
+        $name = 'Test User';
+
         $response = $this->post('/register', [
-            'name' => 'Test User',
+            'name' => $name,
+            'username' => (new GenerateUsername)($name),
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
@@ -43,5 +49,53 @@ class RegistrationTest extends TestCase
 
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
+    }
+
+    /**
+     * @dataProvider validationDataProvider
+     */
+    public function test_has_proper_validation_rules(string $fieldKey, array $inputData): void
+    {
+        $controlUser = User::factory()->create(
+            [
+                'email' => 'test@test.com',
+                'username' => 'test',
+            ]
+        );
+
+        $dummyUser = User::factory()->make();
+
+        $response = $this->post('/register', [
+            'name' => $dummyUser->name,
+            'username' => $dummyUser->username,
+            'email' => $dummyUser->email,
+            'password' => 'password',
+            'password_confirmation' => 'password',
+            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
+            ...$inputData,
+        ])->assertSessionHasErrors([$fieldKey]);
+    }
+
+    public function test_registration_form_contains_username_component(): void
+    {
+        $this->get('/register')->assertSeeLivewire('username-input');
+    }
+
+    public static function validationDataProvider(): array
+    {
+        return [
+            'Username is required' => ['username', ['username' => null]],
+            'Username must have a minimum length of 2' => ['username', ['username' => '']],
+            'Username must have a maximum length of 50' => [
+                'username',
+                ['username' => (new GenerateUsername)(Str::random(51))],
+            ],
+            'Username must follow a slug like format' => ['username', ['username' => 'this is not ok']],
+            'Username should not start with hyphen' => ['username', ['username' => '-this-is-not-ok']],
+            'Username should not end with hyphen' => ['username', ['username' => 'this-is-not-ok-']],
+            'Username should not start with underscore' => ['username', ['username' => '_this-is-not-ok']],
+            'Username should not end with underscore' => ['username', ['username' => 'this-is-not-ok_']],
+            'Username is unique' => ['username', ['username' => 'test']],
+        ];
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Actions\RequestEmailChange;
 use App\Models\EmailChangeRequest;
+use App\Models\VerificationRequest;
+use App\Models\VerificationRequestStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -62,20 +64,23 @@ final readonly class ProfileController
 
         $validated = $request->validate([
             'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore($request->user()->id)],
+            'email_optin' => ['nullable'],
         ]);
 
-        if ($validated['email'] === $user->email) {
-            flash('No changes were made');
+        $user->update([
+            'email_optin' => $validated['email_optin'] ?? false,
+        ]);
+
+        if ($validated['email'] !== $user->email) {
+            (new RequestEmailChange)(
+                user: $user,
+                newEmail: $validated['email'],
+            );
+
+            flash('An email with a verification link has been sent to your new email address. Please click the link to verify your email.');
 
             return redirect()->action([self::class, 'edit']);
         }
-
-        (new RequestEmailChange)(
-            user: $user,
-            newEmail: $validated['email'],
-        );
-
-        flash('An email with a verification link has been sent to your new email address. Please click the link to verify your email.');
 
         return redirect()->action([self::class, 'edit']);
     }
@@ -131,6 +136,23 @@ final readonly class ProfileController
         $emailChangeRequest->delete();
 
         flash('Your email has been successfully changed.');
+
+        return redirect()->action([self::class, 'edit']);
+    }
+
+    public function requestVerification(Request $request)
+    {
+        $validated = $request->validate([
+            'motivation' => ['required', 'string'],
+        ]);
+
+        VerificationRequest::create([
+            'user_id' => $request->user()->id,
+            'status' => VerificationRequestStatus::PENDING,
+            'motivation' => $validated['motivation'],
+        ]);
+
+        flash('Your verification request was submitted.');
 
         return redirect()->action([self::class, 'edit']);
     }

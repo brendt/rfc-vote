@@ -37,10 +37,12 @@ class VoteBar extends Component
     {
         $userArgument = $this->user?->getArgumentForRfc($this->rfc);
         $rowCount = count(explode(PHP_EOL, $this->body ?? '')) + 1;
+        $hasVoted = $userArgument !== null;
 
         return view('livewire.vote-bar', [
             'userArgument' => $userArgument,
             'rowCount' => $rowCount,
+            'hasVoted' => $hasVoted,
         ]);
     }
 
@@ -72,6 +74,11 @@ class VoteBar extends Component
         $this->refresh();
 
         $this->emit(Events::ARGUMENT_CREATED);
+    }
+
+    public function cancel(): void
+    {
+        $this->refresh();
     }
 
     public function refresh(): void

@@ -1,45 +1,40 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+@component('layouts.base')
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-        </div>
+    <div class="mx-auto max-w-[500px] my-4 md:my-12">
+        <x-form.wrapper
+            method="POST"
+            action="{{ route('verification.send') }}"
+            :heading="__('Verify Email Address')"
+        >
+            <p class="mb-5 text-gray-500">
+                {{ __('Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+            </p>
 
-        @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided in your profile settings.') }}
-            </div>
-        @endif
+            @if (session('status') === 'verification-link-sent')
+                <x-success-message>
+                    {{ __('A new verification link has been sent to the email address you provided in your profile settings.') }}
+                </x-success-message>
+            @endif
 
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
+            <div class="flex justify-end gap-2 items-center mt-7">
+                <x-form.button type="submit">
+                    <x-icons.envelope class="w-6 h-6" />
+                    {{ __('Resend Verification Email') }}
+                </x-form.button>
 
-                <div>
-                    <x-button type="submit">
-                        {{ __('Resend Verification Email') }}
-                    </x-button>
-                </div>
-            </form>
-
-            <div>
-                <a
-                    href="{{ route('profile.show') }}"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                <x-form.button
+                    type="button"
+                    class="!bg-transparent !text-gray-700 hover:!bg-gray-100"
+                    onclick="document.getElementById('logout-form').submit()"
                 >
-                    {{ __('Edit Profile') }}</a>
-
-                <form method="POST" action="{{ route('logout') }}" class="inline">
-                    @csrf
-
-                    <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-2">
-                        {{ __('Log Out') }}
-                    </button>
-                </form>
+                    {{ __('Logout') }}
+                </x-form.button>
             </div>
-        </div>
-    </x-authentication-card>
-</x-guest-layout>
+        </x-form.wrapper>
+    </div>
+
+    <form method="POST" action="{{ route('logout') }}" class="hidden" id="logout-form">
+        @csrf
+    </form>
+
+@endcomponent

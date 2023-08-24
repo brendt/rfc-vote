@@ -1,13 +1,5 @@
 @component('layouts.base')
-    <div class="grid mx-auto container max-w-[800px] px-4 gap-6 mt-4 md:mt-12 mb-8">
-        <x-form.wrapper
-            action="{{ action([Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'destroy']) }}"
-            method="post"
-            heading="Logout"
-        >
-            <x-form.button type="submit">Logout</x-form.button>
-        </x-form.wrapper>
-
+    <div class="grid mx-auto container max-w-[800px] px-4 gap-6 my-4 md:my-12">
         <x-form.wrapper
             action="{{ action([App\Http\Controllers\ProfileController::class, 'update']) }}"
             method="post"
@@ -65,7 +57,7 @@
                     <x-form.input
                         type="text"
                         name="twitter_url"
-                        label="Twitter"
+                        label="𝕏 (Twitter)"
                         value="{{ $user->twitter_url ?? old('twitter_url') }}"
                     />
 
@@ -94,8 +86,14 @@
                 Note: you will need to confirm your new email address. Also: if you logged in with GitHub and change your email address, your GitHub login won't work anymore.
             </p>
 
+            <div class="col-span-2 flex items-center gap-2 mt-4 font-bold">
+                <input type="checkbox" value="1" id="email_optin" name="email_optin" {{ $user->email_optin ? 'checked' : '' }}>
+
+                <label for="email_optin">Receive an email with RFC updates</label>
+            </div>
+
             <div class="text-right mt-4">
-                <x-form.button type="submit">Change your email</x-form.button>
+                <x-form.button type="submit">Save email preferences</x-form.button>
             </div>
         </x-form.wrapper>
 
@@ -129,5 +127,40 @@
                 </div>
             </div>
         </x-form.wrapper>
+
+        <x-form.wrapper
+            action="{{ action([App\Http\Controllers\ProfileController::class, 'requestVerification']) }}"
+            method="post"
+            heading="Verification"
+        >
+            <p class="mb-2 text-gray-600">
+                Please let us know if you're a PHP internal developer or an RFC Vote contributor by filling in this form. Verified users will get a badge before their username.
+            </p>
+            <p class="mb-4 text-gray-600">
+                If you're not an internal developer or RFC Vote contributor, but would still like a badge, you can also fill in the form to explain why: we might add other types of badges in the future.
+            </p>
+
+            @if($user->flair)
+                <div class="flex gap-2 items-baseline">
+                    <p class="text-green-600 font-bold">Your current badge:</p>
+
+                    <x-profile.flair :user="$user"/>
+                </div>
+            @elseif($user->pendingVerificationRequests->isEmpty())
+                <div class="space-y-3">
+                    <x-form.textarea name="motivation" label="Motivation" rows="5"></x-form.textarea>
+
+                    <div class="text-right">
+                        <x-form.button type="submit">
+                            {{ "Request Verification" }}
+                        </x-form.button>
+                    </div>
+                </div>
+            @else
+                <p class="text-green-600 font-bold">Your verification request is pending.</p>
+            @endif
+        </x-form.wrapper>
+
+
     </div>
 @endcomponent

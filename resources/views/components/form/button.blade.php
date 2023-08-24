@@ -1,8 +1,8 @@
 @php
     /**
-     * @var string $slot
+     * @var Illuminate\View\ComponentSlot $slot
      * @var Illuminate\View\ComponentAttributeBag $attributes
      */
 @endphp
 
-<x-buttons.main {{ $attributes->merge([]) }}>{{ $slot }}</x-buttons.main>
+<x-buttons.main {{ $attributes }}>{{ $slot }}</x-buttons.main>

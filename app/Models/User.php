@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Mail\Mailable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Str;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -39,32 +39,22 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'reputation' => 'int',
+        'email_optin' => 'bool',
+        'flair' => UserFlair::class,
     ];
 
     protected $appends = [
         'profile_photo_url',
     ];
 
-    protected static function booted()
-    {
-        self::saving(function (User $user) {
-            if ($user->username) {
-                return;
-            }
-
-            $username = Str::slug(explode(' ', $user->name)[0] ?? '', '');
-
-            $usernameCount = self::query()->where('username', 'like', "{$username}%")->count() + 1;
-
-            $user->username = $usernameCount === 1 ? $username : "{$username}-{$usernameCount}";
-
-            $user->save();
-        });
-    }
-
     public function getRouteKeyName()
     {
         return 'username';
+    }
+
+    public function mails(): HasMany
+    {
+        return $this->hasMany(UserMail::class);
     }
 
     public function viewedArguments(): BelongsToMany
@@ -94,6 +84,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(EmailChangeRequest::class);
     }
 
+    public function verificationRequests(): HasMany
+    {
+        return $this->hasMany(VerificationRequest::class);
+    }
+
+    public function pendingVerificationRequests(): HasMany
+    {
+        return $this->hasMany(VerificationRequest::class)->where('status', VerificationRequestStatus::PENDING);
+    }
+
     public function getArgumentForRfc(Rfc $rfc): ?Argument
     {
         return $this->arguments->first(fn (Argument $argument) => $argument->rfc_id === $rfc->id);
@@ -106,7 +106,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getArgumentVoteForArgument(Argument $argument): ?ArgumentVote
     {
-        return $this->argumentVotes->first(fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id);
+        return $this->argumentVotes->first(
+            fn (ArgumentVote $argumentVote) => $argumentVote->argument_id === $argument->id
+        );
     }
 
     /**
@@ -156,5 +158,23 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return now()->diffInMinutes($argumentView->created_at) > 5;
+    }
+
+    public function shouldSeeTutorial(): bool
+    {
+        if ($this->arguments->count() > 3) {
+            return false;
+        }
+
+        if ($this->argumentVotes->count() > 10) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function hasGottenMail(Mailable $mailable): bool
+    {
+        return $this->mails()->where('mail_type', $mailable::class)->exists();
     }
 }

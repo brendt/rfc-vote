@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\SendNewRfcMails;
 use App\Http\Controllers\RfcDetailController;
 use App\Jobs\RenderMetaImageJob;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -29,6 +30,8 @@ class Rfc extends Model implements Feedable
 
         static::created(function (Rfc $rfc) {
             $rfc->updateVoteCount();
+
+            (new SendNewRfcMails)($rfc);
         });
 
         static::saving(function (Rfc $rfc) {
@@ -54,6 +57,16 @@ class Rfc extends Model implements Feedable
     public function arguments(): HasMany
     {
         return $this->hasMany(Argument::class)->orderByDesc('vote_count')->orderByDesc('created_at');
+    }
+
+    public function userArgument(User $user)
+    {
+        return $this->arguments->first(fn (Argument $argument) => $argument->user_id === $user->id);
+    }
+
+    public function hasRfcVotedByUser(User $user): bool
+    {
+        return $this->userArgument($user)?->exists() ?: false;
     }
 
     public function yesArguments(): HasMany

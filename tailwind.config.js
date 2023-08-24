@@ -34,6 +34,17 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'agree': 'var(--color-agree)',
+                'agree-light': 'var(--color-agree-light)',
+                'agree-dark': 'var(--color-agree-dark)',
+                'disagree': 'var(--color-disagree)',
+                'disagree-light': 'var(--color-disagree-light)',
+                'disagree-dark': 'var(--color-disagree-dark)',
+                'main': 'var(--color-main)',
+                'main-light': 'var(--color-main-light)',
+                'main-dark': 'var(--color-main-dark)',
+            },
         },
     },
 

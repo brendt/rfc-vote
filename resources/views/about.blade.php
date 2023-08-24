@@ -1,7 +1,14 @@
 @component('layouts.base')
-    <div class="container max-w-[600px] mx-auto prose px-4">
+    <div class="container max-w-[600px] mx-auto prose px-4 mb-10">
 <x-markdown>
 ## Shaping PHP, together
+
+<blockquote>
+... voting is just the last step of the RFC process:
+   While the vote is the final arbiter, the discussion phase that precedes it
+   is where concerns are heard and the proposal is shaped.
+    <br><div style="text-align: right"><a href="https://externals.io/message/110936#110937">Nikita Popov</a></div>
+</blockquote>
 
 Thank you for checking out RFC Vote!
 
@@ -20,7 +27,7 @@ For official messages, please consider using the PHP Internals mailing list. Des
 Many people throughout the PHP community have already [contributed to this project](https://github.com/brendt/rfc-vote/graphs/contributors) — and [you can too](https://github.com/brendt/rfc-vote)!
 We also want to give a special shout-out to [Tighten](https://tighten.com/) for helping to create a design.
 
-The initial idea came from [Roman Pronskiy](https://twitter.com/pronskiy), who helps administer the [PHP Foundation](https://thephp.foundation/), and is developed (together with many open source enthousiasts) by [Brent Roose](https://twitter.com/brendt_gd), developer advocate for PHP at [JetBrains](https://www.jetbrains.com/phpstorm/).
+The initial idea came from [Roman Pronskiy](https://twitter.com/pronskiy), who helps administer the [PHP Foundation](https://thephp.foundation/), and is developed (together with many open source enthusiasts) by [Brent Roose](https://twitter.com/brendt_gd), developer advocate for PHP at [JetBrains](https://www.jetbrains.com/phpstorm/).
 
 ## Interesting links
 
