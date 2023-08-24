@@ -22,11 +22,9 @@
     @endif
 
     @foreach($rfc->arguments as $argument)
-        @php
-            if ($userArgument?->is($argument)) {
-                continue;
-            }
-        @endphp
+        @if ($userArgument?->is($argument))
+            @continue
+        @endif
 
         <x-argument-card.card
             :user="$user"
