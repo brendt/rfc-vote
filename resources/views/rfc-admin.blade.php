@@ -1,4 +1,4 @@
-@component('layouts.base')
+@component('layouts.admin')
     <div class="container mx-auto">
         <div class="grid gap-4 px-4">
             <div class="grid gap-2 divide-y divide-gray-300">
