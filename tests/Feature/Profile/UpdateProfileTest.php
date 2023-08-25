@@ -72,4 +72,18 @@ class UpdateProfileTest extends TestCase
             ->post($this->url, $formData)
             ->assertSessionHasErrors('name');
     }
+
+    public function test_username_cannot_be_more_than_255_characters(): void
+    {
+        $user = User::factory()->create();
+
+        $formData = [
+            'username' => str_repeat('a', 256),
+            'name' => 'anna',
+        ];
+
+        $this->actingAs($user)
+            ->post($this->url, $formData)
+            ->assertSessionHasErrors('username');
+    }
 }
