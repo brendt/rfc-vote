@@ -32,8 +32,27 @@ class UpdateProfileTest extends TestCase
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
-            'name' => $formData['name'],
-            'username' => $formData['username'],
+            ...$formData,
+        ]);
+    }
+
+    public function test_user_can_update_urls(): void
+    {
+        $user = User::factory()->create();
+
+        $formData = [
+            'name' => 'Anna',
+            'username' => 'anna',
+            'website_url' => 'https://anna.com',
+            'twitter_url' => 'https://twitter.com/anna',
+            'github_url' => 'https://github.com/anna',
+        ];
+
+        $this->actingAs($user)->post($this->url, $formData);
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            ...$formData,
         ]);
     }
 
