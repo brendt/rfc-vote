@@ -3,9 +3,9 @@
 namespace App\Actions;
 
 use App\Models\Argument;
+use App\Models\Enums\VoteType;
 use App\Models\Rfc;
 use App\Models\User;
-use App\Models\Enums\VoteType;
 use Illuminate\Support\Facades\DB;
 
 final readonly class CreateArgument

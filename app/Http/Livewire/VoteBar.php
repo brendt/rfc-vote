@@ -5,9 +5,9 @@ namespace App\Http\Livewire;
 use App\Actions\CreateArgument;
 use App\Http\Controllers\RfcDetailController;
 use App\Http\Livewire\Enums\Events;
+use App\Models\Enums\VoteType;
 use App\Models\Rfc;
 use App\Models\User;
-use App\Models\Enums\VoteType;
 use Livewire\Component;
 use Session;
 

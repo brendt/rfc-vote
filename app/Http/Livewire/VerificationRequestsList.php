@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Enums\UserFlair;
-use App\Models\VerificationRequest;
 use App\Models\Enums\VerificationRequestStatus;
+use App\Models\VerificationRequest;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
