@@ -11,22 +11,51 @@ class UpdateProfileTest extends TestCase
 {
     use LazilyRefreshDatabase;
 
+    private string $url;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->url = action([ProfileController::class, 'update']);
+    }
+
     public function test_user_can_update_name_and_username(): void
     {
         $user = User::factory()->create();
 
-        $form_data = [
+        $formData = [
             'name' => 'Anna',
             'username' => 'anna',
         ];
 
-        $this->actingAs($user)
-            ->post(action([ProfileController::class, 'update']), $form_data);
+        $this->actingAs($user)->post($this->url, $formData);
 
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
-            'name' => $form_data['name'],
-            'username' => $form_data['username'],
+            'name' => $formData['name'],
+            'username' => $formData['username'],
         ]);
+    }
+
+    public function test_username_is_required(): void
+    {
+        $user = User::factory()->create();
+
+        $formData = ['name' => 'Sam'];
+
+        $this->actingAs($user)
+            ->post($this->url, $formData)
+            ->assertSessionHasErrors('username');
+    }
+
+    public function test_name_is_required(): void
+    {
+        $user = User::factory()->create();
+
+        $formData = ['username' => 'serhii-cho'];
+
+        $this->actingAs($user)
+             ->post($this->url, $formData)
+             ->assertSessionHasErrors('name');
     }
 }
