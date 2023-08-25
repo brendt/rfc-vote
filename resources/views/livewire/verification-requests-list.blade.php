@@ -14,12 +14,22 @@
 
                     <div class="col-span-6 md:col-span-4 flex gap-3 items-center justify-end text-sm">
                         <x-buttons.main-small-solid wire:click="accept({{ $request->id }})">
-                            <x-icons.check class="w-4 h-4" />
+                             <span wire:loading.remove wire:target="accept({{ $request->id }})">
+                                <x-icons.check class="w-4 h-4" />
+                             </span>
+                            <span wire:loading wire:target="accept({{ $request->id }})">
+                             <x-icons.loading  class="w-4 h-4"></x-icons.loading>
+                            </span>
                             Accept
                         </x-buttons.main-small-solid>
 
                         <x-buttons.main-small-solid wire:click="deny({{ $request->id }})">
-                            <x-icons.trash class="w-4 h-4" />
+                             <span wire:loading.remove wire:target="deny({{ $request->id }})">
+                                <x-icons.trash class="w-4 h-4" />
+                             </span>
+                            <span wire:loading wire:target="deny({{ $request->id }})">
+                             <x-icons.loading  class="w-4 h-4"></x-icons.loading>
+                            </span>
                             {{ $isDenying?->is($request) ? 'Confirm' : 'Deny' }}
                         </x-buttons.main-small-solid>
                     </div>
@@ -42,8 +52,18 @@
                         </label>
 
                         <div class="flex justify-end col-span-2 gap-2">
-                            <x-buttons.main wire:click="accept({{ $isAccepting->id }})">Accept</x-buttons.main>
-                            <x-buttons.ghost wire:click="cancelAccept()">Cancel</x-buttons.ghost>
+                            <x-buttons.main wire:click="accept({{ $isAccepting->id }})">
+                                <span wire:loading  wire:target="accept({{ $isAccepting->id }})">
+                                    <x-icons.loading  class="w-4 h-4"></x-icons.loading>
+                                </span>
+                                Accept
+                            </x-buttons.main>
+                            <x-buttons.ghost wire:click="cancelAccept()">
+                                <span wire:loading wire:target="cancelAccept">
+                                    <x-icons.loading  class="w-4 h-4"></x-icons.loading>
+                                </span>
+                                Cancel
+                            </x-buttons.ghost>
                         </div>
                     </div>
 

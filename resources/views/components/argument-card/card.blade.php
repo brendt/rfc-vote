@@ -28,7 +28,13 @@
                     wire:click="editArgument('{{ $argument->id }}')"
                     class="!bg-agree hover:!bg-agree-dark"
                 >
-                    <x-icons.check class="w-6 h-6" />
+                    <span wire:loading wire:target="editArgument('{{ $argument->id }}')">
+                             <x-icons.loading  class="w-6 h-6"></x-icons.loading>
+                    </span>
+                    <span wire:loading.remove wire:target="editArgument('{{ $argument->id }}')">
+                        <x-icons.check class="w-6 h-6" />
+                    </span>
+
                     {{ __('Save') }}
                 </x-buttons.main>
 

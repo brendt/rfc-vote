@@ -21,9 +21,19 @@
     wire:click="voteForArgument({{ $argument->id }})"
 >
     @if ($user?->hasVotedForArgument($argument))
-        <x-icons.arrow-up-filled class="w-8 h-8 text-black m-auto text-inherit"></x-icons.arrow-up-filled>
+        <span wire:loading.remove wire:target="voteForArgument({{ $argument->id }})">
+            <x-icons.arrow-up-filled class="w-8 h-8 text-black m-auto text-inherit"></x-icons.arrow-up-filled>
+        </span>
+        <span wire:loading wire:target="voteForArgument({{ $argument->id }})">
+             <x-icons.loading  class="w-8 h-8 text-black m-auto text-inherit"></x-icons.loading>
+        </span>
     @elseif($user?->can('vote', $argument))
-        <x-icons.arrow-up-empty class="w-8 h-8 text-black m-auto text-inherit"></x-icons.arrow-up-empty>
+        <span wire:loading.remove wire:target="voteForArgument({{ $argument->id }})">
+            <x-icons.arrow-up-empty  class="w-8 h-8 text-black m-auto text-inherit"></x-icons.arrow-up-empty>
+        </span>
+        <span wire:loading wire:target="voteForArgument({{ $argument->id }})">
+             <x-icons.loading  class="w-8 h-8 text-black m-auto text-inherit"></x-icons.loading>
+        </span>
     @endif
 
     <span class="font-bold w-8">{{ $argument->vote_count }}</span>
