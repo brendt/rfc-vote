@@ -5,12 +5,12 @@
 @endphp
 
 <div
-    class="absolute right-1 top-1"
-    x-data="{ open: true }"
+    class="absolute right-2 top-2"
+    x-data="{ open: false }"
 >
     <button
         type="button"
-        class="p-2 rounded-full group-hover:bg-gray-100"
+        class="p-1 rounded-full group-hover:bg-gray-100 hover:bg-gray-100 transition-colors"
         @click="open = !open"
         @click.away="open = false"
     >
