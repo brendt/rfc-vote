@@ -29,15 +29,14 @@ final readonly class ProfileController
     public function update(UpdateRequest $request): RedirectResponse
     {
         $validated = collect($request->validated());
-
         $user = $request->user();
-
-        $user->update($validated->except('avatar')->toArray());
 
         if ($validated->has('avatar')) {
             $avatar = $request->file('avatar')?->store('public/avatars');
-            $user->update(compact('avatar'));
+            $validated->put('avatar', $avatar);
         }
+
+        $user->update($validated->toArray());
 
         flash('Profile updated successfully');
 
