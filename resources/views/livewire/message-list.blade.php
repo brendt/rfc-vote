@@ -1,6 +1,6 @@
-<div class="grid gap-2">
-    <h2 class="text-lg font-bold">Inbox</h2>
+<h2 class="text-lg font-bold">Inbox</h2>
 
+<div class="grid gap-4">
     @foreach($user->inboxMessages as $message)
         <x-message-card.card :message="$message" />
     @endforeach
