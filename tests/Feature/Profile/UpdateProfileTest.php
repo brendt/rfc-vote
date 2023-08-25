@@ -76,8 +76,8 @@ class UpdateProfileTest extends TestCase
         $formData = ['username' => 'serhii-cho'];
 
         $this->actingAs($user)
-             ->post($this->url, $formData)
-             ->assertSessionHasErrors('name');
+            ->post($this->url, $formData)
+            ->assertSessionHasErrors('name');
     }
 
     public function test_name_cannot_be_more_than_255_characters(): void
