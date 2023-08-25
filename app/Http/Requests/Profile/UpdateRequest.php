@@ -27,9 +27,9 @@ class UpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique('users', 'username')->ignore($this->user()->id),
             ],
-            'website_url' => ['nullable', 'url'],
-            'github_url' => ['nullable', 'url'],
-            'twitter_url' => ['nullable', 'url'],
+            'website_url' => ['nullable', 'max:255', 'url'],
+            'github_url' => ['nullable', 'max:255', 'url'],
+            'twitter_url' => ['nullable', 'max:255', 'url'],
             'avatar' => ['nullable', File::types(['png', 'jpg'])->max(1024)],
         ];
     }

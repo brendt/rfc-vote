@@ -86,4 +86,49 @@ class UpdateProfileTest extends TestCase
             ->post($this->url, $formData)
             ->assertSessionHasErrors('username');
     }
+
+    public function test_website_url_cannot_be_more_than_255_characters(): void
+    {
+        $user = User::factory()->create();
+
+        $formData = [
+            'username' => 'anna',
+            'name' => 'Anna',
+            'website_url' => str_repeat('a', 256),
+        ];
+
+        $this->actingAs($user)
+            ->post($this->url, $formData)
+            ->assertSessionHasErrors('website_url');
+    }
+
+    public function test_github_url_cannot_be_more_than_255_characters(): void
+    {
+        $user = User::factory()->create();
+
+        $formData = [
+            'username' => 'anna',
+            'name' => 'Anna',
+            'github_url' => str_repeat('a', 256),
+        ];
+
+        $this->actingAs($user)
+            ->post($this->url, $formData)
+            ->assertSessionHasErrors('github_url');
+    }
+
+    public function test_twitter_url_cannot_be_more_than_255_characters(): void
+    {
+        $user = User::factory()->create();
+
+        $formData = [
+            'username' => 'anna',
+            'name' => 'Anna',
+            'twitter_url' => str_repeat('a', 256),
+        ];
+
+        $this->actingAs($user)
+            ->post($this->url, $formData)
+            ->assertSessionHasErrors('twitter_url');
+    }
 }
