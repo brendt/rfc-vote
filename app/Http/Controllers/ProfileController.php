@@ -25,19 +25,9 @@ final readonly class ProfileController
         ]);
     }
 
-    public function update(Request $request)
+    public function update(UpdateRequest $request): RedirectResponse
     {
-        $validated = collect($request->validate([
-            'name' => ['required', 'string'],
-            'username' => ['required', 'string', Rule::unique('users', 'username')->ignore($request->user()->id)],
-            'website_url' => ['nullable', 'url'],
-            'github_url' => ['nullable', 'url'],
-            'twitter_url' => ['nullable', 'url'],
-            'avatar' => [
-                'nullable',
-                File::types(['png', 'jpg'])->max(1024),
-            ],
-        ]));
+        $validated = collect($request->validated());
 
         $user = $request->user();
 
