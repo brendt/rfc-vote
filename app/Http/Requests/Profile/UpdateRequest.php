@@ -20,7 +20,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', Rule::unique('users', 'username')->ignore($this->user()->id)],
             'website_url' => ['nullable', 'url'],
             'github_url' => ['nullable', 'url'],
