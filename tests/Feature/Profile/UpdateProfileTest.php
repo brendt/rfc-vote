@@ -164,8 +164,7 @@ class UpdateProfileTest extends TestCase
             'avatar' => UploadedFile::fake()->image('avatar.jpg'),
         ];
 
-        $this->actingAs($user)
-            ->post($this->url, $formData);
+        $this->actingAs($user)->post($this->url, $formData);
 
         $fileName = $formData['avatar']->hashName();
 
@@ -174,6 +173,43 @@ class UpdateProfileTest extends TestCase
         $this->assertDatabaseHas('users', [
             'id' => $user->id,
             'avatar' => "public/avatars/{$fileName}",
+        ]);
+    }
+
+    public function test_avatar_is_not_updated_to_null_when_avatar_in_request_is_null(): void
+    {
+        $avatar = 'public/avatars/alex.jpg';
+        $user = User::factory()->create(compact('avatar'));
+
+        $formData = [
+            'username' => 'alex',
+            'name' => 'alex',
+            'avatar' => null,
+        ];
+
+        $this->actingAs($user)->post($this->url, $formData);
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'avatar' => $avatar,
+        ]);
+    }
+
+    public function test_avatar_is_not_updated_to_null_when_not_provided(): void
+    {
+        $avatar = 'public/avatars/sam.jpg';
+        $user = User::factory()->create(compact('avatar'));
+
+        $formData = [
+            'username' => 'sam',
+            'name' => 'Sam',
+        ];
+
+        $this->actingAs($user)->post($this->url, $formData);
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'avatar' => $avatar,
         ]);
     }
 }
