@@ -7,7 +7,7 @@
 ... voting is just the last step of the RFC process:
    While the vote is the final arbiter, the discussion phase that precedes it
    is where concerns are heard and the proposal is shaped.
-    <br><div style="text-align: right"><a href="https://externals.io/message/110936#110937" class="text-white">Nikita Popov</a></div>
+    <br><div style="text-align: right"><a href="https://externals.io/message/110936#110937" class="text-font">Nikita Popov</a></div>
 </blockquote>
 
 Thank you for checking out RFC Vote!

@@ -72,7 +72,7 @@
         </div>
 
         <div class="mt-12 md:px-8">
-            <h2 class="text-2xl text-gray-600 font-bold tracking-wide md:mb-1">
+            <h2 class="text-2xl font-bold text-font-second tracking-wide md:mb-1">
                 {{ __('Check out another RFCs') }}
             </h2>
             <div class="flex flex-col justify-center lg:flex-row mt-4 space-x-0 space-y-4 lg:space-x-4 lg:space-y-0">
