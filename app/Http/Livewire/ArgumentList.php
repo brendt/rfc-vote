@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Actions\DeleteArgument;
 use App\Actions\ToggleArgumentVote;
 use App\Http\Controllers\RfcDetailController;
+use App\Http\Livewire\Enums\Events;
 use App\Models\Argument;
 use App\Models\Rfc;
 use App\Models\User;

@@ -4,7 +4,7 @@ namespace App\Actions;
 
 use App\Models\Argument;
 use App\Models\ArgumentVote;
-use App\Models\ReputationType;
+use App\Models\Enums\ReputationType;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 

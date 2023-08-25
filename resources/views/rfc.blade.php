@@ -40,8 +40,8 @@
                     {{ $rfc->arguments->count() }}
                 </x-tag>
 
-                <livewire:rfc-counter :rfc="$rfc" :vote-type="App\Models\VoteType::YES"/>
-                <livewire:rfc-counter :rfc="$rfc" :vote-type="App\Models\VoteType::NO" />
+                <livewire:rfc-counter :rfc="$rfc" :vote-type="App\Models\Enums\VoteType::YES"/>
+                <livewire:rfc-counter :rfc="$rfc" :vote-type="App\Models\Enums\VoteType::NO" />
 
                 @if($user?->is_admin)
                     <x-tag
@@ -90,8 +90,8 @@
                                 {{ $additionalRfc->arguments->count() }}
                             </x-tag>
 
-                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::YES"/>
-                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::NO"/>
+                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\Enums\VoteType::YES"/>
+                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\Enums\VoteType::NO"/>
                         </div>
                     </x-card-link>
                 @endforeach

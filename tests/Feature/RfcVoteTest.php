@@ -5,9 +5,9 @@ namespace Tests\Feature;
 use App\Http\Controllers\RfcDetailController;
 use App\Http\Livewire\VoteBar;
 use App\Models\Argument;
-use App\Models\ReputationType;
+use App\Models\Enums\ReputationType;
 use App\Models\Rfc;
-use App\Models\VoteType;
+use App\Models\Enums\VoteType;
 use Livewire\Livewire;
 use Tests\TestCase;
 

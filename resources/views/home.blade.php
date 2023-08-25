@@ -47,8 +47,8 @@
                             {{ $rfc->arguments->count() }}
                         </x-tag>
 
-                        <livewire:rfc-counter :rfc="$rfc" :vote-type="App\Models\VoteType::YES" />
-                        <livewire:rfc-counter :rfc="$rfc" :vote-type="App\Models\VoteType::NO" />
+                        <livewire:rfc-counter :rfc="$rfc" :vote-type="App\Models\Enums\VoteType::YES" />
+                        <livewire:rfc-counter :rfc="$rfc" :vote-type="App\Models\Enums\VoteType::NO" />
 
                         @if(isset($user) && $rfc->hasRfcVotedByUser($user))
                             @php

@@ -7,7 +7,7 @@ use App\Actions\RequestEmailChange;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Models\EmailChangeRequest;
 use App\Models\VerificationRequest;
-use App\Models\VerificationRequestStatus;
+use App\Models\Enums\VerificationRequestStatus;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;

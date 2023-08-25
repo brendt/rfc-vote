@@ -17,7 +17,7 @@
             style="width: {{ $rfc->percentage_yes }}%;"
 
             @if(! $hasVoted)
-                wire:click="vote('{{ App\Models\VoteType::YES }}')"
+                wire:click="vote('{{ App\Models\Enums\VoteType::YES }}')"
             @endif
         >
             {{ $rfc->percentage_yes }}%
@@ -33,7 +33,7 @@
             style="width: {{ $rfc->percentage_no }}%;"
 
             @if(! $hasVoted)
-                wire:click="vote('{{ App\Models\VoteType::NO }}')"
+                wire:click="vote('{{ App\Models\Enums\VoteType::NO }}')"
             @endif
         >
             {{ $rfc->percentage_no }}%
@@ -48,8 +48,8 @@
 
             <span @class([
                 'uppercase ml-1 font-black text-lg',
-                'text-agree' => $voteType === App\Models\VoteType::YES,
-                'text-disagree' => $voteType === App\Models\VoteType::NO,
+                'text-agree' => $voteType === App\Models\Enums\VoteType::YES,
+                'text-disagree' => $voteType === App\Models\Enums\VoteType::NO,
             ])>
                 {{ $voteType->value }}
             </span>
@@ -63,8 +63,8 @@
             <div @class([
                 'flex-1 p-4 flex gap-4 items-end bg-white border-gray-200 shadow-md p-4 gap-4 items-center',
                 $voteType->getJustify(),
-                'border-l-green-400 border-l-8 md:mr-8' => $voteType === App\Models\VoteType::YES,
-                'border-r-red-400 border-r-8 md:ml-8' => $voteType !== App\Models\VoteType::YES,
+                'border-l-green-400 border-l-8 md:mr-8' => $voteType === App\Models\Enums\VoteType::YES,
+                'border-r-red-400 border-r-8 md:ml-8' => $voteType !== App\Models\Enums\VoteType::YES,
             ])>
                 <div class="w-full">
                     <small>Your argument:</small>

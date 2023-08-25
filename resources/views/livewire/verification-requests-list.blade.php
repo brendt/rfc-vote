@@ -45,7 +45,7 @@
                             <b>Flair</b>
 
                             <select name="flair" id="flair" wire:model="flair" class="flex-grow">
-                                @foreach(\App\Models\UserFlair::cases() as $userFlair)
+                                @foreach(\App\Models\Enums\UserFlair::cases() as $userFlair)
                                     <option value="{{ $userFlair->value }}">{{ $userFlair->name }}</option>
                                 @endforeach
                             </select>

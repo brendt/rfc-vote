@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Enums\Events;
 use App\Models\Rfc;
-use App\Models\VoteType;
+use App\Models\Enums\VoteType;
 use Livewire\Component;
 
 class RfcCounter extends Component

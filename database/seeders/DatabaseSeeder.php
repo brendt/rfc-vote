@@ -6,8 +6,8 @@ use App\Actions\CreateArgument;
 use App\Models\Rfc;
 use App\Models\User;
 use App\Models\VerificationRequest;
-use App\Models\VerificationRequestStatus;
-use App\Models\VoteType;
+use App\Models\Enums\VerificationRequestStatus;
+use App\Models\Enums\VoteType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Actions\SendNewRfcMails;
 use App\Http\Controllers\RfcDetailController;
 use App\Jobs\RenderMetaImageJob;
+use App\Models\Enums\VoteType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

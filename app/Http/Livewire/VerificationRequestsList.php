@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\UserFlair;
+use App\Models\Enums\UserFlair;
 use App\Models\VerificationRequest;
-use App\Models\VerificationRequestStatus;
+use App\Models\Enums\VerificationRequestStatus;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
