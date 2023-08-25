@@ -5,6 +5,8 @@ namespace Tests\Feature\Profile;
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UpdateProfileTest extends TestCase
@@ -149,5 +151,29 @@ class UpdateProfileTest extends TestCase
         $this->actingAs($user)
             ->post($this->url, $formData)
             ->assertSessionHasErrors('twitter_url');
+    }
+
+    public function test_it_saves_avatar(): void
+    {
+        $user = User::factory()->create();
+        Storage::fake();
+
+        $formData = [
+            'username' => 'anna',
+            'name' => 'Anna',
+            'avatar' => UploadedFile::fake()->image('avatar.jpg'),
+        ];
+
+        $this->actingAs($user)
+            ->post($this->url, $formData);
+
+        $fileName = $formData['avatar']->hashName();
+
+        Storage::assertExists("public/avatars/{$fileName}");
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'avatar' => "public/avatars/{$fileName}",
+        ]);
     }
 }
