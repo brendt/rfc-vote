@@ -13,7 +13,7 @@
         <p>{{ $message->body }}</p>
 
         <div class="flex flex-col lg:flex-row gap-4 items-center justify-between mb-3 mt-1 opacity-80 border-t pt-3">
-            <div class="text-xs">
+            <div class="text-xs space-x-2">
                 @if(! $message->isArchived())
                     @if($message->isUnread() || $message->isArchived())
                         <x-buttons.ghost wire:click="read({{ $message->id }})">
