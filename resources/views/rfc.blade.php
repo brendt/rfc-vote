@@ -20,8 +20,8 @@
     <div class="container mx-auto px-4 mt-5 max-w-[1200px] mb-8">
         <x-email-optin-banner :user="$user"/>
 
-        <div class="grid gap-4 dark:bg-secondary-dark-mode bg-white p-7 md:px-14 md:py-12 rounded-xl">
-            <h1 class="text-2xl md:text-4xl font-bold dark:text-white text-gray-800">
+        <div class="grid gap-4 bg-rfc-card p-7 md:px-14 md:py-12 rounded-xl">
+            <h1 class="text-2xl md:text-4xl font-bold text-font-second">
                 {{ $rfc->title }}
             </h1>
 
@@ -54,7 +54,7 @@
                 @endif
             </div>
 
-            <x-markdown class="prose text-lg dark:text-white max-w-full">
+            <x-markdown class="prose text-lg text-font max-w-full">
                 {!! $rfc->description !!}
             </x-markdown>
 
@@ -78,11 +78,11 @@
             <div class="flex flex-col justify-center lg:flex-row mt-4 space-x-0 space-y-4 lg:space-x-4 lg:space-y-0">
                 @foreach($additionalRfcs as $additionalRfc)
                     <x-card-link :href="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)" class="flex-1">
-                        <div class="text-xl text-gray-800 dark:text-white font-bold px-2 border-b pb-4 mb-2">
+                        <div class="text-xl text-font font-bold px-2 border-b pb-4 mb-2">
                             {{ $additionalRfc->title }}
                         </div>
 
-                        <x-markdown class="px-2 text-gray-800 dark:text-white">{!! $additionalRfc->teaser !!}</x-markdown>
+                        <x-markdown class="px-2 text-font">{!! $additionalRfc->teaser !!}</x-markdown>
 
                         <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">
                             <x-tag class="font-bold">

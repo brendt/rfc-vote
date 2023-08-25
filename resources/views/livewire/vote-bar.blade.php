@@ -6,7 +6,7 @@
         </div>
     @endif
 
-    <div class="flex shadow-lg font-bold rounded-full overflow-hidden p-1.5 lg:p-3 bg-gray-200 dark:bg-secondary-dark-mode max-w-[1100px] mx-auto">
+    <div class="flex shadow-lg font-bold rounded-full overflow-hidden p-1.5 lg:p-3 bg-vote-bar-background dark:bg-secondary-dark-mode max-w-[1100px] mx-auto">
         {{-- Left (green) bar --}}
         <div
             @class([
@@ -26,7 +26,7 @@
         {{-- Right (red) bar --}}
         <div
             @class([
-                'py-1.5 lg:py-3 px-6 flex-grow text-right md:min-w-[15%] min-w-[20%] rounded-r-full bg-gradient-to-r from-disagree to-disagree-light text-white hover:opacity-100',
+                'py-1.5 lg:py-3  px-6 flex-grow text-right md:min-w-[15%] min-w-[20%] rounded-r-full bg-gradient-to-r from-disagree to-disagree-light text-white hover:opacity-100',
                 'cursor-not-allowed opacity-100' => $hasVoted,
                 'hover:bg-red-600 cursor-pointer opacity-80 shadow-md hover:shadow-[0px_0px_7px_var(--color-disagree-light)]' => ! $hasVoted,
             ])
@@ -42,7 +42,7 @@
 
     @if($voteType)
         <div class="flex justify-center mt-5 items-center gap-1">
-            <span class="text-gray-600 tracking-wide">
+            <span class=" text-font tracking-wide">
                 {{ $userArgument ? "You've voted" : "You're voting" }}
             </span>
 
@@ -61,7 +61,7 @@
     @if(!$userArgument && $voteType)
         <div class="flex {{ $voteType->getJustify() }} mt-6">
             <div @class([
-                'flex-1 p-4 flex gap-4 items-end bg-white border-gray-200 shadow-md p-4 gap-4 items-center',
+                'flex-1 p-4 flex gap-4 items-end bg-black border-gray-200 shadow-md p-4 gap-4 items-center',
                 $voteType->getJustify(),
                 'border-l-green-400 border-l-8 md:mr-8' => $voteType === App\Models\VoteType::YES,
                 'border-r-red-400 border-r-8 md:ml-8' => $voteType !== App\Models\VoteType::YES,

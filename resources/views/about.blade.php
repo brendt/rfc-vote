@@ -1,13 +1,13 @@
 @component('layouts.base')
-    <div class="container max-w-[600px] mx-auto prose px-4 mb-10 dark:text-white">
+    <div class="container max-w-[600px] mx-auto prose px-4 mb-10 dark:text-font">
 <x-markdown>
-    ## <span class="dark:text-white">Shaping PHP, together</span>
+    ## <span class="text-font">Shaping PHP, together</span>
 
-<blockquote class="dark:text-white">
+<blockquote class="text-font">
 ... voting is just the last step of the RFC process:
    While the vote is the final arbiter, the discussion phase that precedes it
    is where concerns are heard and the proposal is shaped.
-    <br><div style="text-align: right"><a href="https://externals.io/message/110936#110937" class="dark:text-white">Nikita Popov</a></div>
+    <br><div style="text-align: right"><a href="https://externals.io/message/110936#110937" class="text-white">Nikita Popov</a></div>
 </blockquote>
 
 Thank you for checking out RFC Vote!
@@ -22,17 +22,17 @@ In addition to casting a vote, you are encouraged to share your reasoning behind
 
 For official messages, please consider using the PHP Internals mailing list. Despite common belief, it is in fact, open to anyone.
 
-## <span class="dark:text-white">Who's involved?</span>
+## <span class="text-font">Who's involved?</span>
 
-Many people throughout the PHP community have already <a href="https://github.com/brendt/rfc-vote/graphs/contributors" class="dark:text-white">contributed to this project</a> — and <a href="https://github.com/brendt/rfc-vote" class="dark:text-white">you can too</a>!
-We also want to give a special shout-out to <a href="https://tighten.com/" class="dark:text-white">Tighten</a> for helping to create a design.
+Many people throughout the PHP community have already <a href="https://github.com/brendt/rfc-vote/graphs/contributors" class="text-font">contributed to this project</a> — and <a href="https://github.com/brendt/rfc-vote" class="dark:text-white">you can too</a>!
+We also want to give a special shout-out to <a href="https://tighten.com/" class="text-font">Tighten</a> for helping to create a design.
 
-The initial idea came from <a href="https://twitter.com/pronskiy" class="dark:text-white">Roman Pronskiy</a>, who helps administer the <a href="https://thephp.foundation/" class="dark:text-white">PHP Foundation</a>, and is developed (together with many open source enthusiasts) by <a href="https://twitter.com/brendt_gd" class="dark:text-white">Brent Roose</a>, developer advocate for PHP at <a href="https://www.jetbrains.com/phpstorm/" class="dark:text-white">JetBrains</a>.
+The initial idea came from <a href="https://twitter.com/pronskiy" class="text-font">Roman Pronskiy</a>, who helps administer the <a href="https://thephp.foundation/" class="dark:text-white">PHP Foundation</a>, and is developed (together with many open source enthusiasts) by <a href="https://twitter.com/brendt_gd" class="dark:text-white">Brent Roose</a>, developer advocate for PHP at <a href="https://www.jetbrains.com/phpstorm/" class="dark:text-white">JetBrains</a>.
 
-## <span class="dark:text-white">Interesting links</span>
+## <span class="text-font">Interesting links</span>
 
-- <a href="https://github.com/brendt/rfc-vote" class="dark:text-white">The RFC Vote repository</a> — everyone can contribute!
-- <a href="https://www.youtube.com/playlist?list=PL0bgkxUS9EaLguM2puiMD-NiiV6r5b8RY" class="dark:text-white">The YouTube playlist</a> where we built this project on stream, together.
+- <a href="https://github.com/brendt/rfc-vote" class="text-font">The RFC Vote repository</a> — everyone can contribute!
+- <a href="https://www.youtube.com/playlist?list=PL0bgkxUS9EaLguM2puiMD-NiiV6r5b8RY" class="text-font">The YouTube playlist</a> where we built this project on stream, together.
 </x-markdown>
 </div>
 @endcomponent

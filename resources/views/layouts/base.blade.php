@@ -26,7 +26,7 @@
 
     @stack('meta')
 </head>
-<body class="min-h-screen flex flex-col bg-background transition-colors duration-100">
+<body class="min-h-screen flex flex-col bg-background transition-colors duration-300">
 
 @php
     $user = auth()->user();
@@ -100,15 +100,17 @@
                 </x-navbar.link>
             @endif
 
-            <div>
+            <div class="ml-4 mt-4 md:m-0">
                 <button id="header__moon" title="Switch to light mode" class="relative focus:outline-none focus:shadow-outline text-gray-500"
+                        x-cloak
                         @click="toggle()"
-                        x-bind:class="{ 'hidden': darkMode }">
+                        x-bind:class="{ 'hidden': !darkMode }">
                     <x-icons.dark-mode />
                 </button>
                 <button id="header__indeterminate" title="Switch to dark mode" class="relative focus:outline-none focus:shadow-outline text-gray-500"
+                        x-cloak
                         @click="toggle()"
-                        x-bind:class="{ 'hidden': !darkMode }">
+                        x-bind:class="{ 'hidden': darkMode }">
                     <x-icons.light-mode/>
                 </button>
             </div>

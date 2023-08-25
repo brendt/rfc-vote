@@ -4,7 +4,7 @@
      * @var string $icon
      */
 
-    $styles = 'px-3 w-full py-1.5 text-[.9rem] font-bold text-gray-900 transition-colors hover:bg-gray-100 min-w-[140px]';
+    $styles = 'px-3 w-full py-1.5 text-[.9rem] font-bold text-font transition-colors hover:bg-gray-100 min-w-[140px]';
 @endphp
 
 @if ($attributes->has('href'))

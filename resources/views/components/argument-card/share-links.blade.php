@@ -5,7 +5,7 @@
      */
 @endphp
 
-<div class="flex items-center dark:text-white dark:fill-white gap-5 lg:gap-3 group-hover/card:opacity-100 text-gray-700 lg:opacity-0 duration-300 transition-opacity">
+<div class="flex items-center text-font gap-5 lg:gap-3 group-hover/card:opacity-100 lg:opacity-0 duration-300 transition-opacity">
     <small>{{ __('Share') }}:</small>
 
     <x-argument-card.share-link
@@ -35,6 +35,7 @@
         target="_blank"
         title="{{ __('Share on X') }}"
         icon="icons.x"
+        class="fill-font"
     />
 
     <x-argument-card.share-link

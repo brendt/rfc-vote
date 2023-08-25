@@ -36,6 +36,7 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                'white': 'var(--color-white)',
                 'agree': 'var(--color-agree)',
                 'agree-light': 'var(--color-agree-light)',
                 'agree-dark': 'var(--color-agree-dark)',
@@ -45,12 +46,30 @@ export default {
                 'main': 'var(--color-main)',
                 'main-light': 'var(--color-main-light)',
                 'main-dark': 'var(--color-main-dark)',
+
+                // background
                 'background': 'var(--color-background)',
                 'navbar-background': 'var(--color-navbar-background)',
                 'footer-background': 'var(--color-footer-background)',
                 'rfc-card': 'var(--color-rfc-card)',
                 'argument-card': 'var(--color-argument-card)',
-                'white': 'var(--color-white)',
+
+                // text color
+                'font': 'var(--color-font)',
+                'font-second': 'var(--color-font-second)',
+                // vot-bar
+                'vote-bar-background': 'var(--color-vote-bar-background)',
+                // yes arrow
+                'agree-arrow': 'var(--color-agree-arrow)',
+                'agree-arrow-border': 'var(--color-agree-arrow-border)',
+                'agree-arrow-hover': 'var(--color-agree-arrow-hover)',
+                'agree-arrow-background': 'var(--color-agree-arrow-background)',
+
+                // no arrow
+                'disagree-arrow': 'var(--color-disagree-arrow)',
+                'disagree-arrow-border': 'var(--color-disagree-arrow-border)',
+                'disagree-arrow-hover': 'var(--color-disagree-arrow-hover)',
+                'disagree-arrow-background': 'var(--color-disagree-arrow-background)',
             },
         },
     },
