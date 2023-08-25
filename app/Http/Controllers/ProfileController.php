@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Actions\RequestEmailChange;
+use App\Http\Requests\Profile\UpdateRequest;
 use App\Models\EmailChangeRequest;
 use App\Models\VerificationRequest;
 use App\Models\VerificationRequestStatus;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\File;
 
 final readonly class ProfileController
 {
@@ -31,16 +32,11 @@ final readonly class ProfileController
 
         $user = $request->user();
 
-        $user->update($validated->except('avatar')->all());
+        $user->update($validated->except('avatar')->toArray());
 
-        if ($validated['avatar'] ?? null) {
-            $file = $request->file('avatar');
-
-            $path = $file->store(path: 'public/avatars');
-
-            $user->update([
-                'avatar' => $path,
-            ]);
+        if ($validated->has('avatar')) {
+            $avatar = $request->file('avatar')?->store('public/avatars');
+            $user->update(compact('avatar'));
         }
 
         flash('Profile updated successfully');
