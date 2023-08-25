@@ -18,6 +18,11 @@ class RfcCounter extends Component
         Events::ARGUMENT_CREATED->value => 'refresh',
     ];
 
+    public function booted()
+    {
+        $this->rfc = $this->rfc->withoutRelations();
+    }
+
     public function render()
     {
         $count = match ($this->voteType) {
