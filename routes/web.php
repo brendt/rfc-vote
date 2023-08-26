@@ -22,7 +22,6 @@ use App\Http\Controllers\SocialiteCallbackController;
 use App\Http\Controllers\SocialiteRedirectController;
 use App\Http\Controllers\VerificationRequestsAdminController;
 use App\Http\Middleware\AdminMiddleware;
-use App\Http\Middleware\WithoutCaching;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,7 +37,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class);
 Route::get('/rfc/{rfc}', RfcDetailController::class);
-Route::get('/rfc/{rfc}/meta.png', RfcMetaImageController::class)->middleware(WithoutCaching::class);
+Route::get('/rfc/{rfc}/meta.png', RfcMetaImageController::class)->middleware('cache:900');
 Route::get('/login', LoginController::class)->name('login');
 Route::get('/register', RegisterController::class)->name('register');
 Route::get('/register-pending', fn () => view('register-pending'))->name('register-pending');
