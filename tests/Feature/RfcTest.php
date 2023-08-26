@@ -7,7 +7,9 @@ use App\Http\Controllers\PublishRfcController;
 use App\Http\Controllers\RfcAdminController;
 use App\Http\Controllers\RfcCreateController;
 use App\Http\Controllers\RfcEditController;
+use App\Http\Controllers\RfcMetaImageController;
 use App\Models\Rfc;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -128,5 +130,18 @@ class RfcTest extends TestCase
         $this->login(null, true);
         $this->post(action(EndRfcController::class, $rfc))
             ->assertRedirect(action(RfcAdminController::class));
+    }
+
+    /** @test */
+    public function rfc_meta_image_has_no_cache_headers()
+    {
+        $rfc = Rfc::factory()->create();
+        $response = $this->get(action(RfcMetaImageController::class, $rfc))
+            ->assertHeader('Content-Type', 'image/png')
+            ->assertHeader('Cache-Control', 'max-age=900, public, s-maxage=900, stale-if-error=900, stale-while-revalidate=900');
+
+        $expires = $response->headers->get('Expires');
+
+        $this->assertEquals(now()->format('d-m-Y'), Carbon::parse($expires)->format('d-m-Y'));
     }
 }
