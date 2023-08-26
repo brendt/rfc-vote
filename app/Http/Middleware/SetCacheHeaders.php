@@ -25,7 +25,7 @@ class SetCacheHeaders
             "stale-if-error=$seconds",
         ];
 
-        $response->headers->set('Cache-Control', 'public, ' . Arr::join($cacheControl,", "));
+        $response->headers->set('Cache-Control', 'public, ' . Arr::join($cacheControl, ", "));
         $response->headers->set('Expires', now()->addSeconds($seconds)->toRfc7231String());
 
         return $response;
