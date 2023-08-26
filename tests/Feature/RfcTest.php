@@ -7,6 +7,7 @@ use App\Http\Controllers\PublishRfcController;
 use App\Http\Controllers\RfcAdminController;
 use App\Http\Controllers\RfcCreateController;
 use App\Http\Controllers\RfcEditController;
+use App\Http\Controllers\RfcMetaImageController;
 use App\Models\Rfc;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -128,5 +129,16 @@ class RfcTest extends TestCase
         $this->login(null, true);
         $this->post(action(EndRfcController::class, $rfc))
             ->assertRedirect(action(RfcAdminController::class));
+    }
+
+    /** @test */
+    public function rfc_meta_image_has_no_cache_headers()
+    {
+        $rfc = Rfc::factory()->create();
+        $this->get(action(RfcMetaImageController::class, $rfc))
+            ->assertHeader('Content-Type', 'image/png')
+            ->assertHeader('Cache-Control', 'must-revalidate, no-cache, no-store, private')
+            ->assertHeader('Pragma', 'no-cache')
+            ->assertHeader('Expires', '0');
     }
 }
