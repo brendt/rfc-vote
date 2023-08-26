@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         foreach ($rfcs as $rfc) {
             $majority = fake()->boolean() ? VoteType::YES : VoteType::NO;
 
-            $minority = $majority === VoteType::YES ? VoteType::NO : VoteType::YES;
+            $minority = VoteType::opposite($majority);
 
             foreach ($users as $user) {
                 if (fake()->boolean(80)) {
