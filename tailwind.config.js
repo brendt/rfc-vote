@@ -49,8 +49,7 @@ export default {
 
                 // background
                 'background': 'var(--color-background)',
-                'navbar-background': 'var(--color-navbar-background)',
-                'footer-background': 'var(--color-footer-background)',
+                'admin-navbar-background': 'var(--color--admin-navbar-background)',
                 'rfc-card': 'var(--color-rfc-card)',
                 'argument-card': 'var(--color-argument-card)',
 

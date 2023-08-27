@@ -32,7 +32,8 @@
     $user = auth()->user();
 @endphp
 
-<nav class="bg-navbar-background bg-gradient-to-r from-main to-main-light z-10 p-4">
+<nav class="bg-main z-10 p-4 bg-gradient-to-r from-main to-main-light"
+     x-bind:class="{ '': !darkMode }">
     <div
         class="container flex justify-between text-white gap-4 items-center m-auto relative px-2"
         x-data="{ open: false }"
@@ -56,7 +57,7 @@
 
         <div
             class="md:flex justify-end md:items-center md:gap-6 font-bold text-sm md:text-md inset-x-2 top-14 z-10"
-            :class="open ? 'flex absolute bg-white text-gray-700 flex-col rounded-xl shadow-lg text-[1.1em] py-8 px-4' : 'hidden gap-4'"
+            :class="open ? 'flex absolute bg-white dark:bg-main-light text-font flex-col rounded-xl shadow-lg text-[1.1em] py-8 px-4' : 'hidden gap-4'"
             x-cloak
         >
             <x-navbar.link
@@ -100,14 +101,14 @@
                 </x-navbar.link>
             @endif
 
-            <div class="ml-4 mt-4 md:m-0">
-                <button id="header__moon" title="Switch to light mode" class="relative focus:outline-none focus:shadow-outline text-gray-500"
+            <div class="ml-4 mt-4 md:m-0 bg-">
+                <button id="header__moon" title="Switch to light mode" class="relative focus:outline-none focus:shadow-outline text-font"
                         x-cloak
                         @click="toggle()"
                         x-bind:class="{ 'hidden': !darkMode }">
                     <x-icons.dark-mode />
                 </button>
-                <button id="header__indeterminate" title="Switch to dark mode" class="relative focus:outline-none focus:shadow-outline text-gray-500"
+                <button id="header__indeterminate" title="Switch to dark mode" class="relative focus:outline-none focus:shadow-outline text-font"
                         x-cloak
                         @click="toggle()"
                         x-bind:class="{ 'hidden': darkMode }">

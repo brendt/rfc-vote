@@ -11,8 +11,7 @@
     --color-white: #FFFFFF;
 
     --color-background: #F3F4F6;
-    --color-navbar-background: #5b1497;
-    --color-footer-background: #4d1080;
+    --color--admin-navbar-background: #F3E8FFFF;
     --color-rfc-card: #FEFEFE;
     --color-argument-card: #FEFEFE;
     --color-font: #1f2937;
@@ -35,17 +34,20 @@
 .dark {
     /*--color-background: #161B22;*/
     --color-background: #1f252e;
-    --color-navbar-background: #0D1117;
-    --color-footer-background: #0D1117;
+    --color-main: #0D1117;
+    --color-main-light: #191e26;
+    --color-main-dark: #0D1117;
+    --color--admin-navbar-background: #161B22;
     --color-rfc-card: #191e26;
     --color-argument-card: #191e26;
     --color-font: #adbac7;
     --color-font-second: #E6EDF3;
-    --color-vote-bar-background: #333333;
+    --color-vote-bar-background: #36454F;
+
     /*yes arrow*/
     --color-agree-arrow: #80C251;
     --color-agree-arrow-border: #80C251;
-    --color-agree-arrow-hover: #29D67B;
+    --color-agree-arrow-hover: #AFE1AF;
     --color-agree-arrow-background: #29392C;
 
     /*no arrow*/

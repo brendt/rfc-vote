@@ -22,7 +22,7 @@ In addition to casting a vote, you are encouraged to share your reasoning behind
 
 For official messages, please consider using the PHP Internals mailing list. Despite common belief, it is in fact, open to anyone.
 
-## <span class="text-font">Who's involved?</span>
+## <span class="text-font-second">Who's involved?</span>
 
 Many people throughout the PHP community have already <a href="https://github.com/brendt/rfc-vote/graphs/contributors" class="text-font">contributed to this project</a> — and <a href="https://github.com/brendt/rfc-vote" class="dark:text-white">you can too</a>!
 We also want to give a special shout-out to <a href="https://tighten.com/" class="text-font">Tighten</a> for helping to create a design.
