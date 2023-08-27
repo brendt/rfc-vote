@@ -1,13 +1,13 @@
 @component('layouts.base')
     <div class="container max-w-[600px] mx-auto prose px-4 mb-10 dark:text-font">
 <x-markdown>
-    ## <span class="text-font">Shaping PHP, together</span>
+    ## <span class="text-font-second">Shaping PHP, together</span>
 
-<blockquote class="text-font">
+<blockquote class="text-font-second">
 ... voting is just the last step of the RFC process:
    While the vote is the final arbiter, the discussion phase that precedes it
    is where concerns are heard and the proposal is shaped.
-    <br><div style="text-align: right"><a href="https://externals.io/message/110936#110937" class="text-font">Nikita Popov</a></div>
+    <br><div style="text-align: right"><a href="https://externals.io/message/110936#110937" class="text-font-second">Nikita Popov</a></div>
 </blockquote>
 
 Thank you for checking out RFC Vote!
@@ -29,10 +29,10 @@ We also want to give a special shout-out to <a href="https://tighten.com/" class
 
 The initial idea came from <a href="https://twitter.com/pronskiy" class="text-font">Roman Pronskiy</a>, who helps administer the <a href="https://thephp.foundation/" class="dark:text-white">PHP Foundation</a>, and is developed (together with many open source enthusiasts) by <a href="https://twitter.com/brendt_gd" class="dark:text-white">Brent Roose</a>, developer advocate for PHP at <a href="https://www.jetbrains.com/phpstorm/" class="dark:text-white">JetBrains</a>.
 
-## <span class="text-font">Interesting links</span>
+## <span class="text-font-second">Interesting links</span>
 
-- <a href="https://github.com/brendt/rfc-vote" class="text-font">The RFC Vote repository</a> — everyone can contribute!
-- <a href="https://www.youtube.com/playlist?list=PL0bgkxUS9EaLguM2puiMD-NiiV6r5b8RY" class="text-font">The YouTube playlist</a> where we built this project on stream, together.
+- <a href="https://github.com/brendt/rfc-vote" class="text-font-second">The RFC Vote repository</a> — everyone can contribute!
+- <a href="https://www.youtube.com/playlist?list=PL0bgkxUS9EaLguM2puiMD-NiiV6r5b8RY" class="text-font-second">The YouTube playlist</a> where we built this project on stream, together.
 </x-markdown>
 </div>
 @endcomponent

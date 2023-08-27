@@ -1,6 +1,6 @@
 <div>
     @if (!$voteType)
-        <div class="mb-3 text-gray-600 tracking-wide flex gap-2 items-center justify-center">
+        <div class="mb-3 text-font tracking-wide flex gap-2 items-center justify-center">
             <x-icons.information-circle class="w-6 h-6" />
             {{ __('Click the bar to cast your vote!') }}
         </div>

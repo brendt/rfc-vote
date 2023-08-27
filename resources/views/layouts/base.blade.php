@@ -32,7 +32,7 @@
     $user = auth()->user();
 @endphp
 
-<nav class="bg-navbar-background !dark:bg-gradient-to-r !dark:from-main !dark:to-main-light z-10 p-4">
+<nav class="bg-navbar-background bg-gradient-to-r from-main to-main-light z-10 p-4">
     <div
         class="container flex justify-between text-white gap-4 items-center m-auto relative px-2"
         x-data="{ open: false }"
