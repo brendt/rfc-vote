@@ -2,7 +2,7 @@
     @if (!$voteType)
         <div class="mb-3 text-gray-600 tracking-wide flex gap-2 items-center justify-center">
             <x-icons.information-circle class="w-6 h-6" />
-            {{ __('Click the bar to cast your vote!') }}
+            Click the bar to cast your vote!
         </div>
     @endif
 
@@ -61,13 +61,11 @@
     @if(!$userArgument && $voteType)
         <div class="flex {{ $voteType->getJustify() }} mt-6">
             <div @class([
-                'flex-1 p-4 flex gap-4 items-end bg-white border-gray-200 shadow-md p-4 gap-4 items-center',
+                'flex-1 p-5 flex flex-col items-end rounded-lg bg-white border-gray-200 shadow-md p-4 gap-3 md:gap-2',
                 $voteType->getJustify(),
-                'border-l-green-400 border-l-8 md:mr-8' => $voteType === App\Models\VoteType::YES,
-                'border-r-red-400 border-r-8 md:ml-8' => $voteType !== App\Models\VoteType::YES,
             ])>
                 <div class="w-full">
-                    <small>Your argument:</small>
+                    <p class="mb-1 text-gray-600">Your argument:</p>
 
                     <div class="grid gap-2">
                         <x-markdown-editor
@@ -85,34 +83,32 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col gap-2">
-                    <button
+                <div class="flex gap-2">
+                    <x-buttons.main
                         type="submit"
-                        @class([
-                            'font-bold py-2 px-4 text-white text-center rounded-full',
-                            'cursor-not-allowed' => empty($this->body),
-                            'cursor-pointer hover:bg-green-600' => ! empty($this->body) && $voteType->getColor() === 'green',
-                            'cursor-pointer hover:bg-red-600' => ! empty($this->body) && $voteType->getColor() === 'red',
-                            'bg-green-400' => $voteType->getColor() === 'green',
-                            'bg-red-400' => $voteType->getColor() === 'red',
-                        ])
-                        @disabled(empty($this->body))
                         wire:click="storeArgument"
+                        @class([
+                            'cursor-not-allowed' => empty($this->body),
+                            'cursor-pointer' => !empty($this->body),
+                            '!bg-agree hover:!bg-agree-dark' => $voteType->getColor() === 'green',
+                            '!bg-disagree hover:!bg-disagree-dark' => $voteType->getColor() === 'red',
+                        ])
+                        :disabled="empty($this->body)"
                     >
                         <span wire:loading wire:target="storeArgument">
-                             <x-icons.loading  class="w-6 h-6"></x-icons.loading>
+                             <x-icons.loading class="w-6 h-6" />
                         </span>
                         <span wire:loading.remove wire:target="storeArgument">
-                            Submit
+                            <x-icons.check class="w-6 h-6" />
                         </span>
-                    </button>
 
-                    <button
-                        class="bg-gray-100 hover:bg-gray-200 py-2 px-4 text-center rounded-full"
-                        wire:click="cancel"
-                    >
+                        Submit
+                    </x-buttons.main>
+
+                    <x-buttons.ghost wire:click="cancel">
+                        <x-icons.cancel class="w-6 h-6" />
                         Cancel
-                    </button>
+                    </x-buttons.ghost>
                 </div>
             </div>
         </div>
