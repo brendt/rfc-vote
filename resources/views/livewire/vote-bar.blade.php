@@ -87,6 +87,7 @@
                     <x-buttons.main
                         type="submit"
                         wire:click="storeArgument"
+                        @disabled(empty($this->body))
                         @class([
                             'cursor-not-allowed' => empty($this->body),
                             'cursor-pointer' => !empty($this->body),
