@@ -12,17 +12,12 @@ enum UserFlair: string
 
     public function getDescription(): string
     {
-        return $this->messages()[$this->value];
-    }
-
-    private function messages(): array
-    {   
-        return [
-            'contributor' => 'This user has contribute to rfc-vote repository.',
-            'internals' => 'This user is the PHP Internals people.',
-            'admin' => 'This user is Admin.',
-            'laravel' => 'This user is the member of Laravel core team.',
-            'symfony' => 'This user is the member of Symfony core team.',
-        ];
+        return match ($this) {
+            UserFlair::CONTRIBUTOR => "This user has contribute to rfc-vote repository.",
+            UserFlair::INTERNALS => "This user is the PHP Internals people.",
+            UserFlair::ADMIN => "This user is Admin.",
+            UserFlair::LARAVEL => "This user is the member of Laravel core team.",
+            UserFlair::SYMFONY => "This user is the member of Symfony core team.",
+        };
     }
 }
