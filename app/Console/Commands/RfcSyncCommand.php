@@ -11,7 +11,7 @@ class RfcSyncCommand extends Command
 {
     protected $signature = 'rfc:sync';
 
-    protected $description = 'Command description';
+    protected $description = 'Sync RFCs from Externals RSS feed';
 
     public function handle(): void
     {

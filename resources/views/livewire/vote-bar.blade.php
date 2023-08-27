@@ -95,8 +95,8 @@
                             'cursor-pointer hover:bg-red-600' => ! empty($this->body) && $voteType->getColor() === 'red',
                             'bg-green-400' => $voteType->getColor() === 'green',
                             'bg-red-400' => $voteType->getColor() === 'red',
-
                         ])
+                        @disabled(empty($this->body))
                         wire:click="storeArgument"
                     >
                         <span wire:loading wire:target="storeArgument">
