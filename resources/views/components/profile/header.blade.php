@@ -15,15 +15,15 @@
         </div>
 
         <div>
-            <h1 class="text-3xl font-bold">
+            <h1 class="text-3xl font-bold text-font">
                 {{ $user->name }}
             </h1>
 
-            <h2 class="text-xl text-gray-500 font-bold">
+            <h2 class="text-xl font-bold text-font-second">
                 {{ $user->username }}
             </h2>
 
-            <p class="text-gray-500">
+            <p class="text-font-second">
                 {{ __('Member since') }} {{ $user->created_at->diffForHumans() }}
             </p>
 
@@ -39,21 +39,21 @@
                 :value="number_format($user->reputation)"
                 :label="__('Total Reputation')"
             >
-                <x-icons.trophy class="w-full" />
+                <x-icons.trophy class="w-full dark:text-font" />
             </x-profile.header-block>
 
             <x-profile.header-block
                 :value="number_format($user->arguments_count)"
                 :label="__('Total Arguments')"
             >
-                <x-icons.chat-bubble class="w-full" />
+                <x-icons.chat-bubble class="w-full dark:text-font" />
             </x-profile.header-block>
 
             <x-profile.header-block
                 :value="number_format($user->argument_votes_count)"
                 :label="__('Total Votes for Arguments')"
             >
-                <x-icons.arrow-up-empty class="w-full" />
+                <x-icons.arrow-up-empty class="w-full dark:text-font" />
             </x-profile.header-block>
         </div>
     </div>

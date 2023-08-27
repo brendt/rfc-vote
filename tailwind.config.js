@@ -56,8 +56,10 @@ export default {
                 // text color
                 'font': 'var(--color-font)',
                 'font-second': 'var(--color-font-second)',
+
                 // vot-bar
                 'vote-bar-background': 'var(--color-vote-bar-background)',
+
                 // yes arrow
                 'agree-arrow': 'var(--color-agree-arrow)',
                 'agree-arrow-border': 'var(--color-agree-arrow-border)',
@@ -69,6 +71,9 @@ export default {
                 'disagree-arrow-border': 'var(--color-disagree-arrow-border)',
                 'disagree-arrow-hover': 'var(--color-disagree-arrow-hover)',
                 'disagree-arrow-background': 'var(--color-disagree-arrow-background)',
+
+                // form
+                'form': 'var(--color-form)',
             },
         },
     },

@@ -6,11 +6,11 @@
      */
 @endphp
 
-<form {{ $attributes->merge(['class' => 'bg-white mx-3 md:mx-0 p-8 rounded-lg shadow-md text-font']) }}>
+<form {{ $attributes->merge(['class' => 'bg-form mx-3 md:mx-0 p-8 rounded-lg shadow-md text-font']) }}>
     @csrf
 
     @isset($heading)
-        <h2 class="text-2xl font-bold text-gray-700 mb-4 dark:text-white">{{ $heading }}</h2>
+        <h2 class="text-2xl font-bold mb-4 text-font">{{ $heading }}</h2>
     @endisset
 
     {{ $slot }}

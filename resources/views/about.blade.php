@@ -1,5 +1,5 @@
 @component('layouts.base')
-    <div class="container max-w-[600px] mx-auto prose px-4 mb-10 dark:text-font">
+    <div class="container max-w-[600px] mx-auto prose px-4 mb-10 text-font">
 <x-markdown>
     ## <span class="text-font-second">Shaping PHP, together</span>
 
@@ -24,10 +24,10 @@ For official messages, please consider using the PHP Internals mailing list. Des
 
 ## <span class="text-font-second">Who's involved?</span>
 
-Many people throughout the PHP community have already <a href="https://github.com/brendt/rfc-vote/graphs/contributors" class="text-font">contributed to this project</a> — and <a href="https://github.com/brendt/rfc-vote" class="dark:text-white">you can too</a>!
-We also want to give a special shout-out to <a href="https://tighten.com/" class="text-font">Tighten</a> for helping to create a design.
+Many people throughout the PHP community have already <a href="https://github.com/brendt/rfc-vote/graphs/contributors" class="text-font-second">contributed to this project</a> — and <a href="https://github.com/brendt/rfc-vote" class="text-font-second">you can too</a>!
+We also want to give a special shout-out to <a href="https://tighten.com/" class="text-font-second">Tighten</a> for helping to create a design.
 
-The initial idea came from <a href="https://twitter.com/pronskiy" class="text-font">Roman Pronskiy</a>, who helps administer the <a href="https://thephp.foundation/" class="dark:text-white">PHP Foundation</a>, and is developed (together with many open source enthusiasts) by <a href="https://twitter.com/brendt_gd" class="dark:text-white">Brent Roose</a>, developer advocate for PHP at <a href="https://www.jetbrains.com/phpstorm/" class="dark:text-white">JetBrains</a>.
+The initial idea came from <a href="https://twitter.com/pronskiy" class="text-font-second">Roman Pronskiy</a>, who helps administer the <a href="https://thephp.foundation/" class="text-font-second">PHP Foundation</a>, and is developed (together with many open source enthusiasts) by <a href="https://twitter.com/brendt_gd" class="text-font-second">Brent Roose</a>, developer advocate for PHP at <a href="https://www.jetbrains.com/phpstorm/" class="text-font-second">JetBrains</a>.
 
 ## <span class="text-font-second">Interesting links</span>
 

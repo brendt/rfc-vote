@@ -41,7 +41,7 @@
     </div>
 
     @if($voteType)
-        <div class="flex justify-center mt-5 items-center gap-1">
+        <div class="flex justify-center mt-5 items-center gap-1 text-font">
             <span class=" text-font tracking-wide">
                 {{ $userArgument ? "You've voted" : "You're voting" }}
             </span>
@@ -61,11 +61,11 @@
     @if(!$userArgument && $voteType)
         <div class="flex {{ $voteType->getJustify() }} mt-6">
             <div @class([
-                'flex-1 p-5 flex flex-col items-end rounded-lg bg-white border-gray-200 shadow-md p-4 gap-3 md:gap-2',
+                'flex-1 p-5 flex flex-col items-end rounded-lg bg-white dark:bg-main-light border-gray-200 shadow-md p-4 gap-3 md:gap-2',
                 $voteType->getJustify(),
             ])>
                 <div class="w-full">
-                    <p class="mb-1 text-gray-600">Your argument:</p>
+                    <p class="mb-1 text-font">Your argument:</p>
 
                     <div class="grid gap-2">
                         <x-markdown-editor

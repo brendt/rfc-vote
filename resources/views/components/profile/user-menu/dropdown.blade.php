@@ -7,7 +7,7 @@
 <div
     x-show="open"
     x-cloak
-    class="absolute dark:bg-secondary-dark-mode text-font dark:divide-secondary-dark-mode bg-white shadow-md rounded-md top-full mt-3 left-1/2 -translate-x-1/2 w-[170px] divide-y overflow-hidden"
+    class="absolute dark:bg-main text-font dark:divide-main-light bg-white shadow-md rounded-md top-full mt-3 left-1/2 -translate-x-1/2 w-[170px] divide-y overflow-hidden"
     x-transition:enter="transition ease-out duration-200"
     x-transition:enter-start="opacity-0 transform -translate-y-1"
     x-transition:enter-end="opacity-100 transform translate-y-0"

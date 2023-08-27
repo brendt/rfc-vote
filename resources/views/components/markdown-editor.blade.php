@@ -10,6 +10,6 @@
                 editor.codemirror.on('change', () => {
                  $dispatch('input', editor.value());
                 });
-                " {{$attributes}}></textarea>
+                " {{$attributes}} class="bg-black"></textarea>
     </div>
 </div>

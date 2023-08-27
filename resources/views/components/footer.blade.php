@@ -1,7 +1,6 @@
 <div class="
     p-8 text-white flex justify-center md:gap-6 gap-4 flex-col
-    bg-main-dark"
-     x-bind:class="{ 'bg-gradient-to-br from-main to-main-dark': !darkMode }">
+    bg-main-dark bg-gradient-to-r from-main to-main-dark">
     <div class="flex font-bold flex-wrap md:flex-nowrap gap-4 flex-1 justify-center">
         <span class="w-full md:w-auto">
             {{ __('This project is open source, you can help out') }}

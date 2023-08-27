@@ -44,7 +44,7 @@
     </div>
 
     @if ($isConfirmingDelete?->is($argument))
-        <div class="absolute right-6 bg-white flex flex-col gap-2 p-3 border rounded-sm min-w-[140px]">
+        <div class="absolute right-6 bg-argument-card flex flex-col gap-2 p-3 border rounded-sm min-w-[140px]">
             <b>{{ __('Are you sure?') }}</b>
 
             <x-buttons.main-small

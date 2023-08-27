@@ -38,7 +38,7 @@
 
                 <div class="inline-flex gap-4">
                     <label for="remember_me" class="flex items-center">
-                        <x-checkbox id="remember_me" name="remember" class="checked:text-main"/>
+                        <x-checkbox id="remember_me" name="remember" class="checked:text-purple-900"/>
                         <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                     </label>
 
@@ -62,7 +62,7 @@
 
             <x-buttons.main
                 href="{{ action(App\Http\Controllers\SocialiteRedirectController::class, 'github') }}"
-                class="!bg-gray-900 hover:!bg-gray-700"
+                class="!bg-gray-800 hover:!bg-gray-700"
             >
                 <x-icons.github class="h-6 w-6 fill-white" />
                 {{ __('Log in with GitHub') }}

@@ -57,7 +57,7 @@
 
         <div
             class="md:flex justify-end md:items-center md:gap-6 font-bold text-sm md:text-md inset-x-2 top-14 z-10"
-            :class="open ? 'flex absolute bg-white dark:bg-main-light text-font flex-col rounded-xl shadow-lg text-[1.1em] py-8 px-4' : 'hidden gap-4'"
+            :class="open ? 'space-y-2 flex absolute bg-white dark:bg-main-light text-font flex-col rounded-xl shadow-lg text-[1.1em] py-8 px-4' : 'hidden gap-4'"
             x-cloak
         >
             <x-navbar.link
