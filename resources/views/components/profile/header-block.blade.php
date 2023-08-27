@@ -11,7 +11,7 @@
         {{ $slot }}
     </div>
 
-    <div class="text-center  space-y-3 mt-1 sm:mt-1.5">
+    <div class="text-center space-y-3 mt-1 sm:mt-1.5">
         <h3 class="text-2xl sm:text-3xl font-bold text-slate-600 dark:text-font">{{ $value }}</h3>
         <h2 class="text-xl leading-5 text-slate-500 dark:text-font">{{ $label }}</h2>
     </div>
