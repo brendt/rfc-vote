@@ -2,7 +2,7 @@
     @if (!$voteType)
         <div class="mb-3 text-gray-600 tracking-wide flex gap-2 items-center justify-center">
             <x-icons.information-circle class="w-6 h-6" />
-            @lang('Click the bar to cast your vote!')
+            Click the bar to cast your vote!
         </div>
     @endif
 
@@ -65,7 +65,7 @@
                 $voteType->getJustify(),
             ])>
                 <div class="w-full">
-                    <p class="mb-1 text-gray-600">@lang('Your argument'):</p>
+                    <p class="mb-1 text-gray-600">Your argument:</p>
 
                     <div class="grid gap-2">
                         <x-markdown-editor
@@ -87,13 +87,13 @@
                     <x-buttons.main
                         type="submit"
                         wire:click="storeArgument"
-                        @disabled(empty($this->body))
                         @class([
                             'cursor-not-allowed' => empty($this->body),
                             'cursor-pointer' => !empty($this->body),
                             '!bg-agree hover:!bg-agree-dark' => $voteType->getColor() === 'green',
                             '!bg-disagree hover:!bg-disagree-dark' => $voteType->getColor() === 'red',
                         ])
+                        :disabled="empty($this->body)"
                     >
                         <span wire:loading wire:target="storeArgument">
                              <x-icons.loading class="w-6 h-6" />
@@ -102,12 +102,12 @@
                             <x-icons.check class="w-6 h-6" />
                         </span>
 
-                        @lang('Submit')
+                        Submit
                     </x-buttons.main>
 
                     <x-buttons.ghost wire:click="cancel">
                         <x-icons.cancel class="w-6 h-6" />
-                        @lang('Cancel')
+                        Cancel
                     </x-buttons.ghost>
                 </div>
             </div>
