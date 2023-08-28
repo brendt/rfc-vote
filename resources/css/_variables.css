@@ -15,6 +15,7 @@
     --color-rfc-card: #FEFEFE;
     --color-argument-card: #FEFEFE;
     --color-form: #FFFFFF;
+    --color-input: #FFFFFF;
     --color-font: #1f2937;
     --color-font-second: #374151;
     --color-vote-bar-background: #edf2f7;
@@ -42,6 +43,7 @@
     --color-rfc-card: #191e26;
     --color-argument-card: #191e26;
     --color-form: #191e26;
+    --color-input: #1f252e;
     --color-font: #adbac7;
     --color-font-second: #E6EDF3;
     --color-vote-bar-background: #36454F;

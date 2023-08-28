@@ -74,6 +74,7 @@ export default {
 
                 // form
                 'form': 'var(--color-form)',
+                'input': 'var(--color-input)',
             },
         },
     },
