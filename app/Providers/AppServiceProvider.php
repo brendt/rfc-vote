@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Support\Meta;
+// use Barryvdh\LaravelIdveHelper\IdeHelperServiceProvider;
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Browsershot\Browsershot;
@@ -44,6 +46,10 @@ class AppServiceProvider extends ServiceProvider
 
             return $browsershot;
         });
+
+        if ($this->app->isLocal()) {
+            $this->app->register(IdeHelperServiceProvider::class);
+        }
     }
 
     /**

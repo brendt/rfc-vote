@@ -14,6 +14,47 @@ use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 
+/**
+ * App\Models\Rfc
+ *
+ * @property int $id
+ * @property string $title
+ * @property string|null $teaser
+ * @property string $slug
+ * @property string|null $url
+ * @property string|null $description
+ * @property int $count_yes
+ * @property int $count_no
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $published_at
+ * @property \Illuminate\Support\Carbon|null $ends_at
+ * @property mixed|null $meta_image
+ * @property-read Collection<int, \App\Models\Argument> $arguments
+ * @property-read int|null $arguments_count
+ * @property-read Collection<int, \App\Models\Argument> $noArguments
+ * @property-read int|null $no_arguments_count
+ * @property-read Collection<int, \App\Models\Argument> $yesArguments
+ * @property-read int|null $yes_arguments_count
+ * @method static \Database\Factories\RfcFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereCountNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereCountYes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereEndsAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereMetaImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc wherePublishedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereTeaser($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rfc whereUrl($value)
+ * @mixin \Eloquent
+ */
 class Rfc extends Model implements Feedable
 {
     use HasFactory;
@@ -90,11 +131,11 @@ class Rfc extends Model implements Feedable
     {
         return Attribute::make(
             get: function () {
-                if ($this->count_total === 0) {
+                if ($this->countTotal() === 0) {
                     return 0;
                 }
 
-                return round(($this->count_yes / $this->count_total) * 100);
+                return round(($this->count_yes / ($this->count_yes + $this->count_no)) * 100);
             },
         );
     }
@@ -107,7 +148,7 @@ class Rfc extends Model implements Feedable
                     return 0;
                 }
 
-                return 100 - $this->percentage_yes;
+                return round(($this->count_no / ($this->count_no + $this->count_no)) * 100);
             },
         );
     }
@@ -123,7 +164,7 @@ class Rfc extends Model implements Feedable
 
     public function majorityYes(): bool
     {
-        return $this->percentage_yes >= 50;
+        return $this->percentageYes() >= 50;
     }
 
     public function majorityNo(): bool
