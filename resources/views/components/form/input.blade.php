@@ -12,7 +12,7 @@
 
         <input
             {{ $attributes->merge([
-                'class' => 'border text-font bg-input bg-black border-gray-300 dark:border-gray-700 rounded-md p-2 w-full ring-1 focus:ring-2 ring-transparent focus:border-purple-300 focus:ring-purple-500/50 focus:outline-none',
+                'class' => 'border text-font bg-input border-gray-300 dark:border-gray-700 rounded-md p-2 w-full ring-1 focus:ring-2 ring-transparent focus:border-purple-300 focus:ring-purple-500/50 focus:outline-none',
             ]) }}
         />
     </label>
