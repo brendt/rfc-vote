@@ -1,0 +1,7 @@
+includes:
+    - phpstan.neon
+
+parameters:
+    tmpDir: /github/home/.cache/phpstan/files
+    parallel:
+        maximumNumberOfProcesses: 4

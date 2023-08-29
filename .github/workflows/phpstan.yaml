@@ -1,0 +1,71 @@
+name: phpstan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [8.2]
+        laravel: [10.*]
+        stability: [prefer-stable]
+        include:
+          - laravel: 10.*
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Prepare github output
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          npm install
+      - name: List Installed Dependencies
+        run: composer show -D
+
+      - name: Setup Laravel
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+          npm run build
+
+      - name: Cache Result cache
+        uses: actions/cache@v3
+        with:
+          path: /github/home/.cache/phpstan/files
+          key: "result-cache-${{ github.run_id }}"
+          restore-keys: |
+            result-cache-
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan analyse -c phpstan-ci.neon --error-format=github
