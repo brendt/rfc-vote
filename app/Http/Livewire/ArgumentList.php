@@ -8,8 +8,6 @@ use App\Http\Controllers\RfcDetailController;
 use App\Models\Argument;
 use App\Models\Rfc;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
