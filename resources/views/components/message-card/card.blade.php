@@ -17,7 +17,12 @@
     <div class="grid gap-2 md:gap-4 w-full">
         <p>{{ $message->body }}</p>
 
-        <div class="flex flex-col lg:flex-row gap-4 items-center justify-end mt-1 border-t pt-3">
+        <div class="flex flex-col lg:flex-row gap-4 items-center justify-between mt-1 border-t pt-3">
+            <div class="text-xs">
+                @if($message->url)
+                    <x-buttons.ghost :href="$message->url">View</x-buttons.ghost>
+                @endif
+            </div>
             <div class="flex items-end gap-2">
                 <small class="flex items-center gap-2">
                     From <x-profile.username :user="$message->sender"/>
