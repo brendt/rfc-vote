@@ -1,13 +1,13 @@
 @component('layouts.base')
-    <div class="container max-w-[600px] mx-auto prose px-4 mb-10">
+    <div class="container max-w-[600px] mx-auto prose px-4 mb-10 text-font">
 <x-markdown>
-## Shaping PHP, together
+    ## <span class="text-font-second">Shaping PHP, together</span>
 
-<blockquote>
+<blockquote class="text-font-second">
 ... voting is just the last step of the RFC process:
    While the vote is the final arbiter, the discussion phase that precedes it
    is where concerns are heard and the proposal is shaped.
-    <br><div style="text-align: right"><a href="https://externals.io/message/110936#110937">Nikita Popov</a></div>
+    <br><div style="text-align: right"><a href="https://externals.io/message/110936#110937" class="text-font-second">Nikita Popov</a></div>
 </blockquote>
 
 Thank you for checking out RFC Vote!
@@ -22,17 +22,17 @@ In addition to casting a vote, you are encouraged to share your reasoning behind
 
 For official messages, please consider using the PHP Internals mailing list. Despite common belief, it is in fact, open to anyone.
 
-## Who's involved?
+## <span class="text-font-second">Who's involved?</span>
 
-Many people throughout the PHP community have already [contributed to this project](https://github.com/brendt/rfc-vote/graphs/contributors) — and [you can too](https://github.com/brendt/rfc-vote)!
-We also want to give a special shout-out to [Tighten](https://tighten.com/) for helping to create a design.
+Many people throughout the PHP community have already <a href="https://github.com/brendt/rfc-vote/graphs/contributors" class="text-font-second">contributed to this project</a> — and <a href="https://github.com/brendt/rfc-vote" class="text-font-second">you can too</a>!
+We also want to give a special shout-out to <a href="https://tighten.com/" class="text-font-second">Tighten</a> for helping to create a design.
 
-The initial idea came from [Roman Pronskiy](https://twitter.com/pronskiy), who helps administer the [PHP Foundation](https://thephp.foundation/), and is developed (together with many open source enthusiasts) by [Brent Roose](https://twitter.com/brendt_gd), developer advocate for PHP at [JetBrains](https://www.jetbrains.com/phpstorm/).
+The initial idea came from <a href="https://twitter.com/pronskiy" class="text-font-second">Roman Pronskiy</a>, who helps administer the <a href="https://thephp.foundation/" class="text-font-second">PHP Foundation</a>, and is developed (together with many open source enthusiasts) by <a href="https://twitter.com/brendt_gd" class="text-font-second">Brent Roose</a>, developer advocate for PHP at <a href="https://www.jetbrains.com/phpstorm/" class="text-font-second">JetBrains</a>.
 
-## Interesting links
+## <span class="text-font-second">Interesting links</span>
 
-- [The RFC Vote repository](https://github.com/brendt/rfc-vote) — everyone can contribute!
-- [The YouTube playlist](https://www.youtube.com/playlist?list=PL0bgkxUS9EaLguM2puiMD-NiiV6r5b8RY) where we built this project on stream, together.
+- <a href="https://github.com/brendt/rfc-vote" class="text-font-second">The RFC Vote repository</a> — everyone can contribute!
+- <a href="https://www.youtube.com/playlist?list=PL0bgkxUS9EaLguM2puiMD-NiiV6r5b8RY" class="text-font-second">The YouTube playlist</a> where we built this project on stream, together.
 </x-markdown>
-    </div>
+</div>
 @endcomponent

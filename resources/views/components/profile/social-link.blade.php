@@ -10,7 +10,7 @@
         href="{{ $url }}"
         target="_blank"
         rel="noopener noreferrer"
-        class="hover:opacity-70 transition-opacity"
+        class="hover:opacity-70 transition-opacity fill-font text-font"
     >
         {{ $slot }}
     </a>

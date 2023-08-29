@@ -102,7 +102,7 @@
             method="post"
             heading="Password"
         >
-            <p class="mb-4 text-gray-600">
+            <p class="mb-4 text-font">
                 @if ($user->password)
                     You're logged in with a password, so you can change your password here.
                 @else
@@ -133,10 +133,10 @@
             method="post"
             heading="Verification"
         >
-            <p class="mb-2 text-gray-600">
+            <p class="mb-2 text-font">
                 Please let us know if you're a PHP internal developer or an RFC Vote contributor by filling in this form. Verified users will get a badge before their username.
             </p>
-            <p class="mb-4 text-gray-600">
+            <p class="mb-4 text-font">
                 If you're not an internal developer or RFC Vote contributor, but would still like a badge, you can also fill in the form to explain why: we might add other types of badges in the future.
             </p>
 

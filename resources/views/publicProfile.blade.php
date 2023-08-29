@@ -4,7 +4,7 @@
         <x-profile.header :user="$user" />
 
         <div class="grid gap-4 mt-6">
-            <h2 class="text-3xl font-bold text-gray-700">
+            <h2 class="text-3xl font-bold text-font">
                 {{ __('Arguments and votes') }}
             </h2>
 

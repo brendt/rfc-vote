@@ -5,11 +5,11 @@
                 @foreach($rfcs as $rfc)
                     <div class="grid grid-cols-6 lg:grid-cols-12 p-4 gap-4 items-center">
                         <div class="col-span-6 lg:col-span-2 space-y-1">
-                            <h2 class="font-bold">
+                            <h2 class="font-bold text-font">
                                 {{ $rfc->title }}
                             </h2>
 
-                            <div class="flex text-gray-500 text-sm">
+                                <div class="flex text-font-second text-sm">
                                 {{ $rfc->published_at?->format('Y-m-d') }}
                                 <span>&nbsp;—&nbsp;</span> {{ $rfc->ends_at?->format('Y-m-d') ?? 'unknown' }}
                             </div>
@@ -25,7 +25,7 @@
                             </div>
                         </div>
 
-                        <div class="col-span-6">
+                        <div class="col-span-6 text-font">
                             {{ $rfc->description }}
                         </div>
 

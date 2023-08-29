@@ -4,18 +4,18 @@
 
 <div
     class="
-        {{ $user?->can('vote', $argument) ?  "hover:border-gray-200 cursor-pointer" : "cursor-not-allowed" }}
+        {{ $user?->can('vote', $argument) ?  "cursor-pointer" : "cursor-not-allowed" }}
         flex flex-col gap-1 transition-colors py-3 px-2 mb-5 max-w-[50px] mx-auto text-center rounded-2xl text-lg border border-transparent box-content
         @if ($argument->vote_type->isYes())
-            text-agree
-            bg-green-50
+            text-agree-arrow
+            bg-agree-arrow-background
             border-green-300
-            {{ $argument->user()->is($user) ? '' : 'hover:border-agree-light hover:text-agree-dark' }}
+            {{ $argument->user()->is($user) ? '' : 'hover:border-agree-arrow-border hover:text-agree-arrow-hover' }}
         @else
-            text-disagree
-            bg-red-50
+            text-disagree-arrow
+            bg-disagree-arrow-background
             border-red-300
-            {{ $argument->user()->is($user) ? '' : 'hover:border-disagree-light hover:text-disagree-dark' }}
+            {{ $argument->user()->is($user) ? '' : 'hover:border-disagree-arrow-border hover:text-disagree-arrow-hover' }}
         @endif
     "
     wire:click="voteForArgument({{ $argument->id }})"

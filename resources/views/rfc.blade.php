@@ -20,12 +20,12 @@
     <div class="container mx-auto px-4 mt-5 max-w-[1200px] mb-8">
         <x-email-optin-banner :user="$user"/>
 
-        <div class="grid gap-4 bg-white p-7 md:px-14 md:py-12 rounded-xl">
-            <h1 class="text-2xl md:text-4xl font-bold text-gray-800">
+        <div class="grid gap-4 bg-rfc-card p-7 md:px-14 md:py-12 rounded-xl">
+            <h1 class="text-2xl md:text-4xl font-bold text-font-second">
                 {{ $rfc->title }}
             </h1>
 
-            <div class="flex justify-start text-xs items-center flex-wrap gap-2 border-b pb-6 mb-2">
+            <div class="flex justify-start text-xs items-center  flex-wrap gap-2 border-b pb-6 mb-2">
                 <x-tag
                     :href="$rfc->url"
                     target="_blank"
@@ -54,7 +54,7 @@
                 @endif
             </div>
 
-            <x-markdown class="prose text-lg max-w-full">
+            <x-markdown class="prose text-lg text-font max-w-full">
                 {!! $rfc->description !!}
             </x-markdown>
 
@@ -72,17 +72,17 @@
         </div>
 
         <div class="mt-12 md:px-8">
-            <h2 class="text-2xl text-gray-600 font-bold tracking-wide md:mb-1">
+            <h2 class="text-2xl font-bold text-font-second tracking-wide md:mb-1">
                 {{ __('Check out another RFCs') }}
             </h2>
             <div class="flex flex-col justify-center lg:flex-row mt-4 space-x-0 space-y-4 lg:space-x-4 lg:space-y-0">
                 @foreach($additionalRfcs as $additionalRfc)
                     <x-card-link :href="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)" class="flex-1">
-                        <div class="text-xl text-gray-800 font-bold px-2 border-b pb-4 mb-2">
+                        <div class="text-xl text-font font-bold px-2 border-b pb-4 mb-2">
                             {{ $additionalRfc->title }}
                         </div>
 
-                        <x-markdown class="px-2 text-gray-800">{!! $additionalRfc->teaser !!}</x-markdown>
+                        <x-markdown class="px-2 text-font">{!! $additionalRfc->teaser !!}</x-markdown>
 
                         <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">
                             <x-tag class="font-bold">

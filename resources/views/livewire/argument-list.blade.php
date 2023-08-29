@@ -5,7 +5,7 @@
                 $availableVotes = $user->getAvailableVotesForRfc($rfc);
             @endphp
 
-            <span class="text-gray-600 tracking-wide">
+            <span class="text-font tracking-wide">
                 You have {{ $availableVotes }} {{ Str::plural('vote', $availableVotes) }} available
             </span>
         </div>

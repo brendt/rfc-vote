@@ -1,12 +1,12 @@
 <div>
     @if (!$voteType)
-        <div class="mb-3 text-gray-600 tracking-wide flex gap-2 items-center justify-center">
+        <div class="mb-3 text-font tracking-wide flex gap-2 items-center justify-center">
             <x-icons.information-circle class="w-6 h-6" />
             Click the bar to cast your vote!
         </div>
     @endif
 
-    <div class="flex shadow-lg font-bold rounded-full overflow-hidden p-1.5 lg:p-3 bg-gray-200 max-w-[1100px] mx-auto">
+    <div class="flex shadow-lg font-bold rounded-full overflow-hidden p-1.5 lg:p-3 bg-vote-bar-background max-w-[1100px] mx-auto">
         {{-- Left (green) bar --}}
         <div
             @class([
@@ -26,7 +26,7 @@
         {{-- Right (red) bar --}}
         <div
             @class([
-                'py-1.5 lg:py-3 px-6 flex-grow text-right md:min-w-[15%] min-w-[20%] rounded-r-full bg-gradient-to-r from-disagree to-disagree-light text-white hover:opacity-100',
+                'py-1.5 lg:py-3  px-6 flex-grow text-right md:min-w-[15%] min-w-[20%] rounded-r-full bg-gradient-to-r from-disagree to-disagree-light text-white hover:opacity-100',
                 'cursor-not-allowed opacity-100' => $hasVoted,
                 'hover:bg-red-600 cursor-pointer opacity-80 shadow-md hover:shadow-[0px_0px_7px_var(--color-disagree-light)]' => ! $hasVoted,
             ])
@@ -41,8 +41,8 @@
     </div>
 
     @if($voteType)
-        <div class="flex justify-center mt-5 items-center gap-1">
-            <span class="text-gray-600 tracking-wide">
+        <div class="flex justify-center mt-5 items-center gap-1 text-font">
+            <span class=" text-font tracking-wide">
                 {{ $userArgument ? "You've voted" : "You're voting" }}
             </span>
 
@@ -61,11 +61,11 @@
     @if(!$userArgument && $voteType)
         <div class="flex {{ $voteType->getJustify() }} mt-6">
             <div @class([
-                'flex-1 p-5 flex flex-col items-end rounded-lg bg-white border-gray-200 shadow-md p-4 gap-3 md:gap-2',
+                'flex-1 p-5 flex flex-col items-end rounded-lg bg-white dark:bg-main-light border-gray-200 shadow-md p-4 gap-3 md:gap-2',
                 $voteType->getJustify(),
             ])>
                 <div class="w-full">
-                    <p class="mb-1 text-gray-600">Your argument:</p>
+                    <p class="mb-1 text-font">Your argument:</p>
 
                     <div class="grid gap-2">
                         <x-markdown-editor

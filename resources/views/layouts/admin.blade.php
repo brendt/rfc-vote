@@ -1,7 +1,7 @@
 @component('layouts.base')
 
-    <div class="bg-purple-100">
-        <div class="container mx-auto">
+    <div class="bg-admin-navbar-background text-font ">
+        <div class="container mx-auto ">
             <nav class="py-3 px-6 md:px-2 flex items-center gap-8">
                 <x-navbar.link
                     href="{{ action(\App\Http\Controllers\RfcAdminController::class) }}"

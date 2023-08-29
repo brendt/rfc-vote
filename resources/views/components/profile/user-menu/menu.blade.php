@@ -11,7 +11,7 @@
     {{-- Trigger button --}}
     <button
         type="button"
-        class="flex gap-3 items-center bg-purple-900 hover:bg-gray-800 group transition-colors pr-5 md:pr-0 pl-5 rounded-full text-white py-2 md:py-0 mx-auto md:mx-0"
+        class="flex gap-3 items-center bg-main hover:bg-gray-800 group transition-colors pr-5 md:pr-0 pl-5 rounded-full text-white py-2 md:py-0 mx-auto md:mx-0"
         @click="open = !open"
         @click.away="open = false"
     >

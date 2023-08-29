@@ -8,4 +8,55 @@
     --color-main: #5b1497;
     --color-main-light: #8c50c7;
     --color-main-dark: #4d1080;
+    --color-white: #FFFFFF;
+
+    --color-background: #F3F4F6;
+    --color--admin-navbar-background: #F3E8FFFF;
+    --color-rfc-card: #FEFEFE;
+    --color-argument-card: #FEFEFE;
+    --color-form: #FFFFFF;
+    --color-input: #FFFFFF;
+    --color-font: #1f2937;
+    --color-font-second: #374151;
+    --color-vote-bar-background: #edf2f7;
+
+    /*yes arrow*/
+    --color-agree-arrow: #0f766e;
+    --color-agree-arrow-border: #14b8a6;
+    --color-agree-arrow-hover: #3AA574;
+    --color-agree-arrow-background: #F0FDF4;
+
+    /*no arrow*/
+    --color-disagree-arrow: #d11a66;
+    --color-disagree-arrow-border: #f43f5e;
+    --color-disagree-arrow-hover: #a91552;
+    --color-disagree-arrow-background: #fff5f5;
+}
+
+.dark {
+    --color-background: #161B22;
+    /*--color-background: #1f252e;*/
+    --color-main: #0D1117;
+    --color-main-light: #1F1F1F;
+    --color-main-dark: #161616;
+    --color--admin-navbar-background: #43485E;
+    --color-rfc-card: #191e26;
+    --color-argument-card: #191e26;
+    --color-form: #191e26;
+    --color-input: #1f252e;
+    --color-font: #adbac7;
+    --color-font-second: #E6EDF3;
+    --color-vote-bar-background: #36454F;
+
+    /*yes arrow*/
+    --color-agree-arrow: #80C251;
+    --color-agree-arrow-border: #80C251;
+    --color-agree-arrow-hover: #AFE1AF;
+    --color-agree-arrow-background: #29392C;
+
+    /*no arrow*/
+    --color-disagree-arrow: #EB9CA6;
+    --color-disagree-arrow-border: #EB9CA6;
+    --color-disagree-arrow-hover: #694048;
+    --color-disagree-arrow-background: #311820
 }

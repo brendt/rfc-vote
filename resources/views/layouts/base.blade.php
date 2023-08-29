@@ -1,5 +1,16 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en"
+      class="scroll-smooth"
+      x-cloak
+      x-data="{
+        darkMode: localStorage.getItem('theme') === null ? window.matchMedia('(prefers-color-scheme: dark)').matches : localStorage.getItem('theme') === 'dark',
+        toggle() {
+          this.darkMode = !this.darkMode;
+          localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+        }
+      }"
+      :class="{ 'dark': darkMode }"
+>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,13 +26,13 @@
 
     @stack('meta')
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col bg-background transition-colors duration-300" >
 
 @php
     $user = auth()->user();
 @endphp
 
-<nav class="bg-main bg-gradient-to-r from-main to-main-light z-10 p-4">
+<nav class="bg-main z-10 p-4 bg-gradient-to-r from-main to-main-light">
     <div
         class="container flex justify-between text-white gap-4 items-center m-auto relative px-2"
         x-data="{ open: false }"
@@ -44,8 +55,8 @@
         ></div>
 
         <div
-            class="md:flex justify-end items-center md:gap-6 font-bold text-sm md:text-md inset-x-2 top-14 z-10"
-            :class="open ? 'flex absolute bg-white text-gray-700 flex-col rounded-xl shadow-lg text-[1.1em] py-8 px-4' : 'hidden gap-4'"
+            class="md:flex justify-end md:items-center md:gap-6 font-bold text-sm md:text-md inset-x-2 top-14 z-10"
+            :class="open ? 'space-y-2 flex absolute bg-white dark:bg-main-light text-font flex-col rounded-xl shadow-lg text-[1.1em] py-8 px-4' : 'hidden gap-4'"
             x-cloak
         >
             <x-navbar.link
@@ -101,6 +112,21 @@
                     Register
                 </x-navbar.link>
             @endif
+
+            <div class="ml-4 mt-4 md:m-0 bg-">
+                <button id="header__moon" title="Switch to light mode" class="relative focus:outline-none focus:shadow-outline text-font"
+                        x-cloak
+                        @click="toggle()"
+                        x-bind:class="{ 'hidden': !darkMode }">
+                    <x-icons.dark-mode />
+                </button>
+                <button id="header__indeterminate" title="Switch to dark mode" class="relative focus:outline-none focus:shadow-outline text-font"
+                        x-cloak
+                        @click="toggle()"
+                        x-bind:class="{ 'hidden': darkMode }">
+                    <x-icons.light-mode/>
+                </button>
+            </div>
         </div>
     </div>
 </nav>
@@ -120,7 +146,7 @@
 </div>
 
 @if(isset($showToTopArrow) && $showToTopArrow === true)
-    <div class="sticky flex self-end justify-end bottom-6 right-6"
+    <div class="sticky flex self-end justify-end bottom-0 pb-3 right-6"
          x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY; updateVisibility() })"
          x-data="{ isVisible: false, scrolled: 0, updateVisibility() { this.isVisible = (this.scrolled / (document.documentElement.scrollHeight - window.innerHeight)) >= 0.5; } }"
          x-show="isVisible"
@@ -134,7 +160,7 @@
             x-transition:leave="transition ease-in duration-300"
             x-transition:leave-start="opacity-100 transform translate-y-0"
             x-transition:leave-end="opacity-0 transform translate-y-2"
-            onclick="window.scrollTo({top: 0});"
+            @click="window.scrollTo({top: 0});"
             class="rounded-full bg-purple-600 p-4 text-white shadow-md hover:bg-purple-700 duration-700 hover:-translate-y-3 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg active:bg-purple-800 active:shadow-lg"
         >
             <x-icons.arrow-double-up/>

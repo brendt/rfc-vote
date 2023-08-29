@@ -11,14 +11,14 @@
         <div class="grid lg:grid-cols-3 gap-5">
             @foreach ($rfcs as $rfc)
                 <x-card-link :href="action(App\Http\Controllers\RfcDetailController::class, $rfc)">
-                    <div class="text-xl text-gray-800 font-bold px-2 border-b pb-4 mb-2">
+                    <div class="text-xl font-bold px-2 border-b pb-4 mb-2 text-font">
                         {{ $rfc->title }}
                     </div>
 
-                    <x-markdown class="px-2 text-gray-800">{!! $rfc->teaser !!}</x-markdown>
+                    <x-markdown class="px-2 text-font">{!! $rfc->teaser !!}</x-markdown>
 
                     <div class="mt-3">
-                        <div class="bg-gray-200 p-1 rounded-full">
+                        <div class="bg-vote-bar-background p-1 rounded-full">
                             <div class="flex font-bold rounded-full overflow-hidden">
                                 <div
                                     class="p-1 flex-grow bg-gradient-to-r from-agree to-agree-light"

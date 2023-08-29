@@ -1,6 +1,6 @@
 @component('layouts.base')
 
-    <div class="mx-auto max-w-[500px] my-4 md:my-12">
+    <div class="mx-auto max-w-[500px] my-4 md:my-12 text-font">
         <x-form.wrapper
             method="{{ route('register') }}"
             method="post"
@@ -56,7 +56,6 @@
             </div>
         </x-form.wrapper>
 
-        <hr>
 
         <div class="flex items-center gap-3 mt-8 justify-center">
             <a
@@ -70,7 +69,7 @@
 
             <x-buttons.main
                 href="{{ action(App\Http\Controllers\SocialiteRedirectController::class, 'github') }}"
-                class="!bg-gray-900 hover:!bg-gray-700"
+                class="!bg-gray-800 hover:!bg-gray-700"
             >
                 <x-icons.github class="h-6 w-6 fill-white"/>
                 {{ __('Log in with GitHub') }}

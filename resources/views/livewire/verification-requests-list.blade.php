@@ -1,7 +1,7 @@
 
 <div class="container mx-auto">
     <div class="grid gap-4 px-4">
-        <div class="grid divide-y divide-gray-300">
+        <div class="grid divide-y divide-gray-300 text-font">
             @foreach($pendingRequests as $request)
                 <div class="grid grid-cols-6 lg:grid-cols-12 p-4 gap-4 items-center">
                     <div class="col-span-6 lg:col-span-2 space-y-1">
@@ -38,13 +38,13 @@
 
             @if($isAccepting)
                 <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-                    <div class="lg:w-2/5 bg-purple-100 p-4 grid gap-2 grid-cols-2">
-                        <p class="col-span-2">Accepting {{ $isAccepting->user->name }}'s verification request</p>
+                    <div class="lg:w-2/5 bg-purple-100 dark:bg-main-light p-4 grid gap-2 grid-cols-2">
+                        <p class="col-span-2 text-font">Accepting {{ $isAccepting->user->name }}'s verification request</p>
 
                         <label for="flair" class="flex gap-2 items-center">
-                            <b>Flair</b>
+                            <b class="text-font">Flair</b>
 
-                            <select name="flair" id="flair" wire:model="flair" class="flex-grow">
+                            <select name="flair" id="flair" wire:model="flair" class="flex-grow bg-input">
                                 @foreach(\App\Models\UserFlair::cases() as $userFlair)
                                     <option value="{{ $userFlair->value }}">{{ $userFlair->name }}</option>
                                 @endforeach
