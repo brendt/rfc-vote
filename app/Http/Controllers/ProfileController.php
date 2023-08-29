@@ -7,8 +7,6 @@ use App\Actions\Fortify\PasswordValidationRules;
 use App\Actions\RequestEmailChange;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Models\EmailChangeRequest;
-use App\Models\VerificationRequest;
-use App\Models\VerificationRequestStatus;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -127,8 +125,7 @@ final readonly class ProfileController
     public function requestVerification(
         CreateVerificationRequest $createVerificationRequest,
         Request $request,
-    )
-    {
+    ) {
         $validated = $request->validate([
             'motivation' => ['required', 'string'],
         ]);

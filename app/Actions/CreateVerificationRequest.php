@@ -2,7 +2,6 @@
 
 namespace App\Actions;
 
-use App\Http\Controllers\PublicProfileController;
 use App\Http\Controllers\VerificationRequestsAdminController;
 use App\Models\User;
 use App\Models\VerificationRequest;
@@ -10,7 +9,9 @@ use App\Models\VerificationRequestStatus;
 
 final readonly class CreateVerificationRequest
 {
-    public function __construct(private SendUserMessage $sendMessage) {}
+    public function __construct(private SendUserMessage $sendMessage)
+    {
+    }
 
     public function __invoke(User $user, string $motivation): void
     {
