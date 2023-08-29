@@ -67,8 +67,12 @@
                     <x-navbar.link
                         href="{{ action(App\Http\Controllers\RfcAdminController::class) }}"
                         :isActive="request()->is('admin/*')"
+
                     >
                         Admin
+                        @if($pendingVerificationRequests)
+                            <span>({{ $pendingVerificationRequests }})</span>
+                        @endif
                     </x-navbar.link>
                 @endif
 

@@ -11,6 +11,9 @@
                 <x-navbar.link
                     href="{{ action(\App\Http\Controllers\VerificationRequestsAdminController::class) }}"
                     :isActive="request()->is('admin/verification-requests')">Verification Requests
+                    @if($pendingVerificationRequests)
+                        <span class="font-bold">({{ $pendingVerificationRequests }})</span>
+                    @endif
                 </x-navbar.link>
             </nav>
         </div>
