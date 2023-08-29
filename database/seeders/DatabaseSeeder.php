@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Actions\CreateArgument;
+use App\Actions\SendUserMessage;
+use App\Models\ArgumentComment;
 use App\Models\Rfc;
 use App\Models\User;
 use App\Models\VerificationRequest;
@@ -14,12 +16,21 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->create([
+        $mainUser = User::factory()->create([
             'name' => 'Brent',
             'email' => 'brendt@stitcher.io',
             'is_admin' => true,
             'reputation' => 10_000,
         ]);
+
+        foreach (range(1, 10) as $i) {
+            (new SendUserMessage)(
+                to: $mainUser,
+                sender: User::factory()->create(),
+                url: '/',
+                body: $i.fake()->paragraphs(random_int(1, 3), true),
+            );
+        }
 
         $users = User::factory()->count(50)->create();
 
@@ -43,12 +54,22 @@ class DatabaseSeeder extends Seeder
 
             foreach ($users as $user) {
                 if (fake()->boolean(80)) {
-                    (new CreateArgument())(
+                    $argument = (new CreateArgument())(
                         rfc: $rfc,
                         user: $user,
                         voteType: fake()->boolean(70) ? $majority : $minority,
                         body: fake()->paragraphs(fake()->numberBetween(1, 4), true),
                     );
+
+                    ArgumentComment::factory()->count(fake()->numberBetween(0, 5))
+                        ->sequence(
+                            ['argument_id' => $argument->id, 'user_id' => $users->random()->id],
+                            ['argument_id' => $argument->id, 'user_id' => $users->random()->id],
+                            ['argument_id' => $argument->id, 'user_id' => $users->random()->id],
+                            ['argument_id' => $argument->id, 'user_id' => $users->random()->id],
+                            ['argument_id' => $argument->id, 'user_id' => $users->random()->id],
+                        )
+                        ->create();
                 }
             }
         }

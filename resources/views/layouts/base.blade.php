@@ -44,7 +44,7 @@
         ></div>
 
         <div
-            class="md:flex justify-end items-baseline md:gap-6 font-bold text-sm md:text-md inset-x-2 top-14 z-10"
+            class="md:flex justify-end items-center md:gap-6 font-bold text-sm md:text-md inset-x-2 top-14 z-10"
             :class="open ? 'flex absolute bg-white text-gray-700 flex-col rounded-xl shadow-lg text-[1.1em] py-8 px-4' : 'hidden gap-4'"
             x-cloak
         >
@@ -71,6 +71,15 @@
                         Admin
                     </x-navbar.link>
                 @endif
+
+                <x-navbar.link
+                    href="{{ action(\App\Http\Controllers\MessagesController::class) }}"
+                    :isActive="request()->is('messages')"
+                >
+                    <span class="flex gap-1">
+                        <x-icons.inbox class="w-5 h-5" /> <span class="md:hidden">Messages (</span>{{ $user->unread_message_count >= 1 ? $user->unread_message_count : '' }}<span class="md:hidden">)</span>
+                    </span>
+                </x-navbar.link>
 
                 <x-profile.user-menu.menu :user="$user" />
             @else

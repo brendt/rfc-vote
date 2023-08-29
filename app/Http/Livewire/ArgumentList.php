@@ -23,6 +23,8 @@ class ArgumentList extends Component
 
     public ?string $body = null;
 
+    public ?Argument $showingComments = null;
+
     protected $listeners = [
         Events::ARGUMENT_CREATED->value => 'refresh',
     ];
@@ -136,5 +138,16 @@ class ArgumentList extends Component
     public function cancelDeleteArgument(): void
     {
         $this->isConfirmingDelete = null;
+    }
+
+    public function openComments(Argument $argument): void
+    {
+        if ($this->showingComments?->is($argument)) {
+            $this->showingComments = null;
+
+            return;
+        }
+
+        $this->showingComments = $argument;
     }
 }
