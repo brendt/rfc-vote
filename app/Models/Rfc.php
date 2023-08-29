@@ -79,14 +79,20 @@ class Rfc extends Model implements Feedable
         return $this->hasMany(Argument::class)->where('vote_type', VoteType::NO);
     }
 
-    public function countTotal(): Attribute
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<int, never>
+     */
+    protected function countTotal(): Attribute
     {
         return Attribute::make(
             get: fn () => $this->count_yes + $this->count_no,
         );
     }
 
-    public function percentageYes(): Attribute
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<int, never>
+     */
+    protected function percentageYes(): Attribute
     {
         return Attribute::make(
             get: function () {
@@ -99,7 +105,10 @@ class Rfc extends Model implements Feedable
         );
     }
 
-    public function percentageNo(): Attribute
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<int, never>
+     */
+    protected function percentageNo(): Attribute
     {
         return Attribute::make(
             get: function () {
