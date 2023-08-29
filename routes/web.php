@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MailPreviewController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicProfileController;
 use App\Http\Controllers\PublishRfcController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\RfcMetaImageController;
 use App\Http\Controllers\SocialiteCallbackController;
 use App\Http\Controllers\SocialiteRedirectController;
 use App\Http\Controllers\VerificationRequestsAdminController;
+use App\Http\Controllers\ViewMessageController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +64,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    Route::get('/messages', MessagesController::class);
+    Route::get('/messages/{message}', ViewMessageController::class);
     Route::get('/email-optin/enable', EnableEmailOptinController::class);
     Route::get('/email-optin/disable', DisableEmailOptinController::class);
     Route::get('/profile', [ProfileController::class, 'edit']);

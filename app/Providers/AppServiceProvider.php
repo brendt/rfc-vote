@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Http\ViewComposers\AdminViewComposer;
 use App\Support\Meta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Browsershot\Browsershot;
 use Tests\FakeBrowsershot;
+use View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,6 +54,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::unguard();
+
+        View::composer('layouts.base', AdminViewComposer::class);
+        View::composer('layouts.admin', AdminViewComposer::class);
 
         //        Model::preventLazyLoading(! app()->isProduction());
     }

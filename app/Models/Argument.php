@@ -30,4 +30,9 @@ class Argument extends Model
     {
         return $this->hasMany(ArgumentVote::class);
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(ArgumentComment::class);
+    }
 }

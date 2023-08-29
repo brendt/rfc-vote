@@ -2,20 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\VerificationRequest;
-use App\Models\VerificationRequestStatus;
+use App\Models\ArgumentComment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-class VerificationRequestFactory extends Factory
+class ArgumentCommentFactory extends Factory
 {
-    protected $model = VerificationRequest::class;
+    protected $model = ArgumentComment::class;
 
     public function definition(): array
     {
         return [
-            'motivation' => $this->faker->word(),
-            'status' => VerificationRequestStatus::PENDING,
+            'body' => $this->faker->paragraphs(fake()->numberBetween(1, 4), true),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
