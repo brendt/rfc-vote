@@ -61,4 +61,9 @@ enum VoteType: string
     {
         return $this->isYes() ? $yes : $no;
     }
+
+    public static function opposite(VoteType $type): VoteType
+    {
+        return ($type === self::YES) ? self::NO : self::YES;
+    }
 }

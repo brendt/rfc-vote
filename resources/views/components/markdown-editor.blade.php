@@ -5,7 +5,8 @@
                     element: $el,
                     forceSync:true,
                     renderingConfig:{codeSyntaxHighlighting:true},
-                    previewClass:['editor-preview', 'prose', 'prose-code:text-[color:var(--tw-prose-code)]'  , 'w-full', 'max-w-full']
+                    previewClass:['editor-preview', 'prose', 'prose-code:text-[color:var(--tw-prose-code)]'  , 'w-full', 'max-w-full'],
+                    status: false
                 });
                 editor.codemirror.on('change', () => {
                  $dispatch('input', editor.value());
