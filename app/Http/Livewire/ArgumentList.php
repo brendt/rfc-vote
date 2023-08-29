@@ -8,11 +8,16 @@ use App\Http\Controllers\RfcDetailController;
 use App\Models\Argument;
 use App\Models\Rfc;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ArgumentList extends Component
 {
+    use WithPagination;
+
     public Rfc $rfc;
 
     public ?User $user = null;
@@ -33,8 +38,20 @@ class ArgumentList extends Component
     {
         $userArgument = $this->user?->getArgumentForRfc($this->rfc);
 
+        $arguments = Argument::query()
+            ->where('rfc_id', $this->rfc->id)
+            ->orderByDesc('vote_count')
+            ->orderByDesc('created_at')
+            ->with([
+                'user',
+                'rfc',
+                'comments.user',
+            ])
+            ->paginate(15);
+
         return view('livewire.argument-list', [
             'userArgument' => $userArgument,
+            'arguments' => $arguments,
         ]);
     }
 
