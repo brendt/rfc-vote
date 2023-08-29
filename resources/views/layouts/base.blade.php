@@ -26,7 +26,7 @@
 
     @stack('meta')
 </head>
-<body class="min-h-screen flex flex-col bg-background transition-colors duration-300">
+<body class="min-h-screen flex flex-col bg-background transition-colors duration-300" >
 
 @php
     $user = auth()->user();
