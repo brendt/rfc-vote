@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Actions\AcceptVerificationRequest;
+use App\Actions\DenyVerificationRequest;
 use App\Models\UserFlair;
 use App\Models\VerificationRequest;
 use App\Models\VerificationRequestStatus;
@@ -47,13 +49,10 @@ class VerificationRequestsList extends Component
             'flair' => ['required', 'string'],
         ]);
 
-        $request->update([
-            'status' => VerificationRequestStatus::ACCEPTED,
-        ]);
-
-        $request->user->update([
-            'flair' => UserFlair::from($this->flair),
-        ]);
+        app(AcceptVerificationRequest::class)(
+            $request,
+            UserFlair::from($this->flair)
+        );
 
         $this->refresh();
     }
@@ -72,9 +71,7 @@ class VerificationRequestsList extends Component
             return;
         }
 
-        $request->update([
-            'status' => VerificationRequestStatus::DENIED,
-        ]);
+        app(DenyVerificationRequest::class)($request);
 
         $this->refresh();
     }

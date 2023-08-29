@@ -22,6 +22,7 @@ use App\Http\Controllers\RfcMetaImageController;
 use App\Http\Controllers\SocialiteCallbackController;
 use App\Http\Controllers\SocialiteRedirectController;
 use App\Http\Controllers\VerificationRequestsAdminController;
+use App\Http\Controllers\ViewMessageController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +65,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/messages', MessagesController::class);
+    Route::get('/messages/{message}', ViewMessageController::class);
     Route::get('/email-optin/enable', EnableEmailOptinController::class);
     Route::get('/email-optin/disable', DisableEmailOptinController::class);
     Route::get('/profile', [ProfileController::class, 'edit']);

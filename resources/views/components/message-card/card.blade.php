@@ -20,7 +20,7 @@
         <div class="flex flex-col lg:flex-row gap-4 items-center justify-between mt-1 border-t pt-3">
             <div class="text-xs">
                 @if($message->url)
-                    <x-buttons.ghost :href="$message->url">View</x-buttons.ghost>
+                    <x-buttons.ghost :href="action(\App\Http\Controllers\ViewMessageController::class, $message)">View</x-buttons.ghost>
                 @endif
             </div>
             <div class="flex items-end gap-2">
