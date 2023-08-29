@@ -113,7 +113,7 @@
                 </x-navbar.link>
             @endif
 
-            <div class="ml-4 mt-4 md:m-0 bg-">
+            <div class="flex items-center ml-4 mt-4 md:m-0 bg-">
                 <button id="header__moon" title="Switch to light mode" class="relative focus:outline-none focus:shadow-outline text-font"
                         x-cloak
                         @click="toggle()"
