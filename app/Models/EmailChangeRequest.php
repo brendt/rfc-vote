@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property CarbonInterface $created_at
+ * @property-read User $user
  */
 class EmailChangeRequest extends Model
 {

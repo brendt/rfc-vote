@@ -120,10 +120,7 @@ final readonly class ProfileController
             abort(404, 'Link expired');
         }
 
-        /** @var User $user */
-        $user = $emailChangeRequest->user;
-
-        $user->update([
+        $emailChangeRequest->user->update([
             'email' => $emailChangeRequest->new_email,
         ]);
 
