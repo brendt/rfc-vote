@@ -23,7 +23,6 @@ final readonly class SocialiteCallbackController
         $user = User::query()->where('email', $socialiteUser->getEmail())->first();
 
         if (! $user) {
-
             $user = User::create([
                 'email' => $socialiteUser->getEmail(),
                 'name' => $socialiteUser->getName() ?? $socialiteUser->getEmail(),
@@ -47,14 +46,18 @@ final readonly class SocialiteCallbackController
         return redirect()->to('/');
     }
 
-    protected function resolveGithubUrl(string $username): string
+    protected function resolveGithubUrl(?string $username): ?string
     {
+        if (! $username) {
+            return null;
+        }
+
         return "https://github.com/$username";
     }
 
     private function resolveUsername(SocialiteUser $socialiteUser): string
     {
-        $username = (new GenerateUsername)((string) $socialiteUser->getNickname()); // normalize username to our rules
+        $username = (new GenerateUsername)((string)$socialiteUser->getNickname()); // normalize username to our rules
 
         /**
          * We need to check for duplicates, this is because users can register directly on the app and because of

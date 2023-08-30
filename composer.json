@@ -50,6 +50,7 @@
         }
     },
     "scripts": {
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
         "deploy": "vendor/bin/envoy run deploy",
         "deploy-code": "vendor/bin/envoy run deploy-code",
         "post-autoload-dump": [
