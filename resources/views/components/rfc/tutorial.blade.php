@@ -1,4 +1,4 @@
-<x-markdown class="prose text-lg max-w-full text-font">
+<x-markdown class="prose text-lg max-w-full text-font markdown-text">
     ## <span class="text-font-second">How voting works</span>
 
 The goal of this website is to provide a platform for the PHP community to

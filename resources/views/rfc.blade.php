@@ -54,7 +54,7 @@
                 @endif
             </div>
 
-            <x-markdown class="prose text-lg text-font max-w-full prose-a:text-font-second prose-code:text-font-second">
+            <x-markdown class="prose text-lg text-font max-w-full markdown-text">
                 {!! $rfc->description !!}
             </x-markdown>
 
@@ -82,7 +82,7 @@
                             {{ $additionalRfc->title }}
                         </div>
 
-                        <x-markdown class="px-2 text-font">{!! $additionalRfc->teaser !!}</x-markdown>
+                        <x-markdown class="px-2 text-font markdown-text">{!! $additionalRfc->teaser !!}</x-markdown>
 
                         <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">
                             <x-tag class="font-bold">
