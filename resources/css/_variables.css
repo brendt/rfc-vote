@@ -13,8 +13,8 @@
     --color-background: #F3F4F6;
     --color--admin-navbar-background: #F3E8FFFF;
     --color-rfc-card: #FEFEFE;
-    --color-argument-card: #FEFEFE;
-    --color-form: #FFFFFF;
+    --color-argument-card: var(--color-rfc-card);
+    --color-form: var(--color-rfc-card);
     --color-input: #FFFFFF;
     --color-font: #1f2937;
     --color-font-second: #374151;
@@ -35,14 +35,13 @@
 
 .dark {
     --color-background: #161B22;
-    /*--color-background: #1f252e;*/
     --color-main: #0D1117;
     --color-main-light: #1F1F1F;
     --color-main-dark: #161616;
     --color--admin-navbar-background: #43485E;
-    --color-rfc-card: #191e26;
-    --color-argument-card: #191e26;
-    --color-form: #191e26;
+    --color-rfc-card: #1d232c;
+    --color-argument-card: var(--color-rfc-card);
+    --color-form: var(--color-rfc-card);
     --color-input: #1f252e;
     --color-font: #adbac7;
     --color-font-second: #E6EDF3;
