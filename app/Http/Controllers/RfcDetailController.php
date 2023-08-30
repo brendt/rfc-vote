@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Argument;
 use App\Models\Rfc;
 use App\Support\Meta;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 
 final readonly class RfcDetailController
@@ -13,7 +14,7 @@ final readonly class RfcDetailController
     {
     }
 
-    public function __invoke(Rfc $rfc)
+    public function __invoke(Rfc $rfc): View
     {
         $rfc->load([
             'arguments.user',

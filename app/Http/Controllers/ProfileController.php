@@ -7,6 +7,7 @@ use App\Actions\Fortify\PasswordValidationRules;
 use App\Actions\RequestEmailChange;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Models\EmailChangeRequest;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,7 @@ final readonly class ProfileController
 {
     use PasswordValidationRules;
 
-    public function edit()
+    public function edit(): View
     {
         $user = auth()->user();
 
@@ -27,7 +28,7 @@ final readonly class ProfileController
 
     public function update(UpdateRequest $request): RedirectResponse
     {
-        $attrs = collect($request->validated())->except('avatar');
+        $attrs = collect($request->safe()->except('avatar'));
 
         if ($request->avatar !== null) {
             $attrs->put('avatar', $request->file('avatar')?->store('public/avatars'));
@@ -40,7 +41,7 @@ final readonly class ProfileController
         return redirect()->action([self::class, 'edit']);
     }
 
-    public function updateEmail(Request $request)
+    public function updateEmail(Request $request): RedirectResponse
     {
         $user = $request->user();
 
@@ -67,7 +68,7 @@ final readonly class ProfileController
         return redirect()->action([self::class, 'edit']);
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(Request $request): RedirectResponse
     {
         $user = $request->user();
 
@@ -97,7 +98,7 @@ final readonly class ProfileController
         return redirect()->action([self::class, 'edit']);
     }
 
-    public function verifyEmail(string $token)
+    public function verifyEmail(string $token): RedirectResponse
     {
         $emailChangeRequest = EmailChangeRequest::query()->where('token', $token)->first();
 
@@ -125,7 +126,7 @@ final readonly class ProfileController
     public function requestVerification(
         CreateVerificationRequest $createVerificationRequest,
         Request $request,
-    ) {
+    ): RedirectResponse {
         $validated = $request->validate([
             'motivation' => ['required', 'string'],
         ]);

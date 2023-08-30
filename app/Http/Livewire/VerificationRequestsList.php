@@ -7,12 +7,13 @@ use App\Actions\DenyVerificationRequest;
 use App\Models\UserFlair;
 use App\Models\VerificationRequest;
 use App\Models\VerificationRequestStatus;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class VerificationRequestsList extends Component
 {
-    /** @var \Illuminate\Support\Collection<\App\Models\VerificationRequest> */
+    /** @var Collection<int, VerificationRequest> */
     public Collection $pendingRequests;
 
     public ?VerificationRequest $isAccepting = null;
@@ -26,7 +27,7 @@ class VerificationRequestsList extends Component
         $this->refresh();
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.verification-requests-list');
     }

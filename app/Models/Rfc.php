@@ -57,12 +57,15 @@ class Rfc extends Model implements Feedable
         return 'slug';
     }
 
+    /**
+     * @return HasMany<Argument>
+     */
     public function arguments(): HasMany
     {
         return $this->hasMany(Argument::class)->orderByDesc('vote_count')->orderByDesc('created_at');
     }
 
-    public function userArgument(User $user)
+    public function userArgument(User $user): ?Argument
     {
         return $this->arguments->first(fn (Argument $argument) => $argument->user_id === $user->id);
     }
@@ -72,18 +75,24 @@ class Rfc extends Model implements Feedable
         return $this->userArgument($user)?->exists() ?: false;
     }
 
+    /**
+     * @return HasMany<Argument>
+     */
     public function yesArguments(): HasMany
     {
         return $this->hasMany(Argument::class)->where('vote_type', VoteType::YES);
     }
 
+    /**
+     * @return HasMany<Argument>
+     */
     public function noArguments(): HasMany
     {
         return $this->hasMany(Argument::class)->where('vote_type', VoteType::NO);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<int, never>
+     * @return Attribute<int, never>
      */
     protected function countTotal(): Attribute
     {
@@ -93,7 +102,7 @@ class Rfc extends Model implements Feedable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<int, never>
+     * @return Attribute<int, never>
      */
     protected function percentageYes(): Attribute
     {
@@ -109,7 +118,7 @@ class Rfc extends Model implements Feedable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<int, never>
+     * @return Attribute<int, never>
      */
     protected function percentageNo(): Attribute
     {
@@ -153,6 +162,9 @@ class Rfc extends Model implements Feedable
         dispatch(new RenderMetaImageJob($this));
     }
 
+    /**
+     * @return Collection<int, self>
+     */
     public static function getFeedItems(): Collection
     {
         return self::query()

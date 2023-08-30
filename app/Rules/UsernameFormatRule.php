@@ -13,6 +13,9 @@ class UsernameFormatRule implements ValidationRule, ValidatorAwareRule
 {
     protected Validator $validator;
 
+    /**
+     * @var array<int, string>
+     */
     protected array $rules = [
         'required',
         'string',
@@ -44,6 +47,7 @@ class UsernameFormatRule implements ValidationRule, ValidatorAwareRule
 
         if ($validator->fails()) {
             $this->validator->errors()->merge($validator->errors());
+            /** @var string[][] $failedRules */
             $failedRules = $validator->failed()[$attribute];
             collect($failedRules)->each(
                 fn ($failedRuleItem, $failedRuleKey) => $this->validator->addFailure(

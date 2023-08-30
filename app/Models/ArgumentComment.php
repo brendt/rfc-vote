@@ -10,6 +10,9 @@ class ArgumentComment extends Model
 {
     use HasFactory;
 
+    /**
+     * @return BelongsTo<User, self>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

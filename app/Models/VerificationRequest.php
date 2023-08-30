@@ -10,10 +10,16 @@ class VerificationRequest extends Model
 {
     use HasFactory;
 
+    /**
+     * @var array<string, string|class-string>
+     */
     protected $casts = [
         'status' => VerificationRequestStatus::class,
     ];
 
+    /**
+     * @return BelongsTo<User, self>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

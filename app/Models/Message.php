@@ -14,11 +14,17 @@ class Message extends Model
         'status' => MessageStatus::class,
     ];
 
+    /**
+     * @return BelongsTo<User, self>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return BelongsTo<User, self>
+     */
     public function sender(): BelongsTo
     {
         return $this->belongsTo(User::class);

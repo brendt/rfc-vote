@@ -8,7 +8,7 @@ use App\Models\User;
 
 final readonly class MailPreviewController
 {
-    public function __invoke()
+    public function __invoke(): string
     {
         abort_if(app()->isProduction(), 400);
 

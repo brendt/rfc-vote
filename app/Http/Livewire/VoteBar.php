@@ -7,6 +7,7 @@ use App\Http\Controllers\RfcDetailController;
 use App\Models\Rfc;
 use App\Models\User;
 use App\Models\VoteType;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Session;
 
@@ -20,20 +21,23 @@ class VoteBar extends Component
 
     public ?string $body = null;
 
+    /**
+     * @var string[]
+     */
     protected $listeners = [
         Events::ARGUMENT_CREATED->value => 'refresh',
         Events::ARGUMENT_DELETED->value => 'refresh',
         Events::USER_VOTED_FOR_ARGUMENT->value => 'refresh',
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $userArgument = $this->user?->getArgumentForRfc($this->rfc);
 
         $this->voteType = $userArgument?->vote_type;
     }
 
-    public function render()
+    public function render(): View
     {
         $userArgument = $this->user?->getArgumentForRfc($this->rfc);
         $rowCount = count(explode(PHP_EOL, $this->body ?? '')) + 1;

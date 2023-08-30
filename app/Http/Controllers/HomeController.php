@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Argument;
 use App\Models\ArgumentVote;
 use App\Models\Rfc;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 final readonly class HomeController
 {
-    public function __invoke()
+    public function __invoke(): View
     {
         $user = auth()->user();
 

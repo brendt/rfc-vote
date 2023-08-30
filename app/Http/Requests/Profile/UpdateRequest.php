@@ -15,7 +15,7 @@ class UpdateRequest extends FormRequest
     }
 
     /**
-     * @return array<string, ValidationRule|array|string>
+     * @return array<string, array<int, ValidationRule|string>|ValidationRule|string>
      */
     public function rules(): array
     {
