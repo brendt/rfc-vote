@@ -12,7 +12,7 @@
 
         <textarea
             {{ $attributes->merge([
-                'class' => 'border bg-input border-divider text-gray-900 rounded-md p-2 w-full ring-1 focus:ring-2 ring-transparent focus:border-purple-300 focus:ring-purple-500/50 focus:outline-none',
+                'class' => 'border text-font bg-input border-divider rounded-md p-2 w-full ring-1 focus:ring-2 ring-transparent focus:border-purple-300 focus:ring-purple-500/50 focus:outline-none',
             ]) }}
         ></textarea>
     </label>
