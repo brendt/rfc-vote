@@ -57,7 +57,7 @@
                 @endif
             </div>
         @else
-            <x-markdown class="prose  prose-md w-full max-w-full break-words overflow-hidden text-font">
+            <x-markdown class="prose  prose-md w-full max-w-full break-words overflow-hidden text-font prose-a:text-font-second prose-code:text-font-second">
                 {!! $argument->body !!}
             </x-markdown>
         @endif
