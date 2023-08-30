@@ -101,9 +101,9 @@ final class NewRfcMailTest extends TestCase
         User::factory()->create(['email_optin' => true]);
 
         Rfc::factory()->count(3)->sequence(
-            ['title' => 'Test RFC 1',],
-            ['title' => 'Test RFC 2',],
-            ['title' => 'Test RFC 3',],
+            ['title' => 'Test RFC 1'],
+            ['title' => 'Test RFC 2'],
+            ['title' => 'Test RFC 3'],
         )->create();
 
         Mail::assertSentCount(3);

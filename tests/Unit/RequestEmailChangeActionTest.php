@@ -11,8 +11,8 @@ use Tests\TestCase;
 
 class RequestEmailChangeActionTest extends TestCase
 {
-	public function test_request_change()
-	{
+    public function test_request_change()
+    {
         Mail::fake();
 
         $user = User::factory()->create();
@@ -25,6 +25,6 @@ class RequestEmailChangeActionTest extends TestCase
             'new_email' => $newEmail,
         ]);
 
-        Mail::assertSent(EmailVerificationMail::class, fn(EmailVerificationMail $mail) => $mail->hasTo($newEmail));
-	}
+        Mail::assertSent(EmailVerificationMail::class, fn (EmailVerificationMail $mail) => $mail->hasTo($newEmail));
+    }
 }
