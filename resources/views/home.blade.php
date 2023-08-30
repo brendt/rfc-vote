@@ -11,7 +11,7 @@
         <div class="grid lg:grid-cols-3 gap-5">
             @foreach ($rfcs as $rfc)
                 <x-card-link :href="action(App\Http\Controllers\RfcDetailController::class, $rfc)">
-                    <div class="text-xl font-bold px-2 border-b pb-4 mb-2 text-font">
+                    <div class="text-xl font-bold px-2 border-divider border-b pb-4 mb-2 text-font">
                         {{ $rfc->title }}
                     </div>
 

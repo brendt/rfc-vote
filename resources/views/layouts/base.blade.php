@@ -37,7 +37,7 @@
         class="container flex justify-between text-white gap-4 items-center m-auto relative px-2"
         x-data="{ open: false }"
     >
-        <div class="text-lg md:text-xl font-bold relative z-20">
+        <div class="dark:text-gray-200 text-lg md:text-xl font-bold relative z-20">
             <a href="/">
                 RFC Vote
                 <span>{{ app()->isProduction() ? '' : ' (local)' }}</span>

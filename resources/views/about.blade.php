@@ -1,5 +1,5 @@
 @component('layouts.base')
-    <div class="container max-w-[600px] mx-auto prose px-4 mb-10 text-font">
+    <div class="container max-w-[600px] mx-auto prose prose-a:text-font-second prose-a:hover px-4 mb-10 text-font">
 <x-markdown>
     ## <span class="text-font-second">Shaping PHP, together</span>
 
@@ -31,9 +31,14 @@ The initial idea came from <a href="https://twitter.com/pronskiy" class="text-fo
 
 Thanks to all our contributors:
 
-@foreach($contributors as $contributor)
-- [{{ $contributor->name }}]({{ $contributor->url }}): [{{ implode(', ', $contributor->contributions) }}]({{ $contributor->contributionsUrl }})
-@endforeach
+<ul>
+    @foreach($contributors as $contributor)
+        <li>
+            <a href="{{ $contributor->url }}">{{ $contributor->name }}</a>:
+            <a href="{{ $contributor->contributionsUrl }}">{{ implode(', ', $contributor->contributions) }}</a>
+        </li>
+    @endforeach
+</ul>
 
 ## <span class="text-font-second">Interesting links</span>
 
