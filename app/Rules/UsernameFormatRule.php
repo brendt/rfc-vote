@@ -55,8 +55,10 @@ class UsernameFormatRule implements ValidationRule, ValidatorAwareRule
         }
     }
 
-    public function setValidator(Validator $validator): void
+    public function setValidator(Validator $validator): static
     {
         $this->validator = $validator;
+
+        return $this;
     }
 }
