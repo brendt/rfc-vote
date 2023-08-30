@@ -6,8 +6,8 @@
 
 <div
     @class([
-        'border-2 bg-white rounded-xl shadow-md w-full',
-        'border-purple-400' => $message->isUnread(),
+        'border-2 rounded-xl shadow-md w-full bg-message-card text-font',
+        'border-purple-400 dark:border-gray-500' => $message->isUnread(),
         'border-transparent' => ! $message->isUnread(),
         'group/card py-5 pl-6 pr-10 flex gap-6 items-center relative',
     ])

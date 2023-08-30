@@ -53,6 +53,7 @@ export default {
                 'admin-navbar-background': 'var(--color--admin-navbar-background)',
                 'rfc-card': 'var(--color-rfc-card)',
                 'argument-card': 'var(--color-argument-card)',
+                'message-card': 'var(--color-message-card)',
 
                 // text color
                 'font': 'var(--color-font)',
