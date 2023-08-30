@@ -62,7 +62,7 @@ jobs:
       - name: Cache Result cache
         uses: actions/cache@v3
         with:
-          path: /github/home/.cache/phpstan/files
+          path: /home/runner/.cache/phpstan/files
           key: "result-cache-${{ github.run_id }}"
           restore-keys: |
             result-cache-
