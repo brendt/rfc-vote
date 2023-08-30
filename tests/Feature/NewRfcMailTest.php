@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature;
+namespace Tests\Feature;
 
 use App\Actions\SendUserMail;
 use App\Mail\NewRfcMail;

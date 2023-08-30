@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature;
+namespace Tests\Feature;
 
 use App\Actions\CreateVerificationRequest;
 use App\Http\Controllers\VerificationRequestsAdminController;
