@@ -31,17 +31,17 @@ final class NewRfcMailTest extends TestCase
 
         $this->assertDatabaseHas('user_mails', [
             'user_id' => $a->id,
-            'mail_type' => NewRfcMail::class . ':' . $rfc->id,
+            'mail_type' => NewRfcMail::class.':'.$rfc->id,
         ]);
 
         $this->assertDatabaseHas('user_mails', [
             'user_id' => $b->id,
-            'mail_type' => NewRfcMail::class . ':' . $rfc->id,
+            'mail_type' => NewRfcMail::class.':'.$rfc->id,
         ]);
 
         $this->assertDatabaseMissing('user_mails', [
             'user_id' => $c->id,
-            'mail_type' => NewRfcMail::class . ':' . $rfc->id,
+            'mail_type' => NewRfcMail::class.':'.$rfc->id,
         ]);
     }
 
@@ -83,7 +83,7 @@ final class NewRfcMailTest extends TestCase
 
         UserMail::factory()->create([
             'user_id' => $user->id,
-            'mail_type' => ((new NewRfcMail($rfc, $user))->getMailId())
+            'mail_type' => ((new NewRfcMail($rfc, $user))->getMailId()),
         ]);
 
         (new SendUserMail)(

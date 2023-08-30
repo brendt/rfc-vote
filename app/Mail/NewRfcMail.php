@@ -32,6 +32,6 @@ class NewRfcMail extends Mailable implements HasMailId
 
     public function getMailId(): string
     {
-        return self::class . ':' . $this->rfc->id;
+        return self::class.':'.$this->rfc->id;
     }
 }
