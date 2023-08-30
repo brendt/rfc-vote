@@ -15,7 +15,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/socialite": "^5.8",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^2.11",
+        "livewire/livewire": "^3.0",
         "protonemedia/laravel-form-components": "^3.8",
         "spatie/browsershot": "^3.58",
         "spatie/laravel-backup": "^8.1",
