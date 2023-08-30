@@ -25,7 +25,7 @@
                 {{ $rfc->title }}
             </h1>
 
-            <div class="flex justify-start text-xs items-center  flex-wrap gap-2 border-b pb-6 mb-2">
+            <div class="flex justify-start text-xs items-center  flex-wrap gap-2 border-divider border-b pb-6 mb-2">
                 <x-tag
                     :href="$rfc->url"
                     target="_blank"

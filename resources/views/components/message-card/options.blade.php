@@ -20,7 +20,7 @@
     <div
         x-cloak
         x-show="open"
-        class="bg-white rounded-md border right-5 absolute divide-y w-[180px] shadow-md"
+        class="bg-white rounded-md border right-5 absolute divide-divide divide-y w-[180px] shadow-md"
     >
         @if(! $message->isArchived())
             @if($message->isUnread() || $message->isArchived())

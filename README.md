@@ -9,7 +9,15 @@ This is a small app meant to gather feedback on how RFCs are received in the PHP
 
 The app relies on Laravel Sail. See [docs](https://laravel.com/docs/10.x/sail#introduction) for details.
 
-1. `composer install`
+1. install dependency via docker 
+``` bash 
+docker run --rm \
+   -u "$(id -u):$(id -g)" \
+   -v "$(pwd):/var/www/html" \
+   -w /var/www/html \
+   laravelsail/php82-composer:latest \
+   composer install --ignore-platform-reqs
+   ```
 2. copy `.env.example` to `.env`
     * fill `DB_USERNAME` and `DB_PASSWORD` fields with your custom values.
 3. run `./vendor/bin/sail up -d`

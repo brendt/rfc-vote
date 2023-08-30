@@ -95,6 +95,11 @@
             "name": "Ngô Quốc Đạt",
             "url": "https://github.com/datlechin",
             "contributions": ["Frontend"]
+        },
+        {
+            "name": "Vytautas",
+            "url": "https://github.com/Plytas",
+            "contributions": ["Backend"]
         }
     ]
 }
