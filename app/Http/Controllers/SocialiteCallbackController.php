@@ -26,7 +26,8 @@ final readonly class SocialiteCallbackController
             $user = User::create([
                 'email' => $socialiteUser->getEmail(),
                 'name' => $socialiteUser->getName() ?? $socialiteUser->getEmail(),
-                'username' => $this->resolveUsername($socialiteUser),
+                'username' => $username = $this->resolveUsername($socialiteUser),
+                'github_url' => $this->resolveGithubUrl($username),
                 'reputation' => 0,
                 'socialite' => serialize($socialiteUser),
             ]);
@@ -43,6 +44,11 @@ final readonly class SocialiteCallbackController
         $request->session()->regenerate();
 
         return redirect()->to('/');
+    }
+
+    protected function resolveGithubUrl(string $username): string
+    {
+        return "https://github.com/$username";
     }
 
     private function resolveUsername(SocialiteUser $socialiteUser): string
