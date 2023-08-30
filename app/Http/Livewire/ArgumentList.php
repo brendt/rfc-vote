@@ -60,7 +60,7 @@ class ArgumentList extends Component
     public function refresh(): void
     {
         $this->rfc->refresh();
-        $this->user->refresh();
+        $this->user?->refresh();
         $this->isConfirmingDelete = null;
     }
 

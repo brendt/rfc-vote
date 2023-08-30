@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $user_id
+ * @property int $rfc_id
+ * @property-read User $user
+ * @property-read Rfc $rfc
+ */
 class Argument extends Model
 {
     use HasFactory;

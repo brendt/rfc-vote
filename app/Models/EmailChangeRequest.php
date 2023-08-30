@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property CarbonInterface $created_at
+ */
 class EmailChangeRequest extends Model
 {
     /**

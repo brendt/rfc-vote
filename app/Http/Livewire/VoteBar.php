@@ -64,7 +64,7 @@ class VoteBar extends Component
 
     public function storeArgument(): void
     {
-        if (! $this->body || ! $this->voteType) {
+        if (! $this->body || ! $this->voteType || ! $this->user instanceof User) {
             return;
         }
 
@@ -87,7 +87,7 @@ class VoteBar extends Component
 
     public function refresh(): void
     {
-        $this->user->refresh();
+        $this->user?->refresh();
         $this->rfc->refresh();
 
         $userArgument = $this->user?->getArgumentForRfc($this->rfc);

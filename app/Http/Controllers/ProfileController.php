@@ -7,6 +7,7 @@ use App\Actions\Fortify\PasswordValidationRules;
 use App\Actions\RequestEmailChange;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Models\EmailChangeRequest;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,7 +39,10 @@ final readonly class ProfileController
             $attrs->put('avatar', $avatar->store('public/avatars'));
         }
 
-        $request->user()->update($attrs->toArray());
+        /** @var User $user */
+        $user = $request->user();
+
+        $user->update($attrs->toArray());
 
         flash('Profile updated successfully');
 
@@ -47,10 +51,11 @@ final readonly class ProfileController
 
     public function updateEmail(Request $request): RedirectResponse
     {
+        /** @var User $user */
         $user = $request->user();
 
         $validated = $request->validate([
-            'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore($request->user()->id)],
+            'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore($user->id)],
             'email_optin' => ['nullable'],
         ]);
 
@@ -74,6 +79,7 @@ final readonly class ProfileController
 
     public function updatePassword(Request $request): RedirectResponse
     {
+        /** @var User $user */
         $user = $request->user();
 
         if ($user->password) {
@@ -114,6 +120,7 @@ final readonly class ProfileController
             abort(404, 'Link expired');
         }
 
+        /** @var User $user */
         $user = $emailChangeRequest->user;
 
         $user->update([
@@ -135,8 +142,11 @@ final readonly class ProfileController
             'motivation' => ['required', 'string'],
         ]);
 
+        /** @var User $user */
+        $user = $request->user();
+
         $createVerificationRequest(
-            user: $request->user(),
+            user: $user,
             motivation: $validated['motivation']
         );
 

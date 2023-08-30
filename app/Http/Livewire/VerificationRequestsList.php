@@ -52,7 +52,7 @@ class VerificationRequestsList extends Component
 
         app(AcceptVerificationRequest::class)(
             $request,
-            UserFlair::from($this->flair)
+            UserFlair::from((string) $this->flair)
         );
 
         $this->refresh();

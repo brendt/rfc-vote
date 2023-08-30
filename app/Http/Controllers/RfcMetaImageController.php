@@ -23,6 +23,6 @@ final readonly class RfcMetaImageController
             $rfc->refresh();
         }
 
-        return response(base64_decode($rfc->meta_image))->header('Content-Type', 'image/png');
+        return response(base64_decode((string) $rfc->meta_image))->header('Content-Type', 'image/png');
     }
 }

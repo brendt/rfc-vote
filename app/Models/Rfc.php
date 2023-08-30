@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Actions\SendNewRfcMails;
 use App\Http\Controllers\RfcDetailController;
 use App\Jobs\RenderMetaImageJob;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +17,7 @@ use Spatie\Feed\FeedItem;
 
 /**
  * @property ?string $meta_image
+ * @property CarbonInterface $updated_at
  */
 class Rfc extends Model implements Feedable
 {
@@ -178,7 +180,7 @@ class Rfc extends Model implements Feedable
         return FeedItem::create()
             ->id((string) $this->id)
             ->title($this->title)
-            ->summary($this->teaser)
+            ->summary((string) $this->teaser)
             ->updated($this->updated_at)
             ->link(action(RfcDetailController::class, $this))
             ->authorName('Brent')

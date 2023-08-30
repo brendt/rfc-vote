@@ -20,7 +20,7 @@ class RfcSyncCommand extends Command
         $rss = Feed::loadRss('https://externals.io/rss');
 
         foreach ($rss->item as $item) {
-            if (! Str::startsWith($item->title ?? null, ['[VOTE]'])) {
+            if (! Str::startsWith((string) ($item->title ?? null), ['[VOTE]'])) {
                 continue;
             }
 

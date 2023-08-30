@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('users', 'username')->ignore($this->user()->id),
+                Rule::unique('users', 'username')->ignore($this->user()?->id),
             ],
             'website_url' => ['nullable', 'max:255', 'url'],
             'github_url' => ['nullable', 'max:255', 'url'],
