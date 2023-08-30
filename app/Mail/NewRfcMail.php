@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewRfcMail extends Mailable
+class NewRfcMail extends Mailable implements HasMailId
 {
     use Queueable, SerializesModels;
 
@@ -28,5 +28,10 @@ class NewRfcMail extends Mailable
             ->subject("New RFC: {$this->rfc->title}")
             ->with('user', $this->user)
             ->with('rfc', $this->rfc);
+    }
+
+    public function getMailId(): string
+    {
+        return self::class . ':' . $this->rfc->id;
     }
 }

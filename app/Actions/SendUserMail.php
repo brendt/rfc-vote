@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Mail\HasMailId;
 use App\Models\User;
 use App\Models\UserMail;
 use Illuminate\Mail\Mailable;
@@ -21,7 +22,7 @@ final readonly class SendUserMail
 
         UserMail::create([
             'user_id' => $user->id,
-            'mail_type' => $mailable::class,
+            'mail_type' => $mailable instanceof HasMailId ? $mailable->getMailId() : $mailable::class,
             'subject' => $mailable->envelope()->subject,
         ]);
 

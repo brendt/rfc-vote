@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Mail\HasMailId;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -243,7 +244,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hasGottenMail(Mailable $mailable): bool
     {
-        return $this->mails()->where('mail_type', $mailable::class)->exists();
+        $mailType = $mailable instanceof HasMailId ? $mailable->getMailId() : $mailable::class;
+
+        return $this->mails()->where('mail_type', $mailType)->exists();
     }
 
     public function updateUnreadMessageCount(): void
