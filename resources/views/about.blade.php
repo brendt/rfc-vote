@@ -53,34 +53,25 @@
         <x-about.link href="https://www.jetbrains.com/phpstorm/">JetBrains</x-about.link>.</p>
 </x-about.section>
 
-<x-about.section heading="Our contributors">
-    <ul>
-        @foreach($contributors as $contributor)
+<x-about.contributors :contributors="$contributors" />
+
+<x-about.section heading="Interesting links">
+    <p>
+        <ul>
             <li>
-                <x-about.link href="{{ $contributor->url }}">{{ $contributor->name }}</x-about.link>:
-                <x-about.link href="{{ $contributor->contributionsUrl }}">
-                    {{ implode(', ', $contributor->contributions) }}
+                <x-about.link href="https://github.com/brendt/rfc-vote">
+                    The RFC Vote repository
                 </x-about.link>
+                — everyone can contribute!
             </li>
-        @endforeach
-    </ul>
-
-    <h2>Interesting links</h2>
-
-    <ul>
-        <li>
-            <x-about.link href="https://github.com/brendt/rfc-vote">
-                The RFC Vote repository
-            </x-about.link>
-            — everyone can contribute!
-        </li>
-        <li>
-            <x-about.link href="https://www.youtube.com/playlist?list=PL0bgkxUS9EaLguM2puiMD-NiiV6r5b8RY">
-                The YouTube playlist
-            </x-about.link>
-            where we built this project on stream, together.
-        </li>
-    </ul>
+            <li>
+                <x-about.link href="https://www.youtube.com/playlist?list=PL0bgkxUS9EaLguM2puiMD-NiiV6r5b8RY">
+                    The YouTube playlist
+                </x-about.link>
+                where we built this project on stream, together.
+            </li>
+        </ul>
+    </p>
 </x-about.section>
 
 @endcomponent
