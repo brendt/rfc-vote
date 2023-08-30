@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+
 final readonly class MessagesController
 {
-    public function __invoke()
+    public function __invoke(): View
     {
-        $user = auth()->user()->load([
+        $user = auth()->user()?->load([
             'inboxMessages.user',
             'inboxMessages.sender',
             'archivedMessages.user',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Argument;
 use App\Models\Rfc;
 use App\Support\Meta;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 
 final readonly class RfcDetailController
@@ -13,7 +14,7 @@ final readonly class RfcDetailController
     {
     }
 
-    public function __invoke(Rfc $rfc)
+    public function __invoke(Rfc $rfc): View
     {
         $rfc->load([
             'arguments.user',
@@ -31,7 +32,7 @@ final readonly class RfcDetailController
 
         $this->meta
             ->title($rfc->title)
-            ->description($rfc->teaser)
+            ->description((string) $rfc->teaser)
             ->image(action(\App\Http\Controllers\RfcMetaImageController::class, $rfc));
 
         if ($user) {
@@ -45,9 +46,11 @@ final readonly class RfcDetailController
 
         $additionalRfcs = Rfc::query()
             ->where('published_at', '<=', now()->startOfDay())
-            ->where(fn (Builder $builder) => $builder->whereNull('ends_at')->orWhere('ends_at', '>', now()))
+            ->where(function (Builder $builder) {
+                $builder->whereNull('ends_at')->orWhere('ends_at', '>', now());
+            })
             ->where('id', '!=', $rfc->id)
-            ->when(filled($user), fn (Builder $builder) => $builder->whereDoesntHave('arguments', fn (Builder $builder) => $builder->where('user_id', $user->id)))
+            ->when(filled($user), fn (Builder $builder) => $builder->whereDoesntHave('arguments', fn (Builder $builder) => $builder->where('user_id', $user?->id)))
             ->with(['arguments', 'yesArguments', 'noArguments'])
             ->inRandomOrder()
             ->limit(3)

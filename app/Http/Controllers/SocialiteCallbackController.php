@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\GenerateUsername;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
@@ -11,7 +12,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 final readonly class SocialiteCallbackController
 {
-    public function __invoke(string $driver, Request $request)
+    public function __invoke(string $driver, Request $request): RedirectResponse
     {
         if ($request->has('error') || $request->missing('code')) {
             return redirect()->route('login');
@@ -47,7 +48,7 @@ final readonly class SocialiteCallbackController
 
     private function resolveUsername(SocialiteUser $socialiteUser): string
     {
-        $username = (new GenerateUsername)($socialiteUser->getNickname()); // normalize username to our rules
+        $username = (new GenerateUsername)((string) $socialiteUser->getNickname()); // normalize username to our rules
 
         /**
          * We need to check for duplicates, this is because users can register directly on the app and because of

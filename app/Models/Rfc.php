@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Actions\SendNewRfcMails;
 use App\Http\Controllers\RfcDetailController;
 use App\Jobs\RenderMetaImageJob;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +15,10 @@ use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 
+/**
+ * @property ?string $meta_image
+ * @property CarbonInterface $updated_at
+ */
 class Rfc extends Model implements Feedable
 {
     use HasFactory;
@@ -54,12 +59,15 @@ class Rfc extends Model implements Feedable
         return 'slug';
     }
 
+    /**
+     * @return HasMany<Argument>
+     */
     public function arguments(): HasMany
     {
         return $this->hasMany(Argument::class)->orderByDesc('vote_count')->orderByDesc('created_at');
     }
 
-    public function userArgument(User $user)
+    public function userArgument(User $user): ?Argument
     {
         return $this->arguments->first(fn (Argument $argument) => $argument->user_id === $user->id);
     }
@@ -69,18 +77,24 @@ class Rfc extends Model implements Feedable
         return $this->userArgument($user)?->exists() ?: false;
     }
 
+    /**
+     * @return HasMany<Argument>
+     */
     public function yesArguments(): HasMany
     {
         return $this->hasMany(Argument::class)->where('vote_type', VoteType::YES);
     }
 
+    /**
+     * @return HasMany<Argument>
+     */
     public function noArguments(): HasMany
     {
         return $this->hasMany(Argument::class)->where('vote_type', VoteType::NO);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<int, never>
+     * @return Attribute<int, never>
      */
     protected function countTotal(): Attribute
     {
@@ -90,7 +104,7 @@ class Rfc extends Model implements Feedable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<int, never>
+     * @return Attribute<int, never>
      */
     protected function percentageYes(): Attribute
     {
@@ -106,7 +120,7 @@ class Rfc extends Model implements Feedable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<int, never>
+     * @return Attribute<int, never>
      */
     protected function percentageNo(): Attribute
     {
@@ -150,6 +164,9 @@ class Rfc extends Model implements Feedable
         dispatch(new RenderMetaImageJob($this));
     }
 
+    /**
+     * @return Collection<int, self>
+     */
     public static function getFeedItems(): Collection
     {
         return self::query()
@@ -161,9 +178,9 @@ class Rfc extends Model implements Feedable
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
-            ->id($this->id)
+            ->id((string) $this->id)
             ->title($this->title)
-            ->summary($this->teaser)
+            ->summary((string) $this->teaser)
             ->updated($this->updated_at)
             ->link(action(RfcDetailController::class, $this))
             ->authorName('Brent')

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RfcRequest;
 use App\Models\Rfc;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 final readonly class RfcCreateController
 {
-    public function create()
+    public function create(): View
     {
         return view('rfc-form', [
             'rfc' => new Rfc(),
@@ -15,7 +17,7 @@ final readonly class RfcCreateController
         ]);
     }
 
-    public function store(RfcRequest $request)
+    public function store(RfcRequest $request): RedirectResponse
     {
         $rfc = new Rfc($request->validated());
         $rfc->save();
