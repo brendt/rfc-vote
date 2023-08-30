@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RfcRequest;
 use App\Models\Rfc;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 final readonly class RfcEditController
 {
-    public function edit(Rfc $rfc)
+    public function edit(Rfc $rfc): View
     {
         return view('rfc-form', [
             'rfc' => $rfc,
@@ -15,7 +17,7 @@ final readonly class RfcEditController
         ]);
     }
 
-    public function update(Rfc $rfc, RfcRequest $request)
+    public function update(Rfc $rfc, RfcRequest $request): RedirectResponse
     {
         $rfc->update($request->validated());
 

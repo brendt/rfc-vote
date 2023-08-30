@@ -5,13 +5,14 @@ namespace App\Http\Livewire;
 use App\Models\Message;
 use App\Models\MessageStatus;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class MessageList extends Component
 {
     public User $user;
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.message-list');
     }

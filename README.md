@@ -2,12 +2,15 @@
 
 [https://rfc.stitcher.io/](https://rfc.stitcher.io/)
 
-This is a small app meant to gather feedback on how RFCs are received in the PHP community.
+This is a webapp meant to gather feedback on how RFCs are received in the PHP community.
 
 ## Local Development
-> prerequisite: PHP >= 8.2
 
-The app relies on Laravel Sail. See [docs](https://laravel.com/docs/10.x/sail#introduction) for details.
+> **Remember to run `composer qa` before committing a PR**
+
+### Sail
+
+The app supports Laravel Sail. See [docs](https://laravel.com/docs/10.x/sail#introduction) for details.
 
 1. install dependency via docker 
 ``` bash 

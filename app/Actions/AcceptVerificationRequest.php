@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Http\Controllers\PublicProfileController;
+use App\Models\User;
 use App\Models\UserFlair;
 use App\Models\VerificationRequest;
 use App\Models\VerificationRequestStatus;
@@ -23,9 +24,12 @@ final readonly class AcceptVerificationRequest
             'flair' => $flair,
         ]);
 
+        /** @var User $authenticatedUser */
+        $authenticatedUser = auth()->user();
+
         ($this->sendMessage)(
             to: $request->user,
-            sender: auth()->user(),
+            sender: $authenticatedUser,
             url: action(PublicProfileController::class, $request->user),
             body: <<<TXT
             Your verification request was accepted! We'll now show the {$flair->value} badge besides your username.

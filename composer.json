@@ -26,6 +26,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
+        "brianium/paratest": "^7.2",
         "fakerphp/faker": "^1.9.1",
         "laravel/envoy": "^2.8",
         "laravel/pint": "^1.10",
@@ -49,6 +50,14 @@
         }
     },
     "scripts": {
+        "qa": [
+            "composer pint",
+            "composer phpstan",
+            "composer phpunit"
+        ],
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
+        "phpunit": "php artisan test --parallel",
+        "pint": " php vendor/bin/pint",
         "deploy": "vendor/bin/envoy run deploy",
         "deploy-code": "vendor/bin/envoy run deploy-code",
         "post-autoload-dump": [

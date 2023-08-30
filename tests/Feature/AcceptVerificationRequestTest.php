@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature;
+namespace Tests\Feature;
 
 use App\Actions\AcceptVerificationRequest;
 use App\Http\Controllers\PublicProfileController;

@@ -3,10 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Rules\UsernameFormatRule;
-use Illuminate\Contracts\Foundation\Application as ApplicationAlias;
-use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Livewire\Component;
 
 class UsernameInput extends Component
@@ -21,6 +19,9 @@ class UsernameInput extends Component
 
     public bool $required;
 
+    /**
+     * @return array<string, array<int, string|ValidationRule>|ValidationRule|string>
+     */
     protected function rules(): array
     {
         return [
@@ -33,7 +34,7 @@ class UsernameInput extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function render(): View|Application|Factory|ApplicationAlias
+    public function render(): View
     {
         return view('livewire.username-input');
     }
