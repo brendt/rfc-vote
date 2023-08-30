@@ -8,6 +8,7 @@
     --color-main: #5b1497;
     --color-main-light: #8c50c7;
     --color-main-dark: #4d1080;
+    --color-divider: #e2e8f0;
 
     --color-background: #F3F4F6;
     --color--admin-navbar-background: #F3E8FFFF;
@@ -45,6 +46,7 @@
     --color-font: #adbac7;
     --color-font-second: #E6EDF3;
     --color-vote-bar-background: #36454F;
+    --color-divider: #3b4554;
 
     /*yes arrow*/
     --color-agree-arrow: #80C251;

@@ -45,6 +45,7 @@ export default {
                 'main': 'var(--color-main)',
                 'main-light': 'var(--color-main-light)',
                 'main-dark': 'var(--color-main-dark)',
+                'divider': 'var(--color-divider)',
 
                 // background
                 'background': 'var(--color-background)',
