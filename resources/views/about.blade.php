@@ -1,3 +1,9 @@
+@php
+    /**
+     * @var array{name: string, url: string, contributions: string[]}[] $contributors
+     */
+@endphp
+
 @component('layouts.base')
 
 <x-about.section heading="Shaping PHP, together">

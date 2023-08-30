@@ -17,6 +17,8 @@ final readonly class AboutController
             $people['contributors'] ?? [],
         );
 
+        shuffle($contributors);
+
         return view('about', compact('contributors'));
     }
 }
