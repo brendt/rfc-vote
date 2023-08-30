@@ -32,12 +32,12 @@
     $user = auth()->user();
 @endphp
 
-<nav class="bg-main z-10 p-4 bg-gradient-to-r from-main to-main-light">
+<nav id="main-header" class="bg-main z-10 p-4 bg-gradient-to-r from-main to-main-light">
     <div
         class="container flex justify-between text-white gap-4 items-center m-auto relative px-2"
         x-data="{ open: false }"
     >
-        <div class="dark:text-gray-200 text-lg md:text-xl font-bold relative z-20">
+        <div id="header-logo" class="dark:text-gray-200 text-lg md:text-xl font-bold relative z-20">
             <a href="/">
                 RFC Vote
                 <span>{{ app()->isProduction() ? '' : ' (local)' }}</span>

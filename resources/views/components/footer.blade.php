@@ -1,4 +1,4 @@
-<div class="
+<div id="footer" class="
     p-8 text-white flex justify-center md:gap-6 gap-4 flex-col
     bg-main-dark bg-gradient-to-r from-main to-main-dark">
     <div class="flex font-bold flex-wrap md:flex-nowrap gap-4 flex-1 justify-center">
