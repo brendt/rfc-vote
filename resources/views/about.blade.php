@@ -29,6 +29,12 @@ We also want to give a special shout-out to <a href="https://tighten.com/" class
 
 The initial idea came from <a href="https://twitter.com/pronskiy" class="text-font-second">Roman Pronskiy</a>, who helps administer the <a href="https://thephp.foundation/" class="text-font-second">PHP Foundation</a>, and is developed (together with many open source enthusiasts) by <a href="https://twitter.com/brendt_gd" class="text-font-second">Brent Roose</a>, developer advocate for PHP at <a href="https://www.jetbrains.com/phpstorm/" class="text-font-second">JetBrains</a>.
 
+Thanks to all our contributors:
+
+@foreach($contributors as $contributor)
+- [{{ $contributor->name }}]({{ $contributor->url }}): [{{ implode(', ', $contributor->contributions) }}]({{ $contributor->contributionsUrl }})
+@endforeach
+
 ## <span class="text-font-second">Interesting links</span>
 
 - <a href="https://github.com/brendt/rfc-vote" class="text-font-second">The RFC Vote repository</a> — everyone can contribute!

@@ -1,0 +1,100 @@
+{
+    "contributors": [
+        {
+            "name": "Serhii",
+            "url": "https://github.com/SerhiiCho",
+            "contributions": ["Frontend", "Backend"]
+        },
+        {
+            "name": "Mohammad",
+            "url": "https://github.com/MohammadAlhallaq",
+            "contributions": ["Dark Mode", "Frontend", "Backend"]
+        },
+        {
+            "name": "Sergiu",
+            "url": "https://github.com/vsergiu93",
+            "contributions": ["Sail", "Frontend"]
+        },
+        {
+            "name": "Tighten",
+            "url": "https://tighten.com/",
+            "contributions": ["Design"],
+            "contributionsUrl": "https://tighten.com/"
+        },
+        {
+            "name": "Kamlesh",
+            "url": "https://github.com/Kamleshpaul",
+            "contributions": ["Emails", "Frontend"]
+        },
+        {
+            "name": "Alireza",
+            "url": "https://github.com/alirezasalehizadeh",
+            "contributions": ["Backend"]
+        },
+        {
+            "name": "Roman",
+            "url": "https://github.com/pronskiy",
+            "contributions": ["Frontend"]
+        },
+        {
+            "name": "Charles",
+            "url": "https://github.com/chvanam",
+            "contributions": ["Backend", "Markdown support"]
+        },
+        {
+            "name": "Johannes",
+            "url": "https://github.com/joschuba",
+            "contributions": ["Frontend"]
+        },
+        {
+            "name": "Ryan",
+            "url": "https://github.com/ryangjchandler",
+            "contributions": ["Frontend"]
+        },
+        {
+            "name": "Miguel",
+            "url": "https://github.com/mikeziri",
+            "contributions": ["Frontend"]
+        },
+        {
+            "name": "Jelmer",
+            "url": "https://github.com/carakas",
+            "contributions": ["Frontend"]
+        },
+        {
+            "name": "Istiak",
+            "url": "https://github.com/istiak-tridip",
+            "contributions": ["Backend"]
+        },
+        {
+            "name": "Daniel",
+            "url": "https://github.com/krsriq",
+            "contributions": ["Frontend"]
+        },
+        {
+            "name": "Rihards",
+            "url": "https://github.com/rihardsgrislis",
+            "contributions": ["Backend"]
+        },
+        {
+            "name": "Erol",
+            "url": "https://github.com/Erol314",
+            "contributions": ["Backend", "Frontend"]
+        },
+        {
+            "name": "Josh",
+            "url": "https://github.com/joshbonnick",
+            "contributions": ["Backend"]
+        },
+        {
+            "name": "Daniel",
+            "url": "https://github.com/DanielSpravtsev",
+            "contributions": ["Backend"]
+        },
+        {
+            "name": "Ngô Quốc Đạt",
+            "url": "https://github.com/datlechin",
+            "contributions": ["Frontend"]
+        }
+    ]
+}
