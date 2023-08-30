@@ -30,7 +30,7 @@ class HomePage extends Page
     public function elements(): array
     {
         return [
-            '@element' => '#selector',
+            '@disclaimer' => 'div[role="alert"]',
         ];
     }
 }
