@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Rfc;
 use App\Models\VoteType;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class RfcCounter extends Component
@@ -12,18 +13,21 @@ class RfcCounter extends Component
 
     public Rfc $rfc;
 
+    /**
+     * @var array<string, string>
+     */
     protected $listeners = [
         Events::USER_VOTED_FOR_ARGUMENT->value => 'refresh',
         Events::ARGUMENT_DELETED->value => 'refresh',
         Events::ARGUMENT_CREATED->value => 'refresh',
     ];
 
-    public function booted()
+    public function booted(): void
     {
         $this->rfc = $this->rfc->withoutRelations();
     }
 
-    public function render()
+    public function render(): View
     {
         $count = match ($this->voteType) {
             VoteType::YES => $this->rfc->count_yes,

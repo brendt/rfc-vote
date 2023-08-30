@@ -11,7 +11,7 @@ final readonly class SendUserMail
 {
     public function __invoke(User $user, Mailable $mailable): void
     {
-        if (! $user->email_optin) {
+        if (! $user->email_optin || ! method_exists($mailable, 'envelope')) {
             return;
         }
 

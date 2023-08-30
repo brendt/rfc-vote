@@ -10,17 +10,17 @@
 >
     <button
         type="button"
-        class="p-1 rounded-full group-hover:bg-gray-100 hover:bg-gray-100 transition-colors"
+        class="p-1 rounded-full group-hover:bg-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         @click="open = !open"
         @click.away="open = false"
     >
-        <x-icons.ellipsis-vertical class="w-7 h-7 text-gray-800" />
+        <x-icons.ellipsis-vertical class="w-7 h-7 text-font" />
     </button>
 
     <div
         x-cloak
         x-show="open"
-        class="bg-white rounded-md border right-5 absolute divide-divide divide-y w-[180px] shadow-md"
+        class="bg-white dark:bg-message-card rounded-md border dark:border-divider right-5 absolute divide-divider divide-y w-[180px] shadow-md"
     >
         @if(! $message->isArchived())
             @if($message->isUnread() || $message->isArchived())

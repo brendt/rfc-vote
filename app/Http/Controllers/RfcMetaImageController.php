@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Jobs\RenderMetaImageJob;
 use App\Models\Rfc;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 final readonly class RfcMetaImageController
 {
-    public function __invoke(Rfc $rfc, Request $request)
+    public function __invoke(Rfc $rfc, Request $request): Response|string
     {
         if ($request->has('html')) {
             return view('rfc-meta', [
@@ -22,6 +23,6 @@ final readonly class RfcMetaImageController
             $rfc->refresh();
         }
 
-        return response(base64_decode($rfc->meta_image))->header('Content-Type', 'image/png');
+        return response(base64_decode((string) $rfc->meta_image))->header('Content-Type', 'image/png');
     }
 }

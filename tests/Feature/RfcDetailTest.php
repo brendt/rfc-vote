@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature;
+namespace Tests\Feature;
 
 use App\Http\Controllers\RfcDetailController;
 use App\Models\Rfc;

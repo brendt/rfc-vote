@@ -66,6 +66,13 @@ class ArgumentTest extends TestCase
             ->assertSet('isConfirmingDelete', null)
             ->assertOk();
 
+        Livewire::test(ArgumentList::class, ['rfc' => $rfc, 'user' => $user])
+            ->call('deleteArgument', $arguments[1]->id)
+            ->assertNotSet('isConfirmingDelete', null)
+            ->call('deleteArgument', $arguments[1]->id)
+            ->assertSet('isConfirmingDelete', null)
+            ->assertOk();
+
         $this->assertTrue($user->can('delete', $arguments[0]));
         $this->assertFalse($user->can('delete', $arguments[1]));
         $this->assertDatabaseCount('arguments', 1);
