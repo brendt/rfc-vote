@@ -17,7 +17,7 @@
     <div class="grid gap-2 md:gap-4 w-full">
         <p>{{ $message->body }}</p>
 
-        <div class="flex flex-col lg:flex-row gap-4 items-center justify-between mt-1 border-t pt-3">
+        <div class="flex flex-col lg:flex-row gap-4 items-center justify-between mt-1 border-divider border-t pt-3">
             <div class="text-xs">
                 @if($message->url)
                     <x-buttons.ghost :href="action(\App\Http\Controllers\ViewMessageController::class, $message)">View</x-buttons.ghost>
