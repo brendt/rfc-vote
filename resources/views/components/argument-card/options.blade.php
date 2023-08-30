@@ -22,7 +22,7 @@
     <div
         x-cloak
         x-show="isVisible"
-        class="bg-argument-card rounded-sm border right-5 absolute divide-y"
+        class="bg-argument-card rounded-sm border border-divider divide-divider right-5 absolute divide-y"
     >
         @if ($user?->can('edit', $argument))
             <x-argument-card.button

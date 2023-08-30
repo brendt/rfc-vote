@@ -8,12 +8,13 @@
     --color-main: #5b1497;
     --color-main-light: #8c50c7;
     --color-main-dark: #4d1080;
-    --color-divider: #e2e8f0;
+    --color-divider: #CBD5E0;
     --color-info: #dbeafe;
 
     --color-background: #F3F4F6;
     --color--admin-navbar-background: #F3E8FFFF;
     --color-rfc-card: #FEFEFE;
+    --color-message-card: var(--color-rfc-card);
     --color-argument-card: var(--color-rfc-card);
     --color-form: var(--color-rfc-card);
     --color-input: #FFFFFF;
@@ -41,6 +42,7 @@
     --color-main-dark: #161616;
     --color--admin-navbar-background: #43485E;
     --color-rfc-card: #1d232c;
+    --color-message-card: var(--color-rfc-card);
     --color-argument-card: var(--color-rfc-card);
     --color-form: var(--color-rfc-card);
     --color-input: #1f252e;

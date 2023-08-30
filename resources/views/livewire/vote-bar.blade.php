@@ -61,7 +61,7 @@
     @if(!$userArgument && $voteType)
         <div class="flex {{ $voteType->getJustify() }} mt-6">
             <div @class([
-                'flex-1 p-5 flex flex-col items-end rounded-lg bg-white dark:bg-main-light border-gray-200 shadow-md p-4 gap-3 md:gap-2',
+                'flex-1 p-5 flex flex-col items-end rounded-lg bg-white dark:bg-input border-gray-200 shadow-md p-4 gap-3 md:gap-2',
                 $voteType->getJustify(),
             ])>
                 <div class="w-full">
