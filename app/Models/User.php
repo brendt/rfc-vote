@@ -142,7 +142,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @param  \App\Models\Rfc  $rfc
      * @return \Illuminate\Support\Collection<\App\Models\ArgumentVote>
      */
     public function getArgumentVotesForRfc(Rfc $rfc): Collection
