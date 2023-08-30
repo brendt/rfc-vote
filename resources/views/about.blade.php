@@ -30,7 +30,7 @@
 
     <x-about.quote
         author="Nikita Popov"
-        link="https://externals.io/message/110936#110937"
+        link="https://twitter.com/nikita_ppv"
         :image="asset('storage/nikita-popov.jpeg')"
     >
         I believe it is important to remember that voting is just the last step of

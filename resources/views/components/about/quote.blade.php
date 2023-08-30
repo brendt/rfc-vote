@@ -18,7 +18,7 @@
             —
 
             @isset ($link)
-                <a href="{{ $link }}" class="hover:underline">
+                <a href="{{ $link }}" class="hover:underline" target="_blank">
                     {{ $author }}
                     <x-icons.external-link class="inline-block w-4 h-3 -mt-3" />
                 </a>

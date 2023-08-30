@@ -8,9 +8,9 @@
 
 <div {{ $attributes->merge(['class' => 'odd:bg-rfc-card even:bg-background py-12 md:py-16 px-5 lg:px-0 first:pt-10 text-font']) }}>
     <div class="container mx-auto max-w-3xl">
-        <h2 class="text-3xl">{{ $heading }}</h2>
+        <h2 class="text-3xl mb-8">{{ $heading }}</h2>
 
-        <div class="[&>p]:mt-6 text-lg">
+        <div class="[&>p]:mb-6 text-lg">
             {{ $slot }}
         </div>
     </div>

@@ -6,13 +6,18 @@
 @endphp
 
 <x-about.section heading="Our contributors">
-    <ul>
-        @foreach($contributors as $contributor)
-            <li>
-                <x-about.link href="{{ $contributor->url }}">{{ $contributor->name }}</x-about.link>:
-                <x-about.link href="{{ $contributor->contributionsUrl }}">
-                    {{ implode(', ', $contributor->contributions) }}
-                </x-about.link>
+    <ul class="grid grid-cols-10 gap-4">
+        @foreach($contributors as $c)
+            <li class="flex gap-2">
+                <div>
+                    <img
+                        src="{{ "https://avatars.githubusercontent.com/u/{$c->id}" }}"
+                        alt="{{ $c->name }}"
+                        width="460"
+                        height="460"
+                        class="w-full shadow-md rounded-full"
+                    />
+                </div>
             </li>
         @endforeach
     </ul>
