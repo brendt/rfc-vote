@@ -19,8 +19,6 @@ class RegistrationTest extends TestCase
     {
         if (! Features::enabled(Features::registration())) {
             $this->markTestSkipped('Registration support is not enabled.');
-
-            return;
         }
 
         $response = $this->get('/register');

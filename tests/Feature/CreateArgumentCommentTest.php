@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature;
+namespace Tests\Feature;
 
 use App\Actions\CreateArgumentComment;
 use App\Models\Argument;
