@@ -14,7 +14,7 @@ class RfcCounter extends Component
     public Rfc $rfc;
 
     /**
-     * @var string[]
+     * @var array<string, string>
      */
     protected $listeners = [
         Events::USER_VOTED_FOR_ARGUMENT->value => 'refresh',

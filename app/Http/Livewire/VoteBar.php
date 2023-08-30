@@ -22,7 +22,7 @@ class VoteBar extends Component
     public ?string $body = null;
 
     /**
-     * @var string[]
+     * @var array<string, string>
      */
     protected $listeners = [
         Events::ARGUMENT_CREATED->value => 'refresh',

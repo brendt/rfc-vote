@@ -30,7 +30,7 @@ class ArgumentList extends Component
     public ?Argument $showingComments = null;
 
     /**
-     * @var string[]
+     * @var array<string, string>
      */
     protected $listeners = [
         Events::ARGUMENT_CREATED->value => 'refresh',
