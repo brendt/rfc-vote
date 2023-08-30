@@ -10,6 +10,7 @@ use App\Models\EmailChangeRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
@@ -31,7 +32,10 @@ final readonly class ProfileController
         $attrs = collect($request->safe()->except('avatar'));
 
         if ($request->avatar !== null) {
-            $attrs->put('avatar', $request->file('avatar')?->store('public/avatars'));
+            /** @var UploadedFile $avatar */
+            $avatar = $request->file('avatar');
+
+            $attrs->put('avatar', $avatar->store('public/avatars'));
         }
 
         $request->user()->update($attrs->toArray());

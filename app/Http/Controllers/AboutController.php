@@ -11,7 +11,7 @@ final readonly class AboutController
     {
         $contributors = array_map(
             fn (array $item) => new Contributor(...$item),
-            json_decode(file_get_contents(__DIR__.'/../../../contributors.json'), true)['contributors'] ?? [],
+            json_decode(file_get_contents(__DIR__.'/../../../contributors.json') ?: '{}', true)['contributors'] ?? [],
         );
 
         return view('about', [

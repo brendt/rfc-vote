@@ -10,7 +10,7 @@ trait PasswordValidationRules
     /**
      * Get the validation rules used to validate passwords.
      *
-     * @return array<int, array<int, ValidationRule|string>|ValidationRule|string>
+     * @return array<int, array<int, ValidationRule|Password|string>|ValidationRule|Password|string>
      */
     protected function passwordRules(): array
     {
