@@ -5,6 +5,7 @@ namespace App\Models;
 final class Contributor
 {
     public function __construct(
+        public int $id,
         public string $name,
         public string $url,
         public array $contributions,

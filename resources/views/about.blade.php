@@ -1,6 +1,6 @@
 @php
     /**
-     * @var array{name: string, url: string, contributions: string[]}[] $contributors
+     * @var array{id: int, name: string, url: string, contributions: string[]}[] $contributors
      */
 @endphp
 

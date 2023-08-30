@@ -1,7 +1,7 @@
 @php
     /**
      * @var Illuminate\View\ComponentSlot $slot
-     * @var array{name: string, url: string, contributions: string[]}[] $contributors
+     * @var array{id: int, name: string, url: string, contributions: string[]}[] $contributors
      */
 @endphp
 

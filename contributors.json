@@ -1,102 +1,123 @@
 {
     "contributors": [
         {
+            "id": 35465417,
             "name": "Serhii",
             "url": "https://github.com/SerhiiCho",
-            "contributions": ["Frontend", "Backend"]
+            "contributions": ["Frontend", "Backend"],
+            "contributionsUrl": "https://serhii.io/"
         },
         {
+            "id": 19909432,
             "name": "Mohammad",
             "url": "https://github.com/MohammadAlhallaq",
             "contributions": ["Dark Mode", "Frontend", "Backend"]
         },
         {
+            "id": 5923843,
             "name": "Sergiu",
             "url": "https://github.com/vsergiu93",
             "contributions": ["Sail", "Frontend"]
         },
         {
+            "id": 5122936,
             "name": "Tighten",
-            "url": "https://tighten.com/",
+            "url": "https://github.com/tighten",
             "contributions": ["Design"],
             "contributionsUrl": "https://tighten.com/"
         },
         {
+            "id": 25585917,
             "name": "Kamlesh",
             "url": "https://github.com/Kamleshpaul",
             "contributions": ["Emails", "Frontend"]
         },
         {
+            "id": 66994089,
             "name": "Alireza",
             "url": "https://github.com/alirezasalehizadeh",
             "contributions": ["Backend"]
         },
         {
+            "id": 1196825,
             "name": "Roman",
             "url": "https://github.com/pronskiy",
             "contributions": ["Frontend"]
         },
         {
+            "id": 79457016,
             "name": "Charles",
             "url": "https://github.com/chvanam",
             "contributions": ["Backend", "Markdown support"]
         },
         {
+            "id": 1247666,
             "name": "Johannes",
             "url": "https://github.com/joschuba",
             "contributions": ["Frontend"]
         },
         {
+            "id": 41837763,
             "name": "Ryan",
             "url": "https://github.com/ryangjchandler",
             "contributions": ["Frontend"]
         },
         {
+            "id": 551167,
             "name": "Miguel",
             "url": "https://github.com/mikeziri",
             "contributions": ["Frontend"]
         },
         {
+            "id": 3634654,
             "name": "Jelmer",
             "url": "https://github.com/carakas",
             "contributions": ["Frontend"]
         },
         {
+            "id": 13367189,
             "name": "Istiak",
             "url": "https://github.com/istiak-tridip",
             "contributions": ["Backend"]
         },
         {
+            "id": 2337648,
             "name": "Daniel",
             "url": "https://github.com/krsriq",
             "contributions": ["Frontend"]
         },
         {
+            "id": 23099574,
             "name": "Rihards",
             "url": "https://github.com/rihardsgrislis",
             "contributions": ["Backend"]
         },
         {
+            "id": 24621490,
             "name": "Erol",
             "url": "https://github.com/Erol314",
             "contributions": ["Backend", "Frontend"]
         },
         {
+            "id": 69632116,
             "name": "Josh",
             "url": "https://github.com/joshbonnick",
             "contributions": ["Backend"]
         },
         {
+            "id": 31937522,
             "name": "Daniel",
             "url": "https://github.com/DanielSpravtsev",
             "contributions": ["Backend"]
         },
         {
+            "id": 56961917,
             "name": "Ngô Quốc Đạt",
             "url": "https://github.com/datlechin",
             "contributions": ["Frontend"]
         },
         {
+            "id": 17316322,
             "name": "Vytautas",
             "url": "https://github.com/Plytas",
             "contributions": ["Backend"]
