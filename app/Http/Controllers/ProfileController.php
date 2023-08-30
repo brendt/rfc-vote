@@ -102,11 +102,11 @@ final readonly class ProfileController
         $emailChangeRequest = EmailChangeRequest::query()->where('token', $token)->first();
 
         if (! $emailChangeRequest) {
-            abort('403', 'Email Expired');
+            abort(403, 'Email Expired');
         }
 
         if (now()->greaterThan($emailChangeRequest->created_at->addMinutes(30))) {
-            abort('404', 'Link expired');
+            abort(404, 'Link expired');
         }
 
         $user = $emailChangeRequest->user;
