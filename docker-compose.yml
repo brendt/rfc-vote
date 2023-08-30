@@ -26,6 +26,7 @@ services:
             - mysql
             - mailpit
             - redis
+            - selenium
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
@@ -72,6 +73,14 @@ services:
                 - ping
             retries: 3
             timeout: 5s
+    selenium:
+        image: selenium/standalone-chrome
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        volumes:
+            - '/dev/shm:/dev/shm'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
