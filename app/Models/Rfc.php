@@ -14,6 +14,9 @@ use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 
+/**
+ * @property ?string $meta_image
+ */
 class Rfc extends Model implements Feedable
 {
     use HasFactory;

@@ -6,6 +6,7 @@ use App\Models\Rfc;
 use Feed;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use SimpleXMLElement;
 
 class RfcSyncCommand extends Command
 {
@@ -15,6 +16,7 @@ class RfcSyncCommand extends Command
 
     public function handle(): void
     {
+        /** @var SimpleXMLElement $rss */
         $rss = Feed::loadRss('https://externals.io/rss');
 
         foreach ($rss->item as $item) {
