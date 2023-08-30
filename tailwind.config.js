@@ -36,7 +36,6 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'white': 'var(--color-white)',
                 'agree': 'var(--color-agree)',
                 'agree-light': 'var(--color-agree-light)',
                 'agree-dark': 'var(--color-agree-dark)',
