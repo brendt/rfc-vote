@@ -8,7 +8,7 @@
     $argumentUser = $argument->user;
 @endphp
 
-<div class="flex flex-col lg:flex-row gap-4 items-center justify-between mb-3 mt-1 opacity-80 border-divider border-t pt-3">
+<div class="flex flex-col lg:flex-row gap-4 items-center justify-between mb-3 mt-1 opacity-80 border-divider divide-divider border-t pt-3">
     <x-argument-card.share-links :argument="$argument" :anchor-link="$anchorLink" />
 
     <div class="flex flex-col md:flex-row gap-1 md:gap-3 items-center">
