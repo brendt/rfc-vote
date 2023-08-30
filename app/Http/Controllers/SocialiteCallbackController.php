@@ -57,7 +57,7 @@ final readonly class SocialiteCallbackController
 
     private function resolveUsername(SocialiteUser $socialiteUser): string
     {
-        $username = (new GenerateUsername)((string)$socialiteUser->getNickname()); // normalize username to our rules
+        $username = (new GenerateUsername)((string) $socialiteUser->getNickname()); // normalize username to our rules
 
         /**
          * We need to check for duplicates, this is because users can register directly on the app and because of
