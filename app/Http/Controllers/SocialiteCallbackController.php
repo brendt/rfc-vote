@@ -26,8 +26,8 @@ final readonly class SocialiteCallbackController
             $user = User::create([
                 'email' => $socialiteUser->getEmail(),
                 'name' => $socialiteUser->getName() ?? $socialiteUser->getEmail(),
-                'username' => $username = $this->resolveUsername($socialiteUser),
-                'github_url' => $this->resolveGithubUrl($username),
+                'username' => $this->resolveUsername($socialiteUser),
+                'github_url' => $this->resolveGithubUrl($socialiteUser->getNickname()),
                 'reputation' => 0,
                 'socialite' => serialize($socialiteUser),
             ]);
