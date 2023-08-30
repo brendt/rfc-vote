@@ -1,0 +1,93 @@
+name: dusk
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  dusk-php:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ ubuntu-latest ]
+        php: [ 8.2 ]
+        laravel: [ 10.* ]
+        stability: [ prefer-stable ]
+        include:
+          - laravel: 10.*
+    name: Laravel Dusk - P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    env:
+      APP_URL: "http://127.0.0.1:8000"
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      MAIL_MAILER: log
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Create Database
+        run: |
+          sudo systemctl start mysql
+          mysql --user="root" --password="root" -e "CREATE DATABASE \`my-database\` character set UTF8mb4 collate utf8mb4_bin;"
+
+      - name: Prepare github output
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: |
+          composer install
+          npm install
+      - name: List Installed Dependencies
+        run: composer show -D
+
+      - name: Setup Laravel
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+          npm run build
+
+      - name: Upgrade Chrome Driver
+        run: php artisan dusk:chrome-driver --detect
+
+      - name: Start Chrome Driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+
+      - name: Run Laravel Server
+        run: php artisan serve --no-reload &
+
+      - name: Run Dusk Tests
+        run: php artisan dusk
+
+      - name: Upload Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshots
+          path: tests/Browser/screenshots
+
+      - name: Upload Console Logs
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: console
+          path: tests/Browser/console
