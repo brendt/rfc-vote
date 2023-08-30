@@ -28,7 +28,11 @@
     <p>For official messages, please consider using the PHP Internals mailing list. Despite common belief,
         it is in fact, open to anyone.</p>
 
-    <x-about.quote author="Nikita Popov" link="https://externals.io/message/110936#110937">
+    <x-about.quote
+        author="Nikita Popov"
+        link="https://externals.io/message/110936#110937"
+        :image="asset('storage/nikita-popov.jpeg')"
+    >
         I believe it is important to remember that voting is just the last step of
         the RFC process: While the vote is the final arbiter, the discussion phase
         that precedes it is where concerns are heard and the proposal is shaped.<br>
