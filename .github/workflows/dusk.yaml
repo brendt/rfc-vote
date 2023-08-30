@@ -38,7 +38,7 @@ jobs:
       - name: Create Database
         run: |
           sudo systemctl start mysql
-          mysql --user="root" --password="root" -e "CREATE DATABASE \`my-database\` character set UTF8mb4 collate utf8mb4_bin;"
+          mysql --user="root" --password="root" -e "CREATE DATABASE \`rfc_vote\` character set UTF8mb4 collate utf8mb4_bin;"
 
       - name: Prepare github output
         id: composer-cache
