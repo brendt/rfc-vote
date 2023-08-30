@@ -28,16 +28,11 @@
     <p>For official messages, please consider using the PHP Internals mailing list. Despite common belief,
         it is in fact, open to anyone.</p>
 
-    <blockquote>... voting is just the last step of the RFC process:
-        While the vote is the final arbiter, the discussion phase that precedes it
-        is where concerns are heard and the proposal is shaped.<br>
-
-        <div class="text-right">
-            <x-about.link href="https://externals.io/message/110936#110937">
-                Nikita Popov
-            </x-about.link>
-        </div>
-    </blockquote>
+    <x-about.quote author="Nikita Popov" link="https://externals.io/message/110936#110937">
+        I believe it is important to remember that voting is just the last step of
+        the RFC process: While the vote is the final arbiter, the discussion phase
+        that precedes it is where concerns are heard and the proposal is shaped.<br>
+    </x-about.quote>
 </x-about.section>
 
 
