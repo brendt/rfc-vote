@@ -54,7 +54,7 @@
                 @endif
             </div>
 
-            <x-markdown class="prose text-lg text-font max-w-full">
+            <x-markdown class="prose text-lg text-font max-w-full prose-a:text-font-second prose-code:text-font-second">
                 {!! $rfc->description !!}
             </x-markdown>
 
