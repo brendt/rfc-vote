@@ -55,22 +55,20 @@
 <x-about.contributors :contributors="$contributors" />
 
 <x-about.section heading="Interesting links">
-    <p>
-        <ul>
-            <li>
-                <x-about.link href="https://github.com/brendt/rfc-vote">
-                    The RFC Vote repository
-                </x-about.link>
-                — everyone can contribute!
-            </li>
-            <li>
-                <x-about.link href="https://www.youtube.com/playlist?list=PL0bgkxUS9EaLguM2puiMD-NiiV6r5b8RY">
-                    The YouTube playlist
-                </x-about.link>
-                where we built this project on stream, together.
-            </li>
-        </ul>
-    </p>
+    <ul>
+        <li>
+            <x-about.link href="https://github.com/brendt/rfc-vote">
+                The RFC Vote repository
+            </x-about.link>
+            — everyone can contribute!
+        </li>
+        <li>
+            <x-about.link href="https://www.youtube.com/playlist?list=PL0bgkxUS9EaLguM2puiMD-NiiV6r5b8RY">
+                The YouTube playlist
+            </x-about.link>
+            where we built this project on stream, together.
+        </li>
+    </ul>
 </x-about.section>
 
 @endcomponent
