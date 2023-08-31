@@ -23,7 +23,7 @@ class FetchContributors
      *     name: string,
      *     url: string,
      *     contributions: array<int, string>,
-     * }
+     * }>
      */
     public function getJson(): array
     {
