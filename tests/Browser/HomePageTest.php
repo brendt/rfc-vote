@@ -2,6 +2,8 @@
 
 namespace Tests\Browser;
 
+use App\Models\Argument;
+use App\Models\ArgumentVote;
 use App\Models\Rfc;
 use App\Models\User;
 use Carbon\Carbon;
@@ -181,7 +183,38 @@ class HomePageTest extends DuskTestCase
             $browser->visit(new HomePage)
                 ->click('@open-rfcs-items:nth-child(1)')
                 ->assertUrlIs(route('rfc-detail', ['rfc' => Str::slug($rfcTitle)]));
+        });
+    }
 
+    public function test_if_no_argument_of_the_day_exists_we_do_not_render_title_and_argument(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new HomePage)
+                ->assertNotPresent('@argument-of-the-day-title')
+                ->assertNotPresent('@argument-of-the-day');
+        });
+    }
+
+    public function test_if_argument_of_the_day_exists_we_render_the_title_and_argument(): void
+    {
+        $rfc = Rfc::factory()->create(
+            [
+                'title' => 'This is a test rfc that should be rendered 1',
+                'published_at' => Carbon::now()->subDays(3),
+                'created_at' => Carbon::now()->subDays(3),
+                'ends_at' => Carbon::now()->addDay(),
+            ]
+        );
+        $argument = Argument::factory()->for($rfc)->create();
+        ArgumentVote::factory()->for($argument)->count(20)->create([
+            'created_at' => now()->subDay(),
+        ]);
+
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new HomePage)
+                ->screenshot('test')
+                ->assertPresent('@argument-of-the-day-title')
+                ->assertPresent('@argument-of-the-day');
         });
     }
 }

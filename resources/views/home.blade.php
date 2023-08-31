@@ -69,7 +69,7 @@
         </div>
 
         @if($argumentOfTheDay)
-            <x-home.title>
+            <x-home.title id="argument-of-the-day-title">
                 {{ __('Argument of the Day') }}
             </x-home.title>
 

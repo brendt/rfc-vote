@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Argument;
 use App\Models\ArgumentVote;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -13,8 +15,8 @@ class ArgumentVoteFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => $this->faker->randomNumber(),
-            'argument_id' => $this->faker->randomNumber(),
+            'user_id' => fn () => User::factory()->create(),
+            'argument_id' => fn () => Argument::factory()->create(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
