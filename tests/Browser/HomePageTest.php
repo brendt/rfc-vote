@@ -6,7 +6,6 @@ use App\Models\Argument;
 use App\Models\ArgumentVote;
 use App\Models\Rfc;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Support\Facades\Queue;
 use Laravel\Dusk\Browser;
