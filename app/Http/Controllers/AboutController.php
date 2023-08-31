@@ -23,6 +23,7 @@ final readonly class AboutController
 
     /**
      * @return Contributor[]
+     *
      * @throws JsonException
      */
     private function getContributors(): array
