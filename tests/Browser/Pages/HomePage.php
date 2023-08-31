@@ -31,6 +31,8 @@ class HomePage extends Page
     {
         return [
             '@disclaimer' => 'div[role="alert"]',
+            '@open-rfcs-title' => '#open-rfcs-title',
+            '@open-rfcs-items' => '#open-rfcs-title + div a',
         ];
     }
 }

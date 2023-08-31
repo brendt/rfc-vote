@@ -4,7 +4,7 @@
             <x-email-optin-banner :user="auth()->user()"/>
         </div>
 
-        <x-home.title>
+        <x-home.title id="open-rfcs-title">
             {{ __('Open RFCs') }}
         </x-home.title>
 

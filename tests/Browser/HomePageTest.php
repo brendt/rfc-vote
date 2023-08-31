@@ -2,8 +2,11 @@
 
 namespace Tests\Browser;
 
+use App\Models\Rfc;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
+use Illuminate\Support\Facades\Queue;
 use Laravel\Dusk\Browser;
 use Tests\Browser\Pages\HomePage;
 use Tests\DuskTestCase;
@@ -11,6 +14,12 @@ use Tests\DuskTestCase;
 class HomePageTest extends DuskTestCase
 {
     use DatabaseTruncation;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Queue::fake(); // generating the meta image for rfcs is expensive
+    }
 
     public function test_it_renders_all_main_sections(): void
     {
@@ -32,8 +41,8 @@ class HomePageTest extends DuskTestCase
         });
     }
 
-    public function test_it_renders_email_notification_disclaimer_for_auth_users_that_didnt_verify_email(
-    ): void {
+    public function test_it_renders_email_notification_disclaimer_for_auth_users_that_didnt_verify_email(): void
+    {
         $user = User::factory()->unverified()->create();
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
@@ -57,13 +66,103 @@ class HomePageTest extends DuskTestCase
         });
     }
 
-    public function test_it_does_not_render_email_notifications_if_user_already_opted_for_email_notifications(
-    ): void {
+    public function test_it_does_not_render_email_notifications_if_user_already_opted_for_email_notifications(): void
+    {
         $user = User::factory()->withEmailOptin()->create();
         $this->browse(function (Browser $browser) use ($user) {
             $browser->loginAs($user)
                 ->visit(new HomePage)
                 ->assertNotPresent('@disclaimer');
+        });
+    }
+
+    public function test_it_renders_open_rfcs_section_even_if_there_are_no_open_rfcs(): void
+    {
+        Rfc::factory()->count(3)->create(
+            [
+                'published_at' => Carbon::now()->subDays(2),
+                'ends_at' => Carbon::now()->subDay(),
+            ]
+        );
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new HomePage)
+                ->assertPresent('@open-rfcs-title')
+                ->assertNotPresent('@open-rfcs-items');
+        });
+    }
+
+    public function test_it_renders_only_open_rfcs(): void
+    {
+        Rfc::factory()->create(
+            [
+                'title' => 'This is a test rfc that should not be rendered',
+                'published_at' => Carbon::now()->subDays(2),
+                'ends_at' => Carbon::now()->subDay(),
+            ]
+        );
+
+        Rfc::factory()->create(
+            [
+                'title' => 'This is a test rfc that should be rendered',
+                'published_at' => Carbon::now()->subDays(2),
+                'ends_at' => Carbon::now()->addDay(),
+            ]
+        );
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new HomePage)
+                ->assertPresent('@open-rfcs-title')
+                ->assertPresent('@open-rfcs-items')
+                ->assertSeeIn('@open-rfcs-items', 'This is a test rfc that should be rendered')
+                ->assertDontSeeIn('@open-rfcs-items', 'This is a test rfc that should not be rendered');
+        });
+    }
+
+    public function test_it_renders_only_the_newest_three_open_rfcs(): void
+    {
+        Rfc::factory()->create(
+            [
+                'title' => 'This is a test rfc that should not be rendered',
+                'published_at' => Carbon::now()->subDays(4),
+                'created_at' => Carbon::now()->subDays(4),
+                'ends_at' => Carbon::now()->addDay(),
+
+            ]
+        );
+
+        Rfc::factory()->create(
+            [
+                'title' => 'This is a test rfc that should be rendered 1',
+                'published_at' => Carbon::now()->subDays(3),
+                'created_at' => Carbon::now()->subDays(3),
+                'ends_at' => Carbon::now()->addDay(),
+            ]
+        );
+
+        Rfc::factory()->create(
+            [
+                'title' => 'This is a test rfc that should be rendered 2',
+                'published_at' => Carbon::now()->subDays(2),
+                'created_at' => Carbon::now()->subDays(2),
+                'ends_at' => Carbon::now()->addDay(),
+            ]
+        );
+
+        Rfc::factory()->create(
+            [
+                'title' => 'This is a test rfc that should be rendered 3',
+                'published_at' => Carbon::now()->subDays(1),
+                'created_at' => Carbon::now()->subDays(1),
+                'ends_at' => Carbon::now()->addDay(),
+            ]
+        );
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new HomePage)
+                ->assertPresent('@open-rfcs-title')
+                ->assertPresent('@open-rfcs-items')
+                ->assertSeeIn('@open-rfcs-items:nth-child(1)', 'This is a test rfc that should be rendered 3')
+                ->assertSeeIn('@open-rfcs-items:nth-child(2)', 'This is a test rfc that should be rendered 2')
+                ->assertSeeIn('@open-rfcs-items:nth-child(3)', 'This is a test rfc that should be rendered 1')
+                ->assertDontSeeIn('@open-rfcs-items', 'This is a test rfc that should not be rendered');
         });
     }
 }
