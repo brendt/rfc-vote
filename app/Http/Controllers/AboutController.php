@@ -13,7 +13,7 @@ final readonly class AboutController
 
     public function __invoke(): View
     {
-        $contributors = Cache::remember('contributors', self::DAY, fn () => $this->getContributors());
+        $contributors = Cache::remember('contributors', self::DAY, $this->getContributors(...));
 
         shuffle($contributors);
 
