@@ -22,7 +22,6 @@ class AboutTest extends TestCase
         ];
 
         $this->mock(FetchContributors::class, function (MockInterface $mock) use ($contributors) {
-            $mock->shouldReceive('getJson')->andReturn([]);
             $mock->shouldReceive('getContributors')->andReturn($contributors);
         });
 
