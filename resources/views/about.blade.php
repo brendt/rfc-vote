@@ -1,5 +1,5 @@
 @component('layouts.base')
-    <div class="container max-w-[600px] mx-auto prose prose-a:text-font-second prose-a:hover px-4 mb-10 text-font">
+    <div class="container max-w-[600px] mx-auto prose markdown-text px-4 mb-10 text-font">
 <x-markdown>
     ## <span class="text-font-second">Shaping PHP, together</span>
 

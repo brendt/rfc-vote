@@ -16,3 +16,7 @@ pre.shiki {
 pre.shiki code {
     @apply max-w-[200px] block;
 }
+
+.markdown-text {
+    @apply prose-a:text-font-second prose-code:text-font-second prose-blockquote:text-font-second
+}
