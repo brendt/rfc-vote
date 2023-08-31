@@ -38,7 +38,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class);
-Route::get('/rfc/{rfc}', RfcDetailController::class);
+Route::get('/rfc/{rfc}', RfcDetailController::class)->name('rfc-detail');
 Route::get('/rfc/{rfc}/meta.png', RfcMetaImageController::class)->middleware('cache:900');
 Route::get('/login', LoginController::class)->name('login');
 Route::get('/register', RegisterController::class)->name('register');
