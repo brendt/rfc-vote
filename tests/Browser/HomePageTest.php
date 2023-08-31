@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Support\Facades\Queue;
 use Laravel\Dusk\Browser;
+use Str;
 use Tests\Browser\Pages\HomePage;
 use Tests\DuskTestCase;
 
@@ -157,12 +158,30 @@ class HomePageTest extends DuskTestCase
         );
         $this->browse(function (Browser $browser) {
             $browser->visit(new HomePage)
-                ->assertPresent('@open-rfcs-title')
-                ->assertPresent('@open-rfcs-items')
                 ->assertSeeIn('@open-rfcs-items:nth-child(1)', 'This is a test rfc that should be rendered 3')
                 ->assertSeeIn('@open-rfcs-items:nth-child(2)', 'This is a test rfc that should be rendered 2')
                 ->assertSeeIn('@open-rfcs-items:nth-child(3)', 'This is a test rfc that should be rendered 1')
                 ->assertDontSeeIn('@open-rfcs-items', 'This is a test rfc that should not be rendered');
+        });
+    }
+
+    public function test_it_renders_open_rfcs_as_links_to_rfc_detail_page(): void
+    {
+        $rfcTitle = 'This should be a slug';
+        Rfc::factory()->create(
+            [
+                'title' => $rfcTitle,
+                'published_at' => Carbon::now()->subDays(3),
+                'created_at' => Carbon::now()->subDays(3),
+                'ends_at' => Carbon::now()->addDay(),
+            ]
+        );
+
+        $this->browse(function (Browser $browser) use ($rfcTitle) {
+            $browser->visit(new HomePage)
+                ->click('@open-rfcs-items:nth-child(1)')
+                ->assertUrlIs(route('rfc-detail', ['rfc' => Str::slug($rfcTitle)]));
+
         });
     }
 }
