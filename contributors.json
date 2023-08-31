@@ -1,6 +1,12 @@
 {
     "contributors": [
         {
+            "id": 6905297,
+            "name": "Brent",
+            "url": "https://github.com/brendt",
+            "contributions": ["Frontend", "Backend"]
+        },
+        {
             "id": 35465417,
             "name": "Serhii",
             "url": "https://github.com/SerhiiCho",
