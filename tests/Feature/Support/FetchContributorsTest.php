@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class FetchContributorsTest extends TestCase
 {
-
     public function test_no_duplicates_in_contributors_json()
     {
         $contributors = app(FetchContributors::class)->getJson();
