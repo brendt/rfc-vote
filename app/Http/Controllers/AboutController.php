@@ -30,9 +30,8 @@ final readonly class AboutController
         $content = file_get_contents(__DIR__.'/../../../contributors.json') ?: '{}';
         $people = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
 
-        return array_map(
-            static fn (array $item) => new Contributor(...$item),
-            $people['contributors'] ?? [],
-        );
+        return collect($contributors['contributors'])
+            ->map(fn (array $contributor) => new Contributor(...$contributor))
+            ->all();
     }
 }
