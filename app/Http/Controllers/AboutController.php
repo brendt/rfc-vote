@@ -9,9 +9,11 @@ use JsonException;
 
 final readonly class AboutController
 {
+    private const DAY = 60 * 60 * 24;
+
     public function __invoke(): View
     {
-        $contributors = Cache::rememberForever('contributors', fn () => $this->getContributors());
+        $contributors = Cache::remember('contributors', self::DAY, fn () => $this->getContributors());
 
         shuffle($contributors);
 
