@@ -81,9 +81,6 @@
 
                     >
                         Admin
-                        @if($pendingVerificationRequests)
-                            <span>({{ $pendingVerificationRequests }})</span>
-                        @endif
                     </x-navbar.link>
                 @endif
 
