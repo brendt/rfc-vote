@@ -6,20 +6,25 @@
 @endphp
 
 <x-about.section heading="Our contributors">
-    <ul class="grid grid-cols-10 gap-4">
+    <ul class="flex flex-wrap justify-center gap-3">
         @foreach($contributors as $c)
-            <li class="flex gap-2 rounded-l-full rounded-r-xl bg-background">
+            <li @class([
+                'flex gap-4 rounded-[50px_13px_13px_50px] bg-background pl-1 pr-4 py-1 group',
+                'transition-all duration-300',
+            ])>
                 <img
                     src="{{ "https://avatars.githubusercontent.com/u/{$c->id}" }}"
                     alt="{{ $c->name }}"
                     width="460"
                     height="460"
-                    class="w-full shadow-md rounded-full"
+                    class="w-16 h-auto shadow-md rounded-full"
                 />
 
-                <div>
-                    <h2>{{ $c->name }}</h2>
-                    <p></p>
+                <div class="flex justify-center">
+                    <div class="flex-col justify-center text-[.9rem] leading-5 hidden group-hover:flex transition-all duration-300">
+                        <span><b>Name:</b> {{ $c->name }}</span>
+                        <span><b>Focus:</b> {{ implode(', ', $c->contributions) }}</span>
+                    </div>
                 </div>
             </li>
         @endforeach

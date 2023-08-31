@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 
 final readonly class PublicProfileController
 {
-    public function __invoke(User $user)
+    public function __invoke(User $user): View
     {
         $user->load([
             'arguments.rfc',

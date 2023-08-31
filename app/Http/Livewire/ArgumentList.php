@@ -8,6 +8,7 @@ use App\Http\Controllers\RfcDetailController;
 use App\Models\Argument;
 use App\Models\Rfc;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -28,11 +29,14 @@ class ArgumentList extends Component
 
     public ?Argument $showingComments = null;
 
+    /**
+     * @var array<string, string>
+     */
     protected $listeners = [
         Events::ARGUMENT_CREATED->value => 'refresh',
     ];
 
-    public function render()
+    public function render(): View
     {
         $userArgument = $this->user?->getArgumentForRfc($this->rfc);
 
@@ -56,7 +60,7 @@ class ArgumentList extends Component
     public function refresh(): void
     {
         $this->rfc->refresh();
-        $this->user->refresh();
+        $this->user?->refresh();
         $this->isConfirmingDelete = null;
     }
 

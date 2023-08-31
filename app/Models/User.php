@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Mail\HasMailId;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -43,20 +44,29 @@ class User extends Authenticatable implements MustVerifyEmail
         'flair' => UserFlair::class,
     ];
 
+    /**
+     * @var array<int, string>
+     */
     protected $appends = [
         'profile_photo_url',
     ];
 
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'username';
     }
 
+    /**
+     * @return HasMany<UserMail>
+     */
     public function mails(): HasMany
     {
         return $this->hasMany(UserMail::class);
     }
 
+    /**
+     * @return BelongsToMany<Argument>
+     */
     public function viewedArguments(): BelongsToMany
     {
         return $this
@@ -64,42 +74,66 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withTimestamps();
     }
 
+    /**
+     * @return HasMany<UserArgumentView>
+     */
     public function argumentViews(): HasMany
     {
         return $this->hasMany(UserArgumentView::class);
     }
 
+    /**
+     * @return HasMany<ArgumentVote>
+     */
     public function argumentVotes(): HasMany
     {
         return $this->hasMany(ArgumentVote::class);
     }
 
+    /**
+     * @return HasMany<Argument>
+     */
     public function arguments(): HasMany
     {
         return $this->hasMany(Argument::class);
     }
 
+    /**
+     * @return HasMany<EmailChangeRequest>
+     */
     public function emailChangeRequests(): HasMany
     {
         return $this->hasMany(EmailChangeRequest::class);
     }
 
+    /**
+     * @return HasMany<VerificationRequest>
+     */
     public function verificationRequests(): HasMany
     {
         return $this->hasMany(VerificationRequest::class);
     }
 
+    /**
+     * @return HasMany<VerificationRequest>
+     */
     public function pendingVerificationRequests(): HasMany
     {
         return $this->hasMany(VerificationRequest::class)->where('status', VerificationRequestStatus::PENDING);
     }
 
+    /**
+     * @return HasMany<Message>
+     */
     public function messages(): HasMany
     {
         return $this->hasMany(Message::class)
             ->orderByDesc('created_at');
     }
 
+    /**
+     * @return HasMany<Message>
+     */
     public function inboxMessages(): HasMany
     {
         return $this->hasMany(Message::class)
@@ -108,6 +142,9 @@ class User extends Authenticatable implements MustVerifyEmail
             ->orderByDesc('id');
     }
 
+    /**
+     * @return HasMany<Message>
+     */
     public function archivedMessages(): HasMany
     {
         return $this->hasMany(Message::class)
@@ -116,6 +153,9 @@ class User extends Authenticatable implements MustVerifyEmail
             ->orderByDesc('id');
     }
 
+    /**
+     * @return HasMany<Message>
+     */
     public function unreadMessages(): HasMany
     {
         return $this->hasMany(Message::class)
@@ -142,7 +182,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @return \Illuminate\Support\Collection<\App\Models\ArgumentVote>
+     * @return Collection<int, ArgumentVote>
      */
     public function getArgumentVotesForRfc(Rfc $rfc): Collection
     {
@@ -204,7 +244,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hasGottenMail(Mailable $mailable): bool
     {
-        return $this->mails()->where('mail_type', $mailable::class)->exists();
+        $mailType = $mailable instanceof HasMailId ? $mailable->getMailId() : $mailable::class;
+
+        return $this->mails()->where('mail_type', $mailType)->exists();
     }
 
     public function updateUnreadMessageCount(): void

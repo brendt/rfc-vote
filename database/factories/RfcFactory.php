@@ -15,6 +15,7 @@ class RfcFactory extends Factory
         return [
             'title' => $this->faker->word(),
             'url' => $this->faker->url(),
+            'externals_url' => $this->faker->url(),
             'teaser' => $this->faker->sentences(3, true),
             'description' => $this->faker->sentences(3, true),
             'count_yes' => 0,

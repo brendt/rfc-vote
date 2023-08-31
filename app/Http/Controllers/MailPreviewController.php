@@ -8,13 +8,13 @@ use App\Models\User;
 
 final readonly class MailPreviewController
 {
-    public function __invoke()
+    public function __invoke(): string
     {
         abort_if(app()->isProduction(), 400);
 
         $mail = new NewRfcMail(
-            rfc: Rfc::find(1),
-            user: User::find(1),
+            rfc: Rfc::query()->findOrFail(1),
+            user: User::query()->findOrFail(1),
         );
 
         return $mail->render();

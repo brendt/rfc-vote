@@ -1,5 +1,5 @@
 <div>
-    <h2 class="text-2xl text-gray-700 font-bold mb-4">Inbox</h2>
+    <h2 class="text-2xl text-font font-bold mb-4">Inbox</h2>
 
     <div class="grid gap-4">
         @foreach($user->inboxMessages as $message)

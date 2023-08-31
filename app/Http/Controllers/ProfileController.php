@@ -7,8 +7,11 @@ use App\Actions\Fortify\PasswordValidationRules;
 use App\Actions\RequestEmailChange;
 use App\Http\Requests\Profile\UpdateRequest;
 use App\Models\EmailChangeRequest;
+use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
@@ -16,7 +19,7 @@ final readonly class ProfileController
 {
     use PasswordValidationRules;
 
-    public function edit()
+    public function edit(): View
     {
         $user = auth()->user();
 
@@ -27,25 +30,32 @@ final readonly class ProfileController
 
     public function update(UpdateRequest $request): RedirectResponse
     {
-        $attrs = collect($request->validated())->except('avatar');
+        $attrs = collect($request->safe()->except('avatar'));
 
         if ($request->avatar !== null) {
-            $attrs->put('avatar', $request->file('avatar')?->store('public/avatars'));
+            /** @var UploadedFile $avatar */
+            $avatar = $request->file('avatar');
+
+            $attrs->put('avatar', $avatar->store('public/avatars'));
         }
 
-        $request->user()->update($attrs->toArray());
+        /** @var User $user */
+        $user = $request->user();
+
+        $user->update($attrs->toArray());
 
         flash('Profile updated successfully');
 
         return redirect()->action([self::class, 'edit']);
     }
 
-    public function updateEmail(Request $request)
+    public function updateEmail(Request $request): RedirectResponse
     {
+        /** @var User $user */
         $user = $request->user();
 
         $validated = $request->validate([
-            'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore($request->user()->id)],
+            'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore($user->id)],
             'email_optin' => ['nullable'],
         ]);
 
@@ -67,8 +77,9 @@ final readonly class ProfileController
         return redirect()->action([self::class, 'edit']);
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(Request $request): RedirectResponse
     {
+        /** @var User $user */
         $user = $request->user();
 
         if ($user->password) {
@@ -97,21 +108,19 @@ final readonly class ProfileController
         return redirect()->action([self::class, 'edit']);
     }
 
-    public function verifyEmail(string $token)
+    public function verifyEmail(string $token): RedirectResponse
     {
         $emailChangeRequest = EmailChangeRequest::query()->where('token', $token)->first();
 
         if (! $emailChangeRequest) {
-            abort('403', 'Email Expired');
+            abort(403, 'Email Expired');
         }
 
         if (now()->greaterThan($emailChangeRequest->created_at->addMinutes(30))) {
-            abort('404', 'Link expired');
+            abort(404, 'Link expired');
         }
 
-        $user = $emailChangeRequest->user;
-
-        $user->update([
+        $emailChangeRequest->user->update([
             'email' => $emailChangeRequest->new_email,
         ]);
 
@@ -125,13 +134,16 @@ final readonly class ProfileController
     public function requestVerification(
         CreateVerificationRequest $createVerificationRequest,
         Request $request,
-    ) {
+    ): RedirectResponse {
         $validated = $request->validate([
             'motivation' => ['required', 'string'],
         ]);
 
+        /** @var User $user */
+        $user = $request->user();
+
         $createVerificationRequest(
-            user: $request->user(),
+            user: $user,
             motivation: $validated['motivation']
         );
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RfcRequest extends FormRequest
@@ -11,6 +12,9 @@ class RfcRequest extends FormRequest
         return true;
     }
 
+    /**
+     * @return array<string, array<int, ValidationRule|string>|ValidationRule|string>
+     */
     public function rules(): array
     {
         return [
@@ -20,6 +24,7 @@ class RfcRequest extends FormRequest
             'published_at' => ['nullable', 'date'],
             'ends_at' => ['nullable', 'date'],
             'url' => ['required', 'url'],
+            'externals_url' => ['required', 'nullable', 'url'],
         ];
     }
 }

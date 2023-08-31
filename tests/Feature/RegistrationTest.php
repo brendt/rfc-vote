@@ -3,12 +3,17 @@
 namespace Tests\Feature;
 
 use App\Actions\GenerateUsername;
+use App\Http\Controllers\SocialiteCallbackController;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Socialite\Contracts\Factory as SocialiteFactory;
+use Laravel\Socialite\Two\GithubProvider;
+use Mockery;
+use Mockery\MockInterface;
 use Tests\TestCase;
 
 class RegistrationTest extends TestCase
@@ -19,8 +24,6 @@ class RegistrationTest extends TestCase
     {
         if (! Features::enabled(Features::registration())) {
             $this->markTestSkipped('Registration support is not enabled.');
-
-            return;
         }
 
         $response = $this->get('/register');
@@ -79,6 +82,28 @@ class RegistrationTest extends TestCase
     public function test_registration_form_contains_username_component(): void
     {
         $this->get('/register')->assertSeeLivewire('username-input');
+    }
+
+    public function test_github_registration_fills_github_url(): void
+    {
+        $this->mock(SocialiteFactory::class, function (MockInterface $mock) {
+            $mockUser = tap(new \Laravel\Socialite\Two\User())->map([
+                'email' => 'foo@bar.com',
+                'name' => 'Brent Roose',
+                'nickname' => 'brendt',
+            ]);
+
+            $mockedDriver = Mockery::mock(GithubProvider::class);
+            $mockedDriver->shouldReceive('user')->andReturn($mockUser);
+
+            $mock->shouldReceive('driver')->with('github')->andReturn($mockedDriver);
+        });
+
+        $this->get(action(SocialiteCallbackController::class, ['driver' => 'github', 'code' => 200]));
+
+        $this->assertDatabaseHas(User::class, [
+            'github_url' => 'https://github.com/brendt',
+        ]);
     }
 
     public static function validationDataProvider(): array

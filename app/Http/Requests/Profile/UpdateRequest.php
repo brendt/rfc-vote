@@ -15,7 +15,7 @@ class UpdateRequest extends FormRequest
     }
 
     /**
-     * @return array<string, ValidationRule|array|string>
+     * @return array<string, array<int, ValidationRule|File|Rule|string>|ValidationRule|string>
      */
     public function rules(): array
     {
@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('users', 'username')->ignore($this->user()->id),
+                Rule::unique('users', 'username')->ignore($this->user()?->id),
             ],
             'website_url' => ['nullable', 'max:255', 'url'],
             'github_url' => ['nullable', 'max:255', 'url'],

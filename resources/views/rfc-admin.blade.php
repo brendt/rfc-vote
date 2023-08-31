@@ -1,7 +1,7 @@
 @component('layouts.admin')
     <div class="container mx-auto">
         <div class="grid gap-4 px-4">
-            <div class="grid gap-2 divide-divider divide-y divide-gray-300">
+            <div class="grid gap-2 divide-divider divide-y">
                 @foreach($rfcs as $rfc)
                     <div class="grid grid-cols-6 lg:grid-cols-12 p-4 gap-4 items-center">
                         <div class="col-span-6 lg:col-span-2 space-y-1">

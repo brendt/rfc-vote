@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Argument;
 use App\Models\ArgumentVote;
 use App\Models\Rfc;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 final readonly class HomeController
 {
-    public function __invoke()
+    public function __invoke(): View
     {
         $user = auth()->user();
 
         $rfcs = Rfc::query()
             ->where('published_at', '<=', now()->startOfDay())
-            ->where(fn (Builder $builder) => $builder->whereNull('ends_at')->orWhere('ends_at', '>', now()))
+            ->where(function (Builder $builder) {
+                $builder->whereNull('ends_at')->orWhere('ends_at', '>', now());
+            })
             ->orderByDesc('created_at')
             ->with(['arguments', 'yesArguments', 'noArguments'])
             ->limit(3)
