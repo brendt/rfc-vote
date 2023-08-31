@@ -16,6 +16,9 @@
             <div class="col-span-2">
                 <x-form-input name="url" label="URL" class="bg-input"/>
             </div>
+            <div class="col-span-2">
+                <x-form-input name="externals_url" label="Externals URL" class="bg-input"/>
+            </div>
 
             <div class="flex justify-end items-baseline gap-2 col-span-2">
                 <x-form-submit>
