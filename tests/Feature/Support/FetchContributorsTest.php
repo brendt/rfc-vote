@@ -23,6 +23,6 @@ class FetchContributorsTest extends TestCase
     {
         $contributors = app(FetchContributors::class)->getContributors();
 
-        $this->assertCount(0, collect($contributors)->reject(fn ($contributor) => $contributor instanceof Contributor));
+        $this->assertContainsOnlyInstancesOf(Contributor::class, $contributors);
     }
 }
