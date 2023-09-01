@@ -1,6 +1,6 @@
 <div class="grid gap-4 md:gap-6">
     @if($user)
-        <div class="px-2">
+        <div class="px-2 flex justify-between items-center">
             @php
                 $availableVotes = $user->getAvailableVotesForRfc($rfc);
             @endphp
@@ -8,6 +8,14 @@
             <span class="text-font tracking-wide">
                 You have {{ $availableVotes }} {{ Str::plural('vote', $availableVotes) }} available
             </span>
+
+            <div>
+                <select name="sortField" id="sortField" wire:model="sortField">
+                    @foreach(\App\Http\Livewire\SortField::cases() as $sortField)
+                        <option value="{{ $sortField->value }}">{{ $sortField->getDescription() }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
     @endif
 

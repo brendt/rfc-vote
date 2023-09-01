@@ -29,6 +29,8 @@ class ArgumentList extends Component
 
     public ?Argument $showingComments = null;
 
+    public string $sortField = SortField::VOTE_COUNT->value;
+
     /**
      * @var array<string, string>
      */
@@ -36,20 +38,39 @@ class ArgumentList extends Component
         Events::ARGUMENT_CREATED->value => 'refresh',
     ];
 
+    public function updatedSortField(): void
+    {
+        if (! $this->user) {
+            return;
+        }
+
+        $this->user->update([
+            'preferred_sort_field' => $this->sortField,
+        ]);
+    }
+
+    public function booted(): void
+    {
+        if ($this->user) {
+            $this->sortField = $this->user->preferred_sort_field->value;
+        }
+    }
+
     public function render(): View
     {
         $userArgument = $this->user?->getArgumentForRfc($this->rfc);
 
-        $arguments = Argument::query()
+        $query = Argument::query()
             ->where('rfc_id', $this->rfc->id)
-            ->orderByDesc('vote_count')
-            ->orderByDesc('created_at')
             ->with([
                 'user',
                 'rfc',
                 'comments.user',
-            ])
-            ->paginate(15);
+            ]);
+
+        $query = SortField::from($this->sortField)->applySort($query);
+
+        $arguments = $query->paginate(15);
 
         return view('livewire.argument-list', [
             'userArgument' => $userArgument,

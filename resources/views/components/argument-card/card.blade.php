@@ -8,7 +8,13 @@
     $anchorLink = $argument->user->username . '-' . $argument->id;
 @endphp
 
-<div id="{{ $anchorLink }}" class="bg-argument-card text-font rounded-xl shadow-md w-full group/card pt-5 pl-4 pr-10 md:px-8 md:pt-7 flex gap-6 items-center relative">
+<div id="{{ $anchorLink }}"
+     @class([
+        'border-2 bg-argument-card text-font rounded-xl w-full group/card pt-5 pl-4 pr-10 md:px-8 md:pt-7 flex gap-6 items-center relative',
+        'border-purple-400 dark:border-gray-500' => !$readonly && $user && !$user->hasSeenArgument($argument),
+        'shadow-md border-transparent' => !(!$readonly && $user && !$user->hasSeenArgument($argument)),
+     ])
+>
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
     @if (!$readonly && ($user?->can('edit', $argument) || $user?->can('delete', $argument)))

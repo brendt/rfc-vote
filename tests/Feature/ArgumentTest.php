@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\ArgumentList;
+use App\Http\Livewire\SortField;
 use App\Models\Argument;
 use App\Models\Rfc;
 use Livewire\Livewire;
@@ -120,5 +121,20 @@ class ArgumentTest extends TestCase
 
         $this->assertTrue($user->can('edit', $arguments[0]));
         $this->assertFalse($user->can('edit', $arguments[1]));
+    }
+
+    /** @test */
+    public function preferred_sort_is_set_after_switching()
+    {
+        $rfc = Rfc::factory()->create();
+        $user = $this->login();
+
+        $this->assertSame(SortField::VOTE_COUNT, $user->refresh()->preferred_sort_field);
+
+        Livewire::test(ArgumentList::class, ['rfc' => $rfc, 'user' => $user])
+            ->set('sortField', SortField::CREATED_AT->value)
+            ->assertOk();
+
+        $this->assertSame(SortField::CREATED_AT, $user->refresh()->preferred_sort_field);
     }
 }
