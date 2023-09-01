@@ -7,7 +7,7 @@ return [
          *
          * More info: https://spatie.be/docs/laravel-markdown/v1/installation-setup
          */
-        'enabled' => false,
+        'enabled' => true,
 
         /*
          * The name of or path to a Shiki theme
