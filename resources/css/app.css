@@ -11,7 +11,7 @@
 }
 
 pre.shiki {
-    @apply !bg-code-background w-full overflow-x-auto px-5 md:p-6 rounded-xl text-sm md:text-base;
+    @apply !bg-code-background w-full overflow-x-auto rounded-xl text-sm md:text-base;
 }
 
 pre.shiki code {
