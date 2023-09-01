@@ -58,7 +58,11 @@ class ArgumentList extends Component
 
     public function render(): View
     {
-        $userArgument = $this->user?->getArgumentForRfc($this->rfc);
+        $sortField = SortField::from($this->sortField);
+
+        $userArgument = $sortField === SortField::VOTE_COUNT ?
+            $this->user?->getArgumentForRfc($this->rfc)
+            : null;
 
         $query = Argument::query()
             ->where('rfc_id', $this->rfc->id)
@@ -68,7 +72,7 @@ class ArgumentList extends Component
                 'comments.user',
             ]);
 
-        $query = SortField::from($this->sortField)->applySort($query);
+        $query = $sortField->applySort($query);
 
         $arguments = $query->paginate(15);
 
