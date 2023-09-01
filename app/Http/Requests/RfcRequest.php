@@ -24,6 +24,7 @@ class RfcRequest extends FormRequest
             'published_at' => ['nullable', 'date'],
             'ends_at' => ['nullable', 'date'],
             'url' => ['required', 'url'],
+            'externals_url' => ['nullable', 'url'],
         ];
     }
 }

@@ -61,6 +61,8 @@ class RfcTest extends TestCase
     {
         $this->login(null, true);
 
+        $this->withoutExceptionHandling();
+
         $this->post(action([RfcCreateController::class, 'store']), [
             'title' => $this->faker->text(10),
             'teaser' => $this->faker->text(50),

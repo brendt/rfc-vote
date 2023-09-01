@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Livewire\SortField;
 use App\Mail\HasMailId;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -42,6 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'reputation' => 'int',
         'email_optin' => 'bool',
         'flair' => UserFlair::class,
+        'preferred_sort_field' => SortField::class,
     ];
 
     /**

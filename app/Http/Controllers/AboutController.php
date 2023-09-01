@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contributor;
+use App\Support\FetchContributors;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Cache;
 
 final readonly class AboutController
 {
-    public function __invoke(): View
+    public function __invoke(FetchContributors $contributors): View
     {
-        $contributors = array_map(
-            fn (array $item) => new Contributor(...$item),
-            json_decode(file_get_contents(__DIR__.'/../../../contributors.json') ?: '{}', true)['contributors'] ?? [],
-        );
+        $contributors = Cache::remember('contributors', now()->addDay(), $contributors->getContributors(...));
 
-        return view('about', [
-            'contributors' => $contributors,
-        ]);
+        shuffle($contributors);
+
+        return view('about', compact('contributors'));
     }
 }

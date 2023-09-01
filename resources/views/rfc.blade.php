@@ -35,6 +35,17 @@
                     {{ __('Read the RFC') }}
                 </x-tag>
 
+                @if($rfc->externals_url)
+                    <x-tag
+                        :href="$rfc->externals_url"
+                        target="_blank"
+                        class="bg-[#555f88] text-white"
+                    >
+                        <x-icons.external-link class="w-4 h-4" />
+                        {{ __('Externals') }}
+                    </x-tag>
+                @endif
+
                 <x-tag>
                     <x-icons.chat-bubble class="w-4 h-4" />
                     {{ $rfc->arguments->count() }}
