@@ -3,10 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Models\Rfc;
-use Feed;
+use App\Support\ExternalsRssFeed;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use SimpleXMLElement;
 
 class RfcSyncCommand extends Command
 {
@@ -14,10 +13,14 @@ class RfcSyncCommand extends Command
 
     protected $description = 'Sync RFCs from Externals RSS feed';
 
-    public function handle(): void
+    public function __construct(private readonly ExternalsRssFeed $feed)
     {
-        /** @var SimpleXMLElement $rss */
-        $rss = Feed::loadRss('https://externals.io/rss');
+        parent::__construct();
+    }
+
+    public function handle(): int
+    {
+        $rss = $this->feed->load();
 
         foreach ($rss->item as $item) {
             if (! Str::startsWith((string) ($item->title ?? null), ['[VOTE]'])) {
@@ -36,5 +39,7 @@ class RfcSyncCommand extends Command
                 $this->comment("\t{$url}");
             }
         }
+
+        return self::SUCCESS;
     }
 }
