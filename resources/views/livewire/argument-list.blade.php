@@ -9,13 +9,16 @@
                 You have {{ $availableVotes }} {{ Str::plural('vote', $availableVotes) }} available
             </span>
 
-            <div>
-                <select name="sortField" id="sortField" wire:model="sortField">
-                    @foreach(\App\Http\Livewire\SortField::cases() as $sortField)
-                        <option value="{{ $sortField->value }}">{{ $sortField->getDescription() }}</option>
-                    @endforeach
-                </select>
-            </div>
+            <select
+                name="sortField"
+                id="sortField"
+                wire:model="sortField"
+                class="border-divider bg-transparent rounded-lg pl-4 text-font text-sm ring-1 ring-transparent focus:border-purple-300 focus:ring-purple-500/50 focus:outline-none"
+            >
+                @foreach(App\Http\Livewire\SortField::cases() as $sortField)
+                    <option value="{{ $sortField->value }}">{{ $sortField->getDescription() }}</option>
+                @endforeach
+            </select>
         </div>
     @endif
 
