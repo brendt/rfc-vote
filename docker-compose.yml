@@ -74,7 +74,7 @@ services:
             retries: 3
             timeout: 5s
     selenium:
-        image: selenium/standalone-chrome
+        image: ${SELENIUM_IMAGE}
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         volumes:
