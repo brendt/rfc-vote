@@ -25,6 +25,7 @@ class LoginPage extends Page
             '@email-field' => 'input[name="email"]',
             '@password-field' => 'input[name="password"]',
             '@remember-me-field' => 'input[name="remember"]',
+            '@login-form-btn' => 'button[type="submit"]',
         ];
     }
 }
