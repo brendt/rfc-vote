@@ -10,9 +10,9 @@
 
 <div id="{{ $anchorLink }}"
      @class([
-        'border-2 bg-argument-card text-font rounded-xl w-full group/card pt-5 pl-4 pr-10 md:px-8 md:pt-7 flex gap-6 items-center relative',
-        'border-purple-400 dark:border-gray-500' => !$readonly && $user && !$user->hasSeenArgument($argument),
-        'shadow-md border-transparent' => !(!$readonly && $user && !$user->hasSeenArgument($argument)),
+        'bg-argument-card text-font rounded-xl w-full group/card pt-5 pl-4 pr-10 md:px-8 md:pt-7 flex gap-6 items-center relative',
+        'border-2 border-purple-300 dark:border-purple-800' => !$readonly && $user && !$user->hasSeenArgument($argument),
+        'border border-divider' => !(!$readonly && $user && !$user->hasSeenArgument($argument)),
      ])
 >
     <x-argument-card.vote :argument="$argument" :user="$user" />
