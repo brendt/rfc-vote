@@ -205,7 +205,7 @@ class HomePageTest extends DuskTestCase
             ]
         );
         $argument = Argument::factory()->for($rfc)->create();
-        ArgumentVote::factory()->for($argument)->count(20)->create([
+        ArgumentVote::factory()->for($argument)->count(10)->create([
             'created_at' => now()->subDay(),
         ]);
 
