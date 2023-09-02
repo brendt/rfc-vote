@@ -42,10 +42,16 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $rfcs = Rfc::factory()->count(10)->create([
-            'title' => 'Interface Default Methods',
-            'published_at' => now()->subDay(),
-        ]);
+        $rfcs = Rfc::factory()
+            ->count(3)
+            ->sequence(
+                ['title' => 'The Pipe Operator'],
+                ['title' => 'Short Closures 2.0'],
+                ['title' => 'Interface Default Methods'],
+            )
+            ->create([
+                'published_at' => now()->subDay(),
+            ]);
 
         foreach ($rfcs as $rfc) {
             $majority = fake()->boolean() ? VoteType::YES : VoteType::NO;
