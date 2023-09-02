@@ -23,14 +23,16 @@ class LoginPage extends Page
      * @throws NoSuchElementException
      */
     public function fillLoginFormAndSubmit(
-        Browser $browser,
-        string $email,
-        string $password,
-    ): void {
+        Browser $browser = null,
+        string $email = null,
+        string $password = null,
+    ): Browser {
         $browser->type('@email-field', $email)
             ->type('@password-field', $password)
             ->check('@remember-me-field')
             ->click('@login-form-btn');
+
+        return $browser;
     }
 
     /**
