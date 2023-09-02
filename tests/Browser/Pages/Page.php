@@ -13,10 +13,6 @@ abstract class Page extends BasePage
      */
     public static function siteElements(): array
     {
-        return [
-            '@main-header' => '#main-header',
-            '@logo' => '#header-logo',
-            '@footer' => '#footer',
-        ];
+        return [];
     }
 }
