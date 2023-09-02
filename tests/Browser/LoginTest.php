@@ -8,7 +8,7 @@ use Laravel\Dusk\Browser;
 use Tests\Browser\Pages\LoginPage;
 use Tests\DuskTestCase;
 
-class LoginPageTest extends DuskTestCase
+class LoginTest extends DuskTestCase
 {
     use DatabaseTruncation;
 
@@ -21,6 +21,17 @@ class LoginPageTest extends DuskTestCase
             $browser->visit(new LoginPage)
                 ->fillLoginFormAndSubmit(email: $user->email, password: $password)
                 ->assertAuthenticatedAs($user)
+                ->assertPathIs('/');
+        });
+    }
+
+    public function test_it_redirects_to_homepage_if_user_is_already_authenticated(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $user = User::factory()->createOne();
+
+            $browser->loginAs($user)
+                ->visit('/login')
                 ->assertPathIs('/');
         });
     }

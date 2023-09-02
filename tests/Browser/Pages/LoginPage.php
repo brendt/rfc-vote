@@ -2,8 +2,6 @@
 
 namespace Tests\Browser\Pages;
 
-use Facebook\WebDriver\Exception\ElementClickInterceptedException;
-use Facebook\WebDriver\Exception\NoSuchElementException;
 use Laravel\Dusk\Browser;
 
 class LoginPage extends Page
@@ -18,33 +16,16 @@ class LoginPage extends Page
         $browser->assertPathIs($this->url());
     }
 
-    /**
-     * @throws ElementClickInterceptedException
-     * @throws NoSuchElementException
-     */
     public function fillLoginFormAndSubmit(
         Browser $browser = null,
         string $email = null,
         string $password = null,
     ): Browser {
-        $browser->type('@email-field', $email)
-            ->type('@password-field', $password)
-            ->check('@remember-me-field')
-            ->click('@login-form-btn');
+        $browser->type('email', $email)
+            ->type('password', $password)
+            ->check('remember')
+            ->press('Login');
 
         return $browser;
-    }
-
-    /**
-     * @return array<string, string>
-     */
-    public function elements(): array
-    {
-        return [
-            '@email-field' => 'input[name="email"]',
-            '@password-field' => 'input[name="password"]',
-            '@remember-me-field' => 'input[name="remember"]',
-            '@login-form-btn' => 'button[type="submit"]',
-        ];
     }
 }
