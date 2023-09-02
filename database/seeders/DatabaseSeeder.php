@@ -79,7 +79,7 @@ class DatabaseSeeder extends Seeder
                         ->state(new Sequence(
                             fn (Sequence $sequence) => [
                                 'argument_id' => $argument->id,
-                                'user_id' => $users->random()->id
+                                'user_id' => $users->random()->id,
                             ]
                         ))
                         ->create();
