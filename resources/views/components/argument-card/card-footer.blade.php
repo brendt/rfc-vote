@@ -43,18 +43,11 @@
         <span class="hidden md:block">•</span>
 
         {{-- Label that shows when argument has been created --}}
-        <small title="{{ __('Argument creation date') }}">
-            <span class="md:hidden">{{ __('Created') }}</span>
-            {{ $argument->created_at->diffForHumans() }}
-        </small>
-
-        {{-- Label that shows if the argument haven't been seen --}}
-        @if (!$readonly && $user && !$user->hasSeenArgument($argument))
-            <span class="hidden md:block">•</span>
-            <small class="flex gap-1.5 items-center">
-                <x-icons.check-badge class="w-4 h-4" />
-                <span>{{ __('New') }}</span>
+        <time datetime="{{ $argument->created_at->format('c') }}" title="{{ $argument->created_at->format('c') }}">
+            <small>
+                <span class="md:hidden">{{ __('Created') }}</span>
+                {{ $argument->created_at->diffForHumans() }}
             </small>
-        @endif
+        </time>
     </div>
 </div>

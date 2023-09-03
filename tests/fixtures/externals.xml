@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<channel>
+    <item>
+        <title>[VOTE] RFC Shorter attribute syntax change</title>
+        <link>https://externals.io/message/120946</link>
+        <description>"https://wiki.php.net/rfc/shorter_attribute_syntax_change"</description>
+    </item>
+    <item>
+        <title>RFC Should not include this</title>
+        <link>https://externals.io/message/120946</link>
+        <description>"https://wiki.php.net/rfc/should_not_include_this_rfc"</description>
+    </item>
+    <item>
+        <title>[VOTE] RFC Without url</title>
+        <link>https://externals.io/message/120946</link>
+        <description>Description without url</description>
+    </item>
+</channel>

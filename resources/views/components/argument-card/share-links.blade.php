@@ -31,7 +31,7 @@
     />
 
     <x-argument-card.share-link
-        :href="'https://x.com/intent/tweet?text=PHP RFC Votes for ' . urlencode($argument->rfc->title) . '&url=' . urlencode(url()->current())"
+        :href="'https://x.com/intent/tweet?text=PHP RFC Votes for ' . urlencode($argument->rfc->title) . '&url=' . urlencode(url()->current().'#'.$anchorLink)"
         target="_blank"
         title="{{ __('Share on X') }}"
         icon="icons.x"
@@ -39,7 +39,7 @@
     />
 
     <x-argument-card.share-link
-        :href="'https://www.linkedin.com/sharing/share-offsite/?url=PHP RFC Votes for '  . url()->current()"
+        :href="'https://www.linkedin.com/sharing/share-offsite/?url='  . url()->current().'#'.$anchorLink"
         target="_blank"
         title="{{ __('Share on LinkedIn') }}"
         icon="icons.linkedin"

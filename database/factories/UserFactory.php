@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Actions\GenerateUsername;
+use App\Http\Livewire\SortField;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -39,6 +40,7 @@ class UserFactory extends Factory
             'profile_photo_path' => null,
             'current_team_id' => null,
             'reputation' => 1,
+            'preferred_sort_field' => SortField::VOTE_COUNT,
         ];
     }
 
