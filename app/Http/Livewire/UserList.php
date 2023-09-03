@@ -30,7 +30,7 @@ class UserList extends Component
         $this->resetPage();
     }
 
-    public function deleteUser($id): void
+    public function deleteUser(int $id): void
     {
         $user = User::findOrFail($id);
         $user->delete();
