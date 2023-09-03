@@ -125,6 +125,12 @@
             "name": "Vytautas",
             "url": "https://github.com/Plytas",
             "contributions": ["Backend"]
+        },
+        {
+            "id": 8448512,
+            "name": "MoeBrowne",
+            "url": "https://github.com/moebrowne",
+            "contributions": ["Backend"]
         }
     ]
 }

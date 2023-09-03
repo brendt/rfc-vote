@@ -3,7 +3,6 @@
 namespace Tests\Feature\Profile;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
 use Livewire\Livewire;
@@ -11,8 +10,6 @@ use Tests\TestCase;
 
 class ProfileInformationTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_current_profile_information_is_available(): void
     {
         $this->actingAs($user = User::factory()->create());

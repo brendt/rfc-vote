@@ -71,7 +71,11 @@
                                 <div class="flex items-center ml-2">
                                     @if ($token->last_used_at)
                                         <div class="text-sm text-gray-400">
-                                            {{ __('Last used') }} {{ $token->last_used_at->diffForHumans() }}
+                                            {{ __('Last used') }}
+
+                                            <time datetime="{{ $token->last_used_at->format('c') }}" title="{{ $token->last_used_at->format('c') }}">
+                                                {{ $token->last_used_at->diffForHumans() }}
+                                            </time>
                                         </div>
                                     @endif
 
