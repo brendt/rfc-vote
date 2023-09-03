@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\UserFlair;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
 class UserRequest extends FormRequest
@@ -21,7 +22,12 @@ class UserRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'username' => ['required', 'string'],
-            'email' => ['required', 'email', 'max:255'],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')
+                    ->ignore($this->route('user')),
+                'max:255'],
             'website_url' => ['nullable', 'url'],
             'github_url' => ['nullable', 'url'],
             'twitter_url' => ['nullable', 'url'],
