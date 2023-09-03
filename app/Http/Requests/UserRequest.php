@@ -8,18 +8,13 @@ use Illuminate\Validation\Rules\Enum;
 
 class UserRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, array<int,Enum|string>>
      */
     public function rules(): array
     {
@@ -27,9 +22,9 @@ class UserRequest extends FormRequest
             'name' => ['required', 'string'],
             'username' => ['required', 'string'],
             'email' => ['required', 'email', 'max:255'],
-            'website_url' => ['nullable'],
-            'github_url' => ['nullable'],
-            'twitter_url' => ['nullable'],
+            'website_url' => ['nullable', 'url'],
+            'github_url' => ['nullable', 'url'],
+            'twitter_url' => ['nullable', 'url'],
             'reputation' => ['required'],
             'flair' => ['nullable', new Enum(UserFlair::class)],
             'is_admin' => ['nullable', 'boolean'],
