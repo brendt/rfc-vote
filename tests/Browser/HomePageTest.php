@@ -7,9 +7,10 @@ use App\Models\ArgumentVote;
 use App\Models\Rfc;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Queue;
 use Laravel\Dusk\Browser;
-use Str;
+use Illuminate\Support\Str;
 use Tests\Browser\Pages\HomePage;
 use Tests\DuskTestCase;
 
@@ -151,8 +152,8 @@ class HomePageTest extends DuskTestCase
         Rfc::factory()->create(
             [
                 'title' => 'This is a test rfc that should be rendered 3',
-                'published_at' => Carbon::now()->subDays(1),
-                'created_at' => Carbon::now()->subDays(1),
+                'published_at' => Carbon::now()->subDays(),
+                'created_at' => Carbon::now()->subDays(),
                 'ends_at' => Carbon::now()->addDay(),
             ]
         );
