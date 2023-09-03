@@ -9,8 +9,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Queue;
-use Laravel\Dusk\Browser;
 use Illuminate\Support\Str;
+use Laravel\Dusk\Browser;
 use Tests\Browser\Pages\HomePage;
 use Tests\DuskTestCase;
 
