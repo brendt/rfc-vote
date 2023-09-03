@@ -50,7 +50,34 @@ REDIS_PORT=6379
 # And the following as well
 QUEUE_CONNECTION=redis
 ```
+# Laravel Dusk
 
+### Setting Laravel Dusk with Sail
+Please follow the official docs for [Laravel Dusk](https://laravel.com/docs/10.x/dusk) and also look at 
+the specific documentation on Sail page for [Laravel Dusk](https://laravel.com/docs/10.x/sail#laravel-dusk)
+
+1. **Environment Configuration**:
+
+    In your `.env` file, add the following line:
+
+    ```dotenv
+    # For Apple Silicton (m1, m2) replace the value with seleniarm/standalone-chromium, see https://laravel.com/docs/10.x/sail#laravel-dusk for more details
+    SELENIUM_IMAGE=selenium/standalone-chrome
+    ```
+   This enables the choice of selenium image as per your system's architecture. For more context on this, please refer to [this PR discussion](https://github.com/brendt/rfc-vote/pull/234#issuecomment-1700920222)
+
+2. **Database Configuration:**
+
+   To configure your testing environment, copy .env.dusk.local.example to .env.dusk.local and verify the database connection values. By default, Sail creates a specific testing database for testing. Therefore, in your .env.dusk.local, the `DB_DATABASE` environment variable should hold the value testing.
+3. **Running Tests:**
+
+   After properly setting up your environment, you can run your Laravel Dusk tests in the Sail environment using:
+
+    ```shell
+     ./vendor/bin/sail artisan dusk
+    ```
+   Remember to ensure your Sail environment is already running before initiating the tests.
+   The official [Laravel Dusk](https://laravel.com/docs/10.x/dusk) documentation and [Sail](https://laravel.com/docs/10.x/sail#introduction) page provide more information and details about further customization and advanced usage.
 ### Styling guides
 
 - For green and red colors for `yes` and `no` votes, use custom colors defined in `tailwind.config.js` file.
