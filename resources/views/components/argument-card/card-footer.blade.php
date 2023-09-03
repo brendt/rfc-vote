@@ -43,9 +43,11 @@
         <span class="hidden md:block">•</span>
 
         {{-- Label that shows when argument has been created --}}
-        <small title="{{ __('Argument creation date') }}">
-            <span class="md:hidden">{{ __('Created') }}</span>
-            {{ $argument->created_at->diffForHumans() }}
-        </small>
+        <time datetime="{{ $argument->created_at->format('c') }}" title="{{ $argument->created_at->format('c') }}">
+            <small>
+                <span class="md:hidden">{{ __('Created') }}</span>
+                {{ $argument->created_at->diffForHumans() }}
+            </small>
+        </time>
     </div>
 </div>

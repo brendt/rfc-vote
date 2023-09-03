@@ -24,7 +24,11 @@
             </h2>
 
             <p class="text-font-second">
-                {{ __('Member since') }} {{ $user->created_at->diffForHumans() }}
+                {{ __('Member since') }}
+
+                <time datetime="{{ $user->created_at->format('c') }}" title="{{ $user->created_at->format('c') }}">
+                    {{ $user->created_at->diffForHumans() }}
+                </time>
             </p>
 
             <x-profile.social :user="$user" />
