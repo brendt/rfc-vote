@@ -8,7 +8,8 @@ final readonly class NewCommentMessage
 {
     public function __construct(
         private ArgumentComment $comment,
-    ) {}
+    ) {
+    }
 
     public function __toString(): string
     {

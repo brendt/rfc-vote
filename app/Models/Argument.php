@@ -56,6 +56,6 @@ class Argument extends Model
 
     public function getAnchorId(): string
     {
-        return $this->user->username . '-' . $this->id;
+        return $this->user->username.'-'.$this->id;
     }
 }
