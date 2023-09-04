@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 final readonly class UserEditController
 {
@@ -13,7 +13,7 @@ final readonly class UserEditController
     {
         return view('user-form', [
             'user' => $user,
-            'action' => action([self::class, 'update'], ['user' => $user, 'back' => request()->get('back')]),
+            'action' => action([self::class, 'update'], ['user' => $user]),
         ]);
     }
 
@@ -23,10 +23,7 @@ final readonly class UserEditController
         $data['is_admin'] = isset($data['is_admin']);
         $user->update($data);
 
-        if ($back = $request->get('back')) {
-            return redirect()->to($back);
-        }
-
-        return redirect()->action([self::class, 'edit'], $user)->with('message', 'User details updated successfully.');
+        return redirect()->action([self::class, 'edit'], $user)
+            ->with('message', 'User details updated successfully.');
     }
 }

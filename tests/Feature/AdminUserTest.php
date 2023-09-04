@@ -57,12 +57,19 @@ class AdminUserTest extends TestCase
             'twitter_url' => $this->faker->url,
             'reputation' => $this->faker->numberBetween(999, 3000),
             'flair' => $flair,
-            'is_admin' => (int) $this->faker->boolean,
         ];
+        $isAdmin = (int) $this->faker->boolean;
+        if ($isAdmin) {
+            $payload['is_admin'] = $isAdmin;
+        }
+
         $this->post(action([UserEditController::class, 'update'], $user), $payload)
             ->assertRedirect(action([UserEditController::class, 'update'], $user));
 
         $this->assertDatabaseCount('users', 2);
+        if (! $isAdmin) {
+            $payload['is_admin'] = 0;
+        }
         $this->assertDatabaseHas('users', $payload);
     }
 
