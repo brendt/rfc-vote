@@ -58,6 +58,6 @@ class AppServiceProvider extends ServiceProvider
         View::composer('layouts.base', AdminViewComposer::class);
         View::composer('layouts.admin', AdminViewComposer::class);
 
-        //        Model::preventLazyLoading(! app()->isProduction());
+//                Model::preventLazyLoading(! app()->isProduction());
     }
 }
