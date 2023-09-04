@@ -17,7 +17,7 @@ class VerificationRequestFactory extends Factory
         return [
             'motivation' => $this->faker->word(),
             'status' => VerificationRequestStatus::PENDING,
-            'user_id' => fn() => User::factory()->create(),
+            'user_id' => fn () => User::factory()->create(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

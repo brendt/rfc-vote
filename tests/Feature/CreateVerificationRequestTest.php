@@ -41,16 +41,14 @@ class CreateVerificationRequestTest extends TestCase
         ]);
     }
 
-
     public function test_verification_requests_page_can_be_rendered()
     {
         $this->login(isAdmin: true);
 
         $this->get(action(VerificationRequestsAdminController::class))
             ->assertSeeLivewire('verification-requests-list')
-            ->assertViewIs("verification-request-admin");
+            ->assertViewIs('verification-request-admin');
     }
-
 
     public function test_verification_list_component()
     {
@@ -65,8 +63,7 @@ class CreateVerificationRequestTest extends TestCase
             ->assertOk();
     }
 
-
-    function test_admin_can_accept_verification_request()
+    public function test_admin_can_accept_verification_request()
     {
         $this->login(isAdmin: true);
         $pendingRequest = VerificationRequest::factory()->create();
@@ -82,14 +79,13 @@ class CreateVerificationRequestTest extends TestCase
             ->assertNotSet('flair', null)
             ->assertOk();
 
-
         $this->assertDatabaseHas('verification_requests', [
             'id' => $pendingRequest->id,
-            'status' => VerificationRequestStatus::ACCEPTED
+            'status' => VerificationRequestStatus::ACCEPTED,
         ]);
     }
 
-    function test_admin_can_deny_verification_request()
+    public function test_admin_can_deny_verification_request()
     {
         $this->login(isAdmin: true);
         $pendingRequest = VerificationRequest::factory()->create();
@@ -103,10 +99,9 @@ class CreateVerificationRequestTest extends TestCase
             ->call('deny', $pendingRequest)
             ->assertOk();
 
-
         $this->assertDatabaseHas('verification_requests', [
             'id' => $pendingRequest->id,
-            'status' => VerificationRequestStatus::DENIED
+            'status' => VerificationRequestStatus::DENIED,
         ]);
     }
 }

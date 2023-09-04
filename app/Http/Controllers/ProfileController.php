@@ -131,7 +131,8 @@ final readonly class ProfileController
         return redirect()->action([self::class, 'edit']);
     }
 
-    public function requestVerification(CreateVerificationRequest $createVerificationRequest, Request $request): RedirectResponse {
+    public function requestVerification(CreateVerificationRequest $createVerificationRequest, Request $request): RedirectResponse
+    {
 
         $validated = $request->validate([
             'motivation' => ['required', 'string'],
