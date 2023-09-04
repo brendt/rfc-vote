@@ -10,7 +10,7 @@
 <div class="{{ $flexDirection }} bg-rfc-card transition-all opacity-90 rounded-lg border border-divider flex justify-between gap-2 p-3 md:p-7">
     {{ $slot }}
 
-    <div class="flex align-items justify-between mt-2">
+    <div class="flex items-center justify-between mt-2">
         <small>
             @isset($userVote)
                 <x-tag @class([
