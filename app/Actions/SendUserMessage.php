@@ -8,7 +8,7 @@ use Stringable;
 
 final readonly class SendUserMessage
 {
-    public function __invoke(User $to, User $sender, string $url, Stringable $body): void
+    public function __invoke(User $to, User $sender, string $url, string|Stringable $body): void
     {
         if ($sender->is($to)) {
             return;

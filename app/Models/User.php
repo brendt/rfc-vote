@@ -100,6 +100,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Argument::class);
     }
 
+    /**
+     * @return HasMany<\App\Models\ArgumentComment>
+     */
     public function argumentComments(): HasMany
     {
         return $this->hasMany(ArgumentComment::class);

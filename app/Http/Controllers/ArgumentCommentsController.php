@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Argument;
+use Illuminate\Contracts\View\View;
 
 final readonly class ArgumentCommentsController
 {
-    public function __invoke(Argument $argument)
+    public function __invoke(Argument $argument): View
     {
         $user = auth()->user();
 
         $argument->load([
-            'comments.user'
+            'comments.user',
         ]);
 
-        $user->load([
-            'argumentVotes.argument'
+        $user?->load([
+            'argumentVotes.argument',
         ]);
 
         return view('argument-comments', [
