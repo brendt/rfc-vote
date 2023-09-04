@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Http\Controllers\RfcDetailController;
+use App\Messages\NewCommentMessage;
 use App\Models\Argument;
 use App\Models\ArgumentComment;
 use App\Models\User;
@@ -14,7 +15,7 @@ final readonly class CreateArgumentComment
         User $user,
         string $body,
     ): void {
-        ArgumentComment::create([
+        $newComment = ArgumentComment::create([
             'user_id' => $user->id,
             'argument_id' => $argument->id,
             'body' => $body,
@@ -30,8 +31,8 @@ final readonly class CreateArgumentComment
             (new SendUserMessage)(
                 to: $userToNotify,
                 sender: $user,
-                url: action(RfcDetailController::class, ['rfc' => $argument->rfc_id, 'argument' => $argument->id]),
-                body: 'wrote a new comment',
+                url: action(RfcDetailController::class, ['rfc' => $argument->rfc->slug]) . "#{$argument->getAnchorId()}",
+                body: (new NewCommentMessage($newComment)),
             );
         }
     }

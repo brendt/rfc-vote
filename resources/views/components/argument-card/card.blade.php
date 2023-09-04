@@ -5,7 +5,7 @@
      */
 
     $readonly ??= false;
-    $anchorLink = $argument->user->username . '-' . $argument->id;
+    $anchorLink = $argument->getAnchorId();
 @endphp
 
 <div id="{{ $anchorLink }}"

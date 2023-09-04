@@ -4,10 +4,11 @@ namespace App\Actions;
 
 use App\Models\Message;
 use App\Models\User;
+use Stringable;
 
 final readonly class SendUserMessage
 {
-    public function __invoke(User $to, User $sender, string $url, string $body): void
+    public function __invoke(User $to, User $sender, string $url, Stringable $body): void
     {
         if ($sender->is($to)) {
             return;
