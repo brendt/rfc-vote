@@ -11,11 +11,11 @@ final readonly class ArgumentCommentsController
         $user = auth()->user();
 
         $argument->load([
-            'comments.user'
+            'comments.user',
         ]);
 
         $user->load([
-            'argumentVotes.argument'
+            'argumentVotes.argument',
         ]);
 
         return view('argument-comments', [
