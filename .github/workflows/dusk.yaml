@@ -14,6 +14,7 @@ jobs:
       matrix:
         os: [ ubuntu-latest ]
         php: [ 8.2 ]
+        node: [ 18 ]
         laravel: [ 10.* ]
         stability: [ prefer-stable ]
         include:
@@ -27,6 +28,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -56,7 +62,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer install
-          npm install
+          npm ci
       - name: List Installed Dependencies
         run: composer show -D
 
