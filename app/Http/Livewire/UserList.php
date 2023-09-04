@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
-use Illuminate\View\View;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
