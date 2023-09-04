@@ -31,7 +31,7 @@ final readonly class CreateArgumentComment
             (new SendUserMessage)(
                 to: $userToNotify,
                 sender: $user,
-                url: action(RfcDetailController::class, ['rfc' => $argument->rfc->slug]) . "#{$argument->getAnchorId()}",
+                url: action(RfcDetailController::class, ['rfc' => $argument->rfc->slug])."#{$argument->getAnchorId()}",
                 body: (new NewCommentMessage($newComment)),
             );
         }

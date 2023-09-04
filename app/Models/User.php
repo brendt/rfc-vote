@@ -266,6 +266,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasCommentedOn(Argument $argument): bool
     {
         return $this->argumentComments
-            ->contains(fn(ArgumentComment $comment) => $comment->argument_id === $argument->id);
+            ->contains(fn (ArgumentComment $comment) => $comment->argument_id === $argument->id);
     }
 }
