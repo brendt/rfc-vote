@@ -1,4 +1,3 @@
-
 @push('styles')
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     <link rel="stylesheet"
@@ -22,10 +21,17 @@
             :readonly="true"
         />
 
-        <div class="space-y-4 mt-4">
-            @foreach($argument->comments as $comment)
-                <x-argument-card.comment :comment="$comment" />
-            @endforeach
+        <div class="max-w-[900px]">
+            <x-argument-card.comment-form
+                :user="$user"
+                :argument="$argument"
+            />
+
+            <div class="space-y-4 mt-6">
+                @foreach($argument->comments as $comment)
+                    <x-argument-card.comment :comment="$comment" />
+                @endforeach
+            </div>
         </div>
     </div>
 @endcomponent

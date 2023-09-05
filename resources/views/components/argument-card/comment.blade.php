@@ -1,5 +1,5 @@
-<div class="flex gap-4 bg-input px-5 py-5 pb-3 border border-divider rounded-xl">
-    <div class="w-20">
+<div class="grid grid-cols-[50px_auto] gap-4 bg-input px-5 py-5 pb-3 border border-divider rounded-xl">
+    <div>
         <img
             src="{{ $comment->user->getAvatarUrl() }}"
             width="80"
