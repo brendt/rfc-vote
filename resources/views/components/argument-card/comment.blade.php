@@ -1,10 +1,3 @@
-@php
-    /**
-     * @var App\Models\ArgumentComment $comment
-     */
-
-@endphp
-
 <div class="flex gap-4 bg-input px-5 py-5 pb-3 border border-divider rounded-xl">
     <div class="w-20">
         <img
