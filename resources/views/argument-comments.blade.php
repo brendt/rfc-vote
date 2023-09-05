@@ -22,8 +22,10 @@
             :readonly="true"
         />
 
-        @foreach($argument->comments as $comment)
-            <x-argument-card.comment :comment="$comment" />
-        @endforeach
+        <div class="space-y-4 mt-4">
+            @foreach($argument->comments as $comment)
+                <x-argument-card.comment :comment="$comment" />
+            @endforeach
+        </div>
     </div>
 @endcomponent
