@@ -23,15 +23,7 @@
         />
 
         @foreach($argument->comments as $comment)
-            <div>
-                <span class="font-bold">{{ $comment->user->name }}</span>
-
-                <div class="whitespace-pre-line">{{ $comment->body }}</div>
-
-                <div>
-                    {{ $comment->created_at->format('Y-m-d H:i') }}
-                </div>
-            </div>
+            <x-argument-card.comment :comment="$comment" />
         @endforeach
     </div>
 @endcomponent
