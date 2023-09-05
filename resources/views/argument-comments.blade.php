@@ -21,13 +21,13 @@
             :readonly="true"
         />
 
-        <div class="max-w-[900px]">
+        <div class="max-w-[900px] mt-6 md:mt-9 mx-auto">
             <x-argument-card.comment-form
                 :user="$user"
                 :argument="$argument"
             />
 
-            <div class="space-y-4 mt-6">
+            <div class="space-y-4 mt-6 md:mt-8">
                 @foreach($argument->comments as $comment)
                     <x-argument-card.comment :comment="$comment" />
                 @endforeach
