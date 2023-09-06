@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"
+<html :data-theme="darkMode ? 'dark' : 'light'" lang="en"
       class="scroll-smooth"
       x-cloak
       x-data="{
