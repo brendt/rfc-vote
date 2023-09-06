@@ -15,7 +15,7 @@ pre.shiki {
 }
 
 pre.shiki code {
-    @apply max-w-[200px] lg:max-w-full;
+    @apply max-w-[200px] lg:max-w-full !bg-inherit;
     overflow: initial !important;
 }
 
