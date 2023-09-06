@@ -13,7 +13,7 @@
     'pageTitle' => $rfc->title . ' - ' . __('RFC Vote'),
     'showToTopArrow' => true,
 ])
-    <div class="container mx-auto px-4 mt-5 max-w-[1200px] mb-8">
+    <div class="container mx-auto p-3 md:p-8">
         <x-argument-card.card
             :user="$user"
             :rfc="$rfc"
