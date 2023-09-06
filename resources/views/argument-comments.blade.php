@@ -1,4 +1,3 @@
-
 @push('styles')
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
     <link rel="stylesheet"
@@ -14,7 +13,7 @@
     'pageTitle' => $rfc->title . ' - ' . __('RFC Vote'),
     'showToTopArrow' => true,
 ])
-    <div class="container mx-auto px-4 mt-5 max-w-[1200px] mb-8">
+    <div class="container mx-auto p-3 md:p-8">
         <x-argument-card.card
             :user="$user"
             :rfc="$rfc"
@@ -22,16 +21,17 @@
             :readonly="true"
         />
 
-        @foreach($argument->comments as $comment)
-            <div>
-                <span class="font-bold">{{ $comment->user->name }}</span>
+        <div class="max-w-[900px] mt-6 md:mt-9 mx-auto">
+            <x-argument-card.comment-form
+                :user="$user"
+                :argument="$argument"
+            />
 
-                <div class="whitespace-pre-line">{{ $comment->body }}</div>
-
-                <div>
-                    {{ $comment->created_at->format('Y-m-d H:i') }}
-                </div>
+            <div class="space-y-4 mt-6 md:mt-8">
+                @foreach($argument->comments as $comment)
+                    <x-argument-card.comment :comment="$comment" />
+                @endforeach
             </div>
-        @endforeach
+        </div>
     </div>
 @endcomponent
