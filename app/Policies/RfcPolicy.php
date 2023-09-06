@@ -11,6 +11,6 @@ class RfcPolicy
     {
         $maxAmount = $user->getVotesPerRfc();
 
-        return $user->getArgumentVotesForRfc($rfc)->count() < $maxAmount;
+        return $maxAmount > $user->getArgumentVotesForRfc($rfc)->count();
     }
 }

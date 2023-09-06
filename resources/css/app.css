@@ -19,5 +19,13 @@ pre.shiki code {
 }
 
 .markdown-text {
-    @apply prose-a:text-font-second prose-code:text-font-second prose-blockquote:text-font-second
+    @apply prose-a:text-font-second
+    prose-code:text-font-second
+    prose-blockquote:text-font-second
+    prose-h1:text-font-second
+    prose-h2:text-font-second
+    prose-h3:text-font-second
+    prose-h4:text-font-second
+    prose-h5:text-font-second
+    prose-h6:text-font-second
 }
