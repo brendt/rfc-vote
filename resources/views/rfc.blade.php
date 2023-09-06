@@ -88,7 +88,7 @@
             </h2>
             <div class="flex flex-col justify-center lg:flex-row mt-4 space-x-0 space-y-4 lg:space-x-4 lg:space-y-0">
                 @foreach($additionalRfcs as $additionalRfc)
-                    <x-card-link :href="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)" class="flex-1">
+                    <x-card-link :to="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)" class="flex-1">
                         <div class="text-xl text-font font-bold px-2 border-b pb-4 mb-2">
                             {{ $additionalRfc->title }}
                         </div>

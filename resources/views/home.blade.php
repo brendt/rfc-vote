@@ -8,9 +8,12 @@
             {{ __('Open RFCs') }}
         </x-home.title>
 
-        <div class="grid lg:grid-cols-3 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             @foreach ($rfcs as $rfc)
-                <x-card-link :href="action(App\Http\Controllers\RfcDetailController::class, $rfc)">
+                <x-card-link
+                    :to="action(App\Http\Controllers\RfcDetailController::class, $rfc)"
+                    :user-vote="$user ? $rfc->userArgument($user)?->vote_type : null"
+                >
                     <div class="text-xl font-bold px-2 border-divider border-b pb-4 mb-2 text-font">
                         {{ $rfc->title }}
                     </div>
@@ -49,20 +52,6 @@
 
                         <livewire:rfc-counter :rfc="$rfc" :vote-type="App\Models\VoteType::YES" />
                         <livewire:rfc-counter :rfc="$rfc" :vote-type="App\Models\VoteType::NO" />
-
-                        @if(isset($user) && $rfc->hasRfcVotedByUser($user))
-                            @php
-                                $argumentType = $rfc->userArgument($user)?->vote_type
-                            @endphp
-
-                            <x-tag @class([
-                                'bg-none pl-1 pr-0',
-                                'text-agree' => $argumentType?->isYes(),
-                                'text-disagree' => $argumentType?->isNo(),
-                            ])>
-                                {{ __('You voted') }} {{ $argumentType->value }}
-                            </x-tag>
-                        @endif
                     </div>
                 </x-card-link>
             @endforeach
