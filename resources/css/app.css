@@ -11,11 +11,12 @@
 }
 
 pre.shiki {
-    @apply !bg-code-background w-full overflow-x-auto rounded-xl text-sm md:text-base;
+    @apply border border-divider !bg-code-background w-full overflow-x-auto rounded-lg md:rounded-xl text-sm md:text-base p-0;
 }
 
 pre.shiki code {
-    @apply max-w-[200px] block;
+    @apply max-w-[200px] lg:max-w-full;
+    overflow: initial !important;
 }
 
 .markdown-text {
