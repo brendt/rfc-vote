@@ -1,11 +1,4 @@
 <div class="p-5">
-
-    @if(session()->has('message'))
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4">
-            <p>{{ session('message') }}</p>
-        </div>
-    @endif
-
     <div class="flex justify-end items-center mb-4">
         <div class="flex space-x-2">
             <x-input

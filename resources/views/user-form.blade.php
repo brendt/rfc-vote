@@ -1,11 +1,5 @@
-@component('layouts.admin')
+@component('layouts.base')
     <div class="mx-auto container max-w-[800px] px-4 gap-6 md:gap-12 mt-4 md:mt-12 mb-8 text-font">
-        @if(session()->has('message'))
-            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4">
-                <p>{{ session('message') }}</p>
-            </div>
-        @endif
-
         <x-form class="grid grid-cols-2 gap-2 bg-form p-4 border-gray-300 dark:border-gray-700 border shadow-md rounded-lg"
                 action="{{ $action }}"
                 method="post"

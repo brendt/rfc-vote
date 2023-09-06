@@ -35,6 +35,5 @@ class UserList extends Component
         $user = User::findOrFail($id);
         $user->delete();
         $this->isDeletingId = null;
-        session()->flash('message', 'Success.');
     }
 }

@@ -22,8 +22,7 @@ final readonly class UserEditController
         $data = $request->validated();
         $data['is_admin'] = isset($data['is_admin']);
         $user->update($data);
-
-        return redirect()->action([self::class, 'edit'], $user)
-            ->with('message', 'User details updated successfully.');
+        flash('Success');
+        return redirect()->action([self::class, 'edit'], $user);
     }
 }
