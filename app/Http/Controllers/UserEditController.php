@@ -23,6 +23,7 @@ final readonly class UserEditController
         $data['is_admin'] = isset($data['is_admin']);
         $user->update($data);
         flash('Success');
+
         return redirect()->action([self::class, 'edit'], $user);
     }
 }
