@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use ArgumentCountError;
 use PHPUnit\Framework\TestCase;
 
 class DuskHelperTest extends TestCase
