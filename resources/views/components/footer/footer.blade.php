@@ -1,4 +1,7 @@
-<div class="py-16 text-white bg-main-dark bg-gradient-to-r from-main to-main-dark">
+<div class="pt-14 pb-9 text-white bg-main-dark bg-gradient-to-r from-main to-main-dark relative">
+    {{-- Decoration that creates a nice effect on top of the footer --}}
+    <div class="absolute bg-main-light dark:bg-gray-800 h-4 inset-x-0 -top-1 rounded-b-[50%]"></div>
+
     <div class="flex justify-center gap-8">
         <x-footer.link href="/feed" icon="icons.rss">
             RSS Feed
