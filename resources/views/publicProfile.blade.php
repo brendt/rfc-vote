@@ -10,9 +10,6 @@
 
             @foreach ($user->argumentVotes->pluck('argument')->sortByDesc('created_at') as $argument)
                 <div class="grid gap-2">
-{{--                    <a class="px-2 underline hover:no-underline text-lg font-bold" href="{{ action(\App\Http\Controllers\RfcDetailController::class, $argument->rfc) }}">--}}
-{{--                        {{ $argument->rfc->title }}--}}
-{{--                    </a>--}}
                     <x-argument-card.card
                         :user="$user"
                         :rfc="$argument->rfc"
