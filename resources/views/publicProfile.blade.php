@@ -8,7 +8,7 @@
                 Arguments and votes
             </h2>
 
-            @foreach ($user->argumentVotes->pluck('argument')->sortByDesc('created_at') as $argument)
+            @forelse ($user->argumentVotes->pluck('argument')->sortByDesc('created_at') as $argument)
                 <div class="grid gap-2">
                     <x-argument-card.card
                         :user="$user"
@@ -17,7 +17,11 @@
                         :readonly="true"
                     />
                 </div>
-            @endforeach
+            @empty
+                <h2 class="text-xl text-font opacity-70">
+                    {{ $user->name }} doesn't have any arguments yet
+                </h2>
+            @endforelse
         </div>
     </div>
 
