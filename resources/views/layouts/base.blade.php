@@ -165,7 +165,7 @@
     </div>
 @endif
 
-<x-footer />
+<x-footer.footer />
 
 @livewireScripts
 </body>
