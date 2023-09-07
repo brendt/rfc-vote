@@ -32,6 +32,17 @@ export default {
 
     theme: {
         extend: {
+            typography: {
+                DEFAULT: {
+                    css: {
+                        '--tw-prose-bold': 'var(--color-font-second)',
+                        '--tw-prose-links': 'var(--color-font-second)',
+                        '--tw-prose-code': 'var(--color-font-second)',
+                        '--tw-prose-quotes': 'var(--color-font-second)',
+                        '--tw-prose-headings': 'var(--color-font-second)',
+                    },
+                },
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
@@ -79,6 +90,7 @@ export default {
                 'form': 'var(--color-form)',
                 'input': 'var(--color-input)',
             },
+
         },
     },
 
