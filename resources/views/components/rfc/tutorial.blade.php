@@ -1,5 +1,5 @@
 <x-markdown class="prose text-lg max-w-full text-font markdown-text">
-    ## <span class="text-font-second">How voting works</span>
+## How voting works
 
 The goal of this website is to provide a platform for the PHP community to
 express their thoughts and feelings about the proposals for the PHP language in an easy way.
@@ -12,5 +12,5 @@ While voting is an essential part of expressing how you feel about a potential n
 Every user has three votes they can distribute amongst existing arguments. On top of that, they can write one argument of their own.
 All arguments and their votes are counted towards the final result.
 
-You can read more about our goals in the <a href="/about" class="text-font-second">about page</a>.
+You can read more about our goals in the [about page](/about).
 </x-markdown>

@@ -21,6 +21,7 @@
     --color-font: #1f2937;
     --color-font-second: #374151;
     --color-vote-bar-background: #edf2f7;
+    --color-code-background: #F8FAFC;
 
     /*yes arrow*/
     --color-agree-arrow: #0f766e;
@@ -51,6 +52,7 @@
     --color-vote-bar-background: #36454F;
     --color-divider: #40525d;
     --color-info: #2d3c46;
+    --color-code-background: #0D1117;
 
     /*yes arrow*/
     --color-agree-arrow: #80C251;
