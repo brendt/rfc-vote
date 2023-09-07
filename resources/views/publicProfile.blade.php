@@ -5,7 +5,7 @@
 
         <div class="grid gap-4 mt-6">
             <h2 class="text-3xl font-bold text-font">
-                {{ __('Arguments and votes') }}
+                Arguments and votes
             </h2>
 
             @foreach ($user->argumentVotes->pluck('argument')->sortByDesc('created_at') as $argument)
