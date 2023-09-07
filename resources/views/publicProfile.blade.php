@@ -1,3 +1,9 @@
+@php
+    /**
+     * @var App\Models\User $user
+     */
+@endphp
+
 @component('layouts.base')
 
     <div class="container mx-auto px-4 mt-8 md:mt-12 max-w-[1200px] mb-8">
