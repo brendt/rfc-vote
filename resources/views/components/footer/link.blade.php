@@ -7,7 +7,7 @@
 @endphp
 
 <a {{ $attributes->merge([
-    'class' => 'group flex flex-col justify-center items-center gap-3',
+    'class' => 'group flex md:flex-col justify-center items-center gap-3',
     'target' => '_blank'
 ]) }}>
     <x-dynamic-component :component="$icon" class="w-10 h-10 fill-white dark:opacity-80 transition-all group-hover:scale-110 group-hover:opacity-100" />

@@ -1,8 +1,8 @@
-<div class="pt-14 pb-9 text-white bg-main-dark bg-gradient-to-r from-main to-main-dark relative">
+<div class="px-8 pt-14 pb-9 text-white bg-main-dark bg-gradient-to-r from-main to-main-dark relative">
     {{-- Decoration that creates a nice effect on top of the footer --}}
     <div class="absolute bg-main-light dark:bg-gray-800 h-4 inset-x-0 -top-1 rounded-b-[50%]"></div>
 
-    <div class="flex justify-center gap-8">
+    <div class="flex flex-col md:flex-row justify-center gap-6 md:gap-8">
         <x-footer.link href="/feed" icon="icons.rss">
             RSS Feed
         </x-footer.link>
@@ -20,7 +20,7 @@
         </x-footer.link>
     </div>
 
-    <div class="text-center opacity-70 mt-5">
+    <div class="text-center opacity-70 mt-7">
         <small>
             &copy; {{ date('Y') }} {{ config('app.name') }}. This project is open source.
             <a href="https://github.com/brendt/rfc-vote" class="underline" target="_blank">Contribute</a>
