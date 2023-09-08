@@ -1,4 +1,4 @@
-<div class="px-8 pt-14 pb-9 text-white bg-main-dark bg-gradient-to-r from-main to-main-dark relative">
+<div {{dusk('footer')}} class="px-8 pt-14 pb-9 text-white bg-main-dark bg-gradient-to-r from-main to-main-dark relative">
     {{-- Decoration that creates a nice effect on top of the footer --}}
     <div class="absolute bg-main-light dark:bg-gray-800 h-4 inset-x-0 -top-1 rounded-b-[50%]"></div>
 

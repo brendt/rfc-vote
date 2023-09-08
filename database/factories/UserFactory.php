@@ -40,6 +40,7 @@ class UserFactory extends Factory
             'profile_photo_path' => null,
             'current_team_id' => null,
             'reputation' => 1,
+            'email_optin' => 0,
             'preferred_sort_field' => SortField::VOTE_COUNT,
         ];
     }
@@ -52,6 +53,15 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'email_verified_at' => null,
+            ];
+        });
+    }
+
+    public function withEmailOptin(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'email_optin' => 1,
             ];
         });
     }
