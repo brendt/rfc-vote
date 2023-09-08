@@ -69,7 +69,7 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new LoginPage)
-                ->assertPresent('@login-with-github-btn');
+                ->assertSee('Log in with GitHub');
         });
     }
 }

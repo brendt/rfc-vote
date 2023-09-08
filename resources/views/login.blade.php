@@ -30,7 +30,7 @@
 
             <div class="mt-6 justify-between flex items-baseline flex-wrap">
                 <a
-                    dusk="reset-password-link"
+                    {{dusk('reset-password-link')}}
                     href="{{ action(App\Http\Controllers\ForgotPasswordController::class) }}"
                    class="text-purple-900 hover:underline"
                 >
@@ -54,7 +54,7 @@
 
         <div class="flex items-center gap-3 mt-8 justify-center">
             <a
-                dusk="register-link"
+                {{dusk('register-link')}}
                 href="{{ action(App\Http\Controllers\RegisterController::class) }}"
                 class="underline hover:no-underline"
             >
@@ -64,7 +64,6 @@
             <span>or</span>
 
             <x-buttons.main
-                dusk="login-with-github-btn"
                 href="{{ action(App\Http\Controllers\SocialiteRedirectController::class, 'github') }}"
                 class="!bg-gray-800 hover:!bg-gray-700"
             >

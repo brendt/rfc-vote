@@ -88,8 +88,8 @@ class HomePageTest extends DuskTestCase
         );
         $this->browse(function (Browser $browser) {
             $browser->visit(new HomePage)
-                ->assertPresent('@open-rfcs-title')
-                ->assertNotPresent('@open-rfcs-items');
+                ->assertPresent('@title')
+                ->assertNotPresent('@card-links');
         });
     }
 
@@ -112,10 +112,10 @@ class HomePageTest extends DuskTestCase
         );
         $this->browse(function (Browser $browser) {
             $browser->visit(new HomePage)
-                ->assertPresent('@open-rfcs-title')
-                ->assertPresent('@open-rfcs-items')
-                ->assertSeeIn('@open-rfcs-items', 'This is a test rfc that should be rendered')
-                ->assertDontSeeIn('@open-rfcs-items', 'This is a test rfc that should not be rendered');
+                ->assertPresent('@title')
+                ->assertPresent('@card-link')
+                ->assertSeeIn('@card-link', 'This is a test rfc that should be rendered')
+                ->assertDontSeeIn('@card-link', 'This is a test rfc that should not be rendered');
         });
     }
 
@@ -159,10 +159,10 @@ class HomePageTest extends DuskTestCase
         );
         $this->browse(function (Browser $browser) {
             $browser->visit(new HomePage)
-                ->assertSeeIn('@open-rfcs-items:nth-child(1)', 'This is a test rfc that should be rendered 3')
-                ->assertSeeIn('@open-rfcs-items:nth-child(2)', 'This is a test rfc that should be rendered 2')
-                ->assertSeeIn('@open-rfcs-items:nth-child(3)', 'This is a test rfc that should be rendered 1')
-                ->assertDontSeeIn('@open-rfcs-items', 'This is a test rfc that should not be rendered');
+                ->assertSee('This is a test rfc that should be rendered 3')
+                ->assertSee('This is a test rfc that should be rendered 2')
+                ->assertSee('This is a test rfc that should be rendered 1')
+                ->assertDontSee('This is a test rfc that should not be rendered');
         });
     }
 
@@ -180,7 +180,7 @@ class HomePageTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($rfcTitle) {
             $browser->visit(new HomePage)
-                ->click('@open-rfcs-items:nth-child(1)')
+                ->click('@card-link-more')
                 ->assertUrlIs(route('rfc-detail', ['rfc' => Str::slug($rfcTitle)]));
         });
     }
@@ -189,8 +189,8 @@ class HomePageTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new HomePage)
-                ->assertNotPresent('@argument-of-the-day-title')
-                ->assertNotPresent('@argument-of-the-day');
+                ->assertDontSee('Argument of the Day')
+                ->assertNotPresent('@argument-card');
         });
     }
 
@@ -211,9 +211,8 @@ class HomePageTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) {
             $browser->visit(new HomePage)
-                ->screenshot('test')
-                ->assertPresent('@argument-of-the-day-title')
-                ->assertPresent('@argument-of-the-day');
+                ->assertSee('Argument of the Day')
+                ->assertPresent('@argument-card');
         });
     }
 }

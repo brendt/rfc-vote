@@ -33,11 +33,4 @@ class RegisterPage extends Page
 
         return $browser;
     }
-
-    public function elements(): array
-    {
-        return [
-            '@element' => '#selector',
-        ];
-    }
 }

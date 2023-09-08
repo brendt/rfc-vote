@@ -31,10 +31,6 @@ class HomePage extends Page
     {
         return [
             '@disclaimer' => 'div[role="alert"]',
-            '@open-rfcs-title' => '#open-rfcs-title',
-            '@open-rfcs-items' => '#open-rfcs-title + div a',
-            '@argument-of-the-day-title' => '#argument-of-the-day-title',
-            '@argument-of-the-day' => '#argument-of-the-day-title + div',
         ];
     }
 }

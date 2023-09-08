@@ -4,7 +4,7 @@
             <x-email-optin-banner :user="auth()->user()"/>
         </div>
 
-        <x-home.title id="open-rfcs-title">
+        <x-home.title>
             {{ __('Open RFCs') }}
         </x-home.title>
 
@@ -58,7 +58,7 @@
         </div>
 
         @if($argumentOfTheDay)
-            <x-home.title id="argument-of-the-day-title">
+            <x-home.title>
                 {{ __('Argument of the Day') }}
             </x-home.title>
 
