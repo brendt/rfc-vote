@@ -5,6 +5,7 @@
 @endphp
 
 <div
+    {{dusk('user-menu-menu')}}
     x-data="{ open: false }"
     class="relative mt-9 md:mt-0 w-full md:w-auto"
 >

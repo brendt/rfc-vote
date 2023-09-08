@@ -5,6 +5,7 @@
 @endphp
 
 <div
+    {{dusk('user-menu-dropdown')}}
     x-show="open"
     x-cloak
     class="absolute dark:bg-main text-font dark:divide-main-light bg-white shadow-md rounded-md top-full mt-3 left-1/2 -translate-x-1/2 w-[200px] divide-y overflow-hidden z-10"
