@@ -9,8 +9,10 @@ class HelperServiceProvider extends ServiceProvider
     public function register(): void
     {
         $helperFiles = glob(app_path('Helpers').'/*.php');
-        foreach ($helperFiles as $helperFile) {
-            require_once $helperFile;
+        if (is_array($helperFiles)) {
+            foreach ($helperFiles as $helperFile) {
+                require_once $helperFile;
+            }
         }
     }
 }
