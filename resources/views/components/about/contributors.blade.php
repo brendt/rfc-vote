@@ -6,7 +6,7 @@
 @endphp
 
 <x-about.section heading="Our contributors">
-    <div {{dusk('contributors')}} class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-2">
+    <div {{dusk('about-contributors')}} class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pt-2">
         @foreach($contributors as $c)
             <a href="{{ $c->url }}" target="_blank" @class([
                 'flex gap-2 items-center transition-all duration-300 bg-background w-full',
