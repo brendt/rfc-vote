@@ -1,3 +1,9 @@
+@php
+    /**
+     * @var App\Models\User $user
+     */
+@endphp
+
 @component('layouts.base')
 
     <div class="container mx-auto px-4 mt-8 md:mt-12 max-w-[1200px] mb-8">
@@ -5,14 +11,11 @@
 
         <div class="grid gap-4 mt-6">
             <h2 class="text-3xl font-bold text-font">
-                {{ __('Arguments and votes') }}
+                Arguments and votes
             </h2>
 
-            @foreach ($user->argumentVotes->pluck('argument')->sortByDesc('created_at') as $argument)
+            @forelse ($user->argumentVotes->pluck('argument')->sortByDesc('created_at') as $argument)
                 <div class="grid gap-2">
-{{--                    <a class="px-2 underline hover:no-underline text-lg font-bold" href="{{ action(\App\Http\Controllers\RfcDetailController::class, $argument->rfc) }}">--}}
-{{--                        {{ $argument->rfc->title }}--}}
-{{--                    </a>--}}
                     <x-argument-card.card
                         :user="$user"
                         :rfc="$argument->rfc"
@@ -20,7 +23,11 @@
                         :readonly="true"
                     />
                 </div>
-            @endforeach
+            @empty
+                <h2 class="text-xl text-font opacity-70">
+                    {{ $user->name }} doesn't have any arguments yet
+                </h2>
+            @endforelse
         </div>
     </div>
 
