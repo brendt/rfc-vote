@@ -63,7 +63,7 @@
                 @endif
             </div>
         @else
-            <x-markdown class="prose  prose-md w-full max-w-full break-words overflow-hidden text-font markdown-text">
+            <x-markdown class="prose  prose-md w-full max-w-full break-words overflow-hidden text-font">
                 {!! $argument->body !!}
             </x-markdown>
         @endif

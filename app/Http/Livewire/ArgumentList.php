@@ -74,7 +74,9 @@ class ArgumentList extends Component
 
         $query = $sortField->applySort($query);
 
-        $arguments = $query->paginate(15);
+        $arguments = $query
+            ->paginate(15)
+            ->setPath(action(RfcDetailController::class, $this->rfc));
 
         return view('livewire.argument-list', [
             'userArgument' => $userArgument,

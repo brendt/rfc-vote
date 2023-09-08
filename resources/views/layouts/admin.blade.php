@@ -9,6 +9,11 @@
                 </x-navbar.link>
 
                 <x-navbar.link
+                        href="{{ action(\App\Http\Livewire\UserList::class) }}"
+                        :isActive="request()->segment(2) == 'users'">Users
+                </x-navbar.link>
+
+                <x-navbar.link
                     href="{{ action(\App\Http\Controllers\VerificationRequestsAdminController::class) }}"
                     :isActive="request()->is('admin/verification-requests')">Verification Requests
                     @if($pendingVerificationRequests)
