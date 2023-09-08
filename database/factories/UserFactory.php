@@ -42,7 +42,7 @@ class UserFactory extends Factory
             'reputation' => 1,
             'email_optin' => 0,
             'preferred_sort_field' => SortField::VOTE_COUNT,
-            'unread_message_count' => random_int(1, 20)
+            'unread_message_count' => random_int(1, 20),
         ];
     }
 
