@@ -4,7 +4,7 @@
      */
 @endphp
 
-<nav class="bg-main z-10 p-4 bg-gradient-to-r from-main to-main-light">
+<nav class="bg-main z-10 p-4 bg-gradient-to-r from-main to-main-light border-b border-divider">
     <div
         class="container flex justify-between text-white gap-4 items-center m-auto relative px-2"
         x-data="{ open: false }"
@@ -50,24 +50,12 @@
                     <x-navbar.link
                         href="{{ action(App\Http\Controllers\RfcAdminController::class) }}"
                         :isActive="request()->is('admin/*')"
-
                     >
                         Admin
                     </x-navbar.link>
                 @endif
 
-                <x-navbar.link
-                    href="{{ action(\App\Http\Controllers\MessagesController::class) }}"
-                    :isActive="request()->is('messages')"
-                >
-                    <span class="flex gap-1">
-                        <x-icons.inbox class="w-5 h-5" />
-                        <span class="md:hidden">
-                            Messages (</span>{{ $user->unread_message_count >= 1 ? $user->unread_message_count : 0 }}
-                        <span class="md:hidden">)</span>
-                    </span>
-                </x-navbar.link>
-
+                <x-navbar.messages-link :user="$user" />
                 <x-profile.user-menu.menu :user="$user" />
             @else
                 <x-navbar.link
