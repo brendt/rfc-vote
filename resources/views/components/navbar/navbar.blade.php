@@ -28,7 +28,7 @@
 
         <div
             class="md:flex justify-end md:items-center md:gap-6 font-bold text-sm md:text-md inset-x-2 top-14 z-10"
-            :class="open ? 'space-y-2 flex absolute bg-white dark:bg-main-light text-font flex-col rounded-xl shadow-lg text-[1.1em] py-8 px-4' : 'hidden gap-4'"
+            :class="open ? 'flex absolute bg-white dark:bg-main-light text-font flex-col rounded-xl shadow-lg text-[1.1em] py-8 px-4' : 'hidden gap-4'"
             x-cloak
         >
             <x-navbar.link
@@ -61,7 +61,10 @@
                     :isActive="request()->is('messages')"
                 >
                     <span class="flex gap-1">
-                        <x-icons.inbox class="w-5 h-5" /> <span class="md:hidden">Messages (</span>{{ $user->unread_message_count >= 1 ? $user->unread_message_count : '' }}<span class="md:hidden">)</span>
+                        <x-icons.inbox class="w-5 h-5" />
+                        <span class="md:hidden">
+                            Messages (</span>{{ $user->unread_message_count >= 1 ? $user->unread_message_count : 0 }}
+                        <span class="md:hidden">)</span>
                     </span>
                 </x-navbar.link>
 
