@@ -12,7 +12,7 @@ class Navbar extends Component
         return '@navbar';
     }
 
-    public function assert(Browser $browser):void
+    public function assert(Browser $browser): void
     {
         $browser->assertVisible($this->selector());
     }

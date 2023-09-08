@@ -54,7 +54,7 @@ class MainMenuTest extends DuskTestCase
             $browser->loginAs($user)
                 ->visit('/')
                 ->click('@user-menu-menu')
-                ->with(new Menu, function (Browser $browser){
+                ->with(new Menu, function (Browser $browser) {
                     $browser->click('button')
                         ->assertSeeLink('My profile')
                         ->assertSeeLink('Settings')
