@@ -15,7 +15,7 @@
             Watch on YouTube
         </x-footer.link>
 
-        <x-footer.link href="https://raw.githubusercontent.com/brendt/rfc-vote/main/LICENSE.md" icon="icons.document-text">
+        <x-footer.link href="https://raw.githubusercontent.com/brendt/rfc-vote/main/LICENSE.md" icon="icons.document">
             Our License
         </x-footer.link>
     </div>
