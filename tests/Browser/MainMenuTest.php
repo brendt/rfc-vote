@@ -22,6 +22,8 @@ class MainMenuTest extends DuskTestCase
                         ->assertSeeLink('About')
                         ->assertSeeLink('Login')
                         ->assertSeeLink('Register')
+                        ->assertNotPresent('@navbar-link-messages-link')
+                        ->assertNotPresent('@user-menu-menu')
                         ->assertPresent('@dark-mode-button');
                 });
         });
@@ -59,6 +61,21 @@ class MainMenuTest extends DuskTestCase
                         ->assertSeeLink('My profile')
                         ->assertSeeLink('Settings')
                         ->assertSee('Logout');
+                });
+        });
+    }
+
+    public function test_it_users_can_logout_from_navbar(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $user = User::factory()->create();
+            $browser->loginAs($user)
+                ->visit('/')
+                ->click('@user-menu-menu')
+                ->with(new Menu, function (Browser $browser) {
+                    $browser->click('button')
+                        ->press('Logout')
+                        ->assertGuest();
                 });
         });
     }
