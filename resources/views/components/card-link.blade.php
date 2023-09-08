@@ -7,7 +7,7 @@
     $flexDirection = str_contains($attributes->get('class', ''), 'flex-row') ? '' : 'flex-col';
 @endphp
 
-<div class="{{ $flexDirection }} bg-rfc-card transition-all opacity-90 rounded-lg border border-divider flex justify-between gap-2 p-3 md:p-7">
+<div class="{{ $flexDirection }} bg-rfc-card transition-all opacity-90 rounded-lg border border-divider flex justify-between gap-2 p-3 md:p-7 flex-1">
     {{ $slot }}
 
     <div class="flex items-center justify-between mt-2">
