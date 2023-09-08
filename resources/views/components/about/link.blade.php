@@ -5,4 +5,4 @@
      */
 @endphp
 
-<a {{ $attributes->merge(['class' => 'underline']) }}>{{ $slot }}</a>
+<a {{ $attributes->merge(['class' => 'underline text-font-second']) }}>{{ $slot }}</a>
