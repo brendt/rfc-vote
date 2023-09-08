@@ -65,7 +65,7 @@ class MainMenuTest extends DuskTestCase
         });
     }
 
-    public function test_it_users_can_logout_from_navbar(): void
+    public function test_it_allows_users_to_logout_from_navbar(): void
     {
         $this->browse(function (Browser $browser) {
             $user = User::factory()->create();
@@ -76,6 +76,62 @@ class MainMenuTest extends DuskTestCase
                     $browser->click('button')
                         ->press('Logout')
                         ->assertGuest();
+                });
+        });
+    }
+
+    public function test_it_renders_a_settings_link_which_points_to_verification_page_for_unverified_users(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $user = User::factory()->create([
+                'email_verified_at' => null,
+            ]);
+            $browser->loginAs($user)
+                ->visit('/')
+                ->with(new Menu, function (Browser $browser) {
+                    $browser->click('button')
+                        ->clickLink('Settings')
+                        ->assertPathIs('/email/verify');
+                });
+        });
+    }
+
+    public function test_it_renders_a_settings_link_which_points_to_user_private_profile_page_for_verified_users(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $user = User::factory()->create();
+            $browser->loginAs($user)
+                ->visit('/')
+                ->with(new Menu, function (Browser $browser) {
+                    $browser->click('button')
+                        ->clickLink('Settings')
+                        ->assertPathIs('/profile');
+                });
+        });
+    }
+
+    public function test_it_renders_public_profile(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $user = User::factory()->create();
+            $browser->loginAs($user)
+                ->visit('/')
+                ->with(new Menu, function (Browser $browser) use ($user) {
+                    $browser->click('button')
+                        ->clickLink('My profile')
+                        ->assertPathIs("/profile/$user->username");
+                });
+        });
+    }
+
+    public function test_it_renders_unread_messages_count(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $user = User::factory()->create(['unread_message_count' => 10]);
+            $browser->loginAs($user)
+                ->visit('/')
+                ->with(new Navbar, function (Browser $browser) {
+                    $browser->assertSeeIn('@navbar-link-messages-link ~ @navbar-link-messages-count', 10);
                 });
         });
     }
