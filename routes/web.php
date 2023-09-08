@@ -21,8 +21,10 @@ use App\Http\Controllers\RfcEditController;
 use App\Http\Controllers\RfcMetaImageController;
 use App\Http\Controllers\SocialiteCallbackController;
 use App\Http\Controllers\SocialiteRedirectController;
+use App\Http\Controllers\UserEditController;
 use App\Http\Controllers\VerificationRequestsAdminController;
 use App\Http\Controllers\ViewMessageController;
+use App\Http\Livewire\UserList;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +59,10 @@ Route::middleware(AdminMiddleware::class)->prefix('/admin')->group(function () {
     Route::post('/rfc/{rfc}/publish', PublishRfcController::class);
     Route::post('/rfc/{rfc}/end', EndRfcController::class);
     Route::get('/mail-preview', MailPreviewController::class);
+    Route::get('/users', UserList::class);
+    Route::get('/users/{user:id}', [UserEditController::class, 'edit']);
+    Route::post('/users/{user:id}', [UserEditController::class, 'update']);
+
 });
 
 Route::middleware([
