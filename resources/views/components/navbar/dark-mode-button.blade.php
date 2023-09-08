@@ -13,9 +13,7 @@
     >
         <x-icons.dark-mode />
 
-        <span class="md:hidden">
-            Switch to Light mode
-        </span>
+        <span class="md:hidden">Switch to Light mode</span>
     </button>
 
     <button
@@ -28,8 +26,6 @@
     >
         <x-icons.light-mode/>
 
-        <span class="md:hidden">
-            Switch to Dark mode
-        </span>
+        <span class="md:hidden">Switch to Dark mode</span>
     </button>
 </div>
