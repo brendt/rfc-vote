@@ -4,7 +4,7 @@
      */
 @endphp
 
-<nav class="bg-main z-10 p-4 bg-gradient-to-r from-main to-main-light">
+<nav {{dusk('navbar')}} class="bg-main z-10 p-4 bg-gradient-to-r from-main to-main-light">
     <div
         class="container flex justify-between text-white gap-4 items-center m-auto relative px-2"
         x-data="{ open: false }"

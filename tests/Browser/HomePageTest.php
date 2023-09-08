@@ -28,7 +28,7 @@ class HomePageTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new HomePage)
-                ->assertPresent('@main-header')
+                ->assertPresent('@navbar')
                 ->assertPresent('@footer');
         });
     }
