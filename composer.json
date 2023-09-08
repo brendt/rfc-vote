@@ -59,6 +59,7 @@
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon",
         "phpunit": "php artisan test --parallel",
         "pint": " php vendor/bin/pint",
+        "dusk": " php artisan dusk",
         "deploy": "vendor/bin/envoy run deploy",
         "deploy-code": "vendor/bin/envoy run deploy-code",
         "post-autoload-dump": [
