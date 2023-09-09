@@ -12,9 +12,9 @@ final readonly class CreateArgumentCommentController
         Argument $argument,
         Request $request,
         CreateArgumentComment $createArgumentComment
-    ){
+    ) {
         $validated = $request->validate([
-            'body' => ['required', 'string']
+            'body' => ['required', 'string'],
         ]);
 
         $user = $request->user();
