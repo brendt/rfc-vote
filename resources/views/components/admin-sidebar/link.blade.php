@@ -7,7 +7,7 @@
 
 <a
     {{ $attributes->merge([
-        'class' => 'text-white px-4 py-2 ' . ($isActive ? 'bg-purple-800' : 'hover:bg-black')
+        'class' => 'text-white px-4 w-72 py-3 flex gap-4 ' . ($isActive ? 'bg-purple-700' : 'hover:bg-black')
     ]) }}
 >
     {{ $slot }}
