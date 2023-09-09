@@ -36,6 +36,7 @@
         "nunomaduro/collision": "^7.0",
         "nunomaduro/larastan": "^2.6",
         "phpunit/phpunit": "^10.1",
+        "protonemedia/laravel-dusk-fakes": "^1.4",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
