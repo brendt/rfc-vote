@@ -51,7 +51,7 @@ class Argument extends Model
      */
     public function comments(): HasMany
     {
-        return $this->hasMany(ArgumentComment::class);
+        return $this->hasMany(ArgumentComment::class)->orderBy('created_at');
     }
 
     public function getAnchorId(): string

@@ -9,14 +9,12 @@
     </div>
 
     <div class="w-full">
-        <h2 class="text-lg mb-1 lg:text-2xl font-bold text-gray-900 dark:text-white opacity-80">
-            Discussion ({{ $argument->comments->count() }})
-        </h2>
 
-        <form method="post">
+        <form method="post" action="{{ action(\App\Http\Controllers\CreateArgumentCommentController::class, $argument) }}">
             @csrf
 
             <textarea
+                name="body"
                 @class([
                     'p-3 text-font bg-input ring-1 focus:ring-2 ring-transparent rounded-lg',
                     'focus:ring-2 ring-transparent focus:border-purple-300 focus:ring-purple-500/50 focus:outline-none',
