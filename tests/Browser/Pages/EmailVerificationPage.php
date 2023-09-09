@@ -11,7 +11,7 @@ class EmailVerificationPage extends Page
         return '/email/verify';
     }
 
-    public function assert(Browser $browser):void
+    public function assert(Browser $browser): void
     {
         $browser->assertPathIs($this->url());
     }

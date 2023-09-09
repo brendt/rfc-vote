@@ -11,7 +11,7 @@ class ProfilePage extends Page
         return '/profile';
     }
 
-    public function assert(Browser $browser):void
+    public function assert(Browser $browser): void
     {
         $browser->assertPathIs($this->url());
     }
