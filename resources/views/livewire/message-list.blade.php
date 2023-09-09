@@ -7,7 +7,7 @@
         @endforeach
 
         @if($user->inboxMessages->isEmpty())
-            <p>Inbox 0!</p>
+            <p class="text-lg opacity-60 text-font">There are not messages yet!</p>
         @endif
 
         @if($user->archivedMessages->isNotEmpty())
