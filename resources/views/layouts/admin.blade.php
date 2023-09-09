@@ -30,7 +30,7 @@
     </x-admin-sidebar.link>
 </nav>
 
-<div class="pl-14">
+<div class="pl-9 md:pl-14">
     {{ $slot }}
 </div>
 
