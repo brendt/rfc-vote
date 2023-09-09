@@ -5,10 +5,8 @@ namespace Tests\Browser;
 use App\Models\User;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Laravel\Dusk\Browser;
-
 use ProtoneMedia\LaravelDuskFakes\Notifications\PersistentNotifications;
 use Tests\Browser\Pages\EmailVerificationPage;
 use Tests\DuskTestCase;
