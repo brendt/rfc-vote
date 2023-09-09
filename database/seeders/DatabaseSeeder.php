@@ -11,7 +11,7 @@ use App\Models\Rfc;
 use App\Models\User;
 use App\Models\VerificationRequest;
 use App\Models\VerificationRequestStatus;
-use App\Models\VoteType
+use App\Models\VoteType;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
