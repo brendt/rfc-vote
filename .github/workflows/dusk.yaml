@@ -25,6 +25,7 @@ jobs:
       DB_USERNAME: root
       DB_PASSWORD: root
       MAIL_MAILER: log
+      DUSK_FAKE_MAILS: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
