@@ -42,11 +42,7 @@
                 @endforeach
             </div>
 
-            <div class="mt-6  md:mt-8">
-                <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white opacity-80 mb-2">
-                    Add a new comment
-                </h2>
-
+            <div class="mt-6 md:mt-8">
                 <x-argument-card.comment-form
                     :user="$user"
                     :argument="$argument"
