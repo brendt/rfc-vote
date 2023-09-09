@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArgumentCommentsController;
 use App\Http\Controllers\DisableEmailOptinController;
 use App\Http\Controllers\EnableEmailOptinController;
 use App\Http\Controllers\EndRfcController;
@@ -41,6 +42,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class);
 Route::get('/rfc/{rfc}', RfcDetailController::class)->name('rfc-detail');
+Route::get('/argument/{argument}/comments', ArgumentCommentsController::class);
 Route::get('/rfc/{rfc}/meta.png', RfcMetaImageController::class)->middleware('cache:900');
 Route::get('/login', LoginController::class)->name('login');
 Route::get('/register', RegisterController::class)->name('register');

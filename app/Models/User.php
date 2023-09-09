@@ -103,6 +103,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * @return HasMany<\App\Models\ArgumentComment>
+     */
+    public function argumentComments(): HasMany
+    {
+        return $this->hasMany(ArgumentComment::class);
+    }
+
+    /**
      * @return HasMany<EmailChangeRequest>
      */
     public function emailChangeRequests(): HasMany
@@ -258,5 +266,11 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->update([
             'unread_message_count' => $this->unreadMessages()->count(),
         ]);
+    }
+
+    public function hasCommentedOn(Argument $argument): bool
+    {
+        return $this->argumentComments
+            ->contains(fn (ArgumentComment $comment) => $comment->argument_id === $argument->id);
     }
 }

@@ -53,4 +53,9 @@ class Argument extends Model
     {
         return $this->hasMany(ArgumentComment::class);
     }
+
+    public function getAnchorId(): string
+    {
+        return $this->user->username.'-'.$this->id;
+    }
 }
