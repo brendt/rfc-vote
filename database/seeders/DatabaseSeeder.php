@@ -4,13 +4,16 @@ namespace Database\Seeders;
 
 use App\Actions\CreateArgument;
 use App\Actions\SendUserMessage;
+use App\Models\Argument;
 use App\Models\ArgumentComment;
+use App\Models\ArgumentVote;
 use App\Models\Rfc;
 use App\Models\User;
 use App\Models\VerificationRequest;
 use App\Models\VerificationRequestStatus;
-use App\Models\VoteType;
+use App\Models\VoteType
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -43,10 +46,16 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $rfcs = Rfc::factory()->count(10)->create([
-            'title' => 'Interface Default Methods',
-            'published_at' => now()->subDay(),
-        ]);
+        $rfcs = Rfc::factory()
+            ->count(3)
+            ->sequence(
+                ['title' => 'The Pipe Operator'],
+                ['title' => 'Short Closures 2.0'],
+                ['title' => 'Interface Default Methods'],
+            )
+            ->create([
+                'published_at' => now()->subDay(),
+            ]);
 
         foreach ($rfcs as $rfc) {
             $majority = fake()->boolean() ? VoteType::YES : VoteType::NO;
@@ -69,6 +78,26 @@ class DatabaseSeeder extends Seeder
                         'updated_at' => $argumentCreatedDate,
                     ]);
 
+                    $argumentVoteCount = fake()->numberBetween(0, 10);
+
+                    if (fake()->boolean(25)) {
+                        $argumentVoteCount = fake()->numberBetween(10, 30);
+                    }
+
+                    if (fake()->boolean(5)) {
+                        $argumentVoteCount = fake()->numberBetween(30, 50);
+                    }
+
+                    ArgumentVote::factory()
+                        ->count($argumentVoteCount)
+                        ->state(new Sequence(
+                            fn (Sequence $sequence) => [
+                                'argument_id' => $argument->id,
+                                'user_id' => $users->random()->id,
+                            ]
+                        ))
+                        ->create();
+
                     ArgumentComment::factory()->count(fake()->numberBetween(0, 5))
                         ->sequence(
                             ['argument_id' => $argument->id, 'user_id' => $users->random()->id],
@@ -81,5 +110,12 @@ class DatabaseSeeder extends Seeder
                 }
             }
         }
+
+        Argument::get()
+            ->each(function (Argument $argument): void {
+                $argument->update([
+                    'vote_count' => $argument->votes()->count(),
+                ]);
+            });
     }
 }

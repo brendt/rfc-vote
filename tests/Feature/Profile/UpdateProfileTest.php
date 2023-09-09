@@ -4,15 +4,12 @@ namespace Tests\Feature\Profile;
 
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UpdateProfileTest extends TestCase
 {
-    use LazilyRefreshDatabase;
-
     private string $url;
 
     public function setUp(): void

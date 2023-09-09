@@ -8,7 +8,7 @@
     $anchorLink = $argument->user->username . '-' . $argument->id;
 @endphp
 
-<div id="{{ $anchorLink }}"
+<div {{dusk('argument-card')}} id="{{ $anchorLink }}"
      @class([
         'bg-argument-card text-font rounded-xl w-full group/card pt-5 pl-4 pr-10 md:px-8 md:pt-7 flex gap-6 items-center relative',
         'border-2 border-purple-300 dark:border-purple-800' => !$readonly && $user && !$user->hasSeenArgument($argument),
@@ -63,7 +63,7 @@
                 @endif
             </div>
         @else
-            <x-markdown class="prose  prose-md w-full max-w-full break-words overflow-hidden text-font markdown-text">
+            <x-markdown class="prose  prose-md w-full max-w-full break-words overflow-hidden text-font">
                 {!! $argument->body !!}
             </x-markdown>
         @endif

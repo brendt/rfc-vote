@@ -30,6 +30,7 @@
 
             <div class="mt-6 justify-between flex items-baseline flex-wrap">
                 <a
+                    {{dusk('reset-password-link')}}
                     href="{{ action(App\Http\Controllers\ForgotPasswordController::class) }}"
                    class="text-purple-900 hover:underline"
                 >
@@ -42,6 +43,7 @@
                         <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                     </label>
 
+
                     <x-form.button type="submit" class="!m-0">
                         <x-icons.login class="h-6 w-6" />
                         {{ __('Login') }}
@@ -52,6 +54,7 @@
 
         <div class="flex items-center gap-3 mt-8 justify-center">
             <a
+                {{dusk('register-link')}}
                 href="{{ action(App\Http\Controllers\RegisterController::class) }}"
                 class="underline hover:no-underline"
             >

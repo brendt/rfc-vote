@@ -32,6 +32,17 @@ export default {
 
     theme: {
         extend: {
+            typography: {
+                DEFAULT: {
+                    css: {
+                        '--tw-prose-bold': 'var(--color-font-second)',
+                        '--tw-prose-links': 'var(--color-font-second)',
+                        '--tw-prose-code': 'var(--color-font-second)',
+                        '--tw-prose-quotes': 'var(--color-font-second)',
+                        '--tw-prose-headings': 'var(--color-font-second)',
+                    },
+                },
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
@@ -54,6 +65,7 @@ export default {
                 'rfc-card': 'var(--color-rfc-card)',
                 'argument-card': 'var(--color-argument-card)',
                 'message-card': 'var(--color-message-card)',
+                'code-background': 'var(--color-code-background)',
 
                 // text color
                 'font': 'var(--color-font)',
@@ -78,6 +90,7 @@ export default {
                 'form': 'var(--color-form)',
                 'input': 'var(--color-input)',
             },
+
         },
     },
 

@@ -10,13 +10,12 @@ use App\Http\Controllers\RfcEditController;
 use App\Http\Controllers\RfcMetaImageController;
 use App\Models\Rfc;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class RfcTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use WithFaker;
 
     /** @test */
     public function rfc_management_only_accessible_by_admin()

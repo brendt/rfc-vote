@@ -6,7 +6,7 @@
 @endphp
 
 <div class="flex items-center text-font gap-5 lg:gap-3 group-hover/card:opacity-100 lg:opacity-0 duration-300 transition-opacity">
-    <small>{{ __('Share') }}:</small>
+    <small>Share:</small>
 
     <x-argument-card.share-link
         x-init=""
@@ -26,22 +26,22 @@
                throw e;
             }
         })()"
-        title="{{ __('Copy the ') }}"
+        tip="Copy the argument link to clipboard"
         icon="icons.link"
     />
 
     <x-argument-card.share-link
-        :href="'https://x.com/intent/tweet?text=PHP RFC Votes for ' . urlencode($argument->rfc->title) . '&url=' . urlencode(url()->current())"
+        :href="'https://x.com/intent/tweet?text=PHP RFC Votes for ' . urlencode($argument->rfc->title) . '&url=' . urlencode(url()->current().'#'.$anchorLink)"
         target="_blank"
-        title="{{ __('Share on X') }}"
+        tip="Share the argument on X"
         icon="icons.x"
         class="fill-font"
     />
 
     <x-argument-card.share-link
-        :href="'https://www.linkedin.com/sharing/share-offsite/?url='  . url()->current()"
+        :href="'https://www.linkedin.com/sharing/share-offsite/?url='  . url()->current().'#'.$anchorLink"
         target="_blank"
-        title="{{ __('Share on LinkedIn') }}"
+        tip="Share the argument on LinkedIn"
         icon="icons.linkedin"
     />
 </div>

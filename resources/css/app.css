@@ -1,5 +1,7 @@
+@import 'tippy.js/dist/tippy.css';
 @import '_variables.css';
 @import '_fixes.css';
+@import "_theme.scss";
 
 @tailwind base;
 @tailwind components;
@@ -10,13 +12,10 @@
 }
 
 pre.shiki {
-    @apply !bg-slate-50 w-full overflow-x-auto px-5 md:p-6 border border-slate-100 rounded-xl text-sm md:text-base;
+    @apply border border-divider !bg-code-background w-full overflow-x-auto rounded-lg md:rounded-xl text-sm md:text-base p-0;
 }
 
 pre.shiki code {
-    @apply max-w-[200px] block;
-}
-
-.markdown-text {
-    @apply prose-a:text-font-second prose-code:text-font-second prose-blockquote:text-font-second
+    @apply max-w-[200px] lg:max-w-full !bg-inherit;
+    overflow: initial !important;
 }

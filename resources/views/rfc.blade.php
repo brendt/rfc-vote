@@ -4,13 +4,10 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
 @endpush
 
 @push('scripts')
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
 @endpush
 
 @component('layouts.base', [
@@ -65,7 +62,7 @@
                 @endif
             </div>
 
-            <x-markdown class="prose text-lg text-font max-w-full markdown-text">
+            <x-markdown class="prose text-lg text-font max-w-full">
                 {!! $rfc->description !!}
             </x-markdown>
 
@@ -88,12 +85,12 @@
             </h2>
             <div class="flex flex-col justify-center lg:flex-row mt-4 space-x-0 space-y-4 lg:space-x-4 lg:space-y-0">
                 @foreach($additionalRfcs as $additionalRfc)
-                    <x-card-link :href="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)" class="flex-1">
+                    <x-card-link :to="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)">
                         <div class="text-xl text-font font-bold px-2 border-b pb-4 mb-2">
                             {{ $additionalRfc->title }}
                         </div>
 
-                        <x-markdown class="px-2 text-font markdown-text">{!! $additionalRfc->teaser !!}</x-markdown>
+                        <x-markdown class="px-2 text-font">{!! $additionalRfc->teaser !!}</x-markdown>
 
                         <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">
                             <x-tag class="font-bold">
