@@ -12,6 +12,7 @@ use Tests\DuskTestCase;
 class AboutPageTest extends DuskTestCase
 {
     use DatabaseTruncation;
+
     public function test_it_renderers_all_sections(): void
     {
         $this->browse(function (Browser $browser) {
