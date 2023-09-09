@@ -2,7 +2,9 @@
 
 namespace Tests\Browser;
 
+use App\Support\FetchContributors;
 use Laravel\Dusk\Browser;
+use Tests\Browser\Components\About\Contributors;
 use Tests\Browser\Pages\AboutPage;
 use Tests\DuskTestCase;
 
@@ -26,6 +28,22 @@ class AboutPageTest extends DuskTestCase
                 ->with('@interesting-links-container', function (Browser $browser) {
                     $browser->assertSeeLink('The RFC Vote repository')
                         ->assertSeeLink('The YouTube playlist');
+                });
+        });
+    }
+
+    public function test_it_renders_contributors(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $contributors = app(FetchContributors::class);
+
+            $browser->visit(new AboutPage)
+                ->with(new Contributors, function (Browser $browser) use ($contributors) {
+                    $contributor = $contributors->getContributors()[0];
+                    $browser->with("a[href=\"$contributor->url\"]", function (Browser $browser) use ($contributor) {
+                        $browser->assertSee($contributor->name)
+                            ->assertSee(implode(', ', $contributor->contributions));
+                    });
                 });
         });
     }
