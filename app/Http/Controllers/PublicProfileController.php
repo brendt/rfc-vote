@@ -17,6 +17,6 @@ final readonly class PublicProfileController
 
         $user->loadCount('arguments', 'argumentVotes');
 
-        return view('publicProfile', compact('user'));
+        return view('public-profile', compact('user'));
     }
 }
