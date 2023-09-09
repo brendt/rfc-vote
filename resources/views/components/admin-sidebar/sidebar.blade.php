@@ -1,4 +1,4 @@
-<nav class="bg-gray-800 fixed inset-y-0 w-14 hover:w-64 flex flex-col opacity-80 hover:opacity-95 z-10 pt-16 divide-y divide-gray-600 overflow-hidden shadow-md transition-all">
+<nav class="bg-gray-800 fixed inset-y-0 dark:border-r border-divider w-14 hover:w-64 flex flex-col opacity-80 hover:opacity-95 z-10 pt-16 divide-y divide-gray-600 overflow-hidden shadow-md transition-all">
     <x-admin-sidebar.link
         href="{{ action(App\Http\Controllers\RfcAdminController::class) }}"
         :is-active="request()->is('admin/rfc')"
