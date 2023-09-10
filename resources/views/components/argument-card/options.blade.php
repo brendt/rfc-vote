@@ -10,14 +10,10 @@
     class="absolute top-3 right-3 z-10 bg-argument-card"
     x-data="{ isVisible: false }"
 >
-    <button
-        type="button"
-        class="p-2 rounded-full group-hover:bg-gray-100"
+    <x-buttons.more-options
         @click="isVisible = !isVisible"
         @click.away="isVisible = false"
-    >
-        <x-icons.ellipsis-vertical class="w-7 h-7 text-font absolute right-0 top-0" />
-    </button>
+    />
 
     <div
         x-cloak
