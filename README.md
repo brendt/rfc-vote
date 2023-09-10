@@ -12,8 +12,8 @@ This is a webapp meant to gather feedback on how RFCs are received in the PHP co
 
 The app supports Laravel Sail. See [docs](https://laravel.com/docs/10.x/sail#introduction) for details.
 
-1. install dependency via docker 
-``` bash 
+1. install dependency via docker
+``` bash
 docker run --rm \
    -u "$(id -u):$(id -g)" \
    -v "$(pwd):/var/www/html" \
@@ -26,7 +26,7 @@ docker run --rm \
 3. run `./vendor/bin/sail up -d`
 4. run `./vendor/bin/sail artisan key:generate`
 5. run `./vendor/bin/sail npm install && npm run build`
-6. run `./vendor/bin/sail artisan migrate:fresh --seed` 
+6. run `./vendor/bin/sail artisan migrate:fresh --seed`
 
 ### browsershot
 For `browsershot` to work properly add the following in `.env` file:
@@ -53,7 +53,7 @@ QUEUE_CONNECTION=redis
 # Laravel Dusk
 
 ### Setting Laravel Dusk with Sail
-Please follow the official docs for [Laravel Dusk](https://laravel.com/docs/10.x/dusk) and also look at 
+Please follow the official docs for [Laravel Dusk](https://laravel.com/docs/10.x/dusk) and also look at
 the specific documentation on Sail page for [Laravel Dusk](https://laravel.com/docs/10.x/sail#laravel-dusk)
 
 1. **Environment Configuration**:
@@ -61,7 +61,7 @@ the specific documentation on Sail page for [Laravel Dusk](https://laravel.com/d
     In your `.env` file, add the following line:
 
     ```dotenv
-    # For Apple Silicton (m1, m2) replace the value with seleniarm/standalone-chromium, see https://laravel.com/docs/10.x/sail#laravel-dusk for more details
+    # For Apple Silicon (m1, m2) replace the value with seleniarm/standalone-chromium, see https://laravel.com/docs/10.x/sail#laravel-dusk for more details
     SELENIUM_IMAGE=selenium/standalone-chrome
     ```
    This enables the choice of selenium image as per your system's architecture. For more context on this, please refer to [this PR discussion](https://github.com/brendt/rfc-vote/pull/234#issuecomment-1700920222)
