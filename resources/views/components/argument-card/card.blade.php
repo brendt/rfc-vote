@@ -41,7 +41,7 @@
                         <x-icons.check class="w-6 h-6" />
                     </span>
 
-                    {{ __('Save') }}
+                    Save
                 </x-buttons.main>
 
                 @if ($isConfirmingDelete?->is($argument))
@@ -50,7 +50,7 @@
                         class="!bg-disagree hover:!bg-disagree-dark"
                     >
                         <x-icons.cancel class="w-6 h-6" />
-                        {{ __('Cancel') }}
+                        Cancel
                     </x-buttons.main>
                 @else
                     <x-buttons.main
@@ -58,7 +58,7 @@
                         class="!bg-disagree hover:!bg-disagree-dark {{ empty($this->body) && $isEditing?->is($argument) ? 'cursor-not-allowed' : '' }}"
                     >
                         <x-icons.cancel class="w-6 h-6" />
-                        {{ __('Cancel') }}
+                        Cancel
                     </x-buttons.main>
                 @endif
             </div>
