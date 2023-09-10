@@ -48,10 +48,10 @@
                 class="!bg-agree hover:!bg-agree-dark"
             >
                 <span wire:loading wire:target="deleteArgument('{{ $argument->id }}')">
-                     <x-icons.loading  class="w-4 h-4"></x-icons.loading>
+                    <x-icons.loading class="w-4 h-4" />
                 </span>
                 <span wire:loading.remove wire:target="deleteArgument('{{ $argument->id }}')">
-                       <x-icons.check class="w-4 h-4" />
+                    <x-icons.check class="w-4 h-4" />
                 </span>
 
                 Yes!
