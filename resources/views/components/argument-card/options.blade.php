@@ -10,14 +10,10 @@
     class="absolute top-3 right-3 z-10 bg-argument-card"
     x-data="{ isVisible: false }"
 >
-    <button
-        type="button"
-        class="p-2 rounded-full group-hover:bg-gray-100"
+    <x-buttons.more-options
         @click="isVisible = !isVisible"
         @click.away="isVisible = false"
-    >
-        <x-icons.ellipsis-vertical class="w-7 h-7 text-font absolute right-0 top-0" />
-    </button>
+    />
 
     <div
         x-cloak
@@ -29,7 +25,7 @@
                 wire:click="editArgument('{{ $argument->id }}')"
                 icon="icons.pen"
             >
-                {{ __('Edit') }}
+                Edit
             </x-argument-card.button>
         @endif
 
@@ -38,27 +34,27 @@
                 wire:click="deleteArgument('{{ $argument->id }}')"
                 icon="icons.trash"
             >
-                {{ __('Delete') }}
+                Delete
             </x-argument-card.button>
         @endif
     </div>
 
     @if ($isConfirmingDelete?->is($argument))
         <div class="absolute right-6 bg-argument-card flex flex-col gap-2 p-3 border rounded-sm min-w-[140px]">
-            <b>{{ __('Are you sure?') }}</b>
+            <b>Are you sure?</b>
 
             <x-buttons.main-small
                 wire:click="deleteArgument('{{ $argument->id }}')"
                 class="!bg-agree hover:!bg-agree-dark"
             >
                 <span wire:loading wire:target="deleteArgument('{{ $argument->id }}')">
-                     <x-icons.loading  class="w-4 h-4"></x-icons.loading>
+                    <x-icons.loading class="w-4 h-4" />
                 </span>
                 <span wire:loading.remove wire:target="deleteArgument('{{ $argument->id }}')">
-                       <x-icons.check class="w-4 h-4" />
+                    <x-icons.check class="w-4 h-4" />
                 </span>
 
-                {{ __('Yes') }}!
+                Yes!
             </x-buttons.main-small>
 
             <x-buttons.main-small
@@ -66,7 +62,7 @@
                 class="!bg-disagree hover:!bg-disagree-dark"
             >
                 <x-icons.cancel class="w-4 h-4" />
-                {{ __('No') }}!
+                No!
             </x-buttons.main-small>
         </div>
     @endif

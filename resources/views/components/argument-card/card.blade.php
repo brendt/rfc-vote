@@ -10,7 +10,7 @@
 
 <div {{dusk('argument-card')}} id="{{ $anchorLink }}"
      @class([
-        'bg-argument-card text-font rounded-xl w-full group/card pt-5 pl-4 pr-10 md:px-8 md:pt-7 flex gap-6 items-center relative',
+        'bg-argument-card text-font rounded-xl w-full group/card pt-5 px-4 md:pl-8 md:pr-10 md:pt-7 flex flex-col md:flex-row gap-3 md:gap-6 items-center relative',
         'border-2 border-purple-300 dark:border-purple-800' => !$readonly && $user && !$user->hasSeenArgument($argument),
         'border border-divider' => !(!$readonly && $user && !$user->hasSeenArgument($argument)),
      ])
@@ -35,13 +35,13 @@
                     class="!bg-agree hover:!bg-agree-dark"
                 >
                     <span wire:loading wire:target="editArgument('{{ $argument->id }}')">
-                             <x-icons.loading  class="w-6 h-6"></x-icons.loading>
+                        <x-icons.loading  class="w-6 h-6"></x-icons.loading>
                     </span>
                     <span wire:loading.remove wire:target="editArgument('{{ $argument->id }}')">
                         <x-icons.check class="w-6 h-6" />
                     </span>
 
-                    {{ __('Save') }}
+                    Save
                 </x-buttons.main>
 
                 @if ($isConfirmingDelete?->is($argument))
@@ -50,7 +50,7 @@
                         class="!bg-disagree hover:!bg-disagree-dark"
                     >
                         <x-icons.cancel class="w-6 h-6" />
-                        {{ __('Cancel') }}
+                        Cancel
                     </x-buttons.main>
                 @else
                     <x-buttons.main
@@ -58,7 +58,7 @@
                         class="!bg-disagree hover:!bg-disagree-dark {{ empty($this->body) && $isEditing?->is($argument) ? 'cursor-not-allowed' : '' }}"
                     >
                         <x-icons.cancel class="w-6 h-6" />
-                        {{ __('Cancel') }}
+                        Cancel
                     </x-buttons.main>
                 @endif
             </div>

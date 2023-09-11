@@ -8,14 +8,10 @@
     class="absolute right-2 top-2"
     x-data="{ open: false }"
 >
-    <button
-        type="button"
-        class="p-1 rounded-full group-hover:bg-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+    <x-buttons.more-options
         @click="open = !open"
         @click.away="open = false"
-    >
-        <x-icons.ellipsis-vertical class="w-7 h-7 text-font" />
-    </button>
+    />
 
     <div
         x-cloak
