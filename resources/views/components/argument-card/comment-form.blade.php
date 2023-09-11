@@ -9,6 +9,9 @@
     </div>
 
     <div class="w-full">
+        <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white opacity-80 mb-2">
+            Add a new comment
+        </h2>
 
         <form method="post" action="{{ action(\App\Http\Controllers\CreateArgumentCommentController::class, $argument) }}">
             @csrf
