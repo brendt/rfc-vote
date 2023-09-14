@@ -22,18 +22,33 @@
         />
     </div>
 
-    <div class="flex gap-4 items-center my-4">
+    <div
+        x-data="avatarSettings"
+        class="flex gap-5 items-center my-4"
+    >
         @if ($user->getAvatarUrl())
             <img
-                src="{{ $user->getAvatarUrl() }}"
-                class="shadow-xl rounded-full"
+                :src="avatar"
+                data-src="{{ $user->getAvatarUrl() }}"
+                class="shadow-xl rounded-full aspect-square"
                 width="80"
                 height="80"
                 alt="Your avatar"
             />
         @endif
 
-        <x-form.input type="file" name="avatar" label="Choose a new avatar" />
+        <label
+            for="avatar-field"
+            class="border-4 border-dashed w-full rounded-sm p-8 cursor-pointer border-divider text-center bg-background opacity-70 hover:opacity-100 transition-opacity"
+            x-bind="area"
+        >
+            <span
+                x-html="areaMessage"
+                class="text-gray-500 dark:text-gray-600 tracking-wide pointer-events-none"
+            ></span>
+
+            <input id="avatar-field" type="file" name="avatar" class="hidden" />
+        </label>
     </div>
 
     <div class="col-span-2 mt-6">
