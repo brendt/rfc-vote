@@ -4,46 +4,46 @@
         <x-form.wrapper
             method="{{ route('register') }}"
             method="post"
-            :heading="__('Register your account')"
+            heading="Register your account"
         >
             <div class="space-y-3">
                 <x-form.input
                     name="name"
-                    :label="__('Name')"
+                    label="Name"
                     :value="old('name')"
-                    :placeholder="__('Enter your name')"
+                    placeholder="Enter your name"
                     required
                 />
 
                 <x-form.input
                     name="email"
-                    :label="__('Email')"
+                    label="Email"
                     :value="old('email')"
-                    :placeholder="__('Enter your email address')"
+                    placeholder="Enter your email address"
                     required
                 />
 
                 <livewire:username-input
                     name="username"
-                    :label="__('Username')"
+                    label="Username"
                     :value="old('username')"
-                    :placeholder="__('Enter your username')"
+                    placeholder="Enter your username"
                     required="true"
                 />
 
                 <x-form.input
                     type="password"
                     name="password"
-                    :label="__('Password')"
-                    :placeholder="__('Enter your password')"
+                    label="Password"
+                    placeholder="Enter your password"
                     required
                 />
 
                 <x-form.input
                     type="password"
                     name="password_confirmation"
-                    :label="__('Confirm your password')"
-                    :placeholder="__('Confirm your password')"
+                    label="Confirm your password"
+                    placeholder="Confirm your password"
                     required
                 />
             </div>
@@ -51,7 +51,7 @@
             <div class="text-right mt-6">
                 <x-form.button type="submit">
                     <x-icons.register class="h-6 w-6"/>
-                    {{ __('Register') }}
+                    Register
                 </x-form.button>
             </div>
         </x-form.wrapper>
@@ -67,13 +67,7 @@
 
             <span>or</span>
 
-            <x-buttons.main
-                href="{{ action(App\Http\Controllers\SocialiteRedirectController::class, 'github') }}"
-                class="!bg-gray-800 hover:!bg-gray-700"
-            >
-                <x-icons.github class="h-6 w-6 fill-white"/>
-                {{ __('Log in with GitHub') }}
-            </x-buttons.main>
+            <x-buttons.github />
         </div>
     </div>
 

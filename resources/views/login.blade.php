@@ -2,28 +2,28 @@
 
     <div class="mx-auto max-w-[500px] my-4 md:my-12 text-font">
         <x-form.wrapper
-            :heading="__('Login to your account')"
+            heading="Login to your account"
             method="{{ route('login') }}"
             method="post"
         >
             <div class="space-y-3">
                 <x-form.input
-                    :label="__('Email')"
+                    label="Email"
                     type="email"
                     name="email"
                     :value="old('email')"
                     required
                     autocomplete="username"
-                    :placeholder="__('Enter your email address')"
+                    placeholder="Enter your email address"
                     autofocus
                 />
 
                 <x-form.input
-                    :label="__('Password')"
+                    label="Password"
                     type="password"
                     name="password"
                     autocomplete="current-password"
-                    :placeholder="__('Enter your password')"
+                    placeholder="Enter your password"
                     required
                 />
             </div>
@@ -32,21 +32,21 @@
                 <a
                     {{dusk('reset-password-link')}}
                     href="{{ action(App\Http\Controllers\ForgotPasswordController::class) }}"
-                   class="text-purple-900 hover:underline"
+                    class="text-font underline opacity-80 hover:opacity-100"
                 >
-                    {{ __('Forget Password?') }}
+                    Forget Password?
                 </a>
 
                 <div class="inline-flex gap-4">
                     <label for="remember_me" class="flex items-center">
-                        <x-checkbox id="remember_me" name="remember" class="checked:text-purple-900"/>
-                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                        <x-checkbox id="remember_me" name="remember" />
+                        <span class="ml-2 text-sm text-font">Remember me</span>
                     </label>
 
 
                     <x-form.button type="submit" class="!m-0">
                         <x-icons.login class="h-6 w-6" />
-                        {{ __('Login') }}
+                        Login
                     </x-form.button>
                 </div>
             </div>
@@ -63,13 +63,7 @@
 
             <span>or</span>
 
-            <x-buttons.main
-                href="{{ action(App\Http\Controllers\SocialiteRedirectController::class, 'github') }}"
-                class="!bg-gray-800 hover:!bg-gray-700"
-            >
-                <x-icons.github class="h-6 w-6 fill-white" />
-                {{ __('Log in with GitHub') }}
-            </x-buttons.main>
+            <x-buttons.github />
         </div>
     </div>
 
