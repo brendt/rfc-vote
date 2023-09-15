@@ -32,14 +32,14 @@
                 <a
                     {{dusk('reset-password-link')}}
                     href="{{ action(App\Http\Controllers\ForgotPasswordController::class) }}"
-                    class="text-purple-900 hover:underline"
+                    class="text-font underline opacity-80 hover:opacity-100"
                 >
                     Forget Password?
                 </a>
 
                 <div class="inline-flex gap-4">
                     <label for="remember_me" class="flex items-center">
-                        <x-checkbox id="remember_me" name="remember" class="checked:text-purple-900"/>
+                        <x-checkbox id="remember_me" name="remember" />
                         <span class="ml-2 text-sm text-gray-600">Remember me</span>
                     </label>
 
