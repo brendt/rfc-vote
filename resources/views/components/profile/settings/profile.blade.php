@@ -22,19 +22,7 @@
         />
     </div>
 
-    <div class="flex gap-4 items-center my-4">
-        @if ($user->getAvatarUrl())
-            <img
-                src="{{ $user->getAvatarUrl() }}"
-                class="shadow-xl rounded-full"
-                width="80"
-                height="80"
-                alt="Your avatar"
-            />
-        @endif
-
-        <x-form.input type="file" name="avatar" label="Choose a new avatar" />
-    </div>
+    <x-profile.settings.file-uploader :user="$user" />
 
     <div class="col-span-2 mt-6">
         <h2 class="text-xl font-bold mb-2">Social links</h2>
