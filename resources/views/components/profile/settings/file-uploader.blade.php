@@ -15,21 +15,25 @@
 
     <div class="flex flex-col w-full relative py-1 md:my-3">
         <label
-            class="border-4 border-dashed w-full rounded-sm p-4 md:p-8 cursor-pointer border-divider text-center bg-background opacity-70 hover:opacity-100 transition-opacity"
+            class="flex flex-col text-gray-500 items-center gap-1 border-4 border-dashed w-full rounded-sm p-3 md:p-5 cursor-pointer border-divider bg-background opacity-70 hover:opacity-100 transition-opacity"
             x-bind="area"
         >
-            <span
-                x-html="areaMessage"
-                class="text-gray-500 dark:text-gray-600 tracking-wide pointer-events-none"
-            ></span>
+            <x-icons.camera class="w-10 h-10" />
 
-            <input
-                x-ref="fileInp"
-                @change="onFileChange"
-                type="file"
-                name="avatar"
-                class="hidden"
-            />
+            <div>
+                <span
+                    x-html="areaMessage"
+                    class="dark:text-gray-600 tracking-wide pointer-events-none"
+                ></span>
+
+                <input
+                    x-ref="fileInp"
+                    @change="onFileChange"
+                    type="file"
+                    name="avatar"
+                    class="hidden"
+                />
+            </div>
         </label>
 
         <small
