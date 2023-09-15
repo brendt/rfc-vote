@@ -4,6 +4,7 @@ Alpine.data('avatarSettings', () => ({
     _defaultAreaMessage: '<b>Choose a file</b> or drag it here',
     _dragMessage: 'Drop your file <b>here</b>',
     _defaultAvatar: '',
+    avatarChanged: false,
     areaMessage: '',
     avatar: '',
 
@@ -55,5 +56,6 @@ Alpine.data('avatarSettings', () => ({
 
     _updateAvatarPreview(file) {
         this.avatar = URL.createObjectURL(file)
+        this.avatarChanged = true
     },
 }))
