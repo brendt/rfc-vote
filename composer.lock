@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e61c00e51d01bc86942c1d9c61a55de",
+    "content-hash": "3107fa921f457bcf4cc28b7f3f604bdf",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -10011,6 +10011,73 @@
             "time": "2023-09-05T04:34:51+00:00"
         },
         {
+            "name": "protonemedia/laravel-dusk-fakes",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/protonemedia/laravel-dusk-fakes.git",
+                "reference": "a9635673b5430184cd2b6e038e8e7aa21e7f3397"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/protonemedia/laravel-dusk-fakes/zipball/a9635673b5430184cd2b6e038e8e7aa21e7f3397",
+                "reference": "a9635673b5430184cd2b6e038e8e7aa21e7f3397",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0",
+                "laravel/dusk": "^7.0",
+                "php": "^8.1|^8.2",
+                "spatie/invade": "^1.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nesbot/carbon": "^2.66",
+                "nunomaduro/collision": "^6.0",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpunit/phpunit": "^9.5|^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ProtoneMedia\\LaravelDuskFakes\\LaravelDuskFakesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ProtoneMedia\\LaravelDuskFakes\\": "src",
+                    "ProtoneMedia\\LaravelDuskFakes\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pascal Baljet",
+                    "email": "pascal@protone.media",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Persistent Fakes for Laravel Dusk",
+            "homepage": "https://github.com/protonemedia/laravel-dusk-fakes",
+            "keywords": [
+                "laravel",
+                "laravel-dusk-fakes",
+                "protonemedia"
+            ],
+            "support": {
+                "issues": "https://github.com/protonemedia/laravel-dusk-fakes/issues",
+                "source": "https://github.com/protonemedia/laravel-dusk-fakes/tree/1.4.0"
+            },
+            "time": "2023-04-04T09:48:42+00:00"
+        },
+        {
             "name": "sebastian/cli-parser",
             "version": "2.0.0",
             "source": {
@@ -11139,6 +11206,72 @@
                 }
             ],
             "time": "2023-08-21T15:06:37+00:00"
+        },
+        {
+            "name": "spatie/invade",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/invade.git",
+                "reference": "d0a9c895a96152549d478a7e3420e19039eef038"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/invade/zipball/d0a9c895a96152549d478a7e3420e19039eef038",
+                "reference": "d0a9c895a96152549d478a7e3420e19039eef038",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.20",
+                "phpstan/phpstan": "^1.4",
+                "spatie/ray": "^1.28"
+            },
+            "type": "library",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "phpstan-extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Spatie\\Invade\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP function to work with private properties and methods",
+            "homepage": "https://github.com/spatie/invade",
+            "keywords": [
+                "invade",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/invade/tree/1.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-07-05T09:31:00+00:00"
         },
         {
             "name": "spatie/laravel-ignition",

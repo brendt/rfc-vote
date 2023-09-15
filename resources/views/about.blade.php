@@ -54,7 +54,7 @@
 <x-about.contributors :contributors="$contributors" />
 
 <x-about.section heading="Interesting links">
-    <ul>
+    <ul {{dusk('interesting-links-container')}}>
         <li>
             <x-about.link href="https://github.com/brendt/rfc-vote">
                 <x-icons.link class="w-4 h-4 inline-block mr-1" />

@@ -2,7 +2,7 @@
     $styles = 'flex gap-2 items-center relative focus:outline-none focus:shadow-outline text-font';
 @endphp
 
-<div class="flex justify-center items-center mt-7 md:mt-0">
+<div {{dusk('dark-mode-button')}} class="flex justify-center items-center mt-7 md:mt-0">
     <button
         id="header__moon"
         title="Switch to light mode"

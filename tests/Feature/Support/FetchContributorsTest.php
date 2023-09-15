@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class FetchContributorsTest extends TestCase
 {
-    public function test_no_duplicates_in_contributors_json()
+    public function test_no_duplicates_in_contributors_json(): void
     {
         $contributors = app(FetchContributors::class)->getJson();
 
@@ -19,7 +19,7 @@ class FetchContributorsTest extends TestCase
         );
     }
 
-    public function test_get_contributors_returns_an_array_of_contributor_models()
+    public function test_get_contributors_returns_an_array_of_contributor_models(): void
     {
         $contributors = app(FetchContributors::class)->getContributors();
 
