@@ -38,7 +38,6 @@
         @endif
 
         <label
-            for="avatar-field"
             class="border-4 border-dashed w-full rounded-sm p-8 cursor-pointer border-divider text-center bg-background opacity-70 hover:opacity-100 transition-opacity"
             x-bind="area"
         >
@@ -47,7 +46,13 @@
                 class="text-gray-500 dark:text-gray-600 tracking-wide pointer-events-none"
             ></span>
 
-            <input id="avatar-field" type="file" name="avatar" class="hidden" />
+            <input
+                x-ref="fileInp"
+                @change="onFileChange"
+                type="file"
+                name="avatar"
+                class="hidden"
+            />
         </label>
     </div>
 
