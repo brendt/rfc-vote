@@ -1,8 +1,6 @@
 @component('layouts.base')
     <div class="container max-w-[1200px] mx-auto px-4 grid gap-4 my-10">
-        <div class="px-4 max-w-[1200px]">
-            <x-email-optin-banner :user="auth()->user()"/>
-        </div>
+        <x-email-optin-banner :user="auth()->user()"/>
 
         <x-home.title>
             {{ __('Open RFCs') }}
