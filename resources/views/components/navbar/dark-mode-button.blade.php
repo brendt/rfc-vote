@@ -11,7 +11,7 @@
         @click="toggle()"
         x-bind:class="{ 'hidden': !darkMode }"
     >
-        <x-icons.dark-mode />
+        <x-icons.moon class="w-6 h-6 md:text-white" />
 
         <span class="md:hidden">Switch to Light mode</span>
     </button>
@@ -24,7 +24,7 @@
         @click="toggle()"
         x-bind:class="{ 'hidden': darkMode }"
     >
-        <x-icons.light-mode/>
+        <x-icons.sun class="w-6 h-6 md:text-white" />
 
         <span class="md:hidden">Switch to Dark mode</span>
     </button>
