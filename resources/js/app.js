@@ -7,6 +7,7 @@ import hljs from 'highlight.js/lib/core'
 import php from 'highlight.js/lib/languages/php'
 import tippy from 'tippy.js'
 import './data/profile/avatarSettings'
+import './data/general/darkTheme'
 
 hljs.registerLanguage('php', php)
 hljs.highlightAll()

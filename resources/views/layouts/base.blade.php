@@ -1,16 +1,5 @@
 <!doctype html>
-<html :data-theme="darkMode ? 'dark' : 'light'" lang="en"
-      class="scroll-smooth"
-      x-cloak
-      x-data="{
-        darkMode: localStorage.getItem('theme') === null ? window.matchMedia('(prefers-color-scheme: dark)').matches : localStorage.getItem('theme') === 'dark',
-        toggle() {
-          this.darkMode = !this.darkMode;
-          localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
-        }
-      }"
-      :class="{ 'dark': darkMode }"
->
+<html class="scroll-smooth" lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +15,14 @@
 
     @stack('meta')
 </head>
-<body class="min-h-screen flex flex-col bg-background transition-colors duration-300">
+
+<body
+    x-data="darkTheme"
+    x-cloak
+    :data-theme="darkMode ? 'dark' : 'light'"
+    :class="{ 'dark': darkMode }"
+    class="min-h-screen flex flex-col bg-background transition-colors duration-300"
+>
 
 @php
     $user = auth()->user();
