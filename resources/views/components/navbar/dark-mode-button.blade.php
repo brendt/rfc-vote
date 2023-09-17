@@ -3,29 +3,39 @@
 @endphp
 
 <div {{dusk('dark-mode-button')}} class="flex justify-center items-center mt-7 md:mt-0">
+    {{-- Dark theme switches to light theme --}}
     <button
-        id="header__moon"
-        title="Switch to light mode"
+        data-tippy-content="Switch to light theme"
         class="{{ $styles }}"
-        x-cloak
-        @click="toggle()"
-        x-bind:class="{ 'hidden': !darkMode }"
+        @click="toggle('light')"
+        x-show="darkMode === true"
     >
-        <x-icons.dark-mode />
+        <x-icons.moon class="w-6 h-6 md:text-white" />
 
-        <span class="md:hidden">Switch to Light mode</span>
+        <span class="md:hidden">Switch to Light theme</span>
     </button>
 
+    {{-- Light theme switches to system theme --}}
     <button
-        id="header__indeterminate"
-        title="Switch to dark mode"
+        data-tippy-content="Switch to system theme"
         class="{{ $styles }}"
-        x-cloak
-        @click="toggle()"
-        x-bind:class="{ 'hidden': darkMode }"
+        @click="toggle('system')"
+        x-show="darkMode === false"
     >
-        <x-icons.light-mode/>
+        <x-icons.sun class="w-6 h-6 md:text-white" />
 
-        <span class="md:hidden">Switch to Dark mode</span>
+        <span class="md:hidden">Switch to System theme</span>
+    </button>
+
+    {{-- System theme switches to dark theme --}}
+    <button
+        data-tippy-content="Switch to dark theme"
+        class="{{ $styles }}"
+        @click="toggle('dark')"
+        x-show="darkMode === null"
+    >
+        <x-icons.computer-desktop class="w-6 h-6 md:text-white" />
+
+        <span class="md:hidden">Switch to Dark theme</span>
     </button>
 </div>
