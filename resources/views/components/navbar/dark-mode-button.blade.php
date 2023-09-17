@@ -5,7 +5,7 @@
 <div {{dusk('dark-mode-button')}} class="flex justify-center items-center mt-7 md:mt-0">
     {{-- Dark theme switches to light theme --}}
     <button
-        title="Switch to light theme"
+        data-tippy-content="Switch to light theme"
         class="{{ $styles }}"
         @click="toggle('light')"
         x-show="darkMode === true"
@@ -17,7 +17,7 @@
 
     {{-- Light theme switches to system theme --}}
     <button
-        title="Switch to system theme"
+        data-tippy-content="Switch to system theme"
         class="{{ $styles }}"
         @click="toggle('system')"
         x-show="darkMode === false"
@@ -29,7 +29,7 @@
 
     {{-- System theme switches to dark theme --}}
     <button
-        title="Switch to dark theme"
+        data-tippy-content="Switch to dark theme"
         class="{{ $styles }}"
         @click="toggle('dark')"
         x-show="darkMode === null"
