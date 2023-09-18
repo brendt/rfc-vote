@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Pipeline;
 
 class RfcImporter
 {
-    public function __invoke(Command $command, array $rfcs = []): array
+    public function __invoke(Command $command, array $rfcs = []): void
     {
         $historySections = new GatherSections;
 
@@ -22,35 +22,11 @@ class RfcImporter
 
         $command->info(\Str::plural("Gathering data for {$numberOfRfcs} rfc", $numberOfRfcs));
 
-        $bar = $command->getOutput()->createProgressBar($numberOfRfcs);
-
-        $rfcData = [];
-
-        foreach ($rfcs as $rfc) {
-            $this->gatherRfcData($rfc, $sections, $command);
-
-            $bar->advance();
-        }
-
-        $bar->finish();
-
-        return $rfcData;
+        PendingRfc::query()->upsert(array_values($sections), ['slug']);
     }
 
     private function gatherRfcData(string $rfcTitle, array $sections, Command $command)
     {
-        Pipeline::send(new PendingSyncRfc($rfcTitle, $sections))
-            ->through([
-                DownloadRfc::class,
-                GatherRfcMetaData::class,
-                CleanMetaData::class,
-                FromRstToMarkDown::class,
-            ])->then(function (PendingSyncRfc $rfc) {
-                PendingRfc::query()->upsert([
-                    $rfc->toArray(),
-                ], ['slug']);
 
-                return $rfc;
-            });
     }
 }
