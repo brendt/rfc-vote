@@ -367,7 +367,7 @@ class CleanMetaData
     {
         $date = $this->revisions->gatherEarliestRevisionDate($rfcSlug);
 
-        if (null === $date) {
+        if ($date === null) {
             return '0000-00-00';
         }
 
