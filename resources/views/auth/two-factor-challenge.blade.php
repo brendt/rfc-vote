@@ -5,7 +5,7 @@
         </x-slot>
 
         <div x-data="{ recovery: false }">
-            <div class="mb-4 text-sm text-gray-600" x-show="! recovery">
+            <div class="mb-4 text-sm text-gray-600" x-show="!recovery">
                 Please confirm access to your account by entering the authentication code provided by your authenticator application.
             </div>
 
@@ -20,37 +20,57 @@
 
                 <div class="mt-4" x-show="! recovery">
                     <x-label for="code" value="Code" />
-                    <x-input id="code" class="block mt-1 w-full" type="text" inputmode="numeric" name="code" autofocus x-ref="code" autocomplete="one-time-code" />
+                    <x-input
+                        id="code"
+                        class="block mt-1 w-full"
+                        type="text"
+                        inputmode="numeric"
+                        name="code"
+                        autofocus
+                        x-ref="code"
+                        autocomplete="one-time-code"
+                    />
                 </div>
 
                 <div class="mt-4" x-cloak x-show="recovery">
                     <x-label for="recovery_code" value="Recovery Code" />
-                    <x-input id="recovery_code" class="block mt-1 w-full" type="text" name="recovery_code" x-ref="recovery_code" autocomplete="one-time-code" />
+                    <x-input
+                        id="recovery_code"
+                        class="block mt-1 w-full"
+                        type="text"
+                        name="recovery_code"
+                        x-ref="recovery_code"
+                        autocomplete="one-time-code"
+                    />
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
-                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
-                                    x-show="! recovery"
-                                    x-on:click="
-                                        recovery = true;
-                                        $nextTick(() => { $refs.recovery_code.focus() })
-                                    ">
+                    <button
+                        type="button"
+                        class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
+                        x-show="! recovery"
+                        x-on:click="
+                            recovery = true;
+                            $nextTick(() => { $refs.recovery_code.focus() })
+                        "
+                    >
                         Use a recovery code
                     </button>
 
-                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
-                                    x-cloak
-                                    x-show="recovery"
-                                    x-on:click="
-                                        recovery = false;
-                                        $nextTick(() => { $refs.code.focus() })
-                                    ">
+                    <button
+                        type="button"
+                        class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
+                        x-cloak
+                        x-show="recovery"
+                        x-on:click="
+                            recovery = false;
+                            $nextTick(() => { $refs.code.focus() })
+                        "
+                    >
                         Use an authentication code
                     </button>
 
-                    <x-button class="ml-4">
-                        Log in
-                    </x-button>
+                    <x-button class="ml-4">Log in</x-button>
                 </div>
             </form>
         </div>
