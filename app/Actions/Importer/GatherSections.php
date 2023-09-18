@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace App\Actions\Importer;
 
 use DOMDocument;
-use DOMElement;
 use DOMNodeList;
 use DOMXPath;
-use Illuminate\Support\Facades\Http;
 use PhpRfcs\Wiki;
 use RuntimeException;
 use Tidy;
@@ -26,7 +24,7 @@ class GatherSections
     {
         $rfcs = $this->addFromRfcsPage([]);
 
-        array_multisort(array_column($rfcs, 'slug'),  SORT_ASC, $rfcs);
+        array_multisort(array_column($rfcs, 'slug'), SORT_ASC, $rfcs);
 
         return $rfcs;
     }

@@ -4,7 +4,6 @@ namespace App\Actions\Importer;
 
 use App\Models\PendingRfc;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Pipeline;
 
 class RfcImporter
 {
