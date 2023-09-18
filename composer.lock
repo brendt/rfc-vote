@@ -1748,16 +1748,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.22.0",
+            "version": "v10.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "9234388a895206d4e1df37342b61adc67e5c5d31"
+                "reference": "dbfd495557678759153e8d71cc2f6027686ca51e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/9234388a895206d4e1df37342b61adc67e5c5d31",
-                "reference": "9234388a895206d4e1df37342b61adc67e5c5d31",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/dbfd495557678759153e8d71cc2f6027686ca51e",
+                "reference": "dbfd495557678759153e8d71cc2f6027686ca51e",
                 "shasum": ""
             },
             "require": {
@@ -1857,7 +1857,7 @@
                 "league/flysystem-read-only": "^3.3",
                 "league/flysystem-sftp-v3": "^3.0",
                 "mockery/mockery": "^1.5.1",
-                "orchestra/testbench-core": "^8.4",
+                "orchestra/testbench-core": "^8.10",
                 "pda/pheanstalk": "^4.0",
                 "phpstan/phpstan": "^1.4.7",
                 "phpunit/phpunit": "^10.0.7",
@@ -1944,7 +1944,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-09-05T13:20:01+00:00"
+            "time": "2023-09-13T14:51:46+00:00"
         },
         {
             "name": "laravel/horizon",
@@ -2095,16 +2095,16 @@
         },
         {
             "name": "laravel/prompts",
-            "version": "v0.1.6",
+            "version": "v0.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "b514c5620e1b3b61221b0024dc88def26d9654f4"
+                "reference": "554e7d855a22e87942753d68e23b327ad79b2070"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/b514c5620e1b3b61221b0024dc88def26d9654f4",
-                "reference": "b514c5620e1b3b61221b0024dc88def26d9654f4",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/554e7d855a22e87942753d68e23b327ad79b2070",
+                "reference": "554e7d855a22e87942753d68e23b327ad79b2070",
                 "shasum": ""
             },
             "require": {
@@ -2137,9 +2137,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
-                "source": "https://github.com/laravel/prompts/tree/v0.1.6"
+                "source": "https://github.com/laravel/prompts/tree/v0.1.7"
             },
-            "time": "2023-08-18T13:32:23+00:00"
+            "time": "2023-09-12T11:09:22+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -5174,16 +5174,16 @@
         },
         {
             "name": "spatie/laravel-mail-preview",
-            "version": "6.0.5",
+            "version": "6.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-mail-preview.git",
-                "reference": "6da7ad0f579499587195ed9a07540d31b38f391a"
+                "reference": "00b744e223729809a84ef34281b6279d085236a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-mail-preview/zipball/6da7ad0f579499587195ed9a07540d31b38f391a",
-                "reference": "6da7ad0f579499587195ed9a07540d31b38f391a",
+                "url": "https://api.github.com/repos/spatie/laravel-mail-preview/zipball/00b744e223729809a84ef34281b6279d085236a8",
+                "reference": "00b744e223729809a84ef34281b6279d085236a8",
                 "shasum": ""
             },
             "require": {
@@ -5235,7 +5235,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-mail-preview/issues",
-                "source": "https://github.com/spatie/laravel-mail-preview/tree/6.0.5"
+                "source": "https://github.com/spatie/laravel-mail-preview/tree/6.0.6"
             },
             "funding": [
                 {
@@ -5247,7 +5247,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-25T15:10:45+00:00"
+            "time": "2023-09-14T16:44:53+00:00"
         },
         {
             "name": "spatie/laravel-markdown",
