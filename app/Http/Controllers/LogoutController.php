@@ -8,6 +8,6 @@ final readonly class LogoutController
 {
     public function __invoke(): View
     {
-        return view('logout');
+        return view('auth.logout');
     }
 }
