@@ -44,7 +44,6 @@ Route::get('/rfc/{rfc}', RfcDetailController::class)->name('rfc-detail');
 Route::get('/rfc/{rfc}/meta.png', RfcMetaImageController::class)->middleware('cache:900');
 Route::get('/login', LoginController::class)->name('login');
 Route::get('/register', RegisterController::class)->name('register');
-Route::get('/register-pending', fn () => view('register-pending'))->name('register-pending');
 Route::get('/logout', LogoutController::class);
 Route::get('/about', AboutController::class);
 Route::get('email/verify/{token}', [ProfileController::class, 'verifyEmail'])->name('email.verify');
