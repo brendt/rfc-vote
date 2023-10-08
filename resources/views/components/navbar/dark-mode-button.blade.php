@@ -8,7 +8,7 @@
         data-tippy-content="Switch to light theme"
         class="{{ $styles }}"
         @click="toggle('light')"
-        x-show="darkMode === true"
+        x-show="switchType === 'dark'"
     >
         <x-icons.moon class="w-6 h-6 md:text-white" />
 
@@ -20,7 +20,7 @@
         data-tippy-content="Switch to system theme"
         class="{{ $styles }}"
         @click="toggle('system')"
-        x-show="darkMode === false"
+        x-show="switchType === 'light'"
     >
         <x-icons.sun class="w-6 h-6 md:text-white" />
 
@@ -32,7 +32,7 @@
         data-tippy-content="Switch to dark theme"
         class="{{ $styles }}"
         @click="toggle('dark')"
-        x-show="darkMode === null"
+        x-show="switchType === 'system'"
     >
         <x-icons.computer-desktop class="w-6 h-6 md:text-white" />
 

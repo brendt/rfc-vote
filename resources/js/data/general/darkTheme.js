@@ -2,18 +2,22 @@ import Alpine from 'alpinejs'
 
 Alpine.data('darkTheme', () => ({
     darkMode: null,
+    switchType: 'system', // 'light', 'dark', 'system'
 
     /**
      * @param {'dark'|'light'|'system'} theme
      */
     toggle(theme) {
         if (theme === 'system') {
-            this.darkMode = null
+            this.darkMode = this._prefersDarkSystemTheme().matches
+            this.switchType = 'system'
             localStorage.removeItem('theme')
             return
         }
 
-        this.darkMode = !this.darkMode
+        this.darkMode = theme === 'dark'
+        this.switchType = this.darkMode ? 'dark' : 'light'
+
         localStorage.setItem('theme', this.darkMode ? 'dark' : 'light')
     },
 
@@ -26,15 +30,21 @@ Alpine.data('darkTheme', () => ({
 
         if (selectedTheme) {
             this.darkMode = selectedTheme === 'dark'
+            this.switchType = selectedTheme
             return
         }
 
-        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+        const prefersDark = this._prefersDarkSystemTheme()
 
-        this.darkMode = systemTheme.matches
+        this.darkMode = prefersDark.matches
+        this.switchType = 'system'
 
-        systemTheme.addEventListener('change', ({ matches }) => {
+        prefersDark.addEventListener('change', ({ matches }) => {
             this.darkMode = matches
         })
     },
+
+    _prefersDarkSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)')
+    }
 }))
