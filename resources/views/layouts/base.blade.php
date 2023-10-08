@@ -1,5 +1,13 @@
 <!doctype html>
-<html class="scroll-smooth" lang="en">
+<html
+    x-data="darkTheme"
+    x-cloak
+    :data-theme="darkMode ? 'dark' : 'light'"
+    :class="{ 'dark': darkMode }"
+    class="scroll-smooth"
+    lang="en"
+>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,18 +19,12 @@
     @stack('styles')
     @stack('scripts')
 
-    {{ app(\App\Support\Meta::class)->render() }}
+    {{ app(App\Support\Meta::class)->render() }}
 
     @stack('meta')
 </head>
 
-<body
-    x-data="darkTheme"
-    x-cloak
-    :data-theme="darkMode ? 'dark' : 'light'"
-    :class="{ 'dark': darkMode }"
-    class="min-h-screen flex flex-col bg-background transition-colors duration-300"
->
+<body class="min-h-screen flex flex-col bg-background transition-colors duration-300">
 
 @php
     $user = auth()->user();
