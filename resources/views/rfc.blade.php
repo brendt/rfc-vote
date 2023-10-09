@@ -11,7 +11,7 @@
 @endpush
 
 @component('layouts.base', [
-    'pageTitle' => $rfc->title . ' - ' . __('RFC Vote'),
+    'pageTitle' => $rfc->title . ' - RFC Vote',
     'showToTopArrow' => true,
 ])
     <div class="container mx-auto px-4 mt-5 max-w-[1200px] mb-8">
@@ -29,7 +29,7 @@
                     class="bg-[#555f88] text-white"
                 >
                     <x-icons.external-link class="w-4 h-4" />
-                    {{ __('Read the RFC') }}
+                    Read the RFC
                 </x-tag>
 
                 @if($rfc->externals_url)
@@ -39,7 +39,7 @@
                         class="bg-[#555f88] text-white"
                     >
                         <x-icons.external-link class="w-4 h-4" />
-                        {{ __('Externals') }}
+                        Externals
                     </x-tag>
                 @endif
 
@@ -57,7 +57,7 @@
                         class="bg-blue-100"
                     >
                         <x-icons.pen class="w-4 h-4" />
-                        {{ __('Edit') }}
+                        Edit
                     </x-tag>
                 @endif
             </div>
@@ -81,7 +81,7 @@
 
         <div class="mt-12 md:px-8">
             <h2 class="text-2xl font-bold text-font-second tracking-wide md:mb-1">
-                {{ __('Check out another RFCs') }}
+                Check out another RFCs
             </h2>
             <div class="flex flex-col justify-center lg:flex-row mt-4 space-x-0 space-y-4 lg:space-x-4 lg:space-y-0">
                 @foreach($additionalRfcs as $additionalRfc)
