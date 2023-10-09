@@ -1,10 +1,11 @@
 <div class="p-5">
     <div class="flex justify-end items-center mb-4">
         <div class="flex space-x-2">
-            <x-input
+            <x-form.input
                 type="text"
                 placeholder="Search..."
                 wire:model.debounce="search"
+                label="Search a user"
             />
         </div>
     </div>
