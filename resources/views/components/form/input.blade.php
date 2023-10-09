@@ -1,18 +1,20 @@
 @php
     /**
      * @var string $slot
-     * @var string $label
+     * @var string|null $label
      * @var Illuminate\View\ComponentAttributeBag $attributes
      */
 @endphp
 
 <div>
     <label>
-        <b class="text-sm">{{ $label }}</b>
+        @isset($label)
+            <b class="text-sm">{{ $label }}</b>
+        @endisset
 
         <input
             {{ $attributes->merge([
-                'class' => 'border text-font bg-input border-divider rounded-md p-2 w-full ring-1 focus:ring-2 ring-transparent focus:border-purple-300 focus:ring-purple-500/50 focus:outline-none',
+                'class' => 'border text-font bg-input border-divider rounded-md px-3 py-2 w-full ring-1 focus:ring-2 ring-transparent focus:border-purple-300 focus:ring-purple-500/50 focus:outline-none',
             ]) }}
         />
     </label>
