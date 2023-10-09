@@ -29,7 +29,7 @@
         <small class="flex items-center gap-1">
             <x-profile.username :user="$argumentUser" />
 
-            {{ __('voted') }}
+            voted
 
             <b @class([
                 'tracking-wide uppercase ml-0.5',
