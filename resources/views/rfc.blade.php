@@ -66,9 +66,19 @@
                 {!! $rfc->description !!}
             </x-markdown>
 
-            @if(!$user || $user->shouldSeeTutorial())
-                <x-rfc.tutorial />
-            @endif
+            <div class="mt-2 text-right">
+                <a
+                    href="/about#How voting works"
+                    title="Link to the about page"
+                    class="text-font-second text-xs inline-flex items-center gap-1 opacity-70 hover:opacity-100"
+                    target="_blank"
+                >
+
+                    <x-icons.question-mark-circle class="w-4 h-4" />
+                    <span>Learn how voting works</span>
+                    <x-icons.external-link class="w-3 h-3 -mt-1" />
+                </a>
+            </div>
         </div>
 
         <div class="col-span-3 mt-4 md:mt-8">
