@@ -1,6 +1,5 @@
-@import 'tippy.js/dist/tippy.css';
+@import 'tippy.js/dist/tippy';
 @import '_variables.css';
-@import '_fixes.css';
 @import "_theme.scss";
 
 @tailwind base;
