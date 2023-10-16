@@ -4,6 +4,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    @vite('resources/css/easymde.scss')
 @endpush
 
 @push('scripts')
