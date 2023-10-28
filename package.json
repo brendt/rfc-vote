@@ -19,7 +19,7 @@
         "vite": "^4.4.9"
     },
     "dependencies": {
-        "@ryangjchandler/alpine-clipboard": "^2.2.0",
+        "@ryangjchandler/alpine-clipboard": "^2.3.0",
         "highlight.js": "^11.9.0",
         "puppeteer": "^21.3.6",
         "shiki": "^0.14.4",
