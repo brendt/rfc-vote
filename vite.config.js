@@ -12,7 +12,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/css/easymde-dark.scss',
+                'resources/css/easymde.css',
             ],
             refresh: [
                 ...refreshPaths,
