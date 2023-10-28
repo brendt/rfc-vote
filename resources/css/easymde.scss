@@ -47,7 +47,11 @@
 .CodeMirror-cursor {
     border-left: 1px solid #000;
     border-right: none;
-    width: 0
+    width: 0;
+
+    .dark & {
+        border-left-color: var(--color-agree-arrow-hover);
+    }
 }
 
 .CodeMirror div.CodeMirror-secondarycursor {
@@ -564,6 +568,10 @@ span.CodeMirror-selectedtext {
     border-right: 1px solid var(--color-divider);
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+
+    .dark & {
+        background-color: var(--color-main);
+    }
 }
 
 .editor-toolbar.fullscreen {
@@ -578,7 +586,11 @@ span.CodeMirror-selectedtext {
     top: 0;
     left: 0;
     opacity: 1;
-    z-index: 9
+    z-index: 9;
+
+    .dark & {
+        background-color: var(--color-main);
+    }
 }
 
 .editor-toolbar.fullscreen::before {
@@ -895,15 +907,4 @@ span[data-img-src]::after {
 
 .CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
     background: rgba(255, 0, 0, .15)
-}
-
-@media (prefers-color-scheme: dark) {
-    .editor-toolbar,
-    .editor-toolbar.fullscreen {
-        background: var(--color-main);
-    }
-
-    .CodeMirror-cursor {
-        border-left-color: var(--color-agree-arrow-hover);
-    }
 }
