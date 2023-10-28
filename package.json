@@ -20,7 +20,7 @@
     },
     "dependencies": {
         "@ryangjchandler/alpine-clipboard": "^2.2.0",
-        "highlight.js": "^11.8.0",
+        "highlight.js": "^11.9.0",
         "puppeteer": "^21.3.6",
         "shiki": "^0.14.4",
         "tippy.js": "^6.3.7"
