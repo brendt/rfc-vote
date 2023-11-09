@@ -1,32 +1,23 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\User;
-use Tests\TestCase;
 
-class HomeTest extends TestCase
-{
-    public function test_the_application_returns_a_successful_response(): void
-    {
-        $this->get('/')->assertStatus(200);
-    }
+test('the application returns a successful response', function () {
+    $this->get('/')->assertStatus(200);
+});
 
-    public function test_the_application_returns_a_successful_response_when_auth_user_visits_it(): void
-    {
-        $user = User::factory()->create();
+test('the application returns a successful response when auth user visits it', function () {
+    $user = User::factory()->create();
 
-        $this->actingAs($user)
-            ->get('/')
-            ->assertStatus(200);
-    }
+    $this->actingAs($user)
+        ->get('/')
+        ->assertStatus(200);
+});
 
-    public function test_the_application_returns_a_successful_response_when_admin_visits_it(): void
-    {
-        $admin = User::factory()->create(['is_admin' => true]);
+test('the application returns a successful response when admin visits it', function () {
+    $admin = User::factory()->create(['is_admin' => true]);
 
-        $this->actingAs($admin)
-            ->get('/')
-            ->assertStatus(200);
-    }
-}
+    $this->actingAs($admin)
+        ->get('/')
+        ->assertStatus(200);
+});

@@ -1,212 +1,190 @@
 <?php
 
-namespace Tests\Feature\Profile;
-
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
 
-class UpdateProfileTest extends TestCase
-{
-    private string $url;
+beforeEach(function () {
+    $this->url = action([ProfileController::class, 'update']);
+});
 
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->url = action([ProfileController::class, 'update']);
-    }
+test('user can update name and username', function () {
+    $user = User::factory()->create();
 
-    public function test_user_can_update_name_and_username(): void
-    {
-        $user = User::factory()->create();
+    $formData = [
+        'name' => 'Anna',
+        'username' => 'anna',
+    ];
 
-        $formData = [
-            'name' => 'Anna',
-            'username' => 'anna',
-        ];
+    $this->actingAs($user)->post($this->url, $formData);
 
-        $this->actingAs($user)->post($this->url, $formData);
+    $this->assertDatabaseHas('users', [
+        'id' => $user->id,
+        ...$formData,
+    ]);
+});
 
-        $this->assertDatabaseHas('users', [
-            'id' => $user->id,
-            ...$formData,
-        ]);
-    }
+test('user can update urls', function () {
+    $user = User::factory()->create();
 
-    public function test_user_can_update_urls(): void
-    {
-        $user = User::factory()->create();
+    $formData = [
+        'name' => 'Anna',
+        'username' => 'anna',
+        'website_url' => 'https://anna.com',
+        'twitter_url' => 'https://twitter.com/anna',
+        'github_url' => 'https://github.com/anna',
+    ];
 
-        $formData = [
-            'name' => 'Anna',
-            'username' => 'anna',
-            'website_url' => 'https://anna.com',
-            'twitter_url' => 'https://twitter.com/anna',
-            'github_url' => 'https://github.com/anna',
-        ];
+    $this->actingAs($user)->post($this->url, $formData);
 
-        $this->actingAs($user)->post($this->url, $formData);
+    $this->assertDatabaseHas('users', [
+        'id' => $user->id,
+        ...$formData,
+    ]);
+});
 
-        $this->assertDatabaseHas('users', [
-            'id' => $user->id,
-            ...$formData,
-        ]);
-    }
+test('username is required', function () {
+    $user = User::factory()->create();
 
-    public function test_username_is_required(): void
-    {
-        $user = User::factory()->create();
+    $formData = ['name' => 'Sam'];
 
-        $formData = ['name' => 'Sam'];
+    $this->actingAs($user)
+        ->post($this->url, $formData)
+        ->assertSessionHasErrors('username');
+});
 
-        $this->actingAs($user)
-            ->post($this->url, $formData)
-            ->assertSessionHasErrors('username');
-    }
+test('name is required', function () {
+    $user = User::factory()->create();
 
-    public function test_name_is_required(): void
-    {
-        $user = User::factory()->create();
+    $formData = ['username' => 'serhii-cho'];
 
-        $formData = ['username' => 'serhii-cho'];
+    $this->actingAs($user)
+        ->post($this->url, $formData)
+        ->assertSessionHasErrors('name');
+});
 
-        $this->actingAs($user)
-            ->post($this->url, $formData)
-            ->assertSessionHasErrors('name');
-    }
+test('name cannot be more than 255 characters', function () {
+    $user = User::factory()->create();
 
-    public function test_name_cannot_be_more_than_255_characters(): void
-    {
-        $user = User::factory()->create();
+    $formData = [
+        'name' => str_repeat('a', 256),
+        'username' => 'anna',
+    ];
 
-        $formData = [
-            'name' => str_repeat('a', 256),
-            'username' => 'anna',
-        ];
+    $this->actingAs($user)
+        ->post($this->url, $formData)
+        ->assertSessionHasErrors('name');
+});
 
-        $this->actingAs($user)
-            ->post($this->url, $formData)
-            ->assertSessionHasErrors('name');
-    }
+test('username cannot be more than 255 characters', function () {
+    $user = User::factory()->create();
 
-    public function test_username_cannot_be_more_than_255_characters(): void
-    {
-        $user = User::factory()->create();
+    $formData = [
+        'username' => str_repeat('a', 256),
+        'name' => 'anna',
+    ];
 
-        $formData = [
-            'username' => str_repeat('a', 256),
-            'name' => 'anna',
-        ];
+    $this->actingAs($user)
+        ->post($this->url, $formData)
+        ->assertSessionHasErrors('username');
+});
 
-        $this->actingAs($user)
-            ->post($this->url, $formData)
-            ->assertSessionHasErrors('username');
-    }
+test('website url cannot be more than 255 characters', function () {
+    $user = User::factory()->create();
 
-    public function test_website_url_cannot_be_more_than_255_characters(): void
-    {
-        $user = User::factory()->create();
+    $formData = [
+        'username' => 'anna',
+        'name' => 'Anna',
+        'website_url' => str_repeat('a', 256),
+    ];
 
-        $formData = [
-            'username' => 'anna',
-            'name' => 'Anna',
-            'website_url' => str_repeat('a', 256),
-        ];
+    $this->actingAs($user)
+        ->post($this->url, $formData)
+        ->assertSessionHasErrors('website_url');
+});
 
-        $this->actingAs($user)
-            ->post($this->url, $formData)
-            ->assertSessionHasErrors('website_url');
-    }
+test('github url cannot be more than 255 characters', function () {
+    $user = User::factory()->create();
 
-    public function test_github_url_cannot_be_more_than_255_characters(): void
-    {
-        $user = User::factory()->create();
+    $formData = [
+        'username' => 'anna',
+        'name' => 'Anna',
+        'github_url' => str_repeat('a', 256),
+    ];
 
-        $formData = [
-            'username' => 'anna',
-            'name' => 'Anna',
-            'github_url' => str_repeat('a', 256),
-        ];
+    $this->actingAs($user)
+        ->post($this->url, $formData)
+        ->assertSessionHasErrors('github_url');
+});
 
-        $this->actingAs($user)
-            ->post($this->url, $formData)
-            ->assertSessionHasErrors('github_url');
-    }
+test('twitter url cannot be more than 255 characters', function () {
+    $user = User::factory()->create();
 
-    public function test_twitter_url_cannot_be_more_than_255_characters(): void
-    {
-        $user = User::factory()->create();
+    $formData = [
+        'username' => 'anna',
+        'name' => 'Anna',
+        'twitter_url' => str_repeat('a', 256),
+    ];
 
-        $formData = [
-            'username' => 'anna',
-            'name' => 'Anna',
-            'twitter_url' => str_repeat('a', 256),
-        ];
+    $this->actingAs($user)
+        ->post($this->url, $formData)
+        ->assertSessionHasErrors('twitter_url');
+});
 
-        $this->actingAs($user)
-            ->post($this->url, $formData)
-            ->assertSessionHasErrors('twitter_url');
-    }
+test('it saves avatar', function () {
+    $user = User::factory()->create();
+    Storage::fake();
 
-    public function test_it_saves_avatar(): void
-    {
-        $user = User::factory()->create();
-        Storage::fake();
+    $formData = [
+        'username' => 'anna',
+        'name' => 'Anna',
+        'avatar' => UploadedFile::fake()->image('avatar.jpg'),
+    ];
 
-        $formData = [
-            'username' => 'anna',
-            'name' => 'Anna',
-            'avatar' => UploadedFile::fake()->image('avatar.jpg'),
-        ];
+    $this->actingAs($user)->post($this->url, $formData);
 
-        $this->actingAs($user)->post($this->url, $formData);
+    $fileName = $formData['avatar']->hashName();
 
-        $fileName = $formData['avatar']->hashName();
+    Storage::assertExists("public/avatars/{$fileName}");
 
-        Storage::assertExists("public/avatars/{$fileName}");
+    $this->assertDatabaseHas('users', [
+        'id' => $user->id,
+        'avatar' => "public/avatars/{$fileName}",
+    ]);
+});
 
-        $this->assertDatabaseHas('users', [
-            'id' => $user->id,
-            'avatar' => "public/avatars/{$fileName}",
-        ]);
-    }
+test('avatar is not updated to null when avatar in request is null', function () {
+    $avatar = 'public/avatars/alex.jpg';
+    $user = User::factory()->create(compact('avatar'));
 
-    public function test_avatar_is_not_updated_to_null_when_avatar_in_request_is_null(): void
-    {
-        $avatar = 'public/avatars/alex.jpg';
-        $user = User::factory()->create(compact('avatar'));
+    $formData = [
+        'username' => 'alex',
+        'name' => 'alex',
+        'avatar' => null,
+    ];
 
-        $formData = [
-            'username' => 'alex',
-            'name' => 'alex',
-            'avatar' => null,
-        ];
+    $this->actingAs($user)->post($this->url, $formData);
 
-        $this->actingAs($user)->post($this->url, $formData);
+    $this->assertDatabaseHas('users', [
+        'id' => $user->id,
+        'avatar' => $avatar,
+    ]);
+});
 
-        $this->assertDatabaseHas('users', [
-            'id' => $user->id,
-            'avatar' => $avatar,
-        ]);
-    }
+test('avatar is not updated to null when not provided', function () {
+    $avatar = 'public/avatars/sam.jpg';
+    $user = User::factory()->create(compact('avatar'));
 
-    public function test_avatar_is_not_updated_to_null_when_not_provided(): void
-    {
-        $avatar = 'public/avatars/sam.jpg';
-        $user = User::factory()->create(compact('avatar'));
+    $formData = [
+        'username' => 'sam',
+        'name' => 'Sam',
+    ];
 
-        $formData = [
-            'username' => 'sam',
-            'name' => 'Sam',
-        ];
+    $this->actingAs($user)->post($this->url, $formData);
 
-        $this->actingAs($user)->post($this->url, $formData);
-
-        $this->assertDatabaseHas('users', [
-            'id' => $user->id,
-            'avatar' => $avatar,
-        ]);
-    }
-}
+    $this->assertDatabaseHas('users', [
+        'id' => $user->id,
+        'avatar' => $avatar,
+    ]);
+});

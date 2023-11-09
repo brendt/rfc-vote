@@ -3,7 +3,7 @@
 use App\Console\Commands\RfcSyncCommand;
 use App\Support\ExternalsRssFeed;
 use Mockery\MockInterface;
-use function Pest\Laravel\{artisan, assertDatabaseHas, assertDatabaseMissing};
+use function Pest\Laravel\{artisan, assertDatabaseHas, assertDatabaseMissing};;
 
 test('command', function () {
     $this->mock(ExternalsRssFeed::class, function (MockInterface $mock) {

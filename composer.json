@@ -37,6 +37,7 @@
         "nunomaduro/collision": "^7.0",
         "nunomaduro/larastan": "^2.6",
         "pestphp/pest": "^2.24",
+        "pestphp/pest-plugin-drift": "^2.5",
         "pestphp/pest-plugin-laravel": "^2.2",
         "phpunit/phpunit": "^10.1",
         "protonemedia/laravel-dusk-fakes": "^1.4",

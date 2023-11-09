@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewRfcMail extends Mailable implements HasMailId
+final class NewRfcMail extends Mailable implements HasMailId
 {
     use Queueable, SerializesModels;
 

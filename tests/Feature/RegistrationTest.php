@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Actions\GenerateUsername;
 use App\Http\Controllers\SocialiteCallbackController;
 use App\Models\User;
@@ -11,113 +9,99 @@ use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Socialite\Contracts\Factory as SocialiteFactory;
 use Laravel\Socialite\Two\GithubProvider;
-use Mockery;
 use Mockery\MockInterface;
-use Tests\TestCase;
 
-class RegistrationTest extends TestCase
-{
-    public function test_registration_screen_can_be_rendered(): void
-    {
-        if (! Features::enabled(Features::registration())) {
-            $this->markTestSkipped('Registration support is not enabled.');
-        }
-
-        $response = $this->get('/register');
-
-        $response->assertStatus(200);
+test('registration screen can be rendered', function () {
+    if (! Features::enabled(Features::registration())) {
+        $this->markTestSkipped('Registration support is not enabled.');
     }
 
-    public function test_new_users_can_register(): void
-    {
-        if (! Features::enabled(Features::registration())) {
-            $this->markTestSkipped('Registration support is not enabled.');
+    $response = $this->get('/register');
 
-            return;
-        }
+    $response->assertStatus(200);
+});
 
-        $name = 'Test User';
+test('new users can register', function () {
+    if (! Features::enabled(Features::registration())) {
+        $this->markTestSkipped('Registration support is not enabled.');
 
-        $response = $this->post('/register', [
-            'name' => $name,
-            'username' => (new GenerateUsername)($name),
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
+        return;
+    }
+
+    $name = 'Test User';
+
+    $response = $this->post('/register', [
+        'name' => $name,
+        'username' => (new GenerateUsername)($name),
+        'email' => 'test@example.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+        'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
+    ]);
+
+    $this->assertAuthenticated();
+    $response->assertRedirect(RouteServiceProvider::HOME);
+});
+
+test('has proper validation rules', function (string $fieldKey, array $inputData) {
+    $controlUser = User::factory()->create(
+        [
+            'email' => 'test@test.com',
+            'username' => 'test',
+        ]
+    );
+
+    $dummyUser = User::factory()->make();
+
+    $response = $this->post('/register', [
+        'name' => $dummyUser->name,
+        'username' => $dummyUser->username,
+        'email' => $dummyUser->email,
+        'password' => 'password',
+        'password_confirmation' => 'password',
+        'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
+        ...$inputData,
+    ])->assertSessionHasErrors([$fieldKey]);
+})->with('validationDataProvider');
+
+test('registration form contains username component', function () {
+    $this->get('/register')->assertSeeLivewire('username-input');
+});
+
+test('github registration fills github url', function () {
+    $this->mock(SocialiteFactory::class, function (MockInterface $mock) {
+        $mockUser = tap(new \Laravel\Socialite\Two\User())->map([
+            'email' => 'foo@bar.com',
+            'name' => 'Brent Roose',
+            'nickname' => 'brendt',
         ]);
 
-        $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
-    }
+        $mockedDriver = Mockery::mock(GithubProvider::class);
+        $mockedDriver->shouldReceive('user')->andReturn($mockUser);
 
-    /**
-     * @dataProvider validationDataProvider
-     */
-    public function test_has_proper_validation_rules(string $fieldKey, array $inputData): void
-    {
-        $controlUser = User::factory()->create(
-            [
-                'email' => 'test@test.com',
-                'username' => 'test',
-            ]
-        );
+        $mock->shouldReceive('driver')->with('github')->andReturn($mockedDriver);
+    });
 
-        $dummyUser = User::factory()->make();
+    $this->get(action(SocialiteCallbackController::class, ['driver' => 'github', 'code' => 200]));
 
-        $response = $this->post('/register', [
-            'name' => $dummyUser->name,
-            'username' => $dummyUser->username,
-            'email' => $dummyUser->email,
-            'password' => 'password',
-            'password_confirmation' => 'password',
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
-            ...$inputData,
-        ])->assertSessionHasErrors([$fieldKey]);
-    }
+    $this->assertDatabaseHas(User::class, [
+        'github_url' => 'https://github.com/brendt',
+    ]);
+});
 
-    public function test_registration_form_contains_username_component(): void
-    {
-        $this->get('/register')->assertSeeLivewire('username-input');
-    }
-
-    public function test_github_registration_fills_github_url(): void
-    {
-        $this->mock(SocialiteFactory::class, function (MockInterface $mock) {
-            $mockUser = tap(new \Laravel\Socialite\Two\User())->map([
-                'email' => 'foo@bar.com',
-                'name' => 'Brent Roose',
-                'nickname' => 'brendt',
-            ]);
-
-            $mockedDriver = Mockery::mock(GithubProvider::class);
-            $mockedDriver->shouldReceive('user')->andReturn($mockUser);
-
-            $mock->shouldReceive('driver')->with('github')->andReturn($mockedDriver);
-        });
-
-        $this->get(action(SocialiteCallbackController::class, ['driver' => 'github', 'code' => 200]));
-
-        $this->assertDatabaseHas(User::class, [
-            'github_url' => 'https://github.com/brendt',
-        ]);
-    }
-
-    public static function validationDataProvider(): array
-    {
-        return [
-            'Username is required' => ['username', ['username' => null]],
-            'Username must have a minimum length of 2' => ['username', ['username' => '']],
-            'Username must have a maximum length of 50' => [
-                'username',
-                ['username' => (new GenerateUsername)(Str::random(51))],
-            ],
-            'Username must follow a slug like format' => ['username', ['username' => 'this is not ok']],
-            'Username should not start with hyphen' => ['username', ['username' => '-this-is-not-ok']],
-            'Username should not end with hyphen' => ['username', ['username' => 'this-is-not-ok-']],
-            'Username should not start with underscore' => ['username', ['username' => '_this-is-not-ok']],
-            'Username should not end with underscore' => ['username', ['username' => 'this-is-not-ok_']],
-            'Username is unique' => ['username', ['username' => 'test']],
-        ];
-    }
-}
+dataset('validationDataProvider', function () {
+    return [
+        'Username is required' => ['username', ['username' => null]],
+        'Username must have a minimum length of 2' => ['username', ['username' => '']],
+        'Username must have a maximum length of 50' => [
+            'username',
+            ['username' => (new GenerateUsername)(Str::random(51))],
+        ],
+        'Username must follow a slug like format' => ['username', ['username' => 'this is not ok']],
+        'Username should not start with hyphen' => ['username', ['username' => '-this-is-not-ok']],
+        'Username should not end with hyphen' => ['username', ['username' => 'this-is-not-ok-']],
+        'Username should not start with underscore' => ['username', ['username' => '_this-is-not-ok']],
+        'Username should not end with underscore' => ['username', ['username' => 'this-is-not-ok_']],
+        'Username is unique' => ['username', ['username' => 'test']],
+    ];
+});

@@ -2,7 +2,7 @@ name: phpunit
 
 on:
   push:
-    branches: [main]
+    branches: [main, pest]
   pull_request:
     branches: [main]
 

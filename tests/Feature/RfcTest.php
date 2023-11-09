@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Http\Controllers\EndRfcController;
 use App\Http\Controllers\PublishRfcController;
 use App\Http\Controllers\RfcAdminController;
@@ -10,139 +8,114 @@ use App\Http\Controllers\RfcEditController;
 use App\Http\Controllers\RfcMetaImageController;
 use App\Models\Rfc;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 
-class RfcTest extends TestCase
-{
-    use WithFaker;
+uses(\Illuminate\Foundation\Testing\WithFaker::class);
 
-    /** @test */
-    public function rfc_management_only_accessible_by_admin()
-    {
-        $this->login();
+test('rfc management only accessible by admin', function () {
+    $this->login();
 
-        $this->get('/admin/rfc')
-            ->assertRedirect('/');
-    }
+    $this->get('/admin/rfc')
+        ->assertRedirect('/');
+});
 
-    /** @test */
-    public function rfc_management_page_can_be_rendered()
-    {
-        $this->login(null, true);
+test('rfc management page can be rendered', function () {
+    $this->login(null, true);
 
-        $this->get(action(RfcAdminController::class))
-            ->assertViewIs('rfc-admin')
-            ->assertOk();
-    }
+    $this->get(action(RfcAdminController::class))
+        ->assertViewIs('rfc-admin')
+        ->assertOk();
+});
 
-    /** @test */
-    public function create_rfc_screen_can_be_rendered()
-    {
-        $this->login(null, true);
+test('create rfc screen can be rendered', function () {
+    $this->login(null, true);
 
-        $this->get(action([RfcCreateController::class, 'create']))
-            ->assertViewIs('rfc-form')
-            ->assertOk();
-    }
+    $this->get(action([RfcCreateController::class, 'create']))
+        ->assertViewIs('rfc-form')
+        ->assertOk();
+});
 
-    /** @test */
-    public function create_rfc_returns_validation_errors()
-    {
-        $this->login(null, true);
+test('create rfc returns validation errors', function () {
+    $this->login(null, true);
 
-        $this->post(action([RfcCreateController::class, 'store']))
-            ->assertSessionHasErrors(['title', 'description', 'url']);
-    }
+    $this->post(action([RfcCreateController::class, 'store']))
+        ->assertSessionHasErrors(['title', 'description', 'url']);
+});
 
-    /** @test */
-    public function it_can_create_rfc()
-    {
-        $this->login(null, true);
+it('can create rfc', function () {
+    $this->login(null, true);
 
-        $this->withoutExceptionHandling();
+    $this->withoutExceptionHandling();
 
-        $this->post(action([RfcCreateController::class, 'store']), [
-            'title' => $this->faker->text(10),
-            'teaser' => $this->faker->text(50),
-            'description' => $this->faker->text(50),
-            'url' => $this->faker->url,
-        ])
-            ->assertRedirect();
+    $this->post(action([RfcCreateController::class, 'store']), [
+        'title' => $this->faker->text(10),
+        'teaser' => $this->faker->text(50),
+        'description' => $this->faker->text(50),
+        'url' => $this->faker->url,
+    ])
+        ->assertRedirect();
 
-        $this->assertDatabaseCount('rfcs', 1);
-    }
+    $this->assertDatabaseCount('rfcs', 1);
+});
 
-    /** @test */
-    public function edit_rfc_screen_can_be_rendered()
-    {
-        $rfc = Rfc::factory()->create();
-        $this->login(null, true);
+test('edit rfc screen can be rendered', function () {
+    $rfc = Rfc::factory()->create();
+    $this->login(null, true);
 
-        $this->get(action([RfcEditController::class, 'edit'], $rfc))
-            ->assertViewIs('rfc-form')
-            ->assertSee($rfc->title)
-            ->assertSee($rfc->url)
-            ->assertSee($rfc->id)
-            ->assertSee($rfc->description)
-            ->assertOk();
-    }
+    $this->get(action([RfcEditController::class, 'edit'], $rfc))
+        ->assertViewIs('rfc-form')
+        ->assertSee($rfc->title)
+        ->assertSee($rfc->url)
+        ->assertSee($rfc->id)
+        ->assertSee($rfc->description)
+        ->assertOk();
+});
 
-    /** @test */
-    public function rfc_can_be_updated()
-    {
-        $rfc = Rfc::factory()->create();
+test('rfc can be updated', function () {
+    $rfc = Rfc::factory()->create();
 
-        $this->login(isAdmin: true);
+    $this->login(isAdmin: true);
 
-        $newUrl = $this->faker->url;
+    $newUrl = $this->faker->url;
 
-        $this->post(action([RfcEditController::class, 'update'], $rfc),
-            [
-                'title' => 'updated_title',
-                'description' => 'updated_description',
-                'teaser' => 'updated_teaser',
-                'url' => $newUrl,
-            ])
-            ->assertRedirect(action([RfcEditController::class, 'update'], $rfc));
-
-        $this->assertDatabaseCount('rfcs', 1);
-        $this->assertDatabaseHas('rfcs', [
+    $this->post(action([RfcEditController::class, 'update'], $rfc),
+        [
             'title' => 'updated_title',
             'description' => 'updated_description',
             'teaser' => 'updated_teaser',
             'url' => $newUrl,
-        ]);
-    }
+        ])
+        ->assertRedirect(action([RfcEditController::class, 'update'], $rfc));
 
-    /** @test */
-    public function rfc_can_be_published()
-    {
-        $rfc = Rfc::factory()->create();
-        $this->login(null, true);
-        $this->post(action(PublishRfcController::class, $rfc))
-            ->assertRedirect(action(RfcAdminController::class));
-    }
+    $this->assertDatabaseCount('rfcs', 1);
+    $this->assertDatabaseHas('rfcs', [
+        'title' => 'updated_title',
+        'description' => 'updated_description',
+        'teaser' => 'updated_teaser',
+        'url' => $newUrl,
+    ]);
+});
 
-    /** @test */
-    public function rfc_can_be_ended()
-    {
-        $rfc = Rfc::factory()->create();
-        $this->login(null, true);
-        $this->post(action(EndRfcController::class, $rfc))
-            ->assertRedirect(action(RfcAdminController::class));
-    }
+test('rfc can be published', function () {
+    $rfc = Rfc::factory()->create();
+    $this->login(null, true);
+    $this->post(action(PublishRfcController::class, $rfc))
+        ->assertRedirect(action(RfcAdminController::class));
+});
 
-    /** @test */
-    public function rfc_meta_image_has_no_cache_headers()
-    {
-        $rfc = Rfc::factory()->create();
-        $response = $this->get(action(RfcMetaImageController::class, $rfc))
-            ->assertHeader('Content-Type', 'image/png')
-            ->assertHeader('Cache-Control', 'max-age=900, public, s-maxage=900, stale-if-error=900, stale-while-revalidate=900');
+test('rfc can be ended', function () {
+    $rfc = Rfc::factory()->create();
+    $this->login(null, true);
+    $this->post(action(EndRfcController::class, $rfc))
+        ->assertRedirect(action(RfcAdminController::class));
+});
 
-        $expires = $response->headers->get('Expires');
+test('rfc meta image has no cache headers', function () {
+    $rfc = Rfc::factory()->create();
+    $response = $this->get(action(RfcMetaImageController::class, $rfc))
+        ->assertHeader('Content-Type', 'image/png')
+        ->assertHeader('Cache-Control', 'max-age=900, public, s-maxage=900, stale-if-error=900, stale-while-revalidate=900');
 
-        $this->assertEquals(now()->format('d-m-Y'), Carbon::parse($expires)->format('d-m-Y'));
-    }
-}
+    $expires = $response->headers->get('Expires');
+
+    expect(Carbon::parse($expires)->format('d-m-Y'))->toEqual(now()->format('d-m-Y'));
+});

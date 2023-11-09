@@ -1,76 +1,67 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Laravel\Fortify\Features;
-use Tests\TestCase;
 
-class EmailVerificationTest extends TestCase
-{
-    public function test_email_verification_screen_can_be_rendered(): void
-    {
-        if (! Features::enabled(Features::emailVerification())) {
-            $this->markTestSkipped('Email verification not enabled.');
+test('email verification screen can be rendered', function () {
+    if (! Features::enabled(Features::emailVerification())) {
+        $this->markTestSkipped('Email verification not enabled.');
 
-            return;
-        }
-
-        $user = User::factory()->withPersonalTeam()->unverified()->create();
-
-        $response = $this->actingAs($user)->get('/email/verify');
-
-        $response->assertStatus(200);
+        return;
     }
 
-    public function test_email_can_be_verified(): void
-    {
-        if (! Features::enabled(Features::emailVerification())) {
-            $this->markTestSkipped('Email verification not enabled.');
+    $user = User::factory()->withPersonalTeam()->unverified()->create();
 
-            return;
-        }
+    $response = $this->actingAs($user)->get('/email/verify');
 
-        Event::fake();
+    $response->assertStatus(200);
+});
 
-        $user = User::factory()->unverified()->create();
+test('email can be verified', function () {
+    if (! Features::enabled(Features::emailVerification())) {
+        $this->markTestSkipped('Email verification not enabled.');
 
-        $verificationUrl = URL::temporarySignedRoute(
-            'verification.verify',
-            now()->addMinutes(60),
-            ['id' => $user->id, 'hash' => sha1($user->email)]
-        );
-
-        $response = $this->actingAs($user)->get($verificationUrl);
-
-        Event::assertDispatched(Verified::class);
-
-        $this->assertTrue($user->fresh()->hasVerifiedEmail());
-        $response->assertRedirect(RouteServiceProvider::HOME.'?verified=1');
+        return;
     }
 
-    public function test_email_can_not_verified_with_invalid_hash(): void
-    {
-        if (! Features::enabled(Features::emailVerification())) {
-            $this->markTestSkipped('Email verification not enabled.');
+    Event::fake();
 
-            return;
-        }
+    $user = User::factory()->unverified()->create();
 
-        $user = User::factory()->unverified()->create();
+    $verificationUrl = URL::temporarySignedRoute(
+        'verification.verify',
+        now()->addMinutes(60),
+        ['id' => $user->id, 'hash' => sha1($user->email)]
+    );
 
-        $verificationUrl = URL::temporarySignedRoute(
-            'verification.verify',
-            now()->addMinutes(60),
-            ['id' => $user->id, 'hash' => sha1('wrong-email')]
-        );
+    $response = $this->actingAs($user)->get($verificationUrl);
 
-        $this->actingAs($user)->get($verificationUrl);
+    Event::assertDispatched(Verified::class);
 
-        $this->assertFalse($user->fresh()->hasVerifiedEmail());
+    expect($user->fresh()->hasVerifiedEmail())->toBeTrue();
+    $response->assertRedirect(RouteServiceProvider::HOME.'?verified=1');
+});
+
+test('email can not verified with invalid hash', function () {
+    if (! Features::enabled(Features::emailVerification())) {
+        $this->markTestSkipped('Email verification not enabled.');
+
+        return;
     }
-}
+
+    $user = User::factory()->unverified()->create();
+
+    $verificationUrl = URL::temporarySignedRoute(
+        'verification.verify',
+        now()->addMinutes(60),
+        ['id' => $user->id, 'hash' => sha1('wrong-email')]
+    );
+
+    $this->actingAs($user)->get($verificationUrl);
+
+    expect($user->fresh()->hasVerifiedEmail())->toBeFalse();
+});
