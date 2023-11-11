@@ -91,10 +91,11 @@
         </div>
 
         <div class="mt-12 md:px-8">
-            <h2 class="text-2xl font-bold text-font-second tracking-wide md:mb-1">
+            <h2 class="text-2xl font-bold text-font-second tracking-wide mb-2 md:mb-3">
                 Check out another RFCs
             </h2>
-            <div class="flex flex-col justify-center lg:flex-row mt-4 space-x-0 space-y-4 lg:space-x-4 lg:space-y-0">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach($additionalRfcs as $additionalRfc)
                     <x-card-link :to="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)">
                         <div class="text-xl text-font font-bold px-2 border-b pb-4 mb-2">

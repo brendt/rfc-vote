@@ -1,5 +1,5 @@
 <div
-    class="sticky flex self-end justify-end bottom-0 pb-3 right-6"
+    class="sticky flex self-end justify-end bottom-0 pb-3 right-6 z-20"
     x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY; updateVisibility() })"
     x-data="{ isVisible: false, scrolled: 0, updateVisibility() { this.isVisible = (this.scrolled / (document.documentElement.scrollHeight - window.innerHeight)) >= 0.5; } }"
     x-show="isVisible"
