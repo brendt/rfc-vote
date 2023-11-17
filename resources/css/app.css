@@ -18,3 +18,7 @@ pre.shiki code {
     @apply max-w-[200px] lg:max-w-full !bg-inherit;
     overflow: initial !important;
 }
+
+.prose > p > code {
+    @apply before:content-none after:content-none bg-[#eff1f3] dark:bg-gray-700 px-2 py-[3px] rounded-md font-normal text-sm;
+}
