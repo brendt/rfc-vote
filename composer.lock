@@ -1951,16 +1951,16 @@
         },
         {
             "name": "laravel/horizon",
-            "version": "v5.21.2",
+            "version": "v5.21.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/horizon.git",
-                "reference": "1035d56b5f0d408c8eb9a4ccb0d185f1dd6ffb70"
+                "reference": "6e2b0bb3f8c5b653e8e3ba15661caea6d9613c31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/horizon/zipball/1035d56b5f0d408c8eb9a4ccb0d185f1dd6ffb70",
-                "reference": "1035d56b5f0d408c8eb9a4ccb0d185f1dd6ffb70",
+                "url": "https://api.github.com/repos/laravel/horizon/zipball/6e2b0bb3f8c5b653e8e3ba15661caea6d9613c31",
+                "reference": "6e2b0bb3f8c5b653e8e3ba15661caea6d9613c31",
                 "shasum": ""
             },
             "require": {
@@ -2023,9 +2023,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/horizon/issues",
-                "source": "https://github.com/laravel/horizon/tree/v5.21.2"
+                "source": "https://github.com/laravel/horizon/tree/v5.21.3"
             },
-            "time": "2023-10-17T13:41:14+00:00"
+            "time": "2023-10-27T13:58:13+00:00"
         },
         {
             "name": "laravel/jetstream",
