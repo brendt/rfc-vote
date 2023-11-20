@@ -1,3 +1,20 @@
+@php
+    use App\Models\Argument;
+    use App\Models\Rfc;
+    use App\Models\User;
+    use Illuminate\Pagination\LengthAwarePaginator;
+    use Illuminate\Support\Collection;
+
+    /**
+     * @var User|null $user
+     * @var Rfc $rfc
+     * @var Argument|null $userArgument
+     * @var LengthAwarePaginator<Argument> $arguments
+     * @var Collection<int, Argument> $yesArguments
+     * @var Collection<int, Argument> $noArguments
+     */
+@endphp
+
 <div class="grid gap-4 md:gap-6">
     @if($user)
         <div class="px-2 flex justify-between items-center">
@@ -44,6 +61,7 @@
             :is-confirming-delete="$isConfirmingDelete"
             :is-editing="$isEditing"
         />
+
         @if($showingComments?->is($argument))
             <div class="grid gap-2">
                 @foreach($argument->comments as $comment)

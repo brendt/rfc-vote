@@ -8,7 +8,10 @@ use App\Http\Controllers\RfcDetailController;
 use App\Models\Argument;
 use App\Models\Rfc;
 use App\Models\User;
+use App\Models\VoteType;
 use Illuminate\Contracts\View\View;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -78,10 +81,30 @@ class ArgumentList extends Component
             ->paginate(15)
             ->setPath(action(RfcDetailController::class, $this->rfc));
 
-        return view('livewire.argument-list', [
-            'userArgument' => $userArgument,
-            'arguments' => $arguments,
-        ]);
+        [$yesArguments, $noArguments] = $this->splitArguments($arguments);
+
+        return view(
+            'livewire.argument-list',
+            compact('userArgument', 'arguments', 'yesArguments', 'noArguments'),
+        );
+    }
+
+    /**
+     * @param LengthAwarePaginator<Argument> $arguments
+     *
+     * @return array<int, Collection<int, mixed>>
+     */
+    private function splitArguments(LengthAwarePaginator $arguments): array
+    {
+        $yesArguments = $arguments
+            ->filter(fn(Argument $arg) => $arg->vote_type === VoteType::YES)
+            ->values();
+
+        $noArguments = $arguments
+            ->filter(fn(Argument $arg) => $arg->vote_type === VoteType::NO)
+            ->values();
+
+        return [$yesArguments, $noArguments];
     }
 
     public function refresh(): void
