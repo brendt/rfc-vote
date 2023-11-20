@@ -81,12 +81,15 @@ class ArgumentList extends Component
             ->paginate(15)
             ->setPath(action(RfcDetailController::class, $this->rfc));
 
-        [$yesArguments, $noArguments] = $this->splitArguments($arguments);
+        [$yesArguments, $noArguments] = $this->splitArguments($arguments, $userArgument);
 
-        return view(
-            'livewire.argument-list',
-            compact('userArgument', 'arguments', 'yesArguments', 'noArguments'),
-        );
+        return view('livewire.argument-list', [
+            'userArgument' => $userArgument,
+            'arguments' => $arguments,
+            'yesArguments' => $yesArguments,
+            'noArguments' => $noArguments,
+            'countDominantVotes' => max($yesArguments->count(), $noArguments->count()),
+        ]);
     }
 
     /**
@@ -94,14 +97,16 @@ class ArgumentList extends Component
      *
      * @return array<int, Collection<int, mixed>>
      */
-    private function splitArguments(LengthAwarePaginator $arguments): array
+    private function splitArguments(LengthAwarePaginator $arguments, ?Argument $userArgument): array
     {
         $yesArguments = $arguments
-            ->filter(fn(Argument $arg) => $arg->vote_type === VoteType::YES)
+            ->where('vote_type', VoteType::YES)
+            ->filter(fn (Argument $arg) => $userArgument?->isNot($arg) ?? true)
             ->values();
 
         $noArguments = $arguments
-            ->filter(fn(Argument $arg) => $arg->vote_type === VoteType::NO)
+            ->where('vote_type', VoteType::NO)
+            ->filter(fn (Argument $arg) => $userArgument?->isNot($arg) ?? true)
             ->values();
 
         return [$yesArguments, $noArguments];

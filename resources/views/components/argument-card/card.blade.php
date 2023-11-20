@@ -1,7 +1,12 @@
 @php
+    use App\Models\Argument;
+    use App\Models\User;
+
     /**
-     * @var App\Models\Argument $argument
-     * @var App\Models\User $user
+     * @var Argument $argument
+     * @var User $user
+     * @var Argument|null $isConfirmingDelete
+     * @var Argument|null $isEditing
      */
 
     $readonly ??= false;
