@@ -93,8 +93,7 @@ class ArgumentList extends Component
     }
 
     /**
-     * @param LengthAwarePaginator<Argument> $arguments
-     *
+     * @param  LengthAwarePaginator<Argument>  $arguments
      * @return array<int, Collection<int, mixed>>
      */
     private function splitArguments(LengthAwarePaginator $arguments, ?Argument $userArgument): array
