@@ -7,7 +7,7 @@
      * @var Argument $argument
      * @var User|null $user
      * @var string $anchorLink
-     * @var bool $isRightSided
+     * @var 'right'|'left'|'both' $cardSide
      */
 
     $argumentUser = $argument->user;
@@ -16,11 +16,11 @@
 <div
     @class([
         'flex flex-col gap-4 items-center justify-between mb-3 mt-1 opacity-80 border-divider border-t pt-3',
-        'lg:flex-row' => !$isRightSided,
-        'lg:flex-row-reverse' => $isRightSided,
+        'lg:flex-row' => $cardSide === 'left' || $cardSide === 'both',
+        'lg:flex-row-reverse' => $cardSide === 'right',
     ])
 >
-    <x-argument-card.share-links :argument="$argument" :anchor-link="$anchorLink" />
+    <x-argument-card.share-links :argument="$argument" :anchor-link="$anchorLink"/>
 
     <div class="flex flex-col md:flex-row gap-1 md:gap-3 items-center">
         @if($readonly)
@@ -39,7 +39,7 @@
         @endif
 
         <small class="flex items-center gap-1">
-            <x-profile.username :user="$argumentUser" />
+            <x-profile.username :user="$argumentUser"/>
 
             voted
 

@@ -61,7 +61,7 @@
                     :argument="$yesArguments[$i]"
                     :is-confirming-delete="$isConfirmingDelete"
                     :is-editing="$isEditing"
-                    :is-right-sided="false"
+                    :card-side="isset($noArguments[$i]) ? 'left' : 'both'"
                 />
             @endisset
 
@@ -72,7 +72,7 @@
                     :argument="$noArguments[$i]"
                     :is-confirming-delete="$isConfirmingDelete"
                     :is-editing="$isEditing"
-                    :is-right-sided="true"
+                    :card-side="isset($yesArguments[$i]) ? 'right' : 'both'"
                 />
             @endisset
         @endfor
