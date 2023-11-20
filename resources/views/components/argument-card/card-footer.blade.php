@@ -1,30 +1,42 @@
 @php
+    use App\Models\Argument;
+    use App\Models\User;
+    use \App\Http\Controllers\RfcDetailController;
+
     /**
-     * @var App\Models\Argument $argument
-     * @var App\Models\User|null $user
+     * @var Argument $argument
+     * @var User|null $user
      * @var string $anchorLink
+     * @var bool $isRightSided
      */
 
     $argumentUser = $argument->user;
 @endphp
 
-<div class="flex flex-col lg:flex-row gap-4 items-center justify-between mb-3 mt-1 opacity-80 border-divider border-t pt-3">
+<div
+    @class([
+        'flex flex-col gap-4 items-center justify-between mb-3 mt-1 opacity-80 border-divider border-t pt-3',
+        'lg:flex-row' => !$isRightSided,
+        'lg:flex-row-reverse' => $isRightSided,
+    ])
+>
     <x-argument-card.share-links :argument="$argument" :anchor-link="$anchorLink" />
 
     <div class="flex flex-col md:flex-row gap-1 md:gap-3 items-center">
         @if($readonly)
             <span class="text-xs">
-                Read the RFC: <a href="{{ action(\App\Http\Controllers\RfcDetailController::class, $argument->rfc) }}" class="underline hover:no-underline">{{ $argument->rfc->title }}</a>
+                Read the RFC:
+
+                <a
+                    href="{{ action(RfcDetailController::class, $argument->rfc) }}"
+                    class="underline hover:no-underline"
+                >
+                    {{ $argument->rfc->title }}
+                </a>
             </span>
 
             <span class="hidden md:block">•</span>
         @endif
-
-{{--        <span class="text-xs cursor-pointer" wire:click="openComments({{ $argument->id }})">--}}
-{{--            {{ $argument->comments->count() }} {{ Str::plural('comment', $argument->comments->count()) }}--}}
-{{--        </span>--}}
-{{----}}
-{{--        <span class="hidden md:block">•</span>--}}
 
         <small class="flex items-center gap-1">
             <x-profile.username :user="$argumentUser" />

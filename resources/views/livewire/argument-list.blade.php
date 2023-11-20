@@ -61,6 +61,7 @@
                     :argument="$yesArguments[$i]"
                     :is-confirming-delete="$isConfirmingDelete"
                     :is-editing="$isEditing"
+                    :is-right-sided="false"
                 />
             @endisset
 
@@ -71,6 +72,7 @@
                     :argument="$noArguments[$i]"
                     :is-confirming-delete="$isConfirmingDelete"
                     :is-editing="$isEditing"
+                    :is-right-sided="true"
                 />
             @endisset
         @endfor

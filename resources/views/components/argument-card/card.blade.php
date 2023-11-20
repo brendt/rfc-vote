@@ -7,18 +7,24 @@
      * @var User $user
      * @var Argument|null $isConfirmingDelete
      * @var Argument|null $isEditing
+     * @var bool $isRightSided
      */
 
     $readonly ??= false;
     $anchorLink = $argument->user->username . '-' . $argument->id;
 @endphp
 
-<div {{dusk('argument-card')}} id="{{ $anchorLink }}"
-     @class([
-        'bg-argument-card text-font rounded-xl w-full group/card pt-5 px-4 md:pl-8 md:pr-10 md:pt-7 flex flex-col md:flex-row gap-3 md:gap-6 items-center relative',
+<div {{dusk('argument-card')}}
+    id="{{ $anchorLink }}"
+    @class([
+        'w-full md:w-[95%] lg:w-[85%] bg-argument-card text-font rounded-xl group/card pt-5 px-4 md:pl-8 md:pr-10 md:pt-7 flex flex-col gap-3 md:gap-6 items-center relative',
         'border-2 border-purple-300 dark:border-purple-800' => !$readonly && $user && !$user->hasSeenArgument($argument),
         'border border-divider' => !(!$readonly && $user && !$user->hasSeenArgument($argument)),
-     ])
+        'md:flex-row-reverse' => $isRightSided,
+        'md:flex-row' => !$isRightSided,
+        'md:ml-[5%] lg:ml-[15%]' => $isRightSided,
+        'md:mr-[5%] lg:mr-[15%]' => !$isRightSided,
+    ])
 >
     <x-argument-card.vote :argument="$argument" :user="$user" />
 
@@ -78,6 +84,7 @@
             :user="$user"
             :anchor-link="$anchorLink"
             :readonly="$readonly"
+            :is-right-sided="$isRightSided"
         />
     </div>
 </div>
