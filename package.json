@@ -11,7 +11,7 @@
         "@tailwindcss/typography": "^0.5.10",
         "alpinejs": "^3.13.2",
         "autoprefixer": "^10.4.16",
-        "axios": "^1.6.0",
+        "axios": "^1.6.2",
         "laravel-vite-plugin": "^0.8.1",
         "postcss": "^8.4.31",
         "sass": "^1.69.5",
