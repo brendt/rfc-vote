@@ -112,7 +112,8 @@ class ArgumentList extends Component
             return [$yesArgs, $noArgs];
         }
 
-        // If the user has voted, put their vote at the top of the list
+        // If the user has voted, put their vote at the first or second place,
+        // depending on whether it's a yes or no vote
         $userArgumentId->vote_type === VoteType::YES
             ? $yesArgs->prepend($userArgumentId)
             : $noArgs->prepend($userArgumentId);
