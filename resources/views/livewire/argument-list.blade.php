@@ -17,7 +17,7 @@
      */
 @endphp
 
-<div class="grid gap-4 md:gap-6 mt-5">
+<div class="grid gap-4 md:gap-6 mt-7">
     @if($user)
         <div class="px-2 flex justify-between items-center">
             @php
