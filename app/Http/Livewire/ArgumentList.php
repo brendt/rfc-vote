@@ -96,19 +96,28 @@ class ArgumentList extends Component
      * @param  LengthAwarePaginator<Argument>  $arguments
      * @return array<int, Collection<int, mixed>>
      */
-    private function splitArguments(LengthAwarePaginator $arguments, ?Argument $userArgument): array
+    private function splitArguments(LengthAwarePaginator $arguments, ?Argument $userArgumentId): array
     {
-        $yesArguments = $arguments
+        $yesArgs = $arguments
             ->where('vote_type', VoteType::YES)
-            ->filter(fn (Argument $arg) => $userArgument?->isNot($arg) ?? true)
+            ->where('id', '!=', $userArgumentId?->id)
             ->values();
 
-        $noArguments = $arguments
+        $noArgs = $arguments
             ->where('vote_type', VoteType::NO)
-            ->filter(fn (Argument $arg) => $userArgument?->isNot($arg) ?? true)
+            ->where('id', '!=', $userArgumentId?->id)
             ->values();
 
-        return [$yesArguments, $noArguments];
+        if (!$userArgumentId) {
+            return [$yesArgs, $noArgs];
+        }
+
+        // If the user has voted, put their vote at the top of the list
+        $userArgumentId->vote_type === VoteType::YES
+            ? $yesArgs->prepend($userArgumentId)
+            : $noArgs->prepend($userArgumentId);
+
+        return [$yesArgs, $noArgs];
     }
 
     public function refresh(): void

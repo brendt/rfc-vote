@@ -49,17 +49,6 @@
         <div class="absolute right-14 border-l-4 border-dotted border-disagree-light opacity-30 inset-y-0"></div>
 
         <div class="space-y-4">
-            @if($userArgument)
-                <x-argument-card.card
-                    :user="$user"
-                    :rfc="$rfc"
-                    :argument="$userArgument"
-                    :is-confirming-delete="$isConfirmingDelete"
-                    :is-editing="$isEditing"
-                    card-side="both"
-                />
-            @endif
-
             @for ($i = 0; $i < $countDominantVotes; $i++)
                 @isset($yesArguments[$i])
                     <x-argument-card.card
