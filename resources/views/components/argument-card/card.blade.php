@@ -16,10 +16,14 @@
 
 <div
     @class([
+        'first:bg-background relative group',
         'md:pl-24' => $cardSide === 'right',
         'md:pr-24' => $cardSide === 'left',
     ])
 >
+    {{-- Small hacky block that hides a part of the red dotted border --}}
+    <div class="hidden md:group-first:block absolute bg-background right-10 -bottom-4 w-7 h-10"></div>
+
     <div
         {{ dusk('argument-card') }}
         id="{{ $anchorLink }}"

@@ -17,7 +17,7 @@
      */
 @endphp
 
-<div class="grid gap-4 md:gap-6">
+<div class="grid gap-4 md:gap-6 mt-5">
     @if($user)
         <div class="px-2 flex justify-between items-center">
             @php
@@ -41,18 +41,7 @@
         </div>
     @endif
 
-    {{-- todo: think about what to do with user argument --}}
-{{--    @if($userArgument)--}}
-{{--        <x-argument-card.card--}}
-{{--            :user="$user"--}}
-{{--            :rfc="$rfc"--}}
-{{--            :argument="$userArgument"--}}
-{{--            :is-confirming-delete="$isConfirmingDelete"--}}
-{{--            :is-editing="$isEditing"--}}
-{{--        />--}}
-{{--    @endif--}}
-
-    <div class="relative pt-8">
+    <div class="relative">
         {{-- Green vertical line --}}
         <div class="absolute left-14 border-r-4 border-dotted border-agree-light opacity-30 inset-y-0"></div>
 
@@ -60,6 +49,17 @@
         <div class="absolute right-14 border-l-4 border-dotted border-disagree-light opacity-30 inset-y-0"></div>
 
         <div class="space-y-4">
+            @if($userArgument)
+                <x-argument-card.card
+                    :user="$user"
+                    :rfc="$rfc"
+                    :argument="$userArgument"
+                    :is-confirming-delete="$isConfirmingDelete"
+                    :is-editing="$isEditing"
+                    card-side="both"
+                />
+            @endif
+
             @for ($i = 0; $i < $countDominantVotes; $i++)
                 @isset($yesArguments[$i])
                     <x-argument-card.card
