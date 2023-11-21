@@ -86,7 +86,7 @@
             <livewire:vote-bar :rfc="$rfc" :user="$user"/>
         </div>
 
-        <div class="col-span-3 mt-4 md:mt-8 md:px-8">
+        <div class="col-span-3 md:px-8">
             <livewire:argument-list :rfc="$rfc" :user="$user"/>
         </div>
 

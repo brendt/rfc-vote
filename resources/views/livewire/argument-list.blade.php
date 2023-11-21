@@ -52,30 +52,38 @@
 {{--        />--}}
 {{--    @endif--}}
 
-    <div class="space-y-4">
-        @for ($i = 0; $i < $countDominantVotes; $i++)
-            @isset($yesArguments[$i])
-                <x-argument-card.card
-                    :user="$user"
-                    :rfc="$rfc"
-                    :argument="$yesArguments[$i]"
-                    :is-confirming-delete="$isConfirmingDelete"
-                    :is-editing="$isEditing"
-                    :card-side="isset($noArguments[$i]) ? 'left' : 'both'"
-                />
-            @endisset
+    <div class="relative pt-8">
+        {{-- Green vertical line --}}
+        <div class="absolute left-14 border-r-4 border-dotted border-agree-light opacity-30 inset-y-0"></div>
 
-            @isset($noArguments[$i])
-                <x-argument-card.card
-                    :user="$user"
-                    :rfc="$rfc"
-                    :argument="$noArguments[$i]"
-                    :is-confirming-delete="$isConfirmingDelete"
-                    :is-editing="$isEditing"
-                    :card-side="isset($yesArguments[$i]) ? 'right' : 'both'"
-                />
-            @endisset
-        @endfor
+        {{-- Red vertical line --}}
+        <div class="absolute right-14 border-l-4 border-dotted border-disagree-light opacity-30 inset-y-0"></div>
+
+        <div class="space-y-4">
+            @for ($i = 0; $i < $countDominantVotes; $i++)
+                @isset($yesArguments[$i])
+                    <x-argument-card.card
+                        :user="$user"
+                        :rfc="$rfc"
+                        :argument="$yesArguments[$i]"
+                        :is-confirming-delete="$isConfirmingDelete"
+                        :is-editing="$isEditing"
+                        :card-side="isset($noArguments[$i]) ? 'left' : 'both'"
+                    />
+                @endisset
+
+                @isset($noArguments[$i])
+                    <x-argument-card.card
+                        :user="$user"
+                        :rfc="$rfc"
+                        :argument="$noArguments[$i]"
+                        :is-confirming-delete="$isConfirmingDelete"
+                        :is-editing="$isEditing"
+                        :card-side="isset($yesArguments[$i]) ? 'right' : 'both'"
+                    />
+                @endisset
+            @endfor
+        </div>
     </div>
 
     {{ $arguments->links('vendor.pagination.tailwind') }}
