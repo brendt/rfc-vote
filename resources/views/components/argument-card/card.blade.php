@@ -20,8 +20,8 @@
         'bg-argument-card text-font rounded-xl group/card pt-5 px-4 md:pl-8 md:pr-10 md:pt-7 flex flex-col gap-3 md:gap-6 items-center relative',
         'border-2 border-purple-300 dark:border-purple-800' => !$readonly && $user && !$user->hasSeenArgument($argument),
         'border border-divider' => !(!$readonly && $user && !$user->hasSeenArgument($argument)),
-        'w-full md:w-[95%] lg:w-[85%] md:flex-row-reverse md:ml-[5%] lg:ml-[15%]' => $cardSide === 'right',
-        'w-full md:w-[95%] lg:w-[85%] md:flex-row md:mr-[5%] lg:mr-[15%]' => $cardSide === 'left',
+        'w-full md:w-[90%] md:flex-row-reverse md:ml-[10%]' => $cardSide === 'right',
+        'w-full md:w-[90%] md:flex-row md:mr-[10%]' => $cardSide === 'left',
         'w-full md:flex-row' => $cardSide === 'both',
     ])
 >
