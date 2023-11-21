@@ -21,14 +21,16 @@
         'md:pr-24' => $cardSide === 'left',
     ])
 >
-    {{-- Small hacky block that hides a part of the red dotted border --}}
-    <div class="hidden md:group-first:block absolute bg-background right-10 -bottom-4 w-7 h-10"></div>
+    @if ($cardSide !== 'both')
+        {{-- Small hacky block that hides a part of the red dotted border --}}
+        <div class="hidden md:group-first:block absolute bg-background right-10 -bottom-4 w-7 h-10"></div>
+    @endif
 
     <div
         {{ dusk('argument-card') }}
         id="{{ $anchorLink }}"
         @class([
-            'bg-argument-card text-font rounded-xl group/card pt-5 px-4 md:px-7 md:pt-7 flex flex-col gap-3 md:gap-6 items-center relative',
+            'bg-argument-card text-font rounded-xl group/card pt-5 px-4 md:pt-7 flex flex-col gap-3 md:gap-6 items-center relative md:px-8',
             'border-2 border-purple-300 dark:border-purple-800' => !$readonly && $user && !$user->hasSeenArgument($argument),
             'border border-divider' => !(!$readonly && $user && !$user->hasSeenArgument($argument)),
             'md:flex-row-reverse' => $cardSide === 'right',
@@ -42,6 +44,7 @@
                 :user="$user"
                 :argument="$argument"
                 :is-confirming-delete="$isConfirmingDelete"
+                class="right-[10px] top-[7px]"
             />
         @endif
 

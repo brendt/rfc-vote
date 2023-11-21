@@ -8,10 +8,13 @@
     class="absolute right-2 top-2"
     x-data="{ open: false }"
 >
-    <x-buttons.more-options
+    <button
+        type="button"
         @click="open = !open"
         @click.away="open = false"
-    />
+    >
+        <x-icons.ellipsis-vertical class="w-7 h-7 text-font" />
+    </button>
 
     <div
         x-cloak
