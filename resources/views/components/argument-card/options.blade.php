@@ -3,17 +3,23 @@
      * @var bool $isConfirmingDelete
      * @var App\Models\User $user
      * @var App\Models\Argument $argument
+     * @var Illuminate\View\ComponentAttributeBag $attributes
      */
 @endphp
 
 <div
-    class="absolute top-3 right-3 z-10 bg-argument-card"
-    x-data="{ isVisible: false }"
+    {{ $attributes->merge([
+        'class' => 'absolute top-3 z-10 right-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors rounded-xl w-4 h-8 flex justify-center items-center',
+        'x-data' => '{ isVisible: false }',
+    ]) }}
 >
-    <x-buttons.more-options
+    <button
+        type="button"
         @click="isVisible = !isVisible"
         @click.away="isVisible = false"
-    />
+    >
+        <x-icons.ellipsis-vertical class="w-7 h-7 text-font" />
+    </button>
 
     <div
         x-cloak

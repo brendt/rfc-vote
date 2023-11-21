@@ -21,6 +21,7 @@
                         :rfc="$argument->rfc"
                         :argument="$argument"
                         :readonly="true"
+                        card-side="both"
                     />
                 </div>
             @empty
