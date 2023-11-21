@@ -108,7 +108,7 @@ class ArgumentList extends Component
             ->where('id', '!=', $userArgumentId?->id)
             ->values();
 
-        if (!$userArgumentId) {
+        if (! $userArgumentId) {
             return [$yesArgs, $noArgs];
         }
 
