@@ -19,7 +19,7 @@ final readonly class RfcDetailController
         $rfc->load([
             'arguments.user',
             'arguments.rfc',
-            'arguments.comments.user',
+//            'arguments.comments.user',
         ]);
 
         $user = auth()->user();
@@ -42,22 +42,22 @@ final readonly class RfcDetailController
             $user->viewedArguments()->attach($unviewedArguments->pluck('id'));
         }
 
-        $additionalRfcs = Rfc::query()
-            ->where('published_at', '<=', now()->startOfDay())
-            ->where(function (Builder $q) {
-                $q->whereNull('ends_at')->orWhere('ends_at', '>', now());
-            })
-            ->where('id', '!=', $rfc->id)
-            ->when(filled($user), function (Builder $builder) use ($user) {
-                $builder->whereDoesntHave('arguments', function (Builder $q) use ($user) {
-                    $q->where('user_id', $user?->id);
-                });
-            })
-            ->with(['arguments', 'yesArguments', 'noArguments'])
-            ->inRandomOrder()
-            ->limit(3)
-            ->get();
+//        $additionalRfcs = Rfc::query()
+//            ->where('published_at', '<=', now()->startOfDay())
+//            ->where(function (Builder $q) {
+//                $q->whereNull('ends_at')->orWhere('ends_at', '>', now());
+//            })
+//            ->where('id', '!=', $rfc->id)
+//            ->when(filled($user), function (Builder $builder) use ($user) {
+//                $builder->whereDoesntHave('arguments', function (Builder $q) use ($user) {
+//                    $q->where('user_id', $user?->id);
+//                });
+//            })
+//            ->with(['arguments', 'yesArguments', 'noArguments'])
+//            ->inRandomOrder()
+//            ->limit(3)
+//            ->get();
 
-        return view('rfc', compact('rfc', 'user', 'additionalRfcs'));
+        return view('rfc', compact('rfc', 'user'));
     }
 }
