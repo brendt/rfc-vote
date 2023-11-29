@@ -4,6 +4,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    @vite('resources/css/easymde.css')
 @endpush
 
 @push('scripts')
@@ -11,7 +12,7 @@
 @endpush
 
 @component('layouts.base', [
-    'pageTitle' => $rfc->title . ' - ' . __('RFC Vote'),
+    'pageTitle' => $rfc->title . ' - RFC Vote',
     'showToTopArrow' => true,
 ])
     <div class="container mx-auto px-4 mt-5 max-w-[1200px] mb-8">
@@ -29,7 +30,7 @@
                     class="bg-[#555f88] text-white"
                 >
                     <x-icons.external-link class="w-4 h-4" />
-                    {{ __('Read the RFC') }}
+                    Read the RFC
                 </x-tag>
 
                 @if($rfc->externals_url)
@@ -39,7 +40,7 @@
                         class="bg-[#555f88] text-white"
                     >
                         <x-icons.external-link class="w-4 h-4" />
-                        {{ __('Externals') }}
+                        Externals
                     </x-tag>
                 @endif
 
@@ -57,7 +58,7 @@
                         class="bg-blue-100"
                     >
                         <x-icons.pen class="w-4 h-4" />
-                        {{ __('Edit') }}
+                        Edit
                     </x-tag>
                 @endif
             </div>
@@ -66,44 +67,55 @@
                 {!! $rfc->description !!}
             </x-markdown>
 
-            @if(!$user || $user->shouldSeeTutorial())
-                <x-rfc.tutorial />
-            @endif
+            <div class="mt-2 text-right">
+                <a
+                    href="/about#How voting works"
+                    title="Link to the about page"
+                    class="text-font-second text-xs inline-flex items-center gap-1 opacity-70 hover:opacity-100"
+                    target="_blank"
+                >
+
+                    <x-icons.question-mark-circle class="w-4 h-4" />
+                    <span>Learn how voting works</span>
+                    <x-icons.external-link class="w-3 h-3 -mt-1" />
+                </a>
+            </div>
         </div>
 
         <div class="col-span-3 mt-4 md:mt-8">
             <livewire:vote-bar :rfc="$rfc" :user="$user"/>
         </div>
 
-        <div class="col-span-3 mt-4 md:mt-8 md:px-8">
+        <div class="col-span-3 md:px-8">
             <livewire:argument-list :rfc="$rfc" :user="$user"/>
         </div>
 
         <div class="mt-12 md:px-8">
-            <h2 class="text-2xl font-bold text-font-second tracking-wide md:mb-1">
-                {{ __('Check out another RFCs') }}
+            <h2 class="text-2xl font-bold text-font-second tracking-wide mb-2 md:mb-3">
+                Check out another RFCs
             </h2>
-            <div class="flex flex-col justify-center lg:flex-row mt-4 space-x-0 space-y-4 lg:space-x-4 lg:space-y-0">
-                @foreach($additionalRfcs as $additionalRfc)
-                    <x-card-link :to="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)">
-                        <div class="text-xl text-font font-bold px-2 border-b pb-4 mb-2">
-                            {{ $additionalRfc->title }}
-                        </div>
 
-                        <x-markdown class="px-2 text-font">{!! $additionalRfc->teaser !!}</x-markdown>
+{{--            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">--}}
+{{--                @foreach($additionalRfcs as $additionalRfc)--}}
+{{--                    <x-card-link :to="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)">--}}
+{{--                        <div class="text-xl text-font font-bold px-2 border-b pb-4 mb-2">--}}
+{{--                            {{ $additionalRfc->title }}--}}
+{{--                        </div>--}}
 
-                        <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">
-                            <x-tag class="font-bold">
-                                <x-icons.chat-bubble class="w-4 h-4"/>
-                                {{ $additionalRfc->arguments->count() }}
-                            </x-tag>
+{{--                        <x-markdown class="px-2 text-font">{!! $additionalRfc->teaser !!}</x-markdown>--}}
 
-                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::YES"/>
-                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::NO"/>
-                        </div>
-                    </x-card-link>
-                @endforeach
-            </div>
+{{--                        <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">--}}
+{{--                            <x-tag class="font-bold">--}}
+{{--                                <x-icons.chat-bubble class="w-4 h-4"/>--}}
+{{--                                {{ $additionalRfc->arguments->count() }}--}}
+{{--                            </x-tag>--}}
+
+{{--                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::YES"/>--}}
+{{--                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::NO"/>--}}
+{{--                        </div>--}}
+{{--                    </x-card-link>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
         </div>
     </div>
 @endcomponent

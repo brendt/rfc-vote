@@ -53,8 +53,22 @@
 
 <x-about.contributors :contributors="$contributors" />
 
+<x-about.section heading="How voting works">
+    <p>The goal of this website is to provide a platform for the PHP community to express their thoughts and feelings about the proposals for the PHP language in an easy way.</p>
+    <p>While voting is an essential part of expressing how you feel about a potential new PHP feature, it's only <b>a part</b>. That's why you must do one of two things if you want to vote:</p>
+
+    <p>
+        <ul>
+            <li>- Write an argument explaining <b>why</b> you vote yes or no</li>
+            <li>- Read existing arguments, and vote for those</li>
+        </ul>
+    </p>
+
+    <p class="!mb-0">Every user has three votes they can distribute amongst existing arguments. On top of that, they can write one argument of their own. All arguments and their votes are counted towards the final result.</p>
+</x-about.section>
+
 <x-about.section heading="Interesting links">
-    <ul>
+    <ul {{dusk('interesting-links-container')}}>
         <li>
             <x-about.link href="https://github.com/brendt/rfc-vote">
                 <x-icons.link class="w-4 h-4 inline-block mr-1" />

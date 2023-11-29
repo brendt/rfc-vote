@@ -1,12 +1,8 @@
 @component('layouts.base')
     <div class="container max-w-[1200px] mx-auto px-4 grid gap-4 my-10">
-        <div class="px-4 max-w-[1200px]">
-            <x-email-optin-banner :user="auth()->user()"/>
-        </div>
+        <x-email-optin-banner :user="auth()->user()"/>
 
-        <x-home.title>
-            {{ __('Open RFCs') }}
-        </x-home.title>
+        <x-home.title>Open RFCs</x-home.title>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             @foreach ($rfcs as $rfc)
@@ -58,15 +54,14 @@
         </div>
 
         @if($argumentOfTheDay)
-            <x-home.title>
-                {{ __('Argument of the Day') }}
-            </x-home.title>
+            <x-home.title>Argument of the Day</x-home.title>
 
             <x-argument-card.card
                 :user="$argumentOfTheDay->user"
                 :rfc="$argumentOfTheDay->rfc"
                 :argument="$argumentOfTheDay"
                 :readonly="true"
+                card-side="both"
             />
         @endif
     </div>

@@ -5,7 +5,7 @@
 <div
     class="
         {{ $user?->can('vote', $argument) ?  "cursor-pointer" : "cursor-not-allowed" }}
-        flex flex-col gap-1 transition-colors py-3 px-2 mb-5 max-w-[50px] mx-auto text-center rounded-2xl text-lg border border-transparent box-content
+        flex items-center md:flex-col gap-1 transition-colors py-1 md:py-3 px-3 md:px-2 md:mb-5 md:max-w-[50px] mx-auto text-center rounded-full md:rounded-2xl text-lg border border-transparent box-content
         @if ($argument->vote_type->isYes())
             text-agree-arrow
             bg-agree-arrow-background

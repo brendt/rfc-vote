@@ -3,29 +3,29 @@
         <x-form.wrapper
             method="POST"
             action="{{ route('password.email') }}"
-            :heading="__('Forgot your password?')"
+            heading="Forgot your password?"
         >
             <x-success-message>{{ session('status') }}</x-success-message>
 
             <p class="mb-5 text-gray-500">
-                {{ __('No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+                No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
             </p>
 
             <x-form.input
-                :label="__('Email')"
+                label="Email"
                 type="email"
                 name="email"
                 :value="old('email')"
                 required
                 autofocus
-                :placeholder="__('Enter your email address')"
+                placeholder="Enter your email address"
                 autocomplete="username"
             />
 
             <div class="text-right mt-7">
                 <x-form.button type="submit">
                     <x-icons.envelope class="w-6 h-6" />
-                    {{ __('Email reset password link') }}
+                    Email reset password link
                 </x-form.button>
             </div>
         </x-form.wrapper>

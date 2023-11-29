@@ -1,12 +1,10 @@
 <div class="p-5">
     <div class="flex justify-end items-center mb-4">
-        <div class="flex space-x-2">
-            <x-input
-                type="text"
-                placeholder="Search..."
-                wire:model.debounce="search"
-            />
-        </div>
+        <x-form.input
+            type="text"
+            placeholder="Search..."
+            wire:model.debounce="search"
+        />
     </div>
 
     <div class="bg-white dark:bg-slate-800 shadow-md rounded-lg p-5 overflow-x-auto">

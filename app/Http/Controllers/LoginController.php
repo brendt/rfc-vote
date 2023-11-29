@@ -11,7 +11,7 @@ final readonly class LoginController
     public function __invoke(): RedirectResponse|View
     {
         if (! Auth::check()) {
-            return view('login');
+            return view('auth.login');
         }
 
         return redirect('/');

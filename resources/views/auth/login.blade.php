@@ -1,56 +1,70 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+@component('layouts.base')
 
-        <x-validation-errors class="mb-4" />
+    <div class="mx-auto max-w-[500px] my-4 md:my-12 text-font">
+        <x-form.wrapper
+            heading="Login to your account"
+            method="{{ route('login') }}"
+            method="post"
+        >
+            <div class="space-y-3">
+                <x-form.input
+                    label="Email"
+                    type="email"
+                    name="email"
+                    :value="old('email')"
+                    required
+                    autocomplete="username"
+                    placeholder="Enter your email address"
+                    autofocus
+                />
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
+                <x-form.input
+                    label="Password"
+                    type="password"
+                    name="password"
+                    autocomplete="current-password"
+                    placeholder="Enter your password"
+                    required
+                />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
+            <div class="mt-6 justify-between flex items-baseline flex-wrap">
+                <a
+                    {{dusk('reset-password-link')}}
+                    href="{{ action(App\Http\Controllers\ForgotPasswordController::class) }}"
+                    class="text-font underline opacity-80 hover:opacity-100"
+                >
+                    Forget Password?
+                </a>
 
-                <x-button class="ml-4">
-                    {{ __('Log in') }}
-                </x-button>
+                <div class="inline-flex gap-4">
+                    <label for="remember_me" class="flex items-center">
+                        <x-checkbox id="remember_me" name="remember" />
+                        <span class="ml-2 text-sm text-font">Remember me</span>
+                    </label>
+
+
+                    <x-form.button type="submit" class="!m-0">
+                        <x-icons.login class="h-6 w-6" />
+                        Login
+                    </x-form.button>
+                </div>
             </div>
-        </form>
+        </x-form.wrapper>
 
-        <div class="mt-2 text-right">
-            <form action="{{ action(\App\Http\Controllers\SocialiteRedirectController::class, 'github') }}">
-                <x-button>
-                    {{ __('Log in with GitHub') }}
-                </x-button>
-            </form>
+        <div class="flex items-center gap-3 mt-8 justify-center">
+            <a
+                {{dusk('register-link')}}
+                href="{{ action(App\Http\Controllers\RegisterController::class) }}"
+                class="underline hover:no-underline"
+            >
+                Register
+            </a>
+
+            <span>or</span>
+
+            <x-buttons.github />
         </div>
-    </x-authentication-card>
-</x-guest-layout>
+    </div>
+
+@endcomponent

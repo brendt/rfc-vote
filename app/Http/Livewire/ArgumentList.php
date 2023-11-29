@@ -8,7 +8,10 @@ use App\Http\Controllers\RfcDetailController;
 use App\Models\Argument;
 use App\Models\Rfc;
 use App\Models\User;
+use App\Models\VoteType;
 use Illuminate\Contracts\View\View;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -76,10 +79,44 @@ class ArgumentList extends Component
             ->paginate(15)
             ->setPath(action(RfcDetailController::class, $this->rfc));
 
+        [$yesArguments, $noArguments] = $this->splitArguments($arguments, $userArgument);
+
         return view('livewire.argument-list', [
             'userArgument' => $userArgument,
             'arguments' => $arguments,
+            'yesArguments' => $yesArguments,
+            'noArguments' => $noArguments,
+            'countDominantVotes' => max($yesArguments->count(), $noArguments->count()),
         ]);
+    }
+
+    /**
+     * @param  LengthAwarePaginator<Argument>  $arguments
+     * @return array<int, Collection<int, mixed>>
+     */
+    private function splitArguments(LengthAwarePaginator $arguments, ?Argument $userArgumentId): array
+    {
+        $yesArgs = $arguments
+            ->where('vote_type', VoteType::YES)
+            ->where('id', '!=', $userArgumentId?->id)
+            ->values();
+
+        $noArgs = $arguments
+            ->where('vote_type', VoteType::NO)
+            ->where('id', '!=', $userArgumentId?->id)
+            ->values();
+
+        if (! $userArgumentId) {
+            return [$yesArgs, $noArgs];
+        }
+
+        // If the user has voted, put their vote at the first or second place,
+        // depending on whether it's a yes or no vote
+        $userArgumentId->vote_type === VoteType::YES
+            ? $yesArgs->prepend($userArgumentId)
+            : $noArgs->prepend($userArgumentId);
+
+        return [$yesArgs, $noArgs];
     }
 
     public function refresh(): void

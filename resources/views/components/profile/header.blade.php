@@ -9,7 +9,7 @@
         <div>
             <img
                 src="{{ $user->getAvatarUrl() }}"
-                class="rounded-full shadow-md w-[100px]"
+                class="rounded-full shadow-md w-[100px] aspect-square"
                 alt="{{ $user->username }}'s avatar"
             />
         </div>

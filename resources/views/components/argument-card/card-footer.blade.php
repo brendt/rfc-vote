@@ -1,35 +1,47 @@
 @php
+    use App\Models\Argument;
+    use App\Models\User;
+    use \App\Http\Controllers\RfcDetailController;
+
     /**
-     * @var App\Models\Argument $argument
-     * @var App\Models\User|null $user
+     * @var Argument $argument
+     * @var User|null $user
      * @var string $anchorLink
+     * @var 'right'|'left'|'both' $cardSide
      */
 
     $argumentUser = $argument->user;
 @endphp
 
-<div class="flex flex-col lg:flex-row gap-4 items-center justify-between mb-3 mt-1 opacity-80 border-divider border-t pt-3">
-    <x-argument-card.share-links :argument="$argument" :anchor-link="$anchorLink" />
+<div
+    @class([
+        'flex flex-col gap-4 items-center justify-between mb-3 mt-1 opacity-80 border-divider border-t pt-3',
+        'lg:flex-row' => $cardSide === 'left' || $cardSide === 'both',
+        'lg:flex-row-reverse' => $cardSide === 'right',
+    ])
+>
+    <x-argument-card.share-links :argument="$argument" :anchor-link="$anchorLink"/>
 
     <div class="flex flex-col md:flex-row gap-1 md:gap-3 items-center">
         @if($readonly)
             <span class="text-xs">
-                Read the RFC: <a href="{{ action(\App\Http\Controllers\RfcDetailController::class, $argument->rfc) }}" class="underline hover:no-underline">{{ $argument->rfc->title }}</a>
+                Read the RFC:
+
+                <a
+                    href="{{ action(RfcDetailController::class, $argument->rfc) }}"
+                    class="underline hover:no-underline"
+                >
+                    {{ $argument->rfc->title }}
+                </a>
             </span>
 
             <span class="hidden md:block">•</span>
         @endif
 
-        <a href="{{ action(\App\Http\Controllers\ArgumentCommentsController::class, $argument) }}" class="text-xs">
-            {{ $argument->comments->count() }} {{ Str::plural('comment', $argument->comments->count()) }}
-        </a>
-
-        <span class="hidden md:block">•</span>
-
         <small class="flex items-center gap-1">
-            <x-profile.username :user="$argumentUser" />
+            <x-profile.username :user="$argumentUser"/>
 
-            {{ __('voted') }}
+            voted
 
             <b @class([
                 'tracking-wide uppercase ml-0.5',

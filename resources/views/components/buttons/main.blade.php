@@ -4,8 +4,7 @@
      * @var Illuminate\View\ComponentSlot $slot
      */
 
-    $styles = 'bg-purple-800 inline-flex items-center gap-3 py-2.5 px-6 transition-colors rounded-md font-bold text-white ';
-    $styles .= $attributes->get('disabled') === true ? 'opacity-50 cursor-not-allowed' : 'hover:bg-purple-900 cursor-pointer';
+    $styles = 'bg-main-light dark:bg-purple-800 dark:hover:bg-purple-900 hover:bg-main inline-flex items-center gap-3 py-2 px-4 transition-colors rounded-md font-bold text-white dark:text-gray-200 cursor-pointer';
 @endphp
 
 @if ($attributes->has('href'))

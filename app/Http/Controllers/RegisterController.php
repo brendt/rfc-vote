@@ -11,7 +11,7 @@ final readonly class RegisterController
     public function __invoke(): RedirectResponse|View
     {
         if (! Auth::check()) {
-            return view('register');
+            return view('auth.register');
         }
 
         return redirect('/');

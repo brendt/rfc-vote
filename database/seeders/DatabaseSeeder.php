@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\VerificationRequest;
 use App\Models\VerificationRequestStatus;
 use App\Models\VoteType;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
@@ -69,6 +70,13 @@ class DatabaseSeeder extends Seeder
                         voteType: fake()->boolean(70) ? $majority : $minority,
                         body: fake()->paragraphs(fake()->numberBetween(1, 4), true),
                     );
+
+                    $argumentCreatedDate = Carbon::now()->subMinutes(fake()->numberBetween(1, 60 * 24 * 14));
+
+                    $argument->update([
+                        'created_at' => $argumentCreatedDate,
+                        'updated_at' => $argumentCreatedDate,
+                    ]);
 
                     $argumentVoteCount = fake()->numberBetween(0, 10);
 

@@ -199,8 +199,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getArgumentVotesForRfc(Rfc $rfc): Collection
     {
         return $this->argumentVotes
-            ->reject(fn (ArgumentVote $vote) => $vote->argument->user_id === $this->id)
-            ->filter(fn (ArgumentVote $vote) => $vote->argument->rfc_id === $rfc->id);
+            ->reject(fn (ArgumentVote $argumentVote) => $argumentVote->argument_user_id === $this->id)
+            ->filter(fn (ArgumentVote $argumentVote) => $argumentVote->argument_rfc_id === $rfc->id);
     }
 
     public function getAvatarUrl(): ?string
@@ -239,19 +239,6 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return now()->diffInMinutes($argumentView->created_at) > 5;
-    }
-
-    public function shouldSeeTutorial(): bool
-    {
-        if ($this->arguments->count() > 3) {
-            return false;
-        }
-
-        if ($this->argumentVotes->count() > 10) {
-            return false;
-        }
-
-        return true;
     }
 
     public function hasGottenMail(Mailable $mailable): bool
