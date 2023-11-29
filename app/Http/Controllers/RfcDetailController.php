@@ -20,9 +20,9 @@ final readonly class RfcDetailController
         $user = auth()->user();
 
         $user?->load([
-//            'arguments',
+            //            'arguments',
             'argumentVotes',
-//            'viewedArguments',
+            //            'viewedArguments',
         ]);
 
         $this->meta
@@ -30,12 +30,12 @@ final readonly class RfcDetailController
             ->description((string) $rfc->teaser)
             ->image(action(RfcMetaImageController::class, $rfc));
 
-//        if ($user) {
-//            $unviewedArguments = $rfc->arguments
-//                ->reject(fn (Argument $other) => $user->viewedArguments->contains($other->id));
-//
-//            $user->viewedArguments()->attach($unviewedArguments->pluck('id'));
-//        }
+        //        if ($user) {
+        //            $unviewedArguments = $rfc->arguments
+        //                ->reject(fn (Argument $other) => $user->viewedArguments->contains($other->id));
+        //
+        //            $user->viewedArguments()->attach($unviewedArguments->pluck('id'));
+        //        }
 
         //        $additionalRfcs = Rfc::query()
         //            ->where('published_at', '<=', now()->startOfDay())
