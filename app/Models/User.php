@@ -191,8 +191,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getArgumentVotesForRfc(Rfc $rfc): Collection
     {
         return $this->argumentVotes
-            ->reject(fn (ArgumentVote $vote) => $vote->argument->user_id === $this->id)
-            ->filter(fn (ArgumentVote $vote) => $vote->argument->rfc_id === $rfc->id);
+            ->reject(fn (ArgumentVote $argumentVote) => $argumentVote->argument_user_id === $this->id)
+            ->filter(fn (ArgumentVote $argumentVote) => $argumentVote->argument_rfc_id === $rfc->id);
     }
 
     public function getAvatarUrl(): ?string

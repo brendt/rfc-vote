@@ -16,18 +16,13 @@ final readonly class RfcDetailController
 
     public function __invoke(Rfc $rfc): View
     {
-        $rfc->load([
-            'arguments.user',
-            'arguments.rfc',
-            //            'arguments.comments.user',
-        ]);
-
+        $rfc->load(['arguments']);
         $user = auth()->user();
 
         $user?->load([
-            'arguments',
-            'argumentVotes.argument',
-            'viewedArguments',
+//            'arguments',
+            'argumentVotes',
+//            'viewedArguments',
         ]);
 
         $this->meta
@@ -35,12 +30,12 @@ final readonly class RfcDetailController
             ->description((string) $rfc->teaser)
             ->image(action(RfcMetaImageController::class, $rfc));
 
-        if ($user) {
-            $unviewedArguments = $rfc->arguments
-                ->reject(fn (Argument $other) => $user->viewedArguments->contains($other->id));
-
-            $user->viewedArguments()->attach($unviewedArguments->pluck('id'));
-        }
+//        if ($user) {
+//            $unviewedArguments = $rfc->arguments
+//                ->reject(fn (Argument $other) => $user->viewedArguments->contains($other->id));
+//
+//            $user->viewedArguments()->attach($unviewedArguments->pluck('id'));
+//        }
 
         //        $additionalRfcs = Rfc::query()
         //            ->where('published_at', '<=', now()->startOfDay())

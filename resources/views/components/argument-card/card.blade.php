@@ -31,8 +31,8 @@
         id="{{ $anchorLink }}"
         @class([
             'bg-argument-card text-font rounded-xl group/card pt-5 px-4 md:pt-7 flex flex-col gap-3 md:gap-6 items-center relative md:px-8',
-            'border-2 border-purple-300 dark:border-purple-800' => !$readonly && $user && !$user->hasSeenArgument($argument),
-            'border border-divider' => !(!$readonly && $user && !$user->hasSeenArgument($argument)),
+//            'border-2 border-purple-300 dark:border-purple-800' => !$readonly && $user && !$user->hasSeenArgument($argument),
+//            'border border-divider' => !(!$readonly && $user && !$user->hasSeenArgument($argument)),
             'md:flex-row-reverse' => $cardSide === 'right',
             'md:flex-row' => $cardSide === 'left' || $cardSide === 'both',
         ])
