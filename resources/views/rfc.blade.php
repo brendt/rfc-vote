@@ -98,7 +98,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach($additionalRfcs as $additionalRfc)
                     <x-card-link :to="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)">
-                        <div class="text-xl text-font font-bold px-2 border-b pb-4 mb-2">
+                        <div class="text-xl text-font font-bold px-2 border-b border-divider pb-4 mb-2">
                             {{ $additionalRfc->title }}
                         </div>
 
