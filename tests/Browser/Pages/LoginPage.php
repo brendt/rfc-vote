@@ -17,9 +17,9 @@ class LoginPage extends Page
     }
 
     public function fillLoginFormAndSubmit(
-        Browser $browser = null,
-        string $email = null,
-        string $password = null,
+        ?Browser $browser = null,
+        ?string $email = null,
+        ?string $password = null,
     ): Browser {
         $browser->type('email', $email)
             ->type('password', $password)
