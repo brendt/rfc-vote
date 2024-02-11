@@ -61,7 +61,6 @@
                 :rfc="$argumentOfTheDay->rfc"
                 :argument="$argumentOfTheDay"
                 :readonly="true"
-                card-side="both"
             />
         @endif
     </div>
