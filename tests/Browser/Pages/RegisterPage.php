@@ -17,12 +17,12 @@ class RegisterPage extends Page
     }
 
     public function fillRegisterFormAndSubmit(
-        Browser $browser = null,
-        string $name = null,
-        string $email = null,
-        string $username = null,
-        string $password = null,
-        string $confirmPassword = null
+        ?Browser $browser = null,
+        ?string $name = null,
+        ?string $email = null,
+        ?string $username = null,
+        ?string $password = null,
+        ?string $confirmPassword = null
     ): Browser {
         $browser->type('name', $name)
             ->type('email', $email)
