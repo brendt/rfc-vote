@@ -223,6 +223,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hasSeenArgument(Argument $argument): bool
     {
+        // This part is requiring way too much memory,
+        // we'll have to come up with a better solution in the long run
+        return true;
+
         $argumentView = $this->argumentViews
             ->first(fn (UserArgumentView $userArgumentView) => $userArgumentView->argument_id === $argument->id);
 
