@@ -9,6 +9,11 @@ final readonly class AddReputation
 {
     public function __invoke(User $user, ReputationType $reputationType): void
     {
+        $sql = <<<SQL
+        SELECT * FROM arguments
+        SQL;
+
+
         $user->increment('reputation', $reputationType->getPoints());
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MailPreviewController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\PhpInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicProfileController;
 use App\Http\Controllers\PublishRfcController;
@@ -49,6 +50,7 @@ Route::get('/about', AboutController::class);
 Route::get('email/verify/{token}', [ProfileController::class, 'verifyEmail'])->name('email.verify');
 
 Route::middleware(AdminMiddleware::class)->prefix('/admin')->group(function () {
+    Route::get('/php-info', PhpInfoController::class);
     Route::get('/rfc', RfcAdminController::class);
     Route::get('/verification-requests', VerificationRequestsAdminController::class);
     Route::get('/rfc/new', [RfcCreateController::class, 'create']);
