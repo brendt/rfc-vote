@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Argument;
 use App\Models\Rfc;
 use App\Models\User;
 use App\Support\Meta;
@@ -31,12 +30,13 @@ final readonly class RfcDetailController
             ->description((string) $rfc->teaser)
             ->image(action(RfcMetaImageController::class, $rfc));
 
-        if ($user) {
-            $unviewedArguments = $rfc->arguments
-                ->reject(fn (Argument $other) => $user->viewedArguments->contains($other->id));
-
-            $user->viewedArguments()->attach($unviewedArguments->pluck('id'));
-        }
+        //        if ($user) {
+        //            // todo: review this block for performance issues
+        //            $unviewedArguments = $rfc->arguments
+        //                ->reject(fn (Argument $other) => $user->viewedArguments->contains($other->id));
+        //
+        //            $user->viewedArguments()->attach($unviewedArguments->pluck('id'));
+        //        }
 
         return view('rfc', [
             'rfc' => $rfc,
@@ -51,6 +51,7 @@ final readonly class RfcDetailController
     private function additionalRfcs(?User $user, Rfc $rfc): Collection
     {
         return Rfc::query()
+            ->with(['arguments', 'yesArguments', 'noArguments'])
             ->where('published_at', '<=', now()->startOfDay())
             ->where(function (Builder $q) {
                 $q->whereNull('ends_at')->orWhere('ends_at', '>', now());
@@ -61,7 +62,6 @@ final readonly class RfcDetailController
                     $q->where('user_id', $user?->id);
                 });
             })
-            ->with(['arguments', 'yesArguments', 'noArguments'])
             ->inRandomOrder()
             ->limit(3)
             ->get();
