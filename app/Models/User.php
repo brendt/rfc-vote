@@ -223,18 +223,19 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hasSeenArgument(Argument $argument): bool
     {
-        // This part is requiring way too much memory,
-        // we'll have to come up with a better solution in the long run
+        // todo: This part is requiring way too much memory,
+        // todo: we'll have to come up with a better solution in the long run
+
+        //        $argumentView = $this->argumentViews
+        //            ->first(fn (UserArgumentView $userArgumentView) => $userArgumentView->argument_id === $argument->id);
+        //
+        //        if ($argumentView === null) {
+        //            return false;
+        //        }
+        //
+        //        return now()->diffInMinutes($argumentView->created_at) > 5;
+
         return true;
-
-        $argumentView = $this->argumentViews
-            ->first(fn (UserArgumentView $userArgumentView) => $userArgumentView->argument_id === $argument->id);
-
-        if ($argumentView === null) {
-            return false;
-        }
-
-        return now()->diffInMinutes($argumentView->created_at) > 5;
     }
 
     public function hasGottenMail(Mailable $mailable): bool

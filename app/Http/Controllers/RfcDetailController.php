@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Argument;
 use App\Models\Rfc;
+use App\Models\User;
 use App\Support\Meta;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -48,7 +48,7 @@ final readonly class RfcDetailController
     /**
      * @return Collection<int, Rfc>
      */
-    private function additionalRfcs(?Authenticatable $user, Rfc $rfc): Collection
+    private function additionalRfcs(?User $user, Rfc $rfc): Collection
     {
         return Rfc::query()
             ->where('published_at', '<=', now()->startOfDay())
