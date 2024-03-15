@@ -90,32 +90,32 @@
             <livewire:argument-list :rfc="$rfc" :user="$user"/>
         </div>
 
-{{--        <div class="mt-12 md:px-8">--}}
-{{--            <h2 class="text-2xl font-bold text-font-second tracking-wide mb-2 md:mb-3">--}}
-{{--                Check out another RFCs--}}
-{{--            </h2>--}}
+        <div class="mt-12 md:px-8">
+            <h2 class="text-2xl font-bold text-font-second tracking-wide mb-2 md:mb-3">
+                Check out another RFCs
+            </h2>
 
-{{--            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">--}}
-{{--                @foreach($additionalRfcs as $additionalRfc)--}}
-{{--                    <x-card-link :to="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)">--}}
-{{--                        <div class="text-xl text-font font-bold px-2 border-b border-divider pb-4 mb-2">--}}
-{{--                            {{ $additionalRfc->title }}--}}
-{{--                        </div>--}}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                @foreach($additionalRfcs as $additionalRfc)
+                    <x-card-link :to="action(App\Http\Controllers\RfcDetailController::class, $additionalRfc)">
+                        <div class="text-xl text-font font-bold px-2 border-b border-divider pb-4 mb-2">
+                            {{ $additionalRfc->title }}
+                        </div>
 
-{{--                        <x-markdown class="px-2 text-font">{!! $additionalRfc->teaser !!}</x-markdown>--}}
+                        <x-markdown class="px-2 text-font">{!! $additionalRfc->teaser !!}</x-markdown>
 
-{{--                        <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">--}}
-{{--                            <x-tag class="font-bold">--}}
-{{--                                <x-icons.chat-bubble class="w-4 h-4"/>--}}
-{{--                                {{ $additionalRfc->arguments->count() }}--}}
-{{--                            </x-tag>--}}
+                        <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">
+                            <x-tag class="font-bold">
+                                <x-icons.chat-bubble class="w-4 h-4"/>
+                                {{ $additionalRfc->arguments->count() }}
+                            </x-tag>
 
-{{--                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::YES"/>--}}
-{{--                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::NO"/>--}}
-{{--                        </div>--}}
-{{--                    </x-card-link>--}}
-{{--                @endforeach--}}
-{{--            </div>--}}
-{{--        </div>--}}
+                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::YES"/>
+                            <livewire:rfc-counter :rfc="$additionalRfc" :vote-type="App\Models\VoteType::NO"/>
+                        </div>
+                    </x-card-link>
+                @endforeach
+            </div>
+        </div>
     </div>
 @endcomponent
