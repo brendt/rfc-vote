@@ -21,7 +21,7 @@ abstract class TestCase extends BaseTestCase
         });
     }
 
-    public function login(User $user = null, bool $isAdmin = false): User
+    public function login(?User $user = null, bool $isAdmin = false): User
     {
         $user ??= User::factory()->create([
             'is_admin' => $isAdmin,
