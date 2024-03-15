@@ -8,10 +8,8 @@
 @endphp
 
 <div
-    {{ $attributes->merge([
-        'class' => 'absolute top-3 z-10 right-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors rounded-xl w-4 h-8 flex justify-center items-center',
-        'x-data' => '{ isVisible: false }',
-    ]) }}
+    class="absolute top-3 z-10 right-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors rounded-xl w-4 h-8 flex justify-center items-center"
+    x-data="{ isVisible: false }"
 >
     <button
         type="button"
