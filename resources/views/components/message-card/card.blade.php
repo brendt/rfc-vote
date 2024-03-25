@@ -15,7 +15,7 @@
     <x-message-card.options :message="$message" />
 
     <div class="grid gap-2 md:gap-4 w-full">
-        <p>{{ $message->body }}</p>
+        <p class="whitespace-pre-line">{{ $message->body }}</p>
 
         <div class="flex flex-col lg:flex-row gap-4 items-center justify-between mt-1 border-divider border-t pt-3">
             <div class="text-xs">
