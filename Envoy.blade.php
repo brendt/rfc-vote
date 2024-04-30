@@ -128,30 +128,30 @@ ln -nfs {{ $baseDir }}/.env .env;
 @task('optimizeInstallation', ['on' => 'remote'])
 {{ logMessage("✨  Optimizing installation...") }}
 cd {{ $newReleaseDir }};
-php artisan clear-compiled;
+php8.3 artisan clear-compiled;
 @endtask
 
 @task('backupDatabase', ['on' => 'remote'])
 {{ logMessage("📀  Backing up database...") }}
 cd {{ $newReleaseDir }}
-php artisan backup:run
+php8.3 artisan backup:run
 @endtask
 
 @task('migrateDatabase', ['on' => 'remote'])
 {{ logMessage("🙈  Migrating database...") }}
 cd {{ $newReleaseDir }};
-php artisan migrate --force;
+php8.3 artisan migrate --force;
 @endtask
 
 @task('blessNewRelease', ['on' => 'remote'])
 {{ logMessage("🙏  Blessing new release...") }}
 ln -nfs {{ $newReleaseDir }} {{ $currentDir }};
 cd {{ $newReleaseDir }}
-php artisan config:clear
-php artisan cache:clear
-php artisan config:cache
+php8.3 artisan config:clear
+php8.3 artisan cache:clear
+php8.3 artisan config:cache
 
-sudo service php8.2-fpm restart
+sudo service php8.3-fpm restart
 sudo supervisorctl restart all
 @endtask
 
@@ -183,10 +183,10 @@ ssh-add -D
 @task('finishCodeDeploy',['on' => 'remote'])
 cd {{ $currentDir }}
 
-php artisan storage:link
-php artisan config:clear
-php artisan cache:clear
-php artisan config:cache
+php8.3 artisan storage:link
+php8.3 artisan config:clear
+php8.3 artisan cache:clear
+php8.3 artisan config:cache
 sudo supervisorctl restart all
-sudo service php8.2-fpm restart
+sudo service php8.3-fpm restart
 @endtask

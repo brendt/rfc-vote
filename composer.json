@@ -5,7 +5,7 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "dg/rss-php": "^1.5",
         "doctrine/dbal": "^3.6",
         "guzzlehttp/guzzle": "^7.2",
@@ -23,7 +23,8 @@
         "spatie/laravel-feed": "^4.3",
         "spatie/laravel-flash": "^1.9",
         "spatie/laravel-mail-preview": "^6.0",
-        "spatie/laravel-markdown": "^2.3"
+        "spatie/laravel-markdown": "^2.3",
+        "tempest/highlight": "^2.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
