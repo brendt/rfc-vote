@@ -96,7 +96,7 @@ echo "{{ $newReleaseName }}" > public/release-name.txt
 @task('runComposer', ['on' => 'remote'])
 {{ logMessage("🚚  Running Composer...") }}
 cd {{ $newReleaseDir }};
-composer install --prefer-dist --no-scripts --no-dev -o;
+php8.3 /usr/local/bin/composer install --prefer-dist --no-scripts --no-dev -o;
 @endtask
 
 @task('runNpm', ['on' => 'remote'])
