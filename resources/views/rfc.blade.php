@@ -1,4 +1,5 @@
 @php
+    /** @var \League\CommonMark\MarkdownConverter $markdown */
     $metaImageUrl = action(App\Http\Controllers\RfcMetaImageController::class, $rfc);
 @endphp
 
@@ -63,9 +64,9 @@
                 @endif
             </div>
 
-            <x-markdown class="prose text-lg text-font max-w-full">
-                {!! $rfc->description !!}
-            </x-markdown>
+            <div class="prose text-lg text-font max-w-full">
+                {!! md($rfc->description) !!}
+            </div>
 
             <div class="mt-2 text-right">
                 <a

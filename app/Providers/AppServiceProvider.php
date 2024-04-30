@@ -6,7 +6,11 @@ use App\Http\ViewComposers\AdminViewComposer;
 use App\Support\Meta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\MarkdownConverter;
 use Spatie\Browsershot\Browsershot;
+use Tempest\Highlight\CommonMark\HighlightExtension;
 use Tests\FakeBrowsershot;
 use View;
 
@@ -17,6 +21,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton(MarkdownConverter::class, function () {
+            $environment = new Environment();
+
+            $environment
+                ->addExtension(new CommonMarkCoreExtension())
+                ->addExtension(new HighlightExtension());
+
+            return new MarkdownConverter($environment);
+        });
+
         $this->app->singleton(Meta::class, function () {
             return new Meta(
                 title: 'RFC Vote',

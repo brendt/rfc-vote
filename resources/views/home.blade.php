@@ -14,7 +14,7 @@
                         {{ $rfc->title }}
                     </div>
 
-                    <x-markdown class="flex-1 px-2 text-font">{!! $rfc->teaser !!}</x-markdown>
+                    <div class="flex-1 px-2 text-font">{!! md($rfc->teaser) !!}</div>
 
                     <div class="mt-3">
                         <div class="bg-vote-bar-background p-1 rounded-full">

@@ -63,9 +63,9 @@
                 @endif
             </div>
         @else
-            <x-markdown class="prose  prose-md w-full max-w-full break-words overflow-hidden text-font">
-                {!! $argument->body !!}
-            </x-markdown>
+            <div class="prose  prose-md w-full max-w-full break-words overflow-hidden text-font">
+                {!! md($argument->body) !!}
+            </div>
         @endif
 
         <x-argument-card.card-footer
