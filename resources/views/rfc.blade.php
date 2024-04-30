@@ -103,7 +103,7 @@
                             {{ $additionalRfc->title }}
                         </div>
 
-                        <x-markdown class="px-2 text-font">{!! $additionalRfc->teaser !!}</x-markdown>
+                        <div class="px-2 text-font">{!! md($additionalRfc->teaser) !!}</div>
 
                         <div class="flex flex-wrap justify-start text-xs mt-3 gap-2 uppercase items-center">
                             <x-tag class="font-bold">
