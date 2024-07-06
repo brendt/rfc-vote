@@ -7,11 +7,11 @@
         @endforeach
 
         @if($user->inboxMessages->isEmpty())
-            <p class="text-lg opacity-60 text-font">There are not messages yet!</p>
+            <p class="text-lg opacity-60 text-font">{{ __('There are no messages yet!') }}</p>
         @endif
 
         @if($user->archivedMessages->isNotEmpty())
-            <h2 class="text-lg font-bold mb-2 mt-6">Archive</h2>
+            <h2 class="text-lg font-bold mb-2 mt-6">{{ __('Archive') }}</h2>
 
             @foreach($user->archivedMessages as $message)
                 <x-message-card.card :message="$message" />
