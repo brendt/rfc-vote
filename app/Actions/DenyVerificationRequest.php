@@ -9,9 +9,7 @@ use App\Models\VerificationRequestStatus;
 
 final readonly class DenyVerificationRequest
 {
-    public function __construct(private SendUserMessage $sendMessage)
-    {
-    }
+    public function __construct(private SendUserMessage $sendMessage) {}
 
     public function __invoke(VerificationRequest $request): void
     {

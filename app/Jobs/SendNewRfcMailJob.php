@@ -19,8 +19,7 @@ class SendNewRfcMailJob implements ShouldQueue
     public function __construct(
         public Rfc $rfc,
         public User $user,
-    ) {
-    }
+    ) {}
 
     public function handle(): void
     {

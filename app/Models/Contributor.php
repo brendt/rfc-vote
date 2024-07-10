@@ -12,6 +12,5 @@ final readonly class Contributor
         public string $name,
         public string $url,
         public array $contributions,
-    ) {
-    }
+    ) {}
 }

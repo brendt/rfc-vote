@@ -13,9 +13,7 @@ class NewRfcMail extends Mailable implements HasMailId
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public Rfc $rfc, public User $user)
-    {
-    }
+    public function __construct(public Rfc $rfc, public User $user) {}
 
     public function envelope(): Envelope
     {
