@@ -27,8 +27,6 @@ class ArgumentList extends Component
 
     public ?string $body = null;
 
-    public ?Argument $showingComments = null;
-
     public string $sortField = SortField::VOTE_COUNT->value;
 
     /**
@@ -184,16 +182,5 @@ class ArgumentList extends Component
     public function cancelDeleteArgument(): void
     {
         $this->isConfirmingDelete = null;
-    }
-
-    public function openComments(Argument $argument): void
-    {
-        if ($this->showingComments?->is($argument)) {
-            $this->showingComments = null;
-
-            return;
-        }
-
-        $this->showingComments = $argument;
     }
 }
