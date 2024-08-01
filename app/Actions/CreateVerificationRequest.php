@@ -9,9 +9,7 @@ use App\Models\VerificationRequestStatus;
 
 final readonly class CreateVerificationRequest
 {
-    public function __construct(private SendUserMessage $sendMessage)
-    {
-    }
+    public function __construct(private SendUserMessage $sendMessage) {}
 
     public function __invoke(User $user, string $motivation): void
     {

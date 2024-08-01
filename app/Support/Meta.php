@@ -10,8 +10,7 @@ final class Meta
         public string $title,
         public string $description,
         public string $image,
-    ) {
-    }
+    ) {}
 
     public function title(string $title): self
     {

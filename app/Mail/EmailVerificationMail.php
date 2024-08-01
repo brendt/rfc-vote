@@ -11,9 +11,7 @@ class EmailVerificationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public string $verificationLink)
-    {
-    }
+    public function __construct(public string $verificationLink) {}
 
     public function envelope(): Envelope
     {
