@@ -178,7 +178,7 @@ class Rfc extends Model implements Feedable
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
-            ->id((string) $this->id)
+            ->id(action(RfcDetailController::class, $this))
             ->title($this->title)
             ->summary((string) $this->teaser)
             ->updated($this->updated_at)
