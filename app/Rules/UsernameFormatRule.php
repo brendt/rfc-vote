@@ -36,7 +36,7 @@ class UsernameFormatRule implements ValidationRule, ValidatorAwareRule
                 return;
             }
 
-            if ($value !== (new GenerateUsername())($value)) {
+            if ($value !== (new GenerateUsername)($value)) {
                 $fail(
                     __(
                         'The :attribute must be valid. Only lowercase characters and non-repeating hyphens (-) are allowed.'

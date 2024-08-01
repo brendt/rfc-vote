@@ -22,11 +22,11 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(MarkdownConverter::class, function () {
-            $environment = new Environment();
+            $environment = new Environment;
 
             $environment
-                ->addExtension(new CommonMarkCoreExtension())
-                ->addExtension(new HighlightExtension());
+                ->addExtension(new CommonMarkCoreExtension)
+                ->addExtension(new HighlightExtension);
 
             return new MarkdownConverter($environment);
         });
@@ -41,10 +41,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(Browsershot::class, function () {
             if (config('services.browsershot.fake')) {
-                return new FakeBrowsershot();
+                return new FakeBrowsershot;
             }
 
-            $browsershot = new Browsershot();
+            $browsershot = new Browsershot;
 
             if ($chromePath = config('services.browsershot.chrome_path')) {
                 $browsershot->setChromePath($chromePath);

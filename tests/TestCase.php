@@ -17,7 +17,7 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         app()->singleton(Browsershot::class, function () {
-            return new FakeBrowsershot();
+            return new FakeBrowsershot;
         });
     }
 

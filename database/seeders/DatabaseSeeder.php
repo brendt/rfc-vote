@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
 
             foreach ($users as $user) {
                 if (fake()->boolean(80)) {
-                    $argument = (new CreateArgument())(
+                    $argument = (new CreateArgument)(
                         rfc: $rfc,
                         user: $user,
                         voteType: fake()->boolean(70) ? $majority : $minority,

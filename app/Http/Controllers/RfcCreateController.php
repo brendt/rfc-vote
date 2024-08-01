@@ -12,7 +12,7 @@ final readonly class RfcCreateController
     public function create(): View
     {
         return view('rfc-form', [
-            'rfc' => new Rfc(),
+            'rfc' => new Rfc,
             'action' => action([self::class, 'store']),
         ]);
     }

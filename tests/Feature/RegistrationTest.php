@@ -84,7 +84,7 @@ class RegistrationTest extends TestCase
     public function test_github_registration_fills_github_url(): void
     {
         $this->mock(SocialiteFactory::class, function (MockInterface $mock) {
-            $mockUser = tap(new \Laravel\Socialite\Two\User())->map([
+            $mockUser = tap(new \Laravel\Socialite\Two\User)->map([
                 'email' => 'foo@bar.com',
                 'name' => 'Brent Roose',
                 'nickname' => 'brendt',
