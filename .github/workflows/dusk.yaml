@@ -83,7 +83,7 @@ jobs:
         run: php artisan serve --no-reload &
 
       - name: Install Chrome Driver
-        run: php artisan dusk:chrome-driver 126
+        run: php artisan dusk:chrome-driver
 
       - name: Run Dusk Tests
         run: php artisan dusk
