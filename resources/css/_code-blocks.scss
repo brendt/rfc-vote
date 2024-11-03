@@ -1,0 +1,102 @@
+// Read more here: https://tempestphp.com/docs/highlight/getting-started/
+
+.prose pre,
+.prose code,
+pre, code {
+    background-color: #f6f8fa;
+    color: #1f2328;
+
+    .dark & {
+        background-color: #212121;
+        color: white;
+    }
+}
+
+.hl-keyword {
+    color: #0550ae;
+
+    .dark & {
+        color: #c792ea;
+    }
+}
+
+.hl-property {
+    color: #6639ba;
+
+    .dark & {
+        color: #75a5ff;
+    }
+}
+
+.hl-attribute {
+    font-style: italic;
+}
+
+.hl-type,
+.hl-generic {
+    color: inherit;
+
+    .dark & {
+        color: #eee;
+    }
+}
+
+.hl-variable {
+    color: inherit;
+
+    .dark & {
+        color: #f77669;
+    }
+}
+
+.hl-value {
+    color: #0a3069;
+
+    .dark & {
+        color: #c3e88d;
+    }
+}
+
+.hl-comment {
+    color: #888888;
+}
+
+.hl-blur {
+    filter: blur(2px);
+}
+
+.hl-strong {
+    font-weight: bold;
+}
+
+.hl-em {
+    font-style: italic;
+}
+
+.hl-addition {
+    min-width: 100%;
+    background-color: rgba(0, 255, 0, .3);
+}
+
+.hl-deletion {
+    min-width: 100%;
+    background-color: rgba(255, 0, 0, .3);
+}
+
+.hl-gutter {
+    display: inline-block;
+    font-size: 0.9em;
+    color: #555;
+    padding: 0 1ch;
+    user-select: none;
+}
+
+.hl-gutter-addition {
+    background-color: #34A853;
+    color: #fff;
+}
+
+.hl-gutter-deletion {
+    background-color: #EA4334;
+    color: #fff;
+}
