@@ -30,7 +30,7 @@
         "barryvdh/laravel-debugbar": "^3.8",
         "brianium/paratest": "^7.2",
         "fakerphp/faker": "^1.9.1",
-        "laravel/dusk": "^7.9",
+        "laravel/dusk": "^8.2.2",
         "laravel/envoy": "^2.8",
         "laravel/pint": "^1.10",
         "laravel/sail": "^1.18",

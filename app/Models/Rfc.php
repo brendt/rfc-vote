@@ -165,7 +165,7 @@ class Rfc extends Model implements Feedable
     }
 
     /**
-     * @return Collection<int, self>
+     * @return Collection<int, $this>
      */
     public static function getFeedItems(): Collection
     {
