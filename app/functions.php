@@ -2,10 +2,12 @@
 
 use League\CommonMark\MarkdownConverter;
 
-function md(string $contents): string
-{
-    /** @var MarkdownConverter $markdown */
-    $markdown = app(MarkdownConverter::class);
+if (! function_exists('md')) {
+    function md(string $contents): string
+    {
+        /** @var MarkdownConverter $markdown */
+        $markdown = app(MarkdownConverter::class);
 
-    return $markdown->convert($contents)->getContent();
+        return $markdown->convert($contents)->getContent();
+    }
 }
