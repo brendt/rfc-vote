@@ -51,7 +51,7 @@ class RegistrationTest extends DuskTestCase
                     confirmPassword: 'password',
                 )->assertPathIs('/')
                 ->assertAuthenticated()
-                ->assertSee("We've added email notifications. We'll email you when a new RFC is added so that you don't have to check the website manually.")
+                ->assertSee('Stay updated! Get an email whenever a new RFC is added.')
                 ->assertSeeLink('Enable it here');
         });
     }

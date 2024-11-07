@@ -65,7 +65,6 @@ export default {
                 'rfc-card': 'var(--color-rfc-card)',
                 'argument-card': 'var(--color-argument-card)',
                 'message-card': 'var(--color-message-card)',
-                'code-background': 'var(--color-code-background)',
 
                 // text color
                 'font': 'var(--color-font)',
