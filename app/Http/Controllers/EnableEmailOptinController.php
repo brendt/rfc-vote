@@ -17,7 +17,7 @@ final readonly class EnableEmailOptinController
 
         $user->update(['email_optin' => true]);
 
-        flash(<<<HTML
+        flash(<<<'HTML'
         Your email preferences were updated!
         You can change them at any time in your Settings.
         HTML);
