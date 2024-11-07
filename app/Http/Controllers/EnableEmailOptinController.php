@@ -15,11 +15,12 @@ final readonly class EnableEmailOptinController
             return redirect()->to($request->get('back', '/'));
         }
 
-        $user->update([
-            'email_optin' => true,
-        ]);
+        $user->update(['email_optin' => true]);
 
-        flash('Your email preferences were updated!');
+        flash(<<<'HTML'
+        Your email preferences were updated!
+        You can change them at any time in your Settings.
+        HTML);
 
         return redirect()->to($request->get('back', '/'));
     }
