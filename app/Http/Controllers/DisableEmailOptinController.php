@@ -15,9 +15,7 @@ final readonly class DisableEmailOptinController
             return redirect()->to($request->get('back', '/'));
         }
 
-        $user->update([
-            'email_optin' => false,
-        ]);
+        $user->update(['email_optin' => false]);
 
         flash('Your email preferences were updated!');
 
