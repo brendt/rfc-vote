@@ -52,7 +52,7 @@ class RegistrationTest extends DuskTestCase
                 )->assertPathIs('/')
                 ->assertAuthenticated()
                 ->assertSee('Stay updated! Get an email whenever a new RFC is added.')
-                ->assertSeeLink('Enable it here');
+                ->assertSeeLink('Enable notifications');
         });
     }
 
