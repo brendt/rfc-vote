@@ -11,8 +11,7 @@ final readonly class EnableEmailOptinController
 
     public const string BUTTON_MESSAGE = 'Enable notifications';
 
-    public const string ENABLED_MESSAGE = 'Your email preferences were updated!
-        You can change them at any time in your Settings.';
+    public const string ENABLED_MESSAGE = 'Your email preferences were updated! You can change them at any time in your Settings.';
 
     public function __invoke(Request $request): RedirectResponse
     {
