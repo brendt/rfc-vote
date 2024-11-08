@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 final readonly class EnableEmailOptinController
 {
     public const string STAY_UPDATED_MESSAGE = 'Stay updated! Get an email whenever a new RFC is added.';
+
     public const string BUTTON_MESSAGE = 'Enable notifications';
 
     public const string ENABLED_MESSAGE = 'Your email preferences were updated!
