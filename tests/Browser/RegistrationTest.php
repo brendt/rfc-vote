@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Http\Controllers\EnableEmailOptinController;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Laravel\Dusk\Browser;
@@ -51,8 +52,8 @@ class RegistrationTest extends DuskTestCase
                     confirmPassword: 'password',
                 )->assertPathIs('/')
                 ->assertAuthenticated()
-                ->assertSee('Stay updated! Get an email whenever a new RFC is added.')
-                ->assertSeeLink('Enable notifications');
+                ->assertSee(EnableEmailOptinController::STAY_UPDATED_MESSAGE)
+                ->assertSeeLink(EnableEmailOptinController::BUTTON_MESSAGE);
         });
     }
 

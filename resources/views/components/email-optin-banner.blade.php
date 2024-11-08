@@ -1,15 +1,18 @@
+@use('App\Http\Controllers\EnableEmailOptinController')
+@use('App\Http\Controllers\LoginController')
+
 @if(! $user?->email_optin)
     @php
         $url = $user
-            ? action(App\Http\Controllers\EnableEmailOptinController::class, ['back' => request()->url()])
-            : action(App\Http\Controllers\LoginController::class)
+            ? action(EnableEmailOptinController::class, ['back' => request()->url()])
+            : action(LoginController::class)
     @endphp
 
     <x-success-message class="mb-10">
-        Stay updated! Get an email whenever a new RFC is added.
+        {{ EnableEmailOptinController::STAY_UPDATED_MESSAGE }}
 
         <a href="{{ $url }}" class="font-bold text-font-second hover:text-font underline">
-            Enable notifications
+            {{ EnableEmailOptinController::BUTTON_MESSAGE }}
         </a>
     </x-success-message>
 @endif

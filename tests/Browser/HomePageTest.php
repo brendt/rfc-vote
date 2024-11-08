@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Http\Controllers\EnableEmailOptinController;
 use App\Models\Argument;
 use App\Models\ArgumentVote;
 use App\Models\Rfc;
@@ -64,7 +65,7 @@ class HomePageTest extends DuskTestCase
                 ->assertPresent('@disclaimer')
                 ->click('@disclaimer a')
                 ->assertPathIs('/')
-                ->assertNotPresent('@disclaimer');
+                ->assertSee(EnableEmailOptinController::ENABLED_MESSAGE);
         });
     }
 
