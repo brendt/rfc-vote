@@ -12,7 +12,7 @@ class UpdateProfileTest extends TestCase
 {
     private string $url;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->url = action([ProfileController::class, 'update']);

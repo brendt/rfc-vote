@@ -13,7 +13,6 @@ final class GenerateUsername
             return $this->generateUsername($userOrString->name);
         }
 
-
     }
 
     private function generateUsername(string $string): string
