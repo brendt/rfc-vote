@@ -10,6 +10,9 @@ final readonly class RegisterController
 {
     public function __invoke(): RedirectResponse|View
     {
+        // Only allow GitHub login
+        return redirect('/');
+
         if (! Auth::check()) {
             return view('auth.register');
         }

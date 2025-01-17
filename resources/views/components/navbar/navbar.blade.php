@@ -65,13 +65,6 @@
                 >
                     Login
                 </x-navbar.link>
-
-                <x-navbar.link
-                    href="{{ action(App\Http\Controllers\RegisterController::class) }}"
-                    :isActive="request()->is('register')"
-                >
-                    Register
-                </x-navbar.link>
             @endif
 
             <x-navbar.dark-mode-button />
