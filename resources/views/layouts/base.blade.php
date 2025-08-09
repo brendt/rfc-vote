@@ -1,10 +1,20 @@
+@php
+    $theme = request()->cookies->get('theme');
+    $themeCssClass = match($theme) {
+        'dark' => 'dark',
+        'light' => 'light',
+        'system-dark' => 'dark',
+        'system-light' => 'light',
+         default => '',
+    };
+@endphp
+
 <!doctype html>
 <html
     x-data="darkTheme"
-    x-cloak
     :data-theme="darkMode ? 'dark' : 'light'"
     :class="{ 'dark': darkMode }"
-    class="scroll-smooth"
+    class="scroll-smooth {{ $themeCssClass }}"
     lang="en"
 >
 
