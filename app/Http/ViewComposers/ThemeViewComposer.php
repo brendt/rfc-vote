@@ -2,8 +2,6 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Models\VerificationRequest;
-use App\Models\VerificationRequestStatus;
 use Illuminate\View\View;
 
 class ThemeViewComposer
