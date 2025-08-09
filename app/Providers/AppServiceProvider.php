@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\ViewComposers\AdminViewComposer;
+use App\Http\ViewComposers\ThemeViewComposer;
 use App\Support\Meta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\View;
@@ -69,6 +70,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
+        View::composer('layouts.base', ThemeViewComposer::class);
         View::composer('layouts.base', AdminViewComposer::class);
         View::composer('layouts.admin', AdminViewComposer::class);
 

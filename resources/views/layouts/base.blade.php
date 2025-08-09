@@ -1,14 +1,3 @@
-@php
-    $theme = request()->cookies->get('theme');
-    $themeCssClass = match($theme) {
-        'dark' => 'dark',
-        'light' => 'light',
-        'system-dark' => 'dark',
-        'system-light' => 'light',
-         default => '',
-    };
-@endphp
-
 <!doctype html>
 <html
     x-data="darkTheme"
