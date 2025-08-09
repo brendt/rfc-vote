@@ -17,6 +17,12 @@ use Tests\TestCase;
 
 class RegistrationTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->markTestSkipped('Registeration is disabled because we have only GitHub login');
+    }
+
     public function test_registration_screen_can_be_rendered(): void
     {
         if (! Features::enabled(Features::registration())) {
@@ -56,16 +62,9 @@ class RegistrationTest extends TestCase
      */
     public function test_has_proper_validation_rules(string $fieldKey, array $inputData): void
     {
-        $controlUser = User::factory()->create(
-            [
-                'email' => 'test@test.com',
-                'username' => 'test',
-            ]
-        );
-
         $dummyUser = User::factory()->make();
 
-        $response = $this->post('/register', [
+        $this->post('/register', [
             'name' => $dummyUser->name,
             'username' => $dummyUser->username,
             'email' => $dummyUser->email,
