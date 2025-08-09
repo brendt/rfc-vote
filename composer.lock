@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bc20719aded9a0d8cda7948b93f439c",
+    "content-hash": "8708cbced9a0b471aa6304b1bf862d44",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -7885,26 +7885,26 @@
         },
         {
             "name": "tempest/highlight",
-            "version": "2.13.1",
+            "version": "2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tempestphp/highlight.git",
-                "reference": "b3efa9bedc6a6524a7e9328327cb0ce477b5b9d6"
+                "reference": "86e643b2c0608c9ac737f824b800cd98b453becf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tempestphp/highlight/zipball/b3efa9bedc6a6524a7e9328327cb0ce477b5b9d6",
-                "reference": "b3efa9bedc6a6524a7e9328327cb0ce477b5b9d6",
+                "url": "https://api.github.com/repos/tempestphp/highlight/zipball/86e643b2c0608c9ac737f824b800cd98b453becf",
+                "reference": "86e643b2c0608c9ac737f824b800cd98b453becf",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.4"
+                "php": "^8.3"
             },
             "require-dev": {
                 "assertchris/ellison": "^1.0.2",
-                "friendsofphp/php-cs-fixer": "^3.84",
+                "friendsofphp/php-cs-fixer": "^3.21",
                 "league/commonmark": "^2.4",
-                "phpstan/phpstan": "^1.12.0",
+                "phpstan/phpstan": "^1.10.0",
                 "phpunit/phpunit": "^10.0",
                 "symfony/var-dumper": "^6.4|^7.0"
             },
@@ -7931,7 +7931,7 @@
             "description": "Fast, extensible, server-side code highlighting",
             "support": {
                 "issues": "https://github.com/tempestphp/highlight/issues",
-                "source": "https://github.com/tempestphp/highlight/tree/2.13.1"
+                "source": "https://github.com/tempestphp/highlight/tree/2.12.0"
             },
             "funding": [
                 {
@@ -7939,7 +7939,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-18T12:38:05+00:00"
+            "time": "2025-07-17T07:01:16+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -11640,12 +11640,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
