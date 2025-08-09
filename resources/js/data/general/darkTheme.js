@@ -12,18 +12,14 @@ Alpine.data('darkTheme', () => ({
         if (theme === 'system') {
             this.darkMode = this._prefersDarkSystemTheme().matches
             this.switchType = 'system'
-            Cookies.set(
-                'theme',
-                this.darkMode ? 'system-dark' : 'system-light',
-                { expires: 365 },
-            )
+            this._setThemeCookieTo(this.darkMode ? 'system-dark' : 'system-light')
             return
         }
 
         this.darkMode = theme === 'dark'
         this.switchType = this.darkMode ? 'dark' : 'light'
 
-        Cookies.set('theme', this.darkMode ? 'dark' : 'light', { expires: 365 })
+        this._setThemeCookieTo(this.darkMode ? 'dark' : 'light')
     },
 
     init() {
@@ -52,15 +48,15 @@ Alpine.data('darkTheme', () => ({
 
         prefersDark.addEventListener('change', ({ matches }) => {
             this.darkMode = matches
-            Cookies.set(
-                'theme',
-                matches ? 'system-dark' : 'system-light',
-                { expires: 365 },
-            )
+            this._setThemeCookieTo(matches ? 'system-dark' : 'system-light')
         })
+    },
+
+    _setThemeCookieTo(value) {
+        Cookies.set('theme', value, { expires: 365 })
     },
 
     _prefersDarkSystemTheme() {
         return window.matchMedia('(prefers-color-scheme: dark)')
-    }
+    },
 }))
