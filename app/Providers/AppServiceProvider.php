@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Http\ViewComposers\AdminViewComposer;
+use App\Http\ViewComposers\ThemeViewComposer;
 use App\Support\Meta;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
@@ -12,7 +14,6 @@ use League\CommonMark\MarkdownConverter;
 use Spatie\Browsershot\Browsershot;
 use Tempest\Highlight\CommonMark\HighlightExtension;
 use Tests\FakeBrowsershot;
-use View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -69,6 +70,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
 
+        View::composer('layouts.base', ThemeViewComposer::class);
         View::composer('layouts.base', AdminViewComposer::class);
         View::composer('layouts.admin', AdminViewComposer::class);
 

@@ -1,4 +1,5 @@
 import Alpine from 'alpinejs'
+import Cookies from 'js-cookie'
 
 Alpine.data('darkTheme', () => ({
     darkMode: null,
@@ -11,14 +12,14 @@ Alpine.data('darkTheme', () => ({
         if (theme === 'system') {
             this.darkMode = this._prefersDarkSystemTheme().matches
             this.switchType = 'system'
-            localStorage.removeItem('theme')
+            this._setThemeCookieTo(this.darkMode ? 'system-dark' : 'system-light')
             return
         }
 
         this.darkMode = theme === 'dark'
         this.switchType = this.darkMode ? 'dark' : 'light'
 
-        localStorage.setItem('theme', this.darkMode ? 'dark' : 'light')
+        this._setThemeCookieTo(this.darkMode ? 'dark' : 'light')
     },
 
     init() {
@@ -26,25 +27,36 @@ Alpine.data('darkTheme', () => ({
     },
 
     _setCurrentMode() {
-        const selectedTheme = localStorage.getItem('theme')
+        const selectedTheme = Cookies.get('theme')
 
-        if (selectedTheme) {
-            this.darkMode = selectedTheme === 'dark'
+        if (!selectedTheme) {
+            return
+        }
+
+        const hasSystemTheme = selectedTheme.includes('system-')
+
+        if (!hasSystemTheme) {
             this.switchType = selectedTheme
+            this.darkMode = selectedTheme === 'dark'
             return
         }
 
         const prefersDark = this._prefersDarkSystemTheme()
 
-        this.darkMode = prefersDark.matches
         this.switchType = 'system'
+        this.darkMode = prefersDark.matches
 
         prefersDark.addEventListener('change', ({ matches }) => {
             this.darkMode = matches
+            this._setThemeCookieTo(matches ? 'system-dark' : 'system-light')
         })
+    },
+
+    _setThemeCookieTo(value) {
+        Cookies.set('theme', value, { expires: 365 })
     },
 
     _prefersDarkSystemTheme() {
         return window.matchMedia('(prefers-color-scheme: dark)')
-    }
+    },
 }))

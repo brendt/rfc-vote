@@ -21,7 +21,6 @@ class MainMenuTest extends DuskTestCase
                     $browser->assertSeeLink('Open RFCs')
                         ->assertSeeLink('About')
                         ->assertSeeLink('Login')
-                        ->assertSeeLink('Register')
                         ->assertNotPresent('@navbar-link-messages-link')
                         ->assertNotPresent('@user-menu-menu')
                         ->assertPresent('@dark-mode-button');

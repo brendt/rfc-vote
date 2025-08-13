@@ -24,7 +24,7 @@
         "spatie/laravel-feed": "^4.3",
         "spatie/laravel-flash": "^1.9",
         "spatie/laravel-mail-preview": "^6.0",
-        "tempest/highlight": "^2.3"
+        "tempest/highlight": "2.12.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

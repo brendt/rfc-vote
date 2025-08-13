@@ -1,10 +1,9 @@
 <!doctype html>
 <html
     x-data="darkTheme"
-    x-cloak
     :data-theme="darkMode ? 'dark' : 'light'"
     :class="{ 'dark': darkMode }"
-    class="scroll-smooth"
+    class="scroll-smooth {{ $themeCssClass }}"
     lang="en"
 >
 
